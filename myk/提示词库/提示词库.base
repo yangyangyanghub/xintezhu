@@ -1,0 +1,65 @@
+title: 提示词库
+filters:
+  and:
+    - file.inFolder("myk/提示词库/prompts")
+    - file.ext == "md"
+    - file.name != "prompts"
+formulas:
+  cover_image: if(cover, cover, "myk/提示词库/assets/default_cover.png")
+  display_category: if(category, category, "未分类")
+  display_desc: if(description, description, "暂无描述")
+  tags_str: if(tags, tags.map(t => "#" + t).join(" "), "")
+  created_date: file.ctime.format("YYYY-MM-DD")
+properties:
+  title:
+    displayName: 标题
+  category:
+    displayName: 分类
+  description:
+    displayName: 描述
+  tags:
+    displayName: 标签
+  cover:
+    displayName: 封面
+  formula.cover_image:
+    displayName: 封面图
+  formula.display_category:
+    displayName: 分类
+  formula.display_desc:
+    displayName: 描述
+  formula.created_date:
+    displayName: 创建时间
+views:
+  - type: cards
+    name: 灵感画廊
+    order:
+      - formula.cover_image
+      - file.name
+      - formula.display_category
+      - formula.display_desc
+    limit: 50
+  - type: table
+    name: 全部提示词
+    groupBy:
+      property: category
+      direction: ASC
+    order:
+      - file.name
+      - formula.display_category
+      - formula.display_desc
+      - formula.created_date
+  - type: list
+    name: 按分类浏览
+    groupBy:
+      property: category
+      direction: ASC
+    order:
+      - file.name
+      - formula.display_category
+  - type: list
+    name: 最近添加
+    order:
+      - file.name
+      - formula.display_category
+      - formula.created_date
+    limit: 10
