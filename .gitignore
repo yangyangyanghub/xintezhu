@@ -1,0 +1,58 @@
+# 敏感配置文件 - 包含 API Key
+.opencode/skill/image-service/config/settings.json
+
+# 环境变量文件
+.env
+.env.*
+*.env
+
+# API Key 文件
+*api*key*
+*apikey*
+*secret*
+
+# Obsidian 工作区配置
+.obsidian/
+
+# 记忆文件
+.memory/
+
+# 临时文件
+temp/
+*.tmp
+*.temp
+nul
+test.txt
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE 配置
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Node modules
+node_modules/
+
+# 日志文件
+*.log
+logs/
+
+# 构建输出
+dist/
+build/
+*.egg-info/
+
+# 数据文件（可根据需要调整）
+# dailynews/
+# daily-report/
