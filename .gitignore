@@ -58,11 +58,15 @@ dist/
 build/
 *.egg-info/
 
-# 数据文件
-dailynews/
-daily-report/
-daily-reports/
-assets/
+# 数据文件（保留目录结构）
+dailynews/*
+!dailynews/.gitkeep
+daily-report/*
+!daily-report/.gitkeep
+daily-reports/*
+!daily-reports/.gitkeep
+assets/*
+!assets/.gitkeep
 
 # 知识库具体内容（保留目录结构）
 myk/调研笔记/*
