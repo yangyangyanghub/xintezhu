@@ -58,9 +58,11 @@ dist/
 build/
 *.egg-info/
 
-# 数据文件（可根据需要调整）
-# dailynews/
-# daily-report/
+# 数据文件
+dailynews/
+daily-report/
+daily-reports/
+assets/
 
 # 知识库具体内容（保留目录结构）
 myk/调研笔记/*
