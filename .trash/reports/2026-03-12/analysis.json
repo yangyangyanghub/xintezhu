@@ -1,0 +1,62 @@
+{
+  "total_count": 5,
+  "avg_score": 2.49,
+  "score_distribution": {
+    "excellent": 0,
+    "good": 0,
+    "average": 3,
+    "poor": 2,
+    "bad": 0
+  },
+  "dept_stats": {
+    "环境艺术所": {
+      "count": 1,
+      "avg_score": 2.05,
+      "max_score": 2.05,
+      "min_score": 2.05
+    },
+    "建筑分院": {
+      "count": 1,
+      "avg_score": 2.65,
+      "max_score": 2.65,
+      "min_score": 2.65
+    },
+    "规划一所": {
+      "count": 1,
+      "avg_score": 2.65,
+      "max_score": 2.65,
+      "min_score": 2.65
+    },
+    "测绘二队": {
+      "count": 1,
+      "avg_score": 2.3,
+      "max_score": 2.3,
+      "min_score": 2.3
+    },
+    "测绘一队": {
+      "count": 1,
+      "avg_score": 2.8,
+      "max_score": 2.8,
+      "min_score": 2.8
+    }
+  },
+  "valuable_info": {
+    "project_outputs": [
+      {
+        "field": "今日完成工作",
+        "content": "圆满完成当日采集任务",
+        "creator": "01033955536426206495"
+      }
+    ],
+    "data_resources": [
+      {
+        "field": "今日完成工作",
+        "content": "今日在上锦云苑开展全站仪外业数据采集工作",
+        "creator": "01033955536426206495"
+      }
+    ],
+    "risk_warnings": [],
+    "collaborations": [],
+    "suggestions": []
+  }
+}

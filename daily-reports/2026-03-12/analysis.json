@@ -1,0 +1,516 @@
+{
+  "total_count": 83,
+  "avg_score": 2.46,
+  "score_distribution": {
+    "excellent": 0,
+    "good": 4,
+    "average": 27,
+    "poor": 52,
+    "bad": 0
+  },
+  "ai_usage_rate": 20.5,
+  "lazy_report_rate": 62.7,
+  "plan_rate": 18.1,
+  "review_rate": 14.5,
+  "dept_stats": {
+    "航测遥感中心": {
+      "count": 5,
+      "avg_score": 2.98,
+      "max_score": 3.65,
+      "min_score": 1.65,
+      "ai_usage_rate": 40.0,
+      "lazy_report_rate": 80.0,
+      "plan_rate": 60.0,
+      "review_rate": 40.0
+    },
+    "市政热力所": {
+      "count": 3,
+      "avg_score": 2.32,
+      "max_score": 2.35,
+      "min_score": 2.25,
+      "ai_usage_rate": 100.0,
+      "lazy_report_rate": 100.0,
+      "plan_rate": 0.0,
+      "review_rate": 0.0
+    },
+    "建筑分院": {
+      "count": 17,
+      "avg_score": 2.46,
+      "max_score": 3.75,
+      "min_score": 1.8,
+      "ai_usage_rate": 11.8,
+      "lazy_report_rate": 64.7,
+      "plan_rate": 23.5,
+      "review_rate": 29.4
+    },
+    "规划一所": {
+      "count": 2,
+      "avg_score": 2.12,
+      "max_score": 2.45,
+      "min_score": 1.8,
+      "ai_usage_rate": 50.0,
+      "lazy_report_rate": 0.0,
+      "plan_rate": 0.0,
+      "review_rate": 0.0
+    },
+    "办公室": {
+      "count": 11,
+      "avg_score": 2.6,
+      "max_score": 3.05,
+      "min_score": 2.1,
+      "ai_usage_rate": 9.1,
+      "lazy_report_rate": 72.7,
+      "plan_rate": 45.5,
+      "review_rate": 9.1
+    },
+    "测绘二队": {
+      "count": 4,
+      "avg_score": 2.15,
+      "max_score": 2.3,
+      "min_score": 1.95,
+      "ai_usage_rate": 0.0,
+      "lazy_report_rate": 75.0,
+      "plan_rate": 50.0,
+      "review_rate": 25.0
+    },
+    "测绘一队": {
+      "count": 7,
+      "avg_score": 2.36,
+      "max_score": 2.85,
+      "min_score": 2.1,
+      "ai_usage_rate": 14.3,
+      "lazy_report_rate": 42.9,
+      "plan_rate": 0.0,
+      "review_rate": 0.0
+    },
+    "市政一所": {
+      "count": 3,
+      "avg_score": 1.97,
+      "max_score": 2.0,
+      "min_score": 1.95,
+      "ai_usage_rate": 0.0,
+      "lazy_report_rate": 0.0,
+      "plan_rate": 0.0,
+      "review_rate": 0.0
+    },
+    "环境艺术所": {
+      "count": 11,
+      "avg_score": 2.22,
+      "max_score": 3.4,
+      "min_score": 1.95,
+      "ai_usage_rate": 9.1,
+      "lazy_report_rate": 54.5,
+      "plan_rate": 0.0,
+      "review_rate": 0.0
+    },
+    "生产技术处": {
+      "count": 5,
+      "avg_score": 2.73,
+      "max_score": 3.15,
+      "min_score": 2.15,
+      "ai_usage_rate": 20.0,
+      "lazy_report_rate": 60.0,
+      "plan_rate": 0.0,
+      "review_rate": 20.0
+    },
+    "综合室": {
+      "count": 6,
+      "avg_score": 2.82,
+      "max_score": 3.7,
+      "min_score": 1.95,
+      "ai_usage_rate": 33.3,
+      "lazy_report_rate": 83.3,
+      "plan_rate": 16.7,
+      "review_rate": 33.3
+    },
+    "旅游规划所": {
+      "count": 2,
+      "avg_score": 2.58,
+      "max_score": 3.0,
+      "min_score": 2.15,
+      "ai_usage_rate": 50.0,
+      "lazy_report_rate": 100.0,
+      "plan_rate": 0.0,
+      "review_rate": 0.0
+    },
+    "市政二所": {
+      "count": 4,
+      "avg_score": 2.46,
+      "max_score": 3.45,
+      "min_score": 1.95,
+      "ai_usage_rate": 50.0,
+      "lazy_report_rate": 25.0,
+      "plan_rate": 0.0,
+      "review_rate": 0.0
+    },
+    "规划编研所": {
+      "count": 2,
+      "avg_score": 2.12,
+      "max_score": 2.15,
+      "min_score": 2.1,
+      "ai_usage_rate": 0.0,
+      "lazy_report_rate": 100.0,
+      "plan_rate": 0.0,
+      "review_rate": 0.0
+    },
+    "宏业中心": {
+      "count": 1,
+      "avg_score": 2.1,
+      "max_score": 2.1,
+      "min_score": 2.1,
+      "ai_usage_rate": 0.0,
+      "lazy_report_rate": 100.0,
+      "plan_rate": 0.0,
+      "review_rate": 0.0
+    }
+  },
+  "completion_stats": null,
+  "approval_stats": {
+    "total_reports": 83,
+    "completed_count": 62,
+    "in_progress_count": 21,
+    "completion_rate": 74.7,
+    "avg_total_duration_hours": 2.68,
+    "avg_first_approve_delay_hours": 2.68,
+    "dept_approval_stats": {
+      "航测遥感中心": {
+        "total": 5,
+        "completed": 3,
+        "completion_rate": 60.0,
+        "avg_duration_hours": 9.96,
+        "avg_first_delay_hours": 9.96
+      },
+      "市政热力所": {
+        "total": 3,
+        "completed": 0,
+        "completion_rate": 0.0,
+        "avg_duration_hours": 0,
+        "avg_first_delay_hours": 0
+      },
+      "建筑分院": {
+        "total": 17,
+        "completed": 17,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 1.13,
+        "avg_first_delay_hours": 1.13
+      },
+      "规划一所": {
+        "total": 2,
+        "completed": 2,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 0.82,
+        "avg_first_delay_hours": 0.82
+      },
+      "办公室": {
+        "total": 11,
+        "completed": 1,
+        "completion_rate": 9.1,
+        "avg_duration_hours": 0.0,
+        "avg_first_delay_hours": 0.0
+      },
+      "测绘二队": {
+        "total": 4,
+        "completed": 4,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 13.33,
+        "avg_first_delay_hours": 13.33
+      },
+      "测绘一队": {
+        "total": 7,
+        "completed": 7,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 0.25,
+        "avg_first_delay_hours": 0.25
+      },
+      "市政一所": {
+        "total": 3,
+        "completed": 3,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 1.14,
+        "avg_first_delay_hours": 1.14
+      },
+      "环境艺术所": {
+        "total": 11,
+        "completed": 11,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 2.75,
+        "avg_first_delay_hours": 2.75
+      },
+      "生产技术处": {
+        "total": 5,
+        "completed": 5,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 2.79,
+        "avg_first_delay_hours": 2.79
+      },
+      "综合室": {
+        "total": 6,
+        "completed": 0,
+        "completion_rate": 0.0,
+        "avg_duration_hours": 0,
+        "avg_first_delay_hours": 0
+      },
+      "旅游规划所": {
+        "total": 2,
+        "completed": 2,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 1.11,
+        "avg_first_delay_hours": 1.11
+      },
+      "市政二所": {
+        "total": 4,
+        "completed": 4,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 2.67,
+        "avg_first_delay_hours": 2.67
+      },
+      "规划编研所": {
+        "total": 2,
+        "completed": 2,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 0.01,
+        "avg_first_delay_hours": 0.01
+      },
+      "宏业中心": {
+        "total": 1,
+        "completed": 1,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 0.0,
+        "avg_first_delay_hours": 0.0
+      }
+    },
+    "approver_stats": {
+      "潘海利": {
+        "approved_count": 3
+      },
+      "郑全": {
+        "approved_count": 17
+      },
+      "王峰": {
+        "approved_count": 2
+      },
+      "王志民": {
+        "approved_count": 4
+      },
+      "柴众": {
+        "approved_count": 7
+      },
+      "胡凯军": {
+        "approved_count": 3
+      },
+      "王松": {
+        "approved_count": 11
+      },
+      "张强": {
+        "approved_count": 5
+      },
+      "薛晓娜": {
+        "approved_count": 2
+      },
+      "张灵峰": {
+        "approved_count": 4
+      },
+      "张春彦": {
+        "approved_count": 2
+      },
+      "贾志国": {
+        "approved_count": 1
+      },
+      "郭雅宾": {
+        "approved_count": 1
+      }
+    }
+  },
+  "valuable_info": {
+    "project_outputs": [
+      {
+        "content": "1.完成搜索学校的其他信息未显示在详情中优化数据问题。\n2.完成梳理生产管理项目整体业务流程工作。\n3.完成项目会审，项目信息，合同会审，合同，任务分配，质量会审，项目成果，开票登记，收款登记，注册证",
+        "creator": "邢自航"
+      },
+      {
+        "content": "今日在上锦云苑开展全站仪外业数据采集工作，详实记录坐标、高程数据，全程遵循操作规范，确保数据真实准确，圆满完成当日采集任务。",
+        "creator": "李建锋"
+      },
+      {
+        "content": "丛台路管线测量，已完成。",
+        "creator": "刘韬"
+      },
+      {
+        "content": "春生物流核算9个综合楼和4个交易厅面积，剩余7个平台、冷库、坡道面积未完成。",
+        "creator": "李彬彬"
+      },
+      {
+        "content": "1.磁县游园提升工程方案设计\n2.中华南健身骑行道初步设计报价等前期工作",
+        "creator": "王英哲"
+      },
+      {
+        "content": "1、配合张处在线完成规划院和大墺公司测绘行业信息统计\n2、一级注册建筑师梁向欣协议，合同相关事宜向领导请示汇报\n3、关注大墺公司乙级规划资质平台审核\n4、注册规划师刘瑶延续注册相关事宜",
+        "creator": "路阳"
+      },
+      {
+        "content": "1、补充完善部分建筑消防设计项目--报名资料2份盖公章法人章\n2、补充完善部分建筑消防设计项目--外出盖章\n3、春和景明景观（盖出图章）、室外电动车--打印2份蓝图红章\n4、春和景明变更回复意见、盖章",
+        "creator": "张洪刚"
+      },
+      {
+        "content": "今日在上锦云苑开展全站仪外业数据采集工作，详实记录坐标、高程数据，全程遵循操作规范，确保数据真实准确，圆满完成当日采集任务。",
+        "creator": "史清志"
+      },
+      {
+        "content": "1.完成了年度法人证书年审工作；\n2.办理韩亚敏待遇退发业务；\n3.开始办理申德印等五名退休人员缴费本息返还业务；\n4.撰写人才培养方案等。",
+        "creator": "冯岩"
+      },
+      {
+        "content": "根据规委会最新指导思路，推进《瑞和府》项目宣传册的修订与研讨工作。\n现阶段重点聚焦目录结构的优化论证，并确立了“先易后难、分步实施”的推进策略。\n今日主要对打造好配套和营造好环境汇报思路进行优化设计以",
+        "creator": "郭华"
+      },
+      {
+        "content": "1上传图纸：黄梁梦、东辛庄、户村镇和北张庄道路改造提升项目设计采购施工工程总承包(EPC)第一标段，上传图纸。\n2标书：办理中铁十九局入围标书  金地。\n3氚云：按照生产处要求，重新提交丛台区北部新城",
+        "creator": "张兵洋"
+      },
+      {
+        "content": "邯郸市串城街历史文化街区保护提升项目设计",
+        "creator": "史丽霞"
+      },
+      {
+        "content": "1.未完成的签字程序走完  未存档的设计成果3项  提交生产处打印\n2.对接 王院 陈晓林 一部分表单签字 未全部完成\n3.完成2个项目 项目评审表 \n4.按照生产处要求 修改 顾客满意度表单 热力所",
+        "creator": "张琳"
+      },
+      {
+        "content": "- 提取并发布3月10日的公共信息，爬取招标公告的程序又没有定点开始爬取，修改程序，同时解决验证码识别失败的问题 #工作\n- 查看郭鹏要转换的CAD文件，文件内容和坐标系较为混乱，郭鹏安排人先整理 #",
+        "creator": "任栋"
+      }
+    ],
+    "data_resources": [],
+    "risk_warnings": [
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 1.完成搜索学校的其他信息未显示在详情中优化数据问题。\n2.完成梳理生产管理项目整体业务流程工作。\n3.完成项目会审，项目信息，合同会审，合同，任务分配，质量会审，项",
+        "creator": "邢自航",
+        "dept": "航测遥感中心"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 3.12\n1、邯郸至济南高速公路邯郸段项目用地土地组卷报批服务二标段招标文件商务标部分撰写；\n2、曲周临时用地沟通（县级要求按照面积大的老版资料走）；\n3、多测合一信",
+        "creator": "于欣欣",
+        "dept": "航测遥感中心"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 1.串城街现场。2.实训后期服务。 AI工具应用情况: 利用豆包梳理加固手册中关于剪力墙开洞难点条续。 今日工作复盘: 粮食局楼地上二层违建全部和地下室柱网不冲，如果",
+        "creator": "李鹏飞",
+        "dept": "建筑分院"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 丛台路管线测量，已完成。 AI工具应用情况: 未使用AI工具 今日工作复盘: 亮点：无\n问题：无\n改进：无 明日重点计划: 东风苑管线测量 需协调支持事项: 无",
+        "creator": "刘韬",
+        "dept": "测绘二队"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 景明街照明设计调整 AI工具应用情况: 无 今日工作复盘: 细致认真设计 明日重点计划: 继续设计 需协调支持事项: 无",
+        "creator": "李雷",
+        "dept": "综合室"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 一、勘察设计报表资料准备--勘察设计企业财务状况资料整理准备。\n二、规划院、大墺公司测绘资质年报配合提供财务资料。\n三、按工作要求，各科室、直属事业单位需重新报送“ ",
+        "creator": "路艳萍",
+        "dept": "生产技术处"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 3月11日关于春和景明S1的修改，涉及门窗表，平面立面剖面修改\n邯山书院的问题汇总，su软件的学习 AI工具应用情况: 查阅资料，探讨方案。",
+        "creator": "陈子芳",
+        "dept": "建筑分院"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: - 提取并发布3月10日的公共信息，爬取招标公告的程序又没有定点开始爬取，修改程序，同时解决验证码识别失败的问题 #工作\n- 查看郭鹏要转换的CAD文件，文件内容和坐",
+        "creator": "任栋",
+        "dept": "航测遥感中心"
+      }
+    ],
+    "ai_applications": [
+      {
+        "content": "使用ai搜索规范条例",
+        "creator": "王佩",
+        "dept": "市政热力所"
+      },
+      {
+        "content": "使用AI协助生产管理系统curd常用接口开发工作",
+        "creator": "邢自航",
+        "dept": "航测遥感中心"
+      },
+      {
+        "content": "豆包、DeepSeek查找规范",
+        "creator": "颜青青",
+        "dept": "规划一所"
+      },
+      {
+        "content": "AI查询直埋热力管道对周围建筑影响",
+        "creator": "王亚琳",
+        "dept": "市政热力所"
+      },
+      {
+        "content": "利用豆包梳理加固手册中关于剪力墙开洞难点条续。",
+        "creator": "李鹏飞",
+        "dept": "建筑分院"
+      },
+      {
+        "content": "豆包和元宝搜索给水管道内衬修复施工过程",
+        "creator": "张倩",
+        "dept": "综合室"
+      },
+      {
+        "content": "使用建筑学长，灵感渲染处理相应的效果图。",
+        "creator": "李建杰",
+        "dept": "旅游规划所"
+      },
+      {
+        "content": "豆包搜索文化相关资料",
+        "creator": "王英哲",
+        "dept": "环境艺术所"
+      },
+      {
+        "content": "用ai填写表格",
+        "creator": "高鹏",
+        "dept": "生产技术处"
+      },
+      {
+        "content": "AI搜索热力管道施工时征地相关费用",
+        "creator": "耿欣",
+        "dept": "市政热力所"
+      },
+      {
+        "content": "运用deepseek工具学习excel软件。",
+        "creator": "张拥军",
+        "dept": "测绘一队"
+      },
+      {
+        "content": "利用DEEPSEEK分析供电范围辐射合理性。",
+        "creator": "陈晓林",
+        "dept": "综合室"
+      },
+      {
+        "content": "探索本地ai的可行性",
+        "creator": "宋瑞华",
+        "dept": "市政二所"
+      },
+      {
+        "content": "豆包搜规范",
+        "creator": "张凤丽",
+        "dept": "办公室"
+      },
+      {
+        "content": "利用AI系统计算电动自行车的同时充电系统和充电负荷等",
+        "creator": "白中华",
+        "dept": "建筑分院"
+      },
+      {
+        "content": "豆包查询道路现行规范汇总",
+        "creator": "岳建伟",
+        "dept": "市政二所"
+      },
+      {
+        "content": "用豆包辅助解决部署openclaw 时遇到的问题",
+        "creator": "任栋",
+        "dept": "航测遥感中心"
+      }
+    ],
+    "suggestions": []
+  },
+  "lazy_reports_count": 52
+}

@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>日报分析报告 - 2026-03-12</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f1f5f9;
+            --border-color: #e2e8f0;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --accent-blue: #60a5fa;
+            --accent-green: #4ade80;
+            --accent-red: #f87171;
+            --accent-yellow: #fbbf24;
+            --accent-purple: #a78bfa;
+            --accent-pink: #f472b6;
+            --accent-cyan: #22d3ee;
+            --accent-orange: #fb923c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #fef3c7 0%, #f0f9ff 50%, #fdf4ff 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+        
+        /* 头部 */
+        .header {
+            text-align: center;
+            padding: 28px 20px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(254,243,199,0.7) 100%);
+            border-radius: 20px;
+            border: 2px solid rgba(251,191,36,0.3);
+            box-shadow: 0 4px 20px rgba(251,191,36,0.15);
+        }
+        
+        .header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f59e0b 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        .header-meta {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .header-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255,255,255,0.8);
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+        
+        /* 统计卡片网格 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: 18px;
+            padding: 18px 14px;
+            text-align: center;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-yellow), var(--accent-pink));
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border-color: var(--accent-blue);
+        }
+        
+        .stat-icon {
+            font-size: 26px;
+            margin-bottom: 6px;
+            display: block;
+        }
+        
+        .stat-value {
+            font-size: 30px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+        
+        .stat-trend {
+            font-size: 11px;
+            margin-top: 8px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 500;
+        }
+        
+        .trend-good { background: #dcfce7; color: #16a34a; }
+        .trend-warning { background: #fef3c7; color: #d97706; }
+        .trend-danger { background: #fee2e2; color: #dc2626; }
+        
+        /* 区块 */
+        .section {
+            background: var(--bg-card);
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 18px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        
+        .section-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* 图表 */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        
+        .chart-wrapper {
+            background: linear-gradient(135deg, #f0f9ff 0%, #fef3c7 100%);
+            border-radius: 14px;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .chart-title {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        /* 表格 */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 0 -18px;
+            padding: 0 18px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+        }
+        
+        th, td {
+            padding: 11px 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 13px;
+        }
+        
+        th {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: #f8fafc;
+        }
+        
+        tr:hover {
+            background: #f0f9ff;
+        }
+        
+        tr.zero-submit {
+            background: #fef3c7;
+            opacity: 0.8;
+        }
+        
+        tr.zero-submit:hover {
+            background: #fef9c3;
+        }
+        
+        .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 11px;
+        }
+        
+        .rank-1 { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #fff; box-shadow: 0 2px 8px rgba(251,191,36,0.4); }
+        .rank-2 { background: linear-gradient(135deg, #94a3b8, #64748b); color: #fff; }
+        .rank-3 { background: linear-gradient(135deg, #fb923c, #ea580c); color: #fff; }
+        .rank-other { background: #f1f5f9; color: var(--text-muted); }
+        .rank-zero { background: #fee2e2; color: #dc2626; }
+        
+        .badge {
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .badge-success { background: #dcfce7; color: #16a34a; }
+        .badge-warning { background: #fef3c7; color: #d97706; }
+        .badge-danger { background: #fee2e2; color: #dc2626; }
+        .badge-muted { background: #f1f5f9; color: var(--text-muted); }
+        
+        /* AI案例 */
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .ai-item {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 12px;
+            padding: 12px;
+            border-left: 4px solid var(--accent-blue);
+        }
+        
+        .ai-user {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--text-primary);
+            margin-bottom: 3px;
+        }
+        
+        .ai-dept {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        
+        .ai-content {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+        
+        /* 建议 */
+        .suggestions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .suggestion-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #f8fafc 100%);
+            border-radius: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+            border: 1px solid var(--border-color);
+        }
+        
+        .suggestion-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .header { padding: 20px 14px; }
+            .header h1 { font-size: 20px; }
+            .header-meta { gap: 8px; font-size: 11px; }
+            .header-meta span { padding: 5px 10px; font-size: 11px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .stat-card { padding: 14px 10px; }
+            .stat-value { font-size: 24px; }
+            .stat-label { font-size: 11px; }
+            .charts-grid { grid-template-columns: 1fr; }
+            .ai-grid { grid-template-columns: 1fr; }
+            .section { padding: 14px; }
+            .section-title { font-size: 15px; }
+            th, td { padding: 9px 8px; font-size: 11px; }
+            .rank-badge { width: 22px; height: 22px; font-size: 10px; }
+        }
+        
+        /* 动画 */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .stat-card { animation: fadeInUp 0.4s ease forwards; }
+        .stat-card:nth-child(1) { animation-delay: 0.05s; }
+        .stat-card:nth-child(2) { animation-delay: 0.08s; }
+        .stat-card:nth-child(3) { animation-delay: 0.11s; }
+        .stat-card:nth-child(4) { animation-delay: 0.14s; }
+        .stat-card:nth-child(5) { animation-delay: 0.17s; }
+        .stat-card:nth-child(6) { animation-delay: 0.2s; }
+        
+        .section { animation: fadeInUp 0.4s ease forwards; animation-delay: 0.25s; opacity: 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>📊 日报分析报告</h1>
+            <div class="header-meta">
+                <span>📅 2026-03-12</span>
+                <span>👥 已提交 83/83人</span>
+                <span>⭐ 平均 2.5分</span>
+                <span>🤖 AI 20.5%</span>
+            </div>
+        </div>
+        
+        <!-- 核心指标 -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-icon">📝</span>
+                <div class="stat-value">83</div>
+                <div class="stat-label">提交人数</div>
+                <div class="stat-trend trend-good">100.0% 提交率</div>
+            </div>
+            
+            <div class="stat-card">
+                <span class="stat-icon">⭐</span>
+                <div class="stat-value">2.5</div>
+                <div class="stat-label">平均得分</div>
+                <div class="stat-trend trend-warning">需提升</div>
+            </div>
+            
+            <div class="stat-card">
+                <span class="stat-icon">🤖</span>
+                <div class="stat-value">20.5%</div>
+                <div class="stat-label">AI工具使用率</div>
+                <div class="stat-trend trend-warning">待推广</div>
+            </div>
+            
+            <div class="stat-card">
+                <span class="stat-icon">⚠️</span>
+                <div class="stat-value">62.7%</div>
+                <div class="stat-label">流水账占比</div>
+                <div class="stat-trend trend-danger">需改进</div>
+            </div>
+            
+            <div class="stat-card">
+                <span class="stat-icon">📋</span>
+                <div class="stat-value">18.1%</div>
+                <div class="stat-label">明日计划率</div>
+                <div class="stat-trend trend-danger">待提高</div>
+            </div>
+            
+            <div class="stat-card">
+                <span class="stat-icon">🔄</span>
+                <div class="stat-value">14.5%</div>
+                <div class="stat-label">工作复盘率</div>
+                <div class="stat-trend trend-danger">待提高</div>
+            </div>
+        </div>
+        
+        <!-- 图表区域 -->
+        <div class="section">
+            <h2 class="section-title">📈 数据概览</h2>
+            <div class="charts-grid">
+                <div class="chart-wrapper">
+                    <div class="chart-title">分数分布</div>
+                    <canvas id="scoreDistChart"></canvas>
+                </div>
+                <div class="chart-wrapper">
+                    <div class="chart-title">部门平均分 TOP10</div>
+                    <canvas id="deptScoreChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 部门排名 -->
+        <div class="section">
+            <h2 class="section-title">🏆 部门综合排名</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>部门</th>
+                            <th>已提交/总人数</th>
+                            <th>提交率</th>
+                            <th>平均分</th>
+                            <th>AI率</th>
+                            <th>流水账</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr class="">
+                            <td><span class="rank-badge rank-1">1</span></td>
+                            <td>航测遥感中心</td>
+                            <td>5/5</td>
+                            <td><span class="badge badge-success">100.0%</span></td>
+                            <td><span class="badge badge-warning">3.0</span></td>
+                            <td><span class="badge badge-danger">40.0%</span></td>
+                            <td><span class="badge badge-danger">80.0%</span></td>
+                        </tr>
+        
+
+                        <tr class="">
+                            <td><span class="rank-badge rank-2">2</span></td>
+                            <td>综合室</td>
+                            <td>6/6</td>
+                            <td><span class="badge badge-warning">100.0%</span></td>
+                            <td><span class="badge badge-warning">2.8</span></td>
+                            <td><span class="badge badge-danger">33.3%</span></td>
+                            <td><span class="badge badge-danger">83.3%</span></td>
+                        </tr>
+        
+
+                        <tr class="">
+                            <td><span class="rank-badge rank-3">3</span></td>
+                            <td>生产技术处</td>
+                            <td>5/5</td>
+                            <td><span class="badge badge-warning">100.0%</span></td>
+                            <td><span class="badge badge-warning">2.7</span></td>
+                            <td><span class="badge badge-danger">20.0%</span></td>
+                            <td><span class="badge badge-danger">60.0%</span></td>
+                        </tr>
+        
+
+                        <tr class="">
+                            <td><span class="rank-badge rank-other">4</span></td>
+                            <td>办公室</td>
+                            <td>11/11</td>
+                            <td><span class="badge badge-warning">100.0%</span></td>
+                            <td><span class="badge badge-danger">2.6</span></td>
+                            <td><span class="badge badge-danger">9.1%</span></td>
+                            <td><span class="badge badge-danger">72.7%</span></td>
+                        </tr>
+        
+
+                        <tr class="">
+                            <td><span class="rank-badge rank-other">5</span></td>
+                            <td>旅游规划所</td>
+                            <td>2/2</td>
+                            <td><span class="badge badge-warning">100.0%</span></td>
+                            <td><span class="badge badge-success">2.6</span></td>
+                            <td><span class="badge badge-danger">50.0%</span></td>
+                            <td><span class="badge badge-danger">100.0%</span></td>
+                        </tr>
+        
+
+                        <tr class="">
+                            <td><span class="rank-badge rank-other">6</span></td>
+                            <td>建筑分院</td>
+                            <td>17/17</td>
+                            <td><span class="badge badge-warning">100.0%</span></td>
+                            <td><span class="badge badge-danger">2.5</span></td>
+                            <td><span class="badge badge-danger">11.8%</span></td>
+                            <td><span class="badge badge-danger">64.7%</span></td>
+                        </tr>
+        
+
+                        <tr class="">
+                            <td><span class="rank-badge rank-other">7</span></td>
+                            <td>市政二所</td>
+                            <td>4/4</td>
+                            <td><span class="badge badge-warning">100.0%</span></td>
+                            <td><span class="badge badge-success">2.5</span></td>
+                            <td><span class="badge badge-warning">50.0%</span></td>
+                            <td><span class="badge badge-warning">25.0%</span></td>
+                        </tr>
+        
+
+                        <tr class="">
+                            <td><span class="rank-badge rank-other">8</span></td>
+                            <td>测绘一队</td>
+                            <td>7/7</td>
+                            <td><span class="badge badge-warning">100.0%</span></td>
+                            <td><span class="badge badge-danger">2.4</span></td>
+                            <td><span class="badge badge-danger">14.3%</span></td>
+                            <td><span class="badge badge-danger">42.9%</span></td>
+                        </tr>
+        
+
+                        <tr class="">
+                            <td><span class="rank-badge rank-other">9</span></td>
+                            <td>市政热力所</td>
+                            <td>3/3</td>
+                            <td><span class="badge badge-warning">100.0%</span></td>
+                            <td><span class="badge badge-success">2.3</span></td>
+                            <td><span class="badge badge-danger">100.0%</span></td>
+                            <td><span class="badge badge-danger">100.0%</span></td>
+                        </tr>
+        
+
+                        <tr class="">
+                            <td><span class="rank-badge rank-other">10</span></td>
+                            <td>环境艺术所</td>
+                            <td>11/11</td>
+                            <td><span class="badge badge-warning">100.0%</span></td>
+                            <td><span class="badge badge-danger">2.2</span></td>
+                            <td><span class="badge badge-danger">9.1%</span></td>
+                            <td><span class="badge badge-danger">54.5%</span></td>
+                        </tr>
+        
+
+                        <tr class="">
+                            <td><span class="rank-badge rank-other">11</span></td>
+                            <td>测绘二队</td>
+                            <td>4/4</td>
+                            <td><span class="badge badge-warning">100.0%</span></td>
+                            <td><span class="badge badge-danger">2.1</span></td>
+                            <td><span class="badge badge-danger">0.0%</span></td>
+                            <td><span class="badge badge-danger">75.0%</span></td>
+                        </tr>
+        
+
+                        <tr class="">
+                            <td><span class="rank-badge rank-other">12</span></td>
+                            <td>规划一所</td>
+                            <td>2/2</td>
+                            <td><span class="badge badge-warning">100.0%</span></td>
+                            <td><span class="badge badge-success">2.1</span></td>
+                            <td><span class="badge badge-success">50.0%</span></td>
+                            <td><span class="badge badge-success">0.0%</span></td>
+                        </tr>
+        
+
+                        <tr class="">
+                            <td><span class="rank-badge rank-other">13</span></td>
+                            <td>规划编研所</td>
+                            <td>2/2</td>
+                            <td><span class="badge badge-warning">100.0%</span></td>
+                            <td><span class="badge badge-danger">2.1</span></td>
+                            <td><span class="badge badge-danger">0.0%</span></td>
+                            <td><span class="badge badge-danger">100.0%</span></td>
+                        </tr>
+        
+
+                        <tr class="">
+                            <td><span class="rank-badge rank-other">14</span></td>
+                            <td>宏业中心</td>
+                            <td>1/1</td>
+                            <td><span class="badge badge-warning">100.0%</span></td>
+                            <td><span class="badge badge-danger">2.1</span></td>
+                            <td><span class="badge badge-danger">0.0%</span></td>
+                            <td><span class="badge badge-danger">100.0%</span></td>
+                        </tr>
+        
+
+                        <tr class="">
+                            <td><span class="rank-badge rank-other">15</span></td>
+                            <td>市政一所</td>
+                            <td>3/3</td>
+                            <td><span class="badge badge-warning">100.0%</span></td>
+                            <td><span class="badge badge-danger">2.0</span></td>
+                            <td><span class="badge badge-success">0.0%</span></td>
+                            <td><span class="badge badge-success">0.0%</span></td>
+                        </tr>
+        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- AI应用案例 -->
+        <div class="section">
+            <h2 class="section-title">🤖 AI工具应用</h2>
+            <div class="ai-grid">
+
+                <div class="ai-item">
+                    <div class="ai-user">王佩</div>
+                    <div class="ai-dept">市政热力所</div>
+                    <div class="ai-content">使用ai搜索规范条例</div>
+                </div>
+        
+
+                <div class="ai-item">
+                    <div class="ai-user">邢自航</div>
+                    <div class="ai-dept">航测遥感中心</div>
+                    <div class="ai-content">使用AI协助生产管理系统curd常用接口开发工作</div>
+                </div>
+        
+
+                <div class="ai-item">
+                    <div class="ai-user">颜青青</div>
+                    <div class="ai-dept">规划一所</div>
+                    <div class="ai-content">豆包、DeepSeek查找规范</div>
+                </div>
+        
+
+                <div class="ai-item">
+                    <div class="ai-user">王亚琳</div>
+                    <div class="ai-dept">市政热力所</div>
+                    <div class="ai-content">AI查询直埋热力管道对周围建筑影响</div>
+                </div>
+        
+
+                <div class="ai-item">
+                    <div class="ai-user">李鹏飞</div>
+                    <div class="ai-dept">建筑分院</div>
+                    <div class="ai-content">利用豆包梳理加固手册中关于剪力墙开洞难点条续。</div>
+                </div>
+        
+
+                <div class="ai-item">
+                    <div class="ai-user">张倩</div>
+                    <div class="ai-dept">综合室</div>
+                    <div class="ai-content">豆包和元宝搜索给水管道内衬修复施工过程</div>
+                </div>
+        
+
+                <div class="ai-item">
+                    <div class="ai-user">李建杰</div>
+                    <div class="ai-dept">旅游规划所</div>
+                    <div class="ai-content">使用建筑学长，灵感渲染处理相应的效果图。</div>
+                </div>
+        
+
+                <div class="ai-item">
+                    <div class="ai-user">王英哲</div>
+                    <div class="ai-dept">环境艺术所</div>
+                    <div class="ai-content">豆包搜索文化相关资料</div>
+                </div>
+        
+            </div>
+        </div>
+        
+        <!-- 改进建议 -->
+        <div class="section">
+            <h2 class="section-title">💡 改进建议</h2>
+            <div class="suggestions">
+
+                <div class="suggestion-item">
+                    <span class="suggestion-icon">🤖</span>
+                    <span>AI工具应用率较低，建议推广AI工具在日常工作中的应用，如豆包、DeepSeek等可辅助查找规范、生成文案</span>
+                </div>
+    
+
+                <div class="suggestion-item">
+                    <span class="suggestion-icon">⚠️</span>
+                    <span>流水账占比高达62.7%，建议引导员工详细描述工作内容，避免只写项目名</span>
+                </div>
+    
+
+                <div class="suggestion-item">
+                    <span class="suggestion-icon">📋</span>
+                    <span>明日计划填写率偏低，建议督促员工养成工作规划习惯，提前安排第二天工作</span>
+                </div>
+    
+
+                <div class="suggestion-item">
+                    <span class="suggestion-icon">🔄</span>
+                    <span>工作复盘填写率偏低，建议鼓励员工每日总结反思，记录亮点、问题和改进点</span>
+                </div>
+    
+
+                <div class="suggestion-item">
+                    <span class="suggestion-icon">⭐</span>
+                    <span>整体平均分偏低，建议加强日报填写培训，明确优秀日报标准</span>
+                </div>
+    
+            </div>
+        </div>
+        
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>本报告由AI自动分析生成 | 生成时间：2026-03-13 16:16:56</p>
+        </div>
+    </div>
+    
+    <script>
+        // 分数分布图
+        new Chart(document.getElementById('scoreDistChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ["\u4f18\u79c0", "\u826f\u597d", "\u4e00\u822c", "\u8f83\u5dee", "\u5dee"],
+                datasets: [{
+                    data: [0, 4, 27, 52, 0],
+                    backgroundColor: ["#4ade80", "#22d3ee", "#fbbf24", "#fb923c", "#f87171"],
+                    borderWidth: 0,
+                    cutout: '60%'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#64748b',
+                            padding: 10,
+                            font: { size: 11 }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // 部门分数图
+        new Chart(document.getElementById('deptScoreChart'), {
+            type: 'bar',
+            data: {
+                labels: ["\u822a\u6d4b\u9065\u611f\u4e2d\u5fc3", "\u7efc\u5408\u5ba4", "\u751f\u4ea7\u6280\u672f\u5904", "\u529e\u516c\u5ba4", "\u65c5\u6e38\u89c4\u5212\u6240", "\u5efa\u7b51\u5206\u9662", "\u5e02\u653f\u4e8c\u6240", "\u6d4b\u7ed8\u4e00\u961f", "\u5e02\u653f\u70ed\u529b\u6240", "\u73af\u5883\u827a\u672f\u6240"],
+                datasets: [{
+                    label: '平均分',
+                    data: [3.0, 2.8, 2.7, 2.6, 2.6, 2.5, 2.5, 2.4, 2.3, 2.2],
+                    backgroundColor: ["#fbbf24", "#94a3b8", "#fb923c", "#a78bfa", "#a78bfa", "#a78bfa", "#a78bfa", "#a78bfa", "#a78bfa", "#a78bfa"],
+                    borderRadius: 6,
+                    barThickness: 18
+                }]
+            },
+            options: {
+                responsive: true,
+                indexAxis: 'y',
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 5,
+                        grid: { color: '#e2e8f0' },
+                        ticks: { color: '#64748b' }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { color: '#64748b', font: { size: 11 } }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

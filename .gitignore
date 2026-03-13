@@ -19,6 +19,7 @@
 
 # 临时文件
 temp/
+exports/
 *.tmp
 *.temp
 nul
@@ -56,3 +57,11 @@ build/
 # 数据文件（可根据需要调整）
 # dailynews/
 # daily-report/
+
+# 知识库具体内容（保留目录结构）
+myk/调研笔记/*
+!myk/调研笔记/.gitkeep
+myk/技术文章/*
+!myk/技术文章/.gitkeep
+myk/提示词库/*
+!myk/提示词库/.gitkeep

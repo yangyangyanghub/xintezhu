@@ -1,0 +1,4602 @@
+{
+  "total_count": 76,
+  "total_should_submit": 229,
+  "avg_score": 2.39,
+  "score_distribution": {
+    "excellent": 0,
+    "good": 0,
+    "average": 28,
+    "poor": 48,
+    "bad": 0
+  },
+  "ai_usage_rate": 7.0,
+  "lazy_report_rate": 85.2,
+  "plan_rate": 4.8,
+  "review_rate": 6.1,
+  "dept_stats": {
+    "规划二所": {
+      "count": 3,
+      "dept_total": 13,
+      "submission_rate": 23.1,
+      "avg_score": 2.67,
+      "max_score": 3.3,
+      "min_score": 2.1,
+      "ai_usage_rate": 0.0,
+      "lazy_report_rate": 84.6,
+      "plan_rate": 7.7,
+      "review_rate": 15.4
+    },
+    "航测遥感中心": {
+      "count": 4,
+      "dept_total": 20,
+      "submission_rate": 20.0,
+      "avg_score": 2.62,
+      "max_score": 3.45,
+      "min_score": 1.95,
+      "ai_usage_rate": 5.0,
+      "lazy_report_rate": 95.0,
+      "plan_rate": 5.0,
+      "review_rate": 5.0
+    },
+    "生产技术处": {
+      "count": 4,
+      "dept_total": 7,
+      "submission_rate": 57.1,
+      "avg_score": 2.98,
+      "max_score": 3.4,
+      "min_score": 2.55,
+      "ai_usage_rate": 14.3,
+      "lazy_report_rate": 71.4,
+      "plan_rate": 0.0,
+      "review_rate": 14.3
+    },
+    "测绘二队": {
+      "count": 4,
+      "dept_total": 13,
+      "submission_rate": 30.8,
+      "avg_score": 2.16,
+      "max_score": 2.55,
+      "min_score": 1.8,
+      "ai_usage_rate": 0.0,
+      "lazy_report_rate": 92.3,
+      "plan_rate": 15.4,
+      "review_rate": 7.7
+    },
+    "测绘一队": {
+      "count": 7,
+      "dept_total": 13,
+      "submission_rate": 53.8,
+      "avg_score": 2.3,
+      "max_score": 2.85,
+      "min_score": 1.95,
+      "ai_usage_rate": 7.7,
+      "lazy_report_rate": 84.6,
+      "plan_rate": 0.0,
+      "review_rate": 0.0
+    },
+    "规划一所": {
+      "count": 4,
+      "dept_total": 13,
+      "submission_rate": 30.8,
+      "avg_score": 2.17,
+      "max_score": 2.85,
+      "min_score": 1.95,
+      "ai_usage_rate": 15.4,
+      "lazy_report_rate": 84.6,
+      "plan_rate": 0.0,
+      "review_rate": 0.0
+    },
+    "办公室": {
+      "count": 6,
+      "dept_total": 11,
+      "submission_rate": 54.5,
+      "avg_score": 2.72,
+      "max_score": 3.05,
+      "min_score": 2.25,
+      "ai_usage_rate": 18.2,
+      "lazy_report_rate": 100.0,
+      "plan_rate": 18.2,
+      "review_rate": 9.1
+    },
+    "规划编研所": {
+      "count": 2,
+      "dept_total": 15,
+      "submission_rate": 13.3,
+      "avg_score": 1.95,
+      "max_score": 2.1,
+      "min_score": 1.8,
+      "ai_usage_rate": 0.0,
+      "lazy_report_rate": 100.0,
+      "plan_rate": 0.0,
+      "review_rate": 0.0
+    },
+    "环境艺术所": {
+      "count": 12,
+      "dept_total": 17,
+      "submission_rate": 70.6,
+      "avg_score": 2.0,
+      "max_score": 2.15,
+      "min_score": 1.95,
+      "ai_usage_rate": 5.9,
+      "lazy_report_rate": 64.7,
+      "plan_rate": 0.0,
+      "review_rate": 0.0
+    },
+    "市政分院-综合室": {
+      "count": 7,
+      "dept_total": 7,
+      "submission_rate": 100.0,
+      "avg_score": 2.6,
+      "max_score": 3.2,
+      "min_score": 2.0,
+      "ai_usage_rate": 42.9,
+      "lazy_report_rate": 42.9,
+      "plan_rate": 14.3,
+      "review_rate": 28.6
+    },
+    "建筑分院": {
+      "count": 15,
+      "dept_total": 22,
+      "submission_rate": 68.2,
+      "avg_score": 2.46,
+      "max_score": 3.25,
+      "min_score": 1.95,
+      "ai_usage_rate": 13.6,
+      "lazy_report_rate": 54.5,
+      "plan_rate": 18.2,
+      "review_rate": 27.3
+    },
+    "市政分院-市政一所": {
+      "count": 3,
+      "dept_total": 3,
+      "submission_rate": 100.0,
+      "avg_score": 2.12,
+      "max_score": 2.35,
+      "min_score": 1.95,
+      "ai_usage_rate": 33.3,
+      "lazy_report_rate": 0.0,
+      "plan_rate": 0.0,
+      "review_rate": 0.0
+    },
+    "市政分院-市政二所": {
+      "count": 4,
+      "dept_total": 4,
+      "submission_rate": 100.0,
+      "avg_score": 2.44,
+      "max_score": 3.45,
+      "min_score": 2.1,
+      "ai_usage_rate": 25.0,
+      "lazy_report_rate": 75.0,
+      "plan_rate": 0.0,
+      "review_rate": 0.0
+    },
+    "总务处": {
+      "count": 1,
+      "dept_total": 4,
+      "submission_rate": 25.0,
+      "avg_score": 2.45,
+      "max_score": 2.45,
+      "min_score": 2.45,
+      "ai_usage_rate": 0.0,
+      "lazy_report_rate": 100.0,
+      "plan_rate": 0.0,
+      "review_rate": 0.0
+    }
+  },
+  "completion_stats": {
+    "院部": {
+      "should_submit": 3,
+      "submitted": 0,
+      "rate": 0.0
+    },
+    "办公室": {
+      "should_submit": 11,
+      "submitted": 6,
+      "rate": 54.5
+    },
+    "生产技术处": {
+      "should_submit": 7,
+      "submitted": 4,
+      "rate": 57.1
+    },
+    "总务处": {
+      "should_submit": 4,
+      "submitted": 1,
+      "rate": 25.0
+    },
+    "维修": {
+      "should_submit": 3,
+      "submitted": 0,
+      "rate": 0.0
+    },
+    "规划一所": {
+      "should_submit": 13,
+      "submitted": 4,
+      "rate": 30.8
+    },
+    "规划二所": {
+      "should_submit": 13,
+      "submitted": 3,
+      "rate": 23.1
+    },
+    "规划编研所": {
+      "should_submit": 15,
+      "submitted": 2,
+      "rate": 13.3
+    },
+    "旅游规划所": {
+      "should_submit": 6,
+      "submitted": 0,
+      "rate": 0.0
+    },
+    "交通规划研究所": {
+      "should_submit": 8,
+      "submitted": 0,
+      "rate": 0.0
+    },
+    "测绘一队": {
+      "should_submit": 13,
+      "submitted": 7,
+      "rate": 53.8
+    },
+    "测绘二队": {
+      "should_submit": 13,
+      "submitted": 4,
+      "rate": 30.8
+    },
+    "航测遥感中心": {
+      "should_submit": 20,
+      "submitted": 4,
+      "rate": 20.0
+    },
+    "市政一所": {
+      "should_submit": 10,
+      "submitted": 0,
+      "rate": 0.0
+    },
+    "市政二所": {
+      "should_submit": 13,
+      "submitted": 0,
+      "rate": 0.0
+    },
+    "市政热力所": {
+      "should_submit": 6,
+      "submitted": 0,
+      "rate": 0.0
+    },
+    "综合室": {
+      "should_submit": 11,
+      "submitted": 0,
+      "rate": 0.0
+    },
+    "建筑分院": {
+      "should_submit": 22,
+      "submitted": 15,
+      "rate": 68.2
+    },
+    "环境艺术所": {
+      "should_submit": 17,
+      "submitted": 12,
+      "rate": 70.6
+    },
+    "宏业中心": {
+      "should_submit": 18,
+      "submitted": 0,
+      "rate": 0.0
+    },
+    "监理公司": {
+      "should_submit": 2,
+      "submitted": 0,
+      "rate": 0.0
+    },
+    "其他": {
+      "should_submit": 1,
+      "submitted": 0,
+      "rate": 0.0
+    },
+    "总览": {
+      "should_submit": 229,
+      "submitted": 62,
+      "rate": 27.1
+    }
+  },
+  "approval_stats": {
+    "total_reports": 76,
+    "completed_count": 76,
+    "in_progress_count": 0,
+    "completion_rate": 100.0,
+    "avg_total_duration_hours": 8.65,
+    "avg_first_approve_delay_hours": 8.65,
+    "dept_approval_stats": {
+      "规划二所": {
+        "total": 3,
+        "completed": 3,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 4.15,
+        "avg_first_delay_hours": 4.15
+      },
+      "航测遥感中心": {
+        "total": 4,
+        "completed": 4,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 10.06,
+        "avg_first_delay_hours": 10.06
+      },
+      "生产技术处": {
+        "total": 4,
+        "completed": 4,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 3.91,
+        "avg_first_delay_hours": 3.91
+      },
+      "测绘二队": {
+        "total": 4,
+        "completed": 4,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 14.27,
+        "avg_first_delay_hours": 14.27
+      },
+      "测绘一队": {
+        "total": 7,
+        "completed": 7,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 0.26,
+        "avg_first_delay_hours": 0.26
+      },
+      "规划一所": {
+        "total": 4,
+        "completed": 4,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 3.85,
+        "avg_first_delay_hours": 3.85
+      },
+      "办公室": {
+        "total": 6,
+        "completed": 6,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 3.8,
+        "avg_first_delay_hours": 3.8
+      },
+      "规划编研所": {
+        "total": 2,
+        "completed": 2,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 7.62,
+        "avg_first_delay_hours": 7.62
+      },
+      "环境艺术所": {
+        "total": 12,
+        "completed": 12,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 8.59,
+        "avg_first_delay_hours": 8.59
+      },
+      "市政分院-综合室": {
+        "total": 7,
+        "completed": 7,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 15.07,
+        "avg_first_delay_hours": 15.07
+      },
+      "建筑分院": {
+        "total": 15,
+        "completed": 15,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 15.73,
+        "avg_first_delay_hours": 15.73
+      },
+      "市政分院-市政一所": {
+        "total": 3,
+        "completed": 3,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 2.88,
+        "avg_first_delay_hours": 2.88
+      },
+      "市政分院-市政二所": {
+        "total": 4,
+        "completed": 4,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 5.67,
+        "avg_first_delay_hours": 5.67
+      },
+      "总务处": {
+        "total": 1,
+        "completed": 1,
+        "completion_rate": 100.0,
+        "avg_duration_hours": 0.65,
+        "avg_first_delay_hours": 0.65
+      }
+    },
+    "approver_stats": {}
+  },
+  "valuable_info": {
+    "project_outputs": [
+      {
+        "content": "1.完成优化筛选查询图层下拉框样式覆盖工作。\n2.完成优化搜索点位缩小后还是会在底部漏出来原本的点位，增加闪动5秒动态效果优化样式工作。\n3.完成进一步优化选择行政区划4区坐标屏幕居中，调试点位，图形",
+        "creator": "邢自航"
+      },
+      {
+        "content": "今日在上锦云苑开展全站仪外业数据采集工作，详实记录坐标、高程数据，全程遵循操作规范，确保数据真实准确，圆满完成当日采集任务。",
+        "creator": "李建锋"
+      },
+      {
+        "content": "1.磁县游园提升项目出初步方案讨论\n2.磁州窑博物馆现场调研",
+        "creator": "王英哲"
+      },
+      {
+        "content": "1、测绘、规划质量管理表格，打印并签字。\n2、环艺所，满意意修改，和册子重打。\n3、测绘公司交质量目标分解记录表。\n4、项目评审表，完成签字及管代盖章。\n",
+        "creator": "薛晓蓉"
+      },
+      {
+        "content": "今日在上锦云苑开展全站仪外业数据采集工作，详实记录坐标、高程数据，全程遵循操作规范，确保数据真实准确，圆满完成当日采集任务。",
+        "creator": "史清志"
+      },
+      {
+        "content": "一、勘察设计报表资料准备---完成企业财务状况初稿。\n二、3个所队补发绩效找冯岩主任核定发放金额，已通知3个所队的负责人，3月18日前反馈再次分配结果。\n三、到局内审科取文件，。按工作要求，各科室、直",
+        "creator": "路艳萍"
+      },
+      {
+        "content": "滏东大街管线探测，已完成外业探测。",
+        "creator": "刘韬"
+      },
+      {
+        "content": "1、整理大墺公司乙级规划资质补正资料，并联系省厅领导审核，并完成系统上报\n2、外聘一级注册建筑师聘用沟通相关事宜\n3、注册规划师刘瑶延续注册相关事宜\n4、注册规划师罗翠红初始注册咨询相关事宜",
+        "creator": "路阳"
+      },
+      {
+        "content": "1，所队报销审核\n2，三级转账\n3，各所队开据发票审核\n4，第一季度收入利润纳税预筹划\n5，配合生产处完善统计数据\n6，配合总务处沟通协调水电暖等分配",
+        "creator": "张凤丽"
+      },
+      {
+        "content": "根据规委会最新指导思路，推进《瑞和府》项目宣传册的修订与研讨工作。\n现阶段重点聚焦目录结构的优化论证，并确立了“先易后难、分步实施”的推进策略。\n今日主要对优化产品户型设计和营造好配套进行系统性的梳理",
+        "creator": "郭华"
+      },
+      {
+        "content": "邯郸市串城街历史文化街区保护提升项目设计",
+        "creator": "史丽霞"
+      },
+      {
+        "content": "1.完成 马瑞 提交工程质量记录清单 签字程序\n2.9个项目的签字程序\n3.制作完成 4个项目 项目评审表 剩余5个项目明日完成 均在签字后对接生产处\n",
+        "creator": "张琳"
+      }
+    ],
+    "data_resources": [],
+    "risk_warnings": [
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 1.完成优化筛选查询图层下拉框样式覆盖工作。\n2.完成优化搜索点位缩小后还是会在底部漏出来原本的点位，增加闪动5秒动态效果优化样式工作。\n3.完成进一步优化选择行政区",
+        "creator": "邢自航",
+        "dept": "航测遥感中心"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 审计问题汇总修改、报税、填写财政局年度决算报表、发放退休人员补贴 AI工具应用情况: 无",
+        "creator": "李玲玲",
+        "dept": "办公室"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 正常工作状态，生产处审核大额支付申请单；大奥财务报销发票等后勤工作。\n AI工具应用情况: 不涉及 今日工作复盘: 坚守工作岗位，积极做好后勤工作。 明日重点计划: ",
+        "creator": "赵杰",
+        "dept": "规划二所"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 1.复垦方案编制软件安装学习\n2.根据省厅下发设施农用地疑似问题台账整理矢量数据，并发给各县区 AI工具应用情况: 无",
+        "creator": "李佳佳",
+        "dept": "航测遥感中心"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 经开区照明图纸调整 AI工具应用情况: 无 今日工作复盘: 细致认真调整 明日重点计划: 继续调整 需协调支持事项: 无",
+        "creator": "李雷",
+        "dept": "市政分院-综合室"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 3.11\n1、博翔装分析软件；\n2、日报社不动产宗地资料整理；\n3、曲周临时用地沟通；\n4、成安四证办理合同取回；\n5、成安平面及高程测量合同替换；\n6、利用科监管项",
+        "creator": "于欣欣",
+        "dept": "航测遥感中心"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 一、勘察设计报表资料准备---完成企业财务状况初稿。\n二、3个所队补发绩效找冯岩主任核定发放金额，已通知3个所队的负责人，3月18日前反馈再次分配结果。\n三、到局内审",
+        "creator": "路艳萍",
+        "dept": "生产技术处"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 滏东大街管线探测，已完成外业探测。 AI工具应用情况: 未使用AI工具 今日工作复盘: 亮点：无\n问题：无\n改进：无 明日重点计划: 丛台路管线探测 需协调支持事项:",
+        "creator": "刘韬",
+        "dept": "测绘二队"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 1沙河小区开洞加固修改。2串城街配合方案。 AI工具应用情况: 今日无应用 今日工作复盘: 高层地下室开洞不光要满足图集最基本做法，还要保障地库顶梁满足要求，如实在做",
+        "creator": "李鹏飞",
+        "dept": "建筑分院"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 1、与磁县公安局核对主楼的消防设备升级改造问题 AI工具应用情况: 未应用AI系统 今日工作复盘: 1、与磁县公安局核对主楼的消防设备升级改造问题，因主楼不在我们设计",
+        "creator": "白中华",
+        "dept": "建筑分院"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 磁县公安局弱电问题回复，邯郸公安局竣工图修改 AI工具应用情况: 无 今日工作复盘: 已回复磁县公安局弱电问题，未完成邯郸公安局竣工图修改",
+        "creator": "李婷婷",
+        "dept": "建筑分院"
+      },
+      {
+        "content": "出勤情况: 出勤 今日完成工作: 1.完成 马瑞 提交工程质量记录清单 签字程序\n2.9个项目的签字程序\n3.制作完成 4个项目 项目评审表 剩余5个项目明日完成 均在签字后对接生产处\n AI工具应用",
+        "creator": "张琳",
+        "dept": "市政分院-综合室"
+      }
+    ],
+    "ai_applications": [
+      {
+        "content": "使用AI调试动态监测平台BUG依旧数据问题",
+        "creator": "邢自航",
+        "dept": "航测遥感中心"
+      },
+      {
+        "content": "运用豆包查找有关质量认证资料的信息",
+        "creator": "尚欢欢",
+        "dept": "生产技术处"
+      },
+      {
+        "content": "豆包生成初级方案模型",
+        "creator": "颜青青",
+        "dept": "规划一所"
+      },
+      {
+        "content": "用豆包和建筑学长出效果图。",
+        "creator": "徐婧",
+        "dept": "环境艺术所"
+      },
+      {
+        "content": "豆包搜索拉管施工过程",
+        "creator": "张倩",
+        "dept": "市政分院-综合室"
+      },
+      {
+        "content": "用豆包查询500球管单价",
+        "creator": "张静",
+        "dept": "市政分院-综合室"
+      },
+      {
+        "content": "用豆包生成图片",
+        "creator": "史鹏举",
+        "dept": "市政分院-市政一所"
+      },
+      {
+        "content": "利用ai编辑防排烟设计说明 其ai编制程度更加严谨合理",
+        "creator": "张村",
+        "dept": "建筑分院"
+      },
+      {
+        "content": "利用豆包查询会议费的相关规定",
+        "creator": "张艳",
+        "dept": "办公室"
+      },
+      {
+        "content": "运用deepseek工具学习Word软件。",
+        "creator": "张拥军",
+        "dept": "测绘一队"
+      },
+      {
+        "content": "灵感渲染",
+        "creator": "索晓岚",
+        "dept": "规划一所"
+      },
+      {
+        "content": "豆包搜索学习规定",
+        "creator": "张凤丽",
+        "dept": "办公室"
+      },
+      {
+        "content": "未应用AI系统",
+        "creator": "白中华",
+        "dept": "建筑分院"
+      },
+      {
+        "content": "利用DEEPSEEK分析供电范围辐射合理性。",
+        "creator": "陈晓林",
+        "dept": "市政分院-综合室"
+      },
+      {
+        "content": "WPS的应用，PPT，豆包的应用",
+        "creator": "郭华",
+        "dept": "建筑分院"
+      },
+      {
+        "content": "豆包查询道路现行规范汇总",
+        "creator": "岳建伟",
+        "dept": "市政分院-市政二所"
+      }
+    ],
+    "suggestions": []
+  },
+  "lazy_reports": [
+    {
+      "report_id": "y9bvOf6QRY-jKDJCyQ0mPw03551773231497",
+      "creator_id": "4450166134751420",
+      "creator_name": "宋慧",
+      "dept_name": "测绘二队",
+      "create_time": 1773231497000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 3,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.8
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 33,
+      "word_count": 6,
+      "work_done_length": 4,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "aTz6ifcQSjuaoLMaVejCRw03551773229995",
+      "creator_id": "01033955536426206495",
+      "creator_name": "李建锋",
+      "dept_name": "测绘一队",
+      "create_time": 1773229995000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 4,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.7
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "今日在上锦云苑开展全站仪外业数据采集工作，详实记录坐标、高程数据，全程遵循操作规范，确保数据真实准确，圆满完成当日采集任务。",
+            "creator": "李建锋"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 91,
+      "word_count": 6,
+      "work_done_length": 62,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "mdc2kGFCQPq9ZRUnqfM3yg03551773226926",
+      "creator_id": "052506564938783964",
+      "creator_name": "颜青青",
+      "dept_name": "规划一所",
+      "create_time": 1773226926000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 3,
+        "ai_application": 5,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.85
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": "豆包生成初级方案模型",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "豆包生成初级方案模型",
+            "creator": "颜青青",
+            "dept": "规划一所"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 77,
+      "word_count": 6,
+      "work_done_length": 39,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "WykBMgYCRECEnkOWuwhw0w03551773226681",
+      "creator_id": "01311712451726362382",
+      "creator_name": "李玲玲",
+      "dept_name": "办公室",
+      "create_time": 1773226681000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 3,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.25
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 审计问题汇总修改、报税、填写财政局年度决算报表、发放退休人员补贴 AI工具应用情况: 无",
+            "creator": "李玲玲",
+            "dept": "办公室"
+          }
+        ],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 61,
+      "word_count": 6,
+      "work_done_length": 32,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "MqtZOtDxS12PVmhahOWsVg03551773225925",
+      "creator_id": "013522082323782501",
+      "creator_name": "张毅",
+      "dept_name": "航测遥感中心",
+      "create_time": 1773225926000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 37,
+      "word_count": 6,
+      "work_done_length": 8,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "UsLsEweOTbODeyw_zLlAHw03551773225349",
+      "creator_id": "295352603132439985",
+      "creator_name": "胡士涛",
+      "dept_name": "规划编研所",
+      "create_time": 1773225349000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.8
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 46,
+      "word_count": 6,
+      "work_done_length": 17,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "CxebVU3LSgetJuuLftkCpw03551773225197",
+      "creator_id": "043531010929486316",
+      "creator_name": "王英哲",
+      "dept_name": "环境艺术所",
+      "create_time": 1773225198000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.0
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "缺少具体工作动作描述",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "1.磁县游园提升项目出初步方案讨论\n2.磁州窑博物馆现场调研",
+            "creator": "王英哲"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 59,
+      "word_count": 7,
+      "work_done_length": 30,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "GvbPMnEsTluERunuu04rPA03551773224898",
+      "creator_id": "290943435235448624",
+      "creator_name": "贾向荣",
+      "dept_name": "市政分院-综合室",
+      "create_time": 1773224899000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.0
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 69,
+      "word_count": 6,
+      "work_done_length": 26,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "dOm1sT8LTbKq3UTdW__TBQ03551773223571",
+      "creator_id": "161758282326065454",
+      "creator_name": "李佳佳",
+      "dept_name": "航测遥感中心",
+      "create_time": 1773223571000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 3,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.25
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 1.复垦方案编制软件安装学习\n2.根据省厅下发设施农用地疑似问题台账整理矢量数据，并发给各县区 AI工具应用情况: 无",
+            "creator": "李佳佳",
+            "dept": "航测遥感中心"
+          }
+        ],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 76,
+      "word_count": 7,
+      "work_done_length": 47,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "ByMCrZ0nQEWorfWgRyxoyw03551773223423",
+      "creator_id": "0844546037781527",
+      "creator_name": "徐婧",
+      "dept_name": "环境艺术所",
+      "create_time": 1773223423000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.0
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": "用豆包和建筑学长出效果图。",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "用豆包和建筑学长出效果图。",
+            "creator": "徐婧",
+            "dept": "环境艺术所"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 67,
+      "word_count": 6,
+      "work_done_length": 26,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "QN-HX1w2Teum9osQyvQdfQ03551773223348",
+      "creator_id": "01201033315033715121",
+      "creator_name": "薛晓蓉",
+      "dept_name": "生产技术处",
+      "create_time": 1773223349000,
+      "scores": {
+        "completeness": 3,
+        "content_quality": 4,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 3,
+        "planning": 1,
+        "total": 3.0
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "1、测绘、规划质量管理表格，打印并签字。\n2、环艺所，满意意修改，和册子重打。\n3、测绘公司交质量目标分解记录表。\n4、项目评审表，完成签字及管代盖章。\n",
+            "creator": "薛晓蓉"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 147,
+      "word_count": 11,
+      "work_done_length": 77,
+      "has_review": true,
+      "has_plan": false
+    },
+    {
+      "report_id": "Kkm5oqylQhK6vlUAk42JEQ03551773223328",
+      "creator_id": "011446516361775433",
+      "creator_name": "张倩",
+      "dept_name": "市政分院-综合室",
+      "create_time": 1773223329000,
+      "scores": {
+        "completeness": 4,
+        "content_quality": 2,
+        "ai_application": 4,
+        "timeliness": 4,
+        "workload": 4,
+        "planning": 1,
+        "total": 3.2
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": "豆包搜索拉管施工过程",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "豆包搜索拉管施工过程",
+            "creator": "张倩",
+            "dept": "市政分院-综合室"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 423,
+      "word_count": 12,
+      "work_done_length": 188,
+      "has_review": true,
+      "has_plan": false
+    },
+    {
+      "report_id": "3oVaKwNjT_qO7wnFW26q6Q03551773223081",
+      "creator_id": "266066165121549540",
+      "creator_name": "史清志",
+      "dept_name": "测绘一队",
+      "create_time": 1773223082000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 4,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.85
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "今日在上锦云苑开展全站仪外业数据采集工作，详实记录坐标、高程数据，全程遵循操作规范，确保数据真实准确，圆满完成当日采集任务。",
+            "creator": "史清志"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 91,
+      "word_count": 6,
+      "work_done_length": 62,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "lb99N55ERNe96x1GflltOw03551773222918",
+      "creator_id": "3049565751858473",
+      "creator_name": "李雷",
+      "dept_name": "市政分院-综合室",
+      "create_time": 1773222919000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 2,
+        "total": 2.2
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 经开区照明图纸调整 AI工具应用情况: 无 今日工作复盘: 细致认真调整 明日重点计划: 继续调整 需协调支持事项: 无",
+            "creator": "李雷",
+            "dept": "市政分院-综合室"
+          }
+        ],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 77,
+      "word_count": 12,
+      "work_done_length": 9,
+      "has_review": true,
+      "has_plan": true
+    },
+    {
+      "report_id": "Ks2sm6WwQSGJhopS_8eFbw03551773222876",
+      "creator_id": "022903391811957476",
+      "creator_name": "王鹏",
+      "dept_name": "建筑分院",
+      "create_time": 1773222876000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.1
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 48,
+      "word_count": 6,
+      "work_done_length": 10,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "JPeLY8NzRPqGz6UxnYpZMQ03551773222684",
+      "creator_id": "141543386320203374",
+      "creator_name": "于欣欣",
+      "dept_name": "航测遥感中心",
+      "create_time": 1773222684000,
+      "scores": {
+        "completeness": 4,
+        "content_quality": 4,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 2,
+        "total": 3.45
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 3.11\n1、博翔装分析软件；\n2、日报社不动产宗地资料整理；\n3、曲周临时用地沟通；\n4、成安四证办理合同取回；\n5、成安平面及高程测量合同替换；\n6、利用科监管项",
+            "creator": "于欣欣",
+            "dept": "航测遥感中心"
+          }
+        ],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 175,
+      "word_count": 18,
+      "work_done_length": 89,
+      "has_review": true,
+      "has_plan": true
+    },
+    {
+      "report_id": "YkSxGLDnTaeYB-rGtvsSbg03551773222652",
+      "creator_id": "036743593638736470",
+      "creator_name": "高丽君",
+      "dept_name": "市政分院-市政二所",
+      "create_time": 1773222652000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.1
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 39,
+      "word_count": 6,
+      "work_done_length": 6,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "1HabyE_YRmiNIPxiRp5MjQ03551773222623",
+      "creator_id": "012812674634412410",
+      "creator_name": "袁文忠",
+      "dept_name": "测绘二队",
+      "create_time": 1773222624000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.1
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 34,
+      "word_count": 6,
+      "work_done_length": 5,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "frdiwfM9TBqlSxdUDNSonA03551773222388",
+      "creator_id": "692054392924289616",
+      "creator_name": "张洪刚",
+      "dept_name": "建筑分院",
+      "create_time": 1773222389000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 4,
+        "total": 2.65
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 99,
+      "word_count": 14,
+      "work_done_length": 28,
+      "has_review": false,
+      "has_plan": true
+    },
+    {
+      "report_id": "MNd-zOtER7mWLLw-h0fRKQ03551773222386",
+      "creator_id": "046435624429267087",
+      "creator_name": "王文豫",
+      "dept_name": "环境艺术所",
+      "create_time": 1773222386000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.15
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 53,
+      "word_count": 6,
+      "work_done_length": 24,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "3bH9VPvxRSyJS0AZ41mxkA03551773222364",
+      "creator_id": "02264301131936333255",
+      "creator_name": "郭冰磊",
+      "dept_name": "办公室",
+      "create_time": 1773222365000,
+      "scores": {
+        "completeness": 3,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 4,
+        "total": 2.95
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 158,
+      "word_count": 16,
+      "work_done_length": 35,
+      "has_review": true,
+      "has_plan": true
+    },
+    {
+      "report_id": "UCqWS0_0SW2OPmL7-X4dJw03551773222173",
+      "creator_id": "02290252444735986985",
+      "creator_name": "路艳萍",
+      "dept_name": "生产技术处",
+      "create_time": 1773222173000,
+      "scores": {
+        "completeness": 3,
+        "content_quality": 5,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 1,
+        "total": 3.4
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "一、勘察设计报表资料准备---完成企业财务状况初稿。\n二、3个所队补发绩效找冯岩主任核定发放金额，已通知3个所队的负责人，3月18日前反馈再次分配结果。\n三、到局内审科取文件，。按工作要求，各科室、直",
+            "creator": "路艳萍"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 一、勘察设计报表资料准备---完成企业财务状况初稿。\n二、3个所队补发绩效找冯岩主任核定发放金额，已通知3个所队的负责人，3月18日前反馈再次分配结果。\n三、到局内审",
+            "creator": "路艳萍",
+            "dept": "生产技术处"
+          }
+        ],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 266,
+      "word_count": 9,
+      "work_done_length": 236,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "XieSg-jTQKOWi9N0fXuqLg03551773222127",
+      "creator_id": "032622353023960890",
+      "creator_name": "廉丽华",
+      "dept_name": "环境艺术所",
+      "create_time": 1773222128000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 41,
+      "word_count": 6,
+      "work_done_length": 12,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "B-WTsbyTRm-1vZYqhrSVeg03551773222041",
+      "creator_id": "441464025823980688",
+      "creator_name": "平子中",
+      "dept_name": "市政分院-市政二所",
+      "create_time": 1773222042000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.1
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 49,
+      "word_count": 6,
+      "work_done_length": 10,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "cDhdnkKDT3qDIkjRTfqbpg03551773222038",
+      "creator_id": "025536063926246807",
+      "creator_name": "李文杰",
+      "dept_name": "测绘二队",
+      "create_time": 1773222038000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 2,
+        "total": 2.2
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 53,
+      "word_count": 8,
+      "work_done_length": 8,
+      "has_review": false,
+      "has_plan": true
+    },
+    {
+      "report_id": "lFYJaE4MQLiXP4yp1A5FzA03551773221930",
+      "creator_id": "01314153480435405554",
+      "creator_name": "贾世钊",
+      "dept_name": "环境艺术所",
+      "create_time": 1773221931000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 44,
+      "word_count": 6,
+      "work_done_length": 15,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "YRgEBP4sQf2ZWeXLYHGfUA03551773221803",
+      "creator_id": "285612514021580284",
+      "creator_name": "吕浩杰",
+      "dept_name": "测绘一队",
+      "create_time": 1773221804000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 46,
+      "word_count": 6,
+      "work_done_length": 17,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "ZIJsicuPQESDtcWcyVtJDw03551773221790",
+      "creator_id": "0103395802011159403",
+      "creator_name": "贾险",
+      "dept_name": "测绘一队",
+      "create_time": 1773221790000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 46,
+      "word_count": 6,
+      "work_done_length": 17,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "7PjlIUB0T6KdXBkBtVyIbA03551773221762",
+      "creator_id": "301067455224255119",
+      "creator_name": "张树楠",
+      "dept_name": "规划二所",
+      "create_time": 1773221763000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.1
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 41,
+      "word_count": 6,
+      "work_done_length": 10,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "pjofDx0kT0yKPm6CeS1EZg03551773221756",
+      "creator_id": "295829054738764259",
+      "creator_name": "高全平",
+      "dept_name": "规划编研所",
+      "create_time": 1773221757000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.1
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 36,
+      "word_count": 6,
+      "work_done_length": 7,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "onAHyGD8TF2OPtD6GRiYDA03551773221740",
+      "creator_id": "020638216754788307",
+      "creator_name": "张艳",
+      "dept_name": "办公室",
+      "create_time": 1773221741000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 4,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.75
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": "利用豆包查询会议费的相关规定",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "利用豆包查询会议费的相关规定",
+            "creator": "张艳",
+            "dept": "办公室"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 97,
+      "word_count": 8,
+      "work_done_length": 55,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "dWBK-xdWRLevNNYv-3vgVA03551773221602",
+      "creator_id": "02290331103037646718",
+      "creator_name": "闫崇智",
+      "dept_name": "建筑分院",
+      "create_time": 1773221603000,
+      "scores": {
+        "completeness": 3,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 3,
+        "total": 2.85
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 158,
+      "word_count": 13,
+      "work_done_length": 25,
+      "has_review": true,
+      "has_plan": true
+    },
+    {
+      "report_id": "kjPzAshdQ9qM05rvQEM8jA03551773221563",
+      "creator_id": "01191812044423465851",
+      "creator_name": "宋瑞华",
+      "dept_name": "市政分院-市政二所",
+      "create_time": 1773221563000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.1
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 45,
+      "word_count": 6,
+      "work_done_length": 8,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "LjQdNRvdTECXULoiNliwng03551773221543",
+      "creator_id": "246444416035692505",
+      "creator_name": "赵永胜",
+      "dept_name": "测绘一队",
+      "create_time": 1773221543000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 46,
+      "word_count": 6,
+      "work_done_length": 17,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "Y8f5tWopQ4y87HW_UeSGcw03551773221530",
+      "creator_id": "022902652411856552",
+      "creator_name": "李轶",
+      "dept_name": "办公室",
+      "create_time": 1773221530000,
+      "scores": {
+        "completeness": 4,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 3,
+        "total": 3.05
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 207,
+      "word_count": 13,
+      "work_done_length": 143,
+      "has_review": false,
+      "has_plan": true
+    },
+    {
+      "report_id": "kzWDS0mISySurnh7VWaxIw03551773221522",
+      "creator_id": "424568182124072185",
+      "creator_name": "张凤丽",
+      "dept_name": "办公室",
+      "create_time": 1773221522000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 4,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 1,
+        "total": 2.85
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": "豆包搜索学习规定",
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "1，所队报销审核\n2，三级转账\n3，各所队开据发票审核\n4，第一季度收入利润纳税预筹划\n5，配合生产处完善统计数据\n6，配合总务处沟通协调水电暖等分配",
+            "creator": "张凤丽"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "豆包搜索学习规定",
+            "creator": "张凤丽",
+            "dept": "办公室"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 111,
+      "word_count": 11,
+      "work_done_length": 75,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "URgw0dLUTQqc5QG2sWrz7w03551773221512",
+      "creator_id": "066016086129791742",
+      "creator_name": "白中华",
+      "dept_name": "建筑分院",
+      "create_time": 1773221513000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 1,
+        "total": 2.45
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "缺少具体工作动作描述",
+      "ai_usage": "未应用AI系统",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 1、与磁县公安局核对主楼的消防设备升级改造问题 AI工具应用情况: 未应用AI系统 今日工作复盘: 1、与磁县公安局核对主楼的消防设备升级改造问题，因主楼不在我们设计",
+            "creator": "白中华",
+            "dept": "建筑分院"
+          }
+        ],
+        "ai_applications": [
+          {
+            "content": "未应用AI系统",
+            "creator": "白中华",
+            "dept": "建筑分院"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 131,
+      "word_count": 8,
+      "work_done_length": 23,
+      "has_review": true,
+      "has_plan": false
+    },
+    {
+      "report_id": "7XzrjN-zRGO65BtguJaIxw03551773221491",
+      "creator_id": "01040563660129320988",
+      "creator_name": "王永辉",
+      "dept_name": "建筑分院",
+      "create_time": 1773221492000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 3,
+        "total": 2.65
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 106,
+      "word_count": 10,
+      "work_done_length": 15,
+      "has_review": true,
+      "has_plan": true
+    },
+    {
+      "report_id": "CsPSnQycTmKOJqhqlEesEQ03551773221481",
+      "creator_id": "3903496132425801",
+      "creator_name": "胡坤斌",
+      "dept_name": "规划一所",
+      "create_time": 1773221482000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "缺少具体工作动作描述",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 47,
+      "word_count": 6,
+      "work_done_length": 18,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "LNvyaIZFTH-XoxzsnxQbJw03551773221441",
+      "creator_id": "015404163415785308",
+      "creator_name": "彭浩",
+      "dept_name": "环境艺术所",
+      "create_time": 1773221442000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.1
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 34,
+      "word_count": 6,
+      "work_done_length": 5,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "XblgFMTITZOp-u9x-Kn4Ow03551773221236",
+      "creator_id": "2326071640845232",
+      "creator_name": "林婧",
+      "dept_name": "办公室",
+      "create_time": 1773221237000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 1,
+        "total": 2.45
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 128,
+      "word_count": 8,
+      "work_done_length": 94,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "9-OW1EPmTLaY2zfrM3RY-g03551773220957",
+      "creator_id": "301312173136579787",
+      "creator_name": "郝玮娜",
+      "dept_name": "总务处",
+      "create_time": 1773220958000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 1,
+        "total": 2.45
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 110,
+      "word_count": 9,
+      "work_done_length": 81,
+      "has_review": false,
+      "has_plan": false
+    }
+  ],
+  "details": [
+    {
+      "report_id": "SpLabKjVQ6OIAEQBedoq6A03551773234945",
+      "creator_id": "01674335515638825548",
+      "creator_name": "马新源",
+      "dept_name": "规划二所",
+      "create_time": 1773234945000,
+      "scores": {
+        "completeness": 4,
+        "content_quality": 5,
+        "ai_application": 2,
+        "timeliness": 3,
+        "workload": 3,
+        "planning": 1,
+        "total": 3.3
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 209,
+      "word_count": 8,
+      "work_done_length": 127,
+      "has_review": true,
+      "has_plan": false
+    },
+    {
+      "report_id": "RyHC9s_pS3WoqlgGf75YVg03551773233380",
+      "creator_id": "01391926044136646306",
+      "creator_name": "邢自航",
+      "dept_name": "航测遥感中心",
+      "create_time": 1773233381000,
+      "scores": {
+        "completeness": 3,
+        "content_quality": 4,
+        "ai_application": 2,
+        "timeliness": 3,
+        "workload": 3,
+        "planning": 1,
+        "total": 2.85
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": "使用AI调试动态监测平台BUG依旧数据问题",
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "1.完成优化筛选查询图层下拉框样式覆盖工作。\n2.完成优化搜索点位缩小后还是会在底部漏出来原本的点位，增加闪动5秒动态效果优化样式工作。\n3.完成进一步优化选择行政区划4区坐标屏幕居中，调试点位，图形",
+            "creator": "邢自航"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 1.完成优化筛选查询图层下拉框样式覆盖工作。\n2.完成优化搜索点位缩小后还是会在底部漏出来原本的点位，增加闪动5秒动态效果优化样式工作。\n3.完成进一步优化选择行政区",
+            "creator": "邢自航",
+            "dept": "航测遥感中心"
+          }
+        ],
+        "ai_applications": [
+          {
+            "content": "使用AI调试动态监测平台BUG依旧数据问题",
+            "creator": "邢自航",
+            "dept": "航测遥感中心"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 204,
+      "word_count": 10,
+      "work_done_length": 155,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "R97om4LWR4aI6UV94O6AUA03551773233157",
+      "creator_id": "662641546523536090",
+      "creator_name": "尚欢欢",
+      "dept_name": "生产技术处",
+      "create_time": 1773233157000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 4,
+        "timeliness": 3,
+        "workload": 3,
+        "planning": 1,
+        "total": 2.55
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": "运用豆包查找有关质量认证资料的信息",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "运用豆包查找有关质量认证资料的信息",
+            "creator": "尚欢欢",
+            "dept": "生产技术处"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 101,
+      "word_count": 9,
+      "work_done_length": 56,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "y9bvOf6QRY-jKDJCyQ0mPw03551773231497",
+      "creator_id": "4450166134751420",
+      "creator_name": "宋慧",
+      "dept_name": "测绘二队",
+      "create_time": 1773231497000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 3,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.8
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 33,
+      "word_count": 6,
+      "work_done_length": 4,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "aTz6ifcQSjuaoLMaVejCRw03551773229995",
+      "creator_id": "01033955536426206495",
+      "creator_name": "李建锋",
+      "dept_name": "测绘一队",
+      "create_time": 1773229995000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 4,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.7
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "今日在上锦云苑开展全站仪外业数据采集工作，详实记录坐标、高程数据，全程遵循操作规范，确保数据真实准确，圆满完成当日采集任务。",
+            "creator": "李建锋"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 91,
+      "word_count": 6,
+      "work_done_length": 62,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "mdc2kGFCQPq9ZRUnqfM3yg03551773226926",
+      "creator_id": "052506564938783964",
+      "creator_name": "颜青青",
+      "dept_name": "规划一所",
+      "create_time": 1773226926000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 3,
+        "ai_application": 5,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.85
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": "豆包生成初级方案模型",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "豆包生成初级方案模型",
+            "creator": "颜青青",
+            "dept": "规划一所"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 77,
+      "word_count": 6,
+      "work_done_length": 39,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "WykBMgYCRECEnkOWuwhw0w03551773226681",
+      "creator_id": "01311712451726362382",
+      "creator_name": "李玲玲",
+      "dept_name": "办公室",
+      "create_time": 1773226681000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 3,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.25
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 审计问题汇总修改、报税、填写财政局年度决算报表、发放退休人员补贴 AI工具应用情况: 无",
+            "creator": "李玲玲",
+            "dept": "办公室"
+          }
+        ],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 61,
+      "word_count": 6,
+      "work_done_length": 32,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "MqtZOtDxS12PVmhahOWsVg03551773225925",
+      "creator_id": "013522082323782501",
+      "creator_name": "张毅",
+      "dept_name": "航测遥感中心",
+      "create_time": 1773225926000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 37,
+      "word_count": 6,
+      "work_done_length": 8,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "UsLsEweOTbODeyw_zLlAHw03551773225349",
+      "creator_id": "295352603132439985",
+      "creator_name": "胡士涛",
+      "dept_name": "规划编研所",
+      "create_time": 1773225349000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.8
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 46,
+      "word_count": 6,
+      "work_done_length": 17,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "CxebVU3LSgetJuuLftkCpw03551773225197",
+      "creator_id": "043531010929486316",
+      "creator_name": "王英哲",
+      "dept_name": "环境艺术所",
+      "create_time": 1773225198000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.0
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "缺少具体工作动作描述",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "1.磁县游园提升项目出初步方案讨论\n2.磁州窑博物馆现场调研",
+            "creator": "王英哲"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 59,
+      "word_count": 7,
+      "work_done_length": 30,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "GvbPMnEsTluERunuu04rPA03551773224898",
+      "creator_id": "290943435235448624",
+      "creator_name": "贾向荣",
+      "dept_name": "市政分院-综合室",
+      "create_time": 1773224899000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.0
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 69,
+      "word_count": 6,
+      "work_done_length": 26,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "4Fb-Etz8TJOfIBZ9owT3Qw03551773224693",
+      "creator_id": "26336011551149083",
+      "creator_name": "赵杰",
+      "dept_name": "规划二所",
+      "create_time": 1773224693000,
+      "scores": {
+        "completeness": 3,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 3,
+        "planning": 2,
+        "total": 2.6
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 正常工作状态，生产处审核大额支付申请单；大奥财务报销发票等后勤工作。\n AI工具应用情况: 不涉及 今日工作复盘: 坚守工作岗位，积极做好后勤工作。 明日重点计划: ",
+            "creator": "赵杰",
+            "dept": "规划二所"
+          }
+        ],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 118,
+      "word_count": 12,
+      "work_done_length": 35,
+      "has_review": true,
+      "has_plan": true
+    },
+    {
+      "report_id": "dOm1sT8LTbKq3UTdW__TBQ03551773223571",
+      "creator_id": "161758282326065454",
+      "creator_name": "李佳佳",
+      "dept_name": "航测遥感中心",
+      "create_time": 1773223571000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 3,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.25
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 1.复垦方案编制软件安装学习\n2.根据省厅下发设施农用地疑似问题台账整理矢量数据，并发给各县区 AI工具应用情况: 无",
+            "creator": "李佳佳",
+            "dept": "航测遥感中心"
+          }
+        ],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 76,
+      "word_count": 7,
+      "work_done_length": 47,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "ByMCrZ0nQEWorfWgRyxoyw03551773223423",
+      "creator_id": "0844546037781527",
+      "creator_name": "徐婧",
+      "dept_name": "环境艺术所",
+      "create_time": 1773223423000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.0
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": "用豆包和建筑学长出效果图。",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "用豆包和建筑学长出效果图。",
+            "creator": "徐婧",
+            "dept": "环境艺术所"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 67,
+      "word_count": 6,
+      "work_done_length": 26,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "QN-HX1w2Teum9osQyvQdfQ03551773223348",
+      "creator_id": "01201033315033715121",
+      "creator_name": "薛晓蓉",
+      "dept_name": "生产技术处",
+      "create_time": 1773223349000,
+      "scores": {
+        "completeness": 3,
+        "content_quality": 4,
+        "ai_application": 2,
+        "timeliness": 4,
+        "workload": 3,
+        "planning": 1,
+        "total": 3.0
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "1、测绘、规划质量管理表格，打印并签字。\n2、环艺所，满意意修改，和册子重打。\n3、测绘公司交质量目标分解记录表。\n4、项目评审表，完成签字及管代盖章。\n",
+            "creator": "薛晓蓉"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 147,
+      "word_count": 11,
+      "work_done_length": 77,
+      "has_review": true,
+      "has_plan": false
+    },
+    {
+      "report_id": "Kkm5oqylQhK6vlUAk42JEQ03551773223328",
+      "creator_id": "011446516361775433",
+      "creator_name": "张倩",
+      "dept_name": "市政分院-综合室",
+      "create_time": 1773223329000,
+      "scores": {
+        "completeness": 4,
+        "content_quality": 2,
+        "ai_application": 4,
+        "timeliness": 4,
+        "workload": 4,
+        "planning": 1,
+        "total": 3.2
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": "豆包搜索拉管施工过程",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "豆包搜索拉管施工过程",
+            "creator": "张倩",
+            "dept": "市政分院-综合室"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 423,
+      "word_count": 12,
+      "work_done_length": 188,
+      "has_review": true,
+      "has_plan": false
+    },
+    {
+      "report_id": "gfKzVQkhTNWKcLtyH7aZBA03551773223099",
+      "creator_id": "2327334924516567",
+      "creator_name": "张解为",
+      "dept_name": "规划一所",
+      "create_time": 1773223100000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 40,
+      "word_count": 6,
+      "work_done_length": 11,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "3oVaKwNjT_qO7wnFW26q6Q03551773223081",
+      "creator_id": "266066165121549540",
+      "creator_name": "史清志",
+      "dept_name": "测绘一队",
+      "create_time": 1773223082000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 4,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.85
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "今日在上锦云苑开展全站仪外业数据采集工作，详实记录坐标、高程数据，全程遵循操作规范，确保数据真实准确，圆满完成当日采集任务。",
+            "creator": "史清志"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 91,
+      "word_count": 6,
+      "work_done_length": 62,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "lb99N55ERNe96x1GflltOw03551773222918",
+      "creator_id": "3049565751858473",
+      "creator_name": "李雷",
+      "dept_name": "市政分院-综合室",
+      "create_time": 1773222919000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 2,
+        "total": 2.2
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 经开区照明图纸调整 AI工具应用情况: 无 今日工作复盘: 细致认真调整 明日重点计划: 继续调整 需协调支持事项: 无",
+            "creator": "李雷",
+            "dept": "市政分院-综合室"
+          }
+        ],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 77,
+      "word_count": 12,
+      "work_done_length": 9,
+      "has_review": true,
+      "has_plan": true
+    },
+    {
+      "report_id": "Ks2sm6WwQSGJhopS_8eFbw03551773222876",
+      "creator_id": "022903391811957476",
+      "creator_name": "王鹏",
+      "dept_name": "建筑分院",
+      "create_time": 1773222876000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.1
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 48,
+      "word_count": 6,
+      "work_done_length": 10,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "N-5RO-AfSGuNVYsXV40QBw03551773222754",
+      "creator_id": "081501532026249992",
+      "creator_name": "栗丽华",
+      "dept_name": "测绘一队",
+      "create_time": 1773222755000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.15
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 55,
+      "word_count": 6,
+      "work_done_length": 25,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "RuPPvg_FSFmMzgZjYbirzg03551773222694",
+      "creator_id": "256140132638060116",
+      "creator_name": "陈蒙超",
+      "dept_name": "市政分院-市政一所",
+      "create_time": 1773222694000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 56,
+      "word_count": 6,
+      "work_done_length": 18,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "JPeLY8NzRPqGz6UxnYpZMQ03551773222684",
+      "creator_id": "141543386320203374",
+      "creator_name": "于欣欣",
+      "dept_name": "航测遥感中心",
+      "create_time": 1773222684000,
+      "scores": {
+        "completeness": 4,
+        "content_quality": 4,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 2,
+        "total": 3.45
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 3.11\n1、博翔装分析软件；\n2、日报社不动产宗地资料整理；\n3、曲周临时用地沟通；\n4、成安四证办理合同取回；\n5、成安平面及高程测量合同替换；\n6、利用科监管项",
+            "creator": "于欣欣",
+            "dept": "航测遥感中心"
+          }
+        ],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 175,
+      "word_count": 18,
+      "work_done_length": 89,
+      "has_review": true,
+      "has_plan": true
+    },
+    {
+      "report_id": "YkSxGLDnTaeYB-rGtvsSbg03551773222652",
+      "creator_id": "036743593638736470",
+      "creator_name": "高丽君",
+      "dept_name": "市政分院-市政二所",
+      "create_time": 1773222652000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.1
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 39,
+      "word_count": 6,
+      "work_done_length": 6,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "1HabyE_YRmiNIPxiRp5MjQ03551773222623",
+      "creator_id": "012812674634412410",
+      "creator_name": "袁文忠",
+      "dept_name": "测绘二队",
+      "create_time": 1773222624000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.1
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 34,
+      "word_count": 6,
+      "work_done_length": 5,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "frdiwfM9TBqlSxdUDNSonA03551773222388",
+      "creator_id": "692054392924289616",
+      "creator_name": "张洪刚",
+      "dept_name": "建筑分院",
+      "create_time": 1773222389000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 4,
+        "total": 2.65
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 99,
+      "word_count": 14,
+      "work_done_length": 28,
+      "has_review": false,
+      "has_plan": true
+    },
+    {
+      "report_id": "MNd-zOtER7mWLLw-h0fRKQ03551773222386",
+      "creator_id": "046435624429267087",
+      "creator_name": "王文豫",
+      "dept_name": "环境艺术所",
+      "create_time": 1773222386000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.15
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 53,
+      "word_count": 6,
+      "work_done_length": 24,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "3bH9VPvxRSyJS0AZ41mxkA03551773222364",
+      "creator_id": "02264301131936333255",
+      "creator_name": "郭冰磊",
+      "dept_name": "办公室",
+      "create_time": 1773222365000,
+      "scores": {
+        "completeness": 3,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 4,
+        "total": 2.95
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 158,
+      "word_count": 16,
+      "work_done_length": 35,
+      "has_review": true,
+      "has_plan": true
+    },
+    {
+      "report_id": "Dw57tu3XSrGBZw_X1TRe7g03551773222303",
+      "creator_id": "27130736793657",
+      "creator_name": "张静",
+      "dept_name": "市政分院-综合室",
+      "create_time": 1773222303000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 2,
+        "ai_application": 4,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.55
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": "用豆包查询500球管单价",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "用豆包查询500球管单价",
+            "creator": "张静",
+            "dept": "市政分院-综合室"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 64,
+      "word_count": 6,
+      "work_done_length": 24,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "t_CaxJSHSiW-BhUjbiVapQ03551773222238",
+      "creator_id": "236043611255312",
+      "creator_name": "高杨",
+      "dept_name": "环境艺术所",
+      "create_time": 1773222239000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 48,
+      "word_count": 6,
+      "work_done_length": 19,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "UCqWS0_0SW2OPmL7-X4dJw03551773222173",
+      "creator_id": "02290252444735986985",
+      "creator_name": "路艳萍",
+      "dept_name": "生产技术处",
+      "create_time": 1773222173000,
+      "scores": {
+        "completeness": 3,
+        "content_quality": 5,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 1,
+        "total": 3.4
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "一、勘察设计报表资料准备---完成企业财务状况初稿。\n二、3个所队补发绩效找冯岩主任核定发放金额，已通知3个所队的负责人，3月18日前反馈再次分配结果。\n三、到局内审科取文件，。按工作要求，各科室、直",
+            "creator": "路艳萍"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 一、勘察设计报表资料准备---完成企业财务状况初稿。\n二、3个所队补发绩效找冯岩主任核定发放金额，已通知3个所队的负责人，3月18日前反馈再次分配结果。\n三、到局内审",
+            "creator": "路艳萍",
+            "dept": "生产技术处"
+          }
+        ],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 266,
+      "word_count": 9,
+      "work_done_length": 236,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "XieSg-jTQKOWi9N0fXuqLg03551773222127",
+      "creator_id": "032622353023960890",
+      "creator_name": "廉丽华",
+      "dept_name": "环境艺术所",
+      "create_time": 1773222128000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 41,
+      "word_count": 6,
+      "work_done_length": 12,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "B-WTsbyTRm-1vZYqhrSVeg03551773222041",
+      "creator_id": "441464025823980688",
+      "creator_name": "平子中",
+      "dept_name": "市政分院-市政二所",
+      "create_time": 1773222042000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.1
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 49,
+      "word_count": 6,
+      "work_done_length": 10,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "cDhdnkKDT3qDIkjRTfqbpg03551773222038",
+      "creator_id": "025536063926246807",
+      "creator_name": "李文杰",
+      "dept_name": "测绘二队",
+      "create_time": 1773222038000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 2,
+        "total": 2.2
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 53,
+      "word_count": 8,
+      "work_done_length": 8,
+      "has_review": false,
+      "has_plan": true
+    },
+    {
+      "report_id": "I5EAZD6PTkOXOq3xTt4xYA03551773222000",
+      "creator_id": "012745185941805556",
+      "creator_name": "戴晨",
+      "dept_name": "环境艺术所",
+      "create_time": 1773222000000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 45,
+      "word_count": 6,
+      "work_done_length": 16,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "HCgk4nq8SMCa42-5_kfbBA03551773221978",
+      "creator_id": "1645032316690388",
+      "creator_name": "刘韬",
+      "dept_name": "测绘二队",
+      "create_time": 1773221978000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 2,
+        "total": 2.55
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "滏东大街管线探测，已完成外业探测。",
+            "creator": "刘韬"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 滏东大街管线探测，已完成外业探测。 AI工具应用情况: 未使用AI工具 今日工作复盘: 亮点：无\n问题：无\n改进：无 明日重点计划: 丛台路管线探测 需协调支持事项:",
+            "creator": "刘韬",
+            "dept": "测绘二队"
+          }
+        ],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 102,
+      "word_count": 14,
+      "work_done_length": 17,
+      "has_review": true,
+      "has_plan": true
+    },
+    {
+      "report_id": "lFYJaE4MQLiXP4yp1A5FzA03551773221930",
+      "creator_id": "01314153480435405554",
+      "creator_name": "贾世钊",
+      "dept_name": "环境艺术所",
+      "create_time": 1773221931000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 44,
+      "word_count": 6,
+      "work_done_length": 15,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "rd5z_A-SSfKKZqwnSpWM0A03551773221910",
+      "creator_id": "17685913261255282",
+      "creator_name": "马瑞",
+      "dept_name": "市政分院-市政一所",
+      "create_time": 1773221910000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 1,
+        "total": 2.05
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 173,
+      "word_count": 10,
+      "work_done_length": 14,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "NZkf_YVYQPOlrjA8p2bNvg03551773221890",
+      "creator_id": "093753341029141068",
+      "creator_name": "王嘉聪",
+      "dept_name": "建筑分院",
+      "create_time": 1773221890000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.35
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 80,
+      "word_count": 6,
+      "work_done_length": 51,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "q1rToy6mSEyhUEXFsdg1vA03551773221875",
+      "creator_id": "300227112526710077",
+      "creator_name": "李鹏飞",
+      "dept_name": "建筑分院",
+      "create_time": 1773221876000,
+      "scores": {
+        "completeness": 3,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 2,
+        "total": 2.75
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 1沙河小区开洞加固修改。2串城街配合方案。 AI工具应用情况: 今日无应用 今日工作复盘: 高层地下室开洞不光要满足图集最基本做法，还要保障地库顶梁满足要求，如实在做",
+            "creator": "李鹏飞",
+            "dept": "建筑分院"
+          }
+        ],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 142,
+      "word_count": 12,
+      "work_done_length": 21,
+      "has_review": true,
+      "has_plan": true
+    },
+    {
+      "report_id": "fPt1HwWUQCiKFP7Kx4Fhlw03551773221836",
+      "creator_id": "01516704323221928257",
+      "creator_name": "史鹏举",
+      "dept_name": "市政分院-市政一所",
+      "create_time": 1773221836000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 4,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.35
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": "用豆包生成图片",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "用豆包生成图片",
+            "creator": "史鹏举",
+            "dept": "市政分院-市政一所"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 47,
+      "word_count": 6,
+      "work_done_length": 12,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "YRgEBP4sQf2ZWeXLYHGfUA03551773221803",
+      "creator_id": "285612514021580284",
+      "creator_name": "吕浩杰",
+      "dept_name": "测绘一队",
+      "create_time": 1773221804000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 46,
+      "word_count": 6,
+      "work_done_length": 17,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "Ddy9XzPMTDCOlcMFAddV3Q03551773221798",
+      "creator_id": "302066164626196302",
+      "creator_name": "李彬彬",
+      "dept_name": "建筑分院",
+      "create_time": 1773221798000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.15
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 55,
+      "word_count": 6,
+      "work_done_length": 26,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "fOuCFqekQXahtwJJXNs3cQ03551773221794",
+      "creator_id": "02290302655423457754",
+      "creator_name": "安爱红",
+      "dept_name": "建筑分院",
+      "create_time": 1773221794000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.15
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 59,
+      "word_count": 7,
+      "work_done_length": 30,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "ZIJsicuPQESDtcWcyVtJDw03551773221790",
+      "creator_id": "0103395802011159403",
+      "creator_name": "贾险",
+      "dept_name": "测绘一队",
+      "create_time": 1773221790000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 46,
+      "word_count": 6,
+      "work_done_length": 17,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "b7wVKVhLR8WxBHWeTg5d4g03551773221781",
+      "creator_id": "2550414151781361",
+      "creator_name": "张村",
+      "dept_name": "建筑分院",
+      "create_time": 1773221782000,
+      "scores": {
+        "completeness": 3,
+        "content_quality": 2,
+        "ai_application": 5,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 1,
+        "total": 3.25
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": "利用ai编辑防排烟设计说明 其ai编制程度更加严谨合理",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "利用ai编辑防排烟设计说明 其ai编制程度更加严谨合理",
+            "creator": "张村",
+            "dept": "建筑分院"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 156,
+      "word_count": 13,
+      "work_done_length": 57,
+      "has_review": true,
+      "has_plan": false
+    },
+    {
+      "report_id": "7PjlIUB0T6KdXBkBtVyIbA03551773221762",
+      "creator_id": "301067455224255119",
+      "creator_name": "张树楠",
+      "dept_name": "规划二所",
+      "create_time": 1773221763000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.1
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 41,
+      "word_count": 6,
+      "work_done_length": 10,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "pjofDx0kT0yKPm6CeS1EZg03551773221756",
+      "creator_id": "295829054738764259",
+      "creator_name": "高全平",
+      "dept_name": "规划编研所",
+      "create_time": 1773221757000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.1
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 36,
+      "word_count": 6,
+      "work_done_length": 7,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "3Gf3rj1sTY6oAsHVkxIaVg03551773221756",
+      "creator_id": "0229026400571164836",
+      "creator_name": "路阳",
+      "dept_name": "生产技术处",
+      "create_time": 1773221756000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 4,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 1,
+        "total": 2.95
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "1、整理大墺公司乙级规划资质补正资料，并联系省厅领导审核，并完成系统上报\n2、外聘一级注册建筑师聘用沟通相关事宜\n3、注册规划师刘瑶延续注册相关事宜\n4、注册规划师罗翠红初始注册咨询相关事宜",
+            "creator": "路阳"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 126,
+      "word_count": 9,
+      "work_done_length": 95,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "onAHyGD8TF2OPtD6GRiYDA03551773221740",
+      "creator_id": "020638216754788307",
+      "creator_name": "张艳",
+      "dept_name": "办公室",
+      "create_time": 1773221741000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 4,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.75
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": "利用豆包查询会议费的相关规定",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "利用豆包查询会议费的相关规定",
+            "creator": "张艳",
+            "dept": "办公室"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 97,
+      "word_count": 8,
+      "work_done_length": 55,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "nnjU3O5_RCewBiuRScDTJQ03551773221675",
+      "creator_id": "626062406739016228",
+      "creator_name": "马红刚",
+      "dept_name": "建筑分院",
+      "create_time": 1773221676000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 42,
+      "word_count": 6,
+      "work_done_length": 13,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "OG-MhlOURBWtRfhWQqZGtg03551773221656",
+      "creator_id": "01034007450424207990",
+      "creator_name": "张拥军",
+      "dept_name": "测绘一队",
+      "create_time": 1773221657000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 2,
+        "ai_application": 4,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.55
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": "运用deepseek工具学习Word软件。",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "运用deepseek工具学习Word软件。",
+            "creator": "张拥军",
+            "dept": "测绘一队"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 78,
+      "word_count": 6,
+      "work_done_length": 29,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "dWBK-xdWRLevNNYv-3vgVA03551773221602",
+      "creator_id": "02290331103037646718",
+      "creator_name": "闫崇智",
+      "dept_name": "建筑分院",
+      "create_time": 1773221603000,
+      "scores": {
+        "completeness": 3,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 3,
+        "total": 2.85
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 158,
+      "word_count": 13,
+      "work_done_length": 25,
+      "has_review": true,
+      "has_plan": true
+    },
+    {
+      "report_id": "wep8M5DJRnubzXoX3dmEIA03551773221592",
+      "creator_id": "266629631131620425",
+      "creator_name": "索晓岚",
+      "dept_name": "规划一所",
+      "create_time": 1773221592000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": "灵感渲染",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "灵感渲染",
+            "creator": "索晓岚",
+            "dept": "规划一所"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 48,
+      "word_count": 6,
+      "work_done_length": 16,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "kjPzAshdQ9qM05rvQEM8jA03551773221563",
+      "creator_id": "01191812044423465851",
+      "creator_name": "宋瑞华",
+      "dept_name": "市政分院-市政二所",
+      "create_time": 1773221563000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.1
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 45,
+      "word_count": 6,
+      "work_done_length": 8,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "rvpnZAjoTzG2JiUMyFvoWg03551773221562",
+      "creator_id": "01532530134532374873",
+      "creator_name": "罗翠红",
+      "dept_name": "环境艺术所",
+      "create_time": 1773221562000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.15
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 60,
+      "word_count": 6,
+      "work_done_length": 27,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "LjQdNRvdTECXULoiNliwng03551773221543",
+      "creator_id": "246444416035692505",
+      "creator_name": "赵永胜",
+      "dept_name": "测绘一队",
+      "create_time": 1773221543000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 46,
+      "word_count": 6,
+      "work_done_length": 17,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "Y8f5tWopQ4y87HW_UeSGcw03551773221530",
+      "creator_id": "022902652411856552",
+      "creator_name": "李轶",
+      "dept_name": "办公室",
+      "create_time": 1773221530000,
+      "scores": {
+        "completeness": 4,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 3,
+        "total": 3.05
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 207,
+      "word_count": 13,
+      "work_done_length": 143,
+      "has_review": false,
+      "has_plan": true
+    },
+    {
+      "report_id": "kzWDS0mISySurnh7VWaxIw03551773221522",
+      "creator_id": "424568182124072185",
+      "creator_name": "张凤丽",
+      "dept_name": "办公室",
+      "create_time": 1773221522000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 4,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 1,
+        "total": 2.85
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": "豆包搜索学习规定",
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "1，所队报销审核\n2，三级转账\n3，各所队开据发票审核\n4，第一季度收入利润纳税预筹划\n5，配合生产处完善统计数据\n6，配合总务处沟通协调水电暖等分配",
+            "creator": "张凤丽"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "豆包搜索学习规定",
+            "creator": "张凤丽",
+            "dept": "办公室"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 111,
+      "word_count": 11,
+      "work_done_length": 75,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "URgw0dLUTQqc5QG2sWrz7w03551773221512",
+      "creator_id": "066016086129791742",
+      "creator_name": "白中华",
+      "dept_name": "建筑分院",
+      "create_time": 1773221513000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 1,
+        "total": 2.45
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "缺少具体工作动作描述",
+      "ai_usage": "未应用AI系统",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 1、与磁县公安局核对主楼的消防设备升级改造问题 AI工具应用情况: 未应用AI系统 今日工作复盘: 1、与磁县公安局核对主楼的消防设备升级改造问题，因主楼不在我们设计",
+            "creator": "白中华",
+            "dept": "建筑分院"
+          }
+        ],
+        "ai_applications": [
+          {
+            "content": "未应用AI系统",
+            "creator": "白中华",
+            "dept": "建筑分院"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 131,
+      "word_count": 8,
+      "work_done_length": 23,
+      "has_review": true,
+      "has_plan": false
+    },
+    {
+      "report_id": "6__t1T1BQza9oFUwzRyVlg03551773221496",
+      "creator_id": "561751212737810156",
+      "creator_name": "陈晓林",
+      "dept_name": "市政分院-综合室",
+      "create_time": 1773221497000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 4,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.35
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": "利用DEEPSEEK分析供电范围辐射合理性。",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "利用DEEPSEEK分析供电范围辐射合理性。",
+            "creator": "陈晓林",
+            "dept": "市政分院-综合室"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 65,
+      "word_count": 6,
+      "work_done_length": 15,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "7XzrjN-zRGO65BtguJaIxw03551773221491",
+      "creator_id": "01040563660129320988",
+      "creator_name": "王永辉",
+      "dept_name": "建筑分院",
+      "create_time": 1773221492000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 3,
+        "total": 2.65
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 106,
+      "word_count": 10,
+      "work_done_length": 15,
+      "has_review": true,
+      "has_plan": true
+    },
+    {
+      "report_id": "w9gnN60TQG2ta6Q3JW5PgA03551773221485",
+      "creator_id": "0934173703681310",
+      "creator_name": "刘瑶",
+      "dept_name": "建筑分院",
+      "create_time": 1773221485000,
+      "scores": {
+        "completeness": 1,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.15
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 53,
+      "word_count": 6,
+      "work_done_length": 24,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "CsPSnQycTmKOJqhqlEesEQ03551773221481",
+      "creator_id": "3903496132425801",
+      "creator_name": "胡坤斌",
+      "dept_name": "规划一所",
+      "create_time": 1773221482000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "缺少具体工作动作描述",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 47,
+      "word_count": 6,
+      "work_done_length": 18,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "Jf6orHsoToePgTTuacQbLQ03551773221481",
+      "creator_id": "064332623033514640",
+      "creator_name": "薛丽恒",
+      "dept_name": "建筑分院",
+      "create_time": 1773221481000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 45,
+      "word_count": 6,
+      "work_done_length": 13,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "O1Sut51VThiCLS8krhTfvg03551773221476",
+      "creator_id": "015325394330760523",
+      "creator_name": "尚玥",
+      "dept_name": "环境艺术所",
+      "create_time": 1773221477000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 47,
+      "word_count": 9,
+      "work_done_length": 18,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "hWyx6D1mRSWuWTmWUFhR5g03551773221470",
+      "creator_id": "02290341646126155694",
+      "creator_name": "李婷婷",
+      "dept_name": "建筑分院",
+      "create_time": 1773221470000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.35
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 磁县公安局弱电问题回复，邯郸公安局竣工图修改 AI工具应用情况: 无 今日工作复盘: 已回复磁县公安局弱电问题，未完成邯郸公安局竣工图修改",
+            "creator": "李婷婷",
+            "dept": "建筑分院"
+          }
+        ],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 86,
+      "word_count": 8,
+      "work_done_length": 22,
+      "has_review": true,
+      "has_plan": false
+    },
+    {
+      "report_id": "LNvyaIZFTH-XoxzsnxQbJw03551773221441",
+      "creator_id": "015404163415785308",
+      "creator_name": "彭浩",
+      "dept_name": "环境艺术所",
+      "create_time": 1773221442000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 1,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 2.1
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "工作内容过短（少于10字）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 34,
+      "word_count": 6,
+      "work_done_length": 5,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "XblgFMTITZOp-u9x-Kn4Ow03551773221236",
+      "creator_id": "2326071640845232",
+      "creator_name": "林婧",
+      "dept_name": "办公室",
+      "create_time": 1773221237000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 1,
+        "total": 2.45
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 128,
+      "word_count": 8,
+      "work_done_length": 94,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "9-OW1EPmTLaY2zfrM3RY-g03551773220957",
+      "creator_id": "301312173136579787",
+      "creator_name": "郝玮娜",
+      "dept_name": "总务处",
+      "create_time": 1773220958000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 1,
+        "total": 2.45
+      },
+      "is_lazy_report": true,
+      "lazy_reason": "多行内容缺少具体工作描述（只写项目名）",
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 110,
+      "word_count": 9,
+      "work_done_length": 81,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "eBIQLSRzS1KjMDy0ul_maA03551773220729",
+      "creator_id": "0229032159591171457",
+      "creator_name": "郭华",
+      "dept_name": "建筑分院",
+      "create_time": 1773220729000,
+      "scores": {
+        "completeness": 3,
+        "content_quality": 4,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 1,
+        "total": 3.15
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": "WPS的应用，PPT，豆包的应用",
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "根据规委会最新指导思路，推进《瑞和府》项目宣传册的修订与研讨工作。\n现阶段重点聚焦目录结构的优化论证，并确立了“先易后难、分步实施”的推进策略。\n今日主要对优化产品户型设计和营造好配套进行系统性的梳理",
+            "creator": "郭华"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "WPS的应用，PPT，豆包的应用",
+            "creator": "郭华",
+            "dept": "建筑分院"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 151,
+      "word_count": 8,
+      "work_done_length": 107,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "0rWXnZoTQL-mLoorB_PKhA03551773220445",
+      "creator_id": "262916640026265396",
+      "creator_name": "李晓静",
+      "dept_name": "环境艺术所",
+      "create_time": 1773220445000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 50,
+      "word_count": 7,
+      "work_done_length": 19,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "8IIVR9g0TI2m26T4cITKmA03551773220322",
+      "creator_id": "01425427554624076630",
+      "creator_name": "张兵洋",
+      "dept_name": "市政分院-综合室",
+      "create_time": 1773220323000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 4,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 1,
+        "total": 2.95
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 120,
+      "word_count": 7,
+      "work_done_length": 90,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "H_xYHrl5RZuLfWJqKYZ4-Q03551773220155",
+      "creator_id": "3232432021311475",
+      "creator_name": "史丽霞",
+      "dept_name": "环境艺术所",
+      "create_time": 1773220156000,
+      "scores": {
+        "completeness": 0,
+        "content_quality": 2,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 1.95
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "邯郸市串城街历史文化街区保护提升项目设计",
+            "creator": "史丽霞"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 49,
+      "word_count": 6,
+      "work_done_length": 20,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "PadRH039Q569t2s8wSe8DA03551773219885",
+      "creator_id": "02290249055623579480",
+      "creator_name": "岳建伟",
+      "dept_name": "市政分院-市政二所",
+      "create_time": 1773219886000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 4,
+        "ai_application": 5,
+        "timeliness": 5,
+        "workload": 2,
+        "planning": 1,
+        "total": 3.45
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": "豆包查询道路现行规范汇总",
+      "valuable_info": {
+        "project_outputs": [],
+        "data_resources": [],
+        "risk_warnings": [],
+        "ai_applications": [
+          {
+            "content": "豆包查询道路现行规范汇总",
+            "creator": "岳建伟",
+            "dept": "市政分院-市政二所"
+          }
+        ],
+        "suggestions": []
+      },
+      "content_length": 92,
+      "word_count": 6,
+      "work_done_length": 52,
+      "has_review": false,
+      "has_plan": false
+    },
+    {
+      "report_id": "6B-Zh6OsQCmsKjvBCWidDw03551773219027",
+      "creator_id": "0859044757784659",
+      "creator_name": "张琳",
+      "dept_name": "市政分院-综合室",
+      "create_time": 1773219027000,
+      "scores": {
+        "completeness": 2,
+        "content_quality": 4,
+        "ai_application": 2,
+        "timeliness": 5,
+        "workload": 3,
+        "planning": 1,
+        "total": 2.95
+      },
+      "is_lazy_report": false,
+      "lazy_reason": null,
+      "ai_usage": null,
+      "valuable_info": {
+        "project_outputs": [
+          {
+            "content": "1.完成 马瑞 提交工程质量记录清单 签字程序\n2.9个项目的签字程序\n3.制作完成 4个项目 项目评审表 剩余5个项目明日完成 均在签字后对接生产处\n",
+            "creator": "张琳"
+          }
+        ],
+        "data_resources": [],
+        "risk_warnings": [
+          {
+            "content": "出勤情况: 出勤 今日完成工作: 1.完成 马瑞 提交工程质量记录清单 签字程序\n2.9个项目的签字程序\n3.制作完成 4个项目 项目评审表 剩余5个项目明日完成 均在签字后对接生产处\n AI工具应用",
+            "creator": "张琳",
+            "dept": "市政分院-综合室"
+          }
+        ],
+        "ai_applications": [],
+        "suggestions": []
+      },
+      "content_length": 195,
+      "word_count": 27,
+      "work_done_length": 76,
+      "has_review": false,
+      "has_plan": false
+    }
+  ]
+}

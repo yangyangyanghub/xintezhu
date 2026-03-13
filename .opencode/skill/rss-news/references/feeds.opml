@@ -171,5 +171,23 @@
 		<outline text="自然资源智库" type="rss" xmlUrl="https://vaqlbqhb.sealosbja.site/feed/3586264340.xml" htmlUrl="https://vaqlbqhb.sealosbja.site/feed/3586264340.xml" title="自然资源智库"></outline>
 		<outline text="走天涯徐小洋地理数据科学" type="rss" xmlUrl="https://vaqlbqhb.sealosbja.site/feed/3289575658.xml" htmlUrl="https://vaqlbqhb.sealosbja.site/feed/3289575658.xml" title="走天涯徐小洋地理数据科学"></outline>
 		<outline text="宝玉AI" type="rss" xmlUrl="https://vaqlbqhb.sealosbja.site/feed/3957812448.xml" htmlUrl="https://vaqlbqhb.sealosbja.site/feed/3957812448.xml" title="宝玉AI"></outline>
+   		<outline text="阿里技术" title="阿里技术" type="rss" xmlUrl="https://wechat2rss.bestblogs.dev/feed/6535a444e9651fecae3383363be7589acdebe2b6.xml" />
+   		<outline text="阿里研究院" title="阿里研究院" type="rss" xmlUrl="https://wechat2rss.bestblogs.dev/feed/e2f1190c120f7f3d74b630bfcfe9e58296bd535c.xml" />
+		<outline text="百度AI" title="百度AI" type="rss" xmlUrl="https://wechat2rss.bestblogs.dev/feed/d0767d885e6ba213344fb0c0408c51331e23a994.xml" />
+		<outline text="硅谷101" title="硅谷101" type="rss" xmlUrl="https://wechat2rss.bestblogs.dev/feed/8f8fe34034f6123b168ed7847c51d50ff47cd7ee.xml" />
+		<outline text="硅谷科技评论" title="硅谷科技评论" type="rss" xmlUrl="https://wechat2rss.bestblogs.dev/feed/4515ee058133ff68570ad586abdd81f54f2b6ee3.xml" />
+		<outline text="机器之心" title="机器之心" type="rss" xmlUrl="https://wechat2rss.bestblogs.dev/feed/8d97af31b0de9e48da74558af128a4673d78c9a3.xml" />
+		<outline text="甲子光年" title="甲子光年" type="rss" xmlUrl="https://wechat2rss.bestblogs.dev/feed/1c4008936645d5c17239d99bba91522cf2bdfa26.xml" />
+   		<outline text="架构师之路" title="架构师之路" type="rss" xmlUrl="https://wechat2rss.bestblogs.dev/feed/f6dec1c3ad16e43532dd427c85eaeb3a7b7b084e.xml" />
+		<outline text="阶跃星辰" title="阶跃星辰" type="rss" xmlUrl="https://wechat2rss.bestblogs.dev/feed/3e2714d06aa36142e8ed6b3f4e5cf9090a069dd2.xml" />
+		<outline text="掘金本周最热" title="掘金本周最热" type="rss" xmlUrl="https://rsshub.bestblogs.dev/juejin/trending/all/weekly" />
+		<outline text="量子位" title="量子位" type="rss" xmlUrl="https://www.qbitai.com/feed" />
+		<outline text="魔搭ModelScope社区" title="魔搭ModelScope社区" type="rss" xmlUrl="https://wechat2rss.bestblogs.dev/feed/d993a885260f96057b9a4c96212cb2c95bb5054b.xml" />
+		<outline text="未闻Code" title="未闻Code" type="rss" xmlUrl="https://wechat2rss.xlab.app/feed/a148ed0a542de4be305ffa1b93e8663ad252e22c.xml" />
+		<outline text="小众软件" title="小众软件" type="rss" xmlUrl="https://wechat2rss.xlab.app/feed/3261d5a75cfef238650a2cabd4bbf99669c2f334.xml" />
+		<outline text="阿虚同学" title="阿虚同学" type="rss" xmlUrl="https://wechat2rss.xlab.app/feed/808d3625c2b1915142f09e2d4bb2acd636aa956d.xml" />
+		<outline text="国家能源局-发展规划司工作进展" title="国家能源局-发展规划司工作进展" type="rss" xmlUrl="https://rsshub.app/gov/nea/sjzz/ghs" />
+		<outline text="中华人民共和国国家发展和改革委员会 - 通知公告" title="中华人民共和国国家发展和改革委员会 - 通知公告" type="rss" xmlUrl="https://rsshub.app/gov/jgjcndrc" />
+		<outline text="大数据专家委员会 - 通知公告" title="大数据专家委员会 - 通知公告" type="rss" xmlUrl="https://rsshub.app/ccf/tfbd/xwdt/tzgg" />
 	</body>
 </opml>
