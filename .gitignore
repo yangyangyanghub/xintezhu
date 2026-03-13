@@ -61,6 +61,8 @@ build/
 # 知识库具体内容（保留目录结构）
 myk/调研笔记/*
 !myk/调研笔记/.gitkeep
+myk/技术沉淀/*
+!myk/技术沉淀/.gitkeep
 myk/技术文章/*
 !myk/技术文章/.gitkeep
 myk/提示词库/*
