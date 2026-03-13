@@ -20,10 +20,14 @@
 # 临时文件
 temp/
 exports/
+.trash/
 *.tmp
 *.temp
 nul
 test.txt
+
+# 分析报告
+.opencode/daily-reports/
 
 # 系统文件
 .DS_Store
