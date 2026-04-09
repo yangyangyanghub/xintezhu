@@ -2,6 +2,13 @@ import { Database } from 'bun:sqlite';
 import { existsSync, mkdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import type { ServiceHealth, HealthCheck } from '../types/index.ts';
+import { SQLiteIngestionRepository, SQLiteAuditRepository, SQLiteMemoryRepository } from '../repository/index.ts';
+import { ClassificationService } from '../classifier/service.ts';
+import { IngestGateway } from '../ingest/gateway.ts';
+import { DefaultProviderRouter } from '../provider/router.ts';
+import { RetrievalService } from '../retrieval/service.ts';
+import { ContextAssemblyService } from '../context/assembly.ts';
+import type { RouteDeps } from '../http/routes.ts';
 
 export interface MemoryCoreConfig {
   runtimeRoot: string;
@@ -21,6 +28,18 @@ export class MemoryCoreService {
   private db: Database | null = null;
   private config: MemoryCoreConfig;
   private initialized = false;
+  
+  // Repository instances
+  private memoryRepo: SQLiteMemoryRepository | null = null;
+  private ingestionRepo: SQLiteIngestionRepository | null = null;
+  private auditRepo: SQLiteAuditRepository | null = null;
+  
+  // Service instances
+  private classifier: ClassificationService | null = null;
+  private ingestGateway: IngestGateway | null = null;
+  private providerRouter: DefaultProviderRouter | null = null;
+  private retrievalService: RetrievalService | null = null;
+  private contextAssembly: ContextAssemblyService | null = null;
 
   constructor(config: Partial<MemoryCoreConfig> = {}) {
     this.config = { ...DEFAULT_CONFIG, ...config };
@@ -38,9 +57,47 @@ export class MemoryCoreService {
 
     // Run migrations
     await this.runMigrations();
+    
+    // Initialize repositories
+    this.initializeRepositories();
+    
+    // Initialize services
+    await this.initializeServices();
 
     this.initialized = true;
     console.log('[MemoryCore] Service initialized');
+  }
+  
+  private initializeRepositories(): void {
+    if (!this.db) {
+      throw new Error('Database not initialized');
+    }
+    
+    this.memoryRepo = new SQLiteMemoryRepository(this.db);
+    this.ingestionRepo = new SQLiteIngestionRepository(this.db);
+    this.auditRepo = new SQLiteAuditRepository(this.db);
+  }
+  
+  private async initializeServices(): Promise<void> {
+    if (!this.memoryRepo || !this.ingestionRepo || !this.auditRepo) {
+      throw new Error('Repositories not initialized');
+    }
+    
+    // Initialize classifier
+    this.classifier = new ClassificationService(this.memoryRepo, this.ingestionRepo);
+    
+    // Initialize ingest gateway
+    this.ingestGateway = new IngestGateway(this.ingestionRepo, this.auditRepo, this.classifier);
+    
+    // Initialize provider router
+    this.providerRouter = new DefaultProviderRouter();
+    await this.providerRouter.initialize({ embedding: { provider: 'none' }, inference: { provider: 'none' } });
+    
+    // Initialize retrieval service
+    this.retrievalService = new RetrievalService(this.memoryRepo, this.providerRouter);
+    
+    // Initialize context assembly
+    this.contextAssembly = new ContextAssemblyService(this.memoryRepo, this.retrievalService);
   }
 
   async health(): Promise<ServiceHealth> {
@@ -61,6 +118,19 @@ export class MemoryCoreService {
       checks,
     };
   }
+  
+  getRouteDeps(): RouteDeps {
+    if (!this.ingestGateway || !this.retrievalService || !this.contextAssembly) {
+      throw new Error('Services not initialized. Call initialize() first.');
+    }
+    
+    return {
+      ingestGateway: this.ingestGateway,
+      retrieval: this.retrievalService,
+      contextAssembly: this.contextAssembly,
+      service: this,
+    };
+  }
 
   getDatabase(): Database {
     if (!this.db) {
@@ -74,6 +144,9 @@ export class MemoryCoreService {
   }
 
   async dispose(): Promise<void> {
+    if (this.providerRouter) {
+      await this.providerRouter.dispose();
+    }
     if (this.db) {
       this.db.close();
       this.db = null;
