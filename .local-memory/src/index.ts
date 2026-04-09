@@ -1,4 +1,5 @@
 import { MemoryCoreService, type MemoryCoreConfig } from './service/core.ts';
+import { createServer } from './http/server.ts';
 
 interface CliOptions extends Partial<MemoryCoreConfig> {
   port?: number;
@@ -58,18 +59,7 @@ async function runStart(options: CliOptions): Promise<number> {
   const service = new MemoryCoreService(options);
   await service.initialize();
 
-  const server = Bun.serve({
-    port,
-    fetch: async (request) => {
-      const url = new URL(request.url);
-
-      if (request.method === 'GET' && url.pathname === '/health') {
-        return Response.json(await service.health());
-      }
-
-      return new Response('Not Found', { status: 404 });
-    },
-  });
+  const server = createServer({ port });
 
   const shutdown = async () => {
     server.stop(true);
