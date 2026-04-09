@@ -1,0 +1,60 @@
+{
+  "version": "1",
+  "policy_ref": ".local-memory/projection/v1-projection-policy.md",
+  "mappings": [
+    {
+      "memory_class": "identity",
+      "target_dir": ".memory/core",
+      "file_strategy": "singleton",
+      "filename": "identity.md"
+    },
+    {
+      "memory_class": "preference",
+      "target_dir": ".memory/core",
+      "file_strategy": "singleton",
+      "filename": "preferences.md"
+    },
+    {
+      "memory_class": "habit",
+      "target_dir": ".memory/core",
+      "file_strategy": "singleton",
+      "filename": "habits.md"
+    },
+    {
+      "memory_class": "workflow",
+      "target_dir": ".memory/core",
+      "file_strategy": "singleton",
+      "filename": "workflows.md"
+    },
+    {
+      "memory_class": "project",
+      "target_dir": ".memory/semantic/projects",
+      "file_strategy": "per_item",
+      "naming_pattern": "{slug}.md"
+    },
+    {
+      "memory_class": "decision",
+      "target_dir": ".memory/semantic/decisions",
+      "file_strategy": "per_item",
+      "naming_pattern": "{id}-{slug}.md"
+    },
+    {
+      "memory_class": "pattern",
+      "target_dir": ".memory/semantic/patterns",
+      "file_strategy": "per_item",
+      "naming_pattern": "{slug}.md"
+    },
+    {
+      "memory_class": "error_solution",
+      "target_dir": ".memory/semantic/error-solutions",
+      "file_strategy": "per_item",
+      "naming_pattern": "{slug}.md"
+    }
+  ],
+  "exclusions": [
+    "working",
+    "episodic",
+    "transient",
+    "noise"
+  ]
+}
