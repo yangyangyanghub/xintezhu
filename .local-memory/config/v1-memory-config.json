@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "local-memory-v1-config",
+  "title": "Local Memory System V1 Configuration",
+  "description": "Configuration schema for memory behavior and system settings",
+  "type": "object",
+  "required": ["version", "memory"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "memory": {
+      "type": "object",
+      "required": ["runtimeRoot", "retention"],
+      "properties": {
+        "runtimeRoot": {
+          "type": "string",
+          "default": ".local-memory",
+          "description": "Runtime directory for database and cache"
+        },
+        "projectionRoot": {
+          "type": "string",
+          "default": ".memory",
+          "description": "Output directory for Markdown projection"
+        },
+        "retention": {
+          "type": "object",
+          "properties": {
+            "episodicDays": {
+              "type": "integer",
+              "default": 7,
+              "minimum": 1,
+              "maximum": 90
+            },
+            "episodicImportantDays": {
+              "type": "integer",
+              "default": 30,
+              "minimum": 1,
+              "maximum": 365
+            },
+            "workingSessionHours": {
+              "type": "integer",
+              "default": 24,
+              "minimum": 1,
+              "maximum": 168
+            },
+            "auditRetentionDays": {
+              "type": "integer",
+              "default": 90,
+              "minimum": 30
+            },
+            "rollbackWindowDays": {
+              "type": "integer",
+              "default": 30,
+              "minimum": 1,
+              "maximum": 90
+            }
+          }
+        },
+        "autoCleanup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically clean expired memories"
+        },
+        "autoProject": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically update projection on changes"
+        }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "properties": {
+        "minConfidence": {
+          "type": "number",
+          "default": 0.3,
+          "minimum": 0,
+          "maximum": 1
+        },
+        "useModelAssistance": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use model for classification (fallback to rules if false)"
+        },
+        "rulePriority": {
+          "type": "boolean",
+          "default": true,
+          "description": "Rules override model predictions"
+        }
+      }
+    },
+    "promotion": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "threshold": {
+          "type": "number",
+          "default": 0.8,
+          "minimum": 0.5,
+          "maximum": 1
+        },
+        "minEvidenceCount": {
+          "type": "integer",
+          "default": 2,
+          "minimum": 1
+        },
+        "whitelist": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["preference", "habit", "workflow", "project", "decision", "pattern", "error_solution"]
+          },
+          "default": ["preference", "habit", "workflow", "project", "decision", "pattern", "error_solution"]
+        }
+      }
+    },
+    "retrieval": {
+      "type": "object",
+      "properties": {
+        "defaultMode": {
+          "type": "string",
+          "enum": ["keyword", "hybrid", "semantic"],
+          "default": "hybrid"
+        },
+        "keywordOnlyFallback": {
+          "type": "boolean",
+          "default": true,
+          "description": "Fall back to keyword if semantic unavailable"
+        },
+        "maxResults": {
+          "type": "integer",
+          "default": 20,
+          "minimum": 1,
+          "maximum": 100
+        },
+        "minRelevanceScore": {
+          "type": "number",
+          "default": 0.1,
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "budgets": {
+          "type": "object",
+          "properties": {
+            "userProfile": {
+              "type": "integer",
+              "default": 5,
+              "description": "Max user preference memories"
+            },
+            "projectKnowledge": {
+              "type": "integer",
+              "default": 8,
+              "description": "Max project-specific memories"
+            },
+            "taskRelevant": {
+              "type": "integer",
+              "default": 5,
+              "description": "Max task-relevant memories"
+            },
+            "recentEpisodic": {
+              "type": "integer",
+              "default": 3,
+              "description": "Max recent episodic memories"
+            }
+          }
+        }
+      }
+    }
+  }
+}

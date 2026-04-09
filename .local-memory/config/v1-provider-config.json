@@ -1,0 +1,157 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "local-memory-v1-provider-config",
+  "title": "Local Memory System V1 Provider Configuration",
+  "description": "Configuration for embedding and inference providers",
+  "type": "object",
+  "required": ["version", "providers"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "localOnly": {
+      "type": "boolean",
+      "const": true,
+      "description": "V1 enforces local-only operation"
+    },
+    "embedding": {
+      "type": "object",
+      "required": ["provider"],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "enum": ["local", "ollama", "none"],
+          "default": "none",
+          "description": "Embedding provider - 'none' for keyword-only mode"
+        },
+        "model": {
+          "type": "string",
+          "description": "Model name/path"
+        },
+        "dimensions": {
+          "type": "integer",
+          "default": 384,
+          "enum": [384, 512, 768, 1024]
+        },
+        "batchSize": {
+          "type": "integer",
+          "default": 32,
+          "minimum": 1,
+          "maximum": 128
+        },
+        "maxRetries": {
+          "type": "integer",
+          "default": 3,
+          "minimum": 0
+        },
+        "timeout": {
+          "type": "integer",
+          "default": 30000,
+          "description": "Timeout in milliseconds"
+        }
+      }
+    },
+    "inference": {
+      "type": "object",
+      "required": ["provider"],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "enum": ["local", "ollama", "none"],
+          "default": "none",
+          "description": "Inference provider for classification/assistance"
+        },
+        "model": {
+          "type": "string",
+          "description": "Model name/path"
+        },
+        "temperature": {
+          "type": "number",
+          "default": 0.1,
+          "minimum": 0,
+          "maximum": 2
+        },
+        "maxTokens": {
+          "type": "integer",
+          "default": 1000,
+          "minimum": 100,
+          "maximum": 4000
+        },
+        "timeout": {
+          "type": "integer",
+          "default": 60000,
+          "description": "Timeout in milliseconds"
+        }
+      }
+    },
+    "fallback": {
+      "type": "object",
+      "properties": {
+        "onProviderError": {
+          "type": "string",
+          "enum": ["fail", "degrade", "retry"],
+          "default": "degrade",
+          "description": "Behavior when provider fails"
+        },
+        "maxRetries": {
+          "type": "integer",
+          "default": 3
+        },
+        "degradedMode": {
+          "type": "object",
+          "properties": {
+            "disableSemanticSearch": {
+              "type": "boolean",
+              "default": true
+            },
+            "disableModelAssistance": {
+              "type": "boolean",
+              "default": true
+            },
+            "logWarnings": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        }
+      }
+    },
+    "providers": {
+      "type": "object",
+      "description": "Provider-specific configurations",
+      "properties": {
+        "ollama": {
+          "type": "object",
+          "properties": {
+            "baseUrl": {
+              "type": "string",
+              "default": "http://localhost:11434"
+            },
+            "embeddingModel": {
+              "type": "string",
+              "default": "nomic-embed-text"
+            },
+            "chatModel": {
+              "type": "string",
+              "default": "phi3:mini"
+            }
+          }
+        },
+        "local": {
+          "type": "object",
+          "properties": {
+            "libraryPath": {
+              "type": "string",
+              "description": "Path to local model library"
+            },
+            "cachePath": {
+              "type": "string",
+              "default": ".local-memory/embeddings-cache"
+            }
+          }
+        }
+      }
+    }
+  }
+}
