@@ -1,0 +1,284 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "local-memory-v1-event-schema",
+  "title": "Local Memory System V1 Event Schema",
+  "description": "Event schema for the Local Memory System - ingestion events from OpenCode adapter",
+  "version": "1.0.0",
+  
+  "definitions": {
+    "EventBase": {
+      "type": "object",
+      "required": ["eventId", "eventType", "batchId", "sourceType", "sourceRef"],
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "description": "Unique identifier for this event"
+        },
+        "eventType": {
+          "type": "string",
+          "enum": [
+            "message.updated",
+            "file.edited", 
+            "session.idle",
+            "session.compacted",
+            "git.commit",
+            "test.result",
+            "build.result"
+          ],
+          "description": "Event type classification"
+        },
+        "sourceType": {
+          "type": "string",
+          "enum": ["opencode", "git", "manual", "system"],
+          "description": "Source system that generated the event"
+        },
+        "sourceRef": {
+          "type": "string",
+          "description": "Reference to source (e.g., sessionId, filePath)"
+        },
+        "workspace": {
+          "type": "string",
+          "description": "Workspace/project scope"
+        },
+        "batchId": {
+          "type": "string",
+          "description": "Batch identifier for rollback operations"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Optional metadata key-value pairs"
+        }
+      }
+    },
+    
+    "MessageUpdatedEvent": {
+      "allOf": [{ "$ref": "#/definitions/EventBase" }],
+      "properties": {
+        "eventType": { "const": "message.updated" },
+        "payload": {
+          "type": "object",
+          "required": ["messageId", "role"],
+          "properties": {
+            "messageId": { "type": "string" },
+            "role": { "type": "string", "enum": ["user", "assistant", "system"] },
+            "content": { "type": "string" },
+            "summary": {
+              "type": "object",
+              "properties": {
+                "title": { "type": "string" },
+                "body": { "type": "string" }
+              }
+            },
+            "tokens": {
+              "type": "object",
+              "properties": {
+                "input": { "type": "integer" },
+                "output": { "type": "integer" }
+              }
+            },
+            "importance": { "type": "string", "enum": ["high", "medium", "low"] },
+            "tags": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    
+    "FileEditedEvent": {
+      "allOf": [{ "$ref": "#/definitions/EventBase" }],
+      "properties": {
+        "eventType": { "const": "file.edited" },
+        "payload": {
+          "type": "object",
+          "required": ["filePath", "changeType"],
+          "properties": {
+            "filePath": { "type": "string" },
+            "changeType": { "type": "string", "enum": ["created", "modified", "deleted", "renamed"] },
+            "language": { "type": "string" },
+            "linesAdded": { "type": "integer" },
+            "linesRemoved": { "type": "integer" },
+            "diff": { "type": "string" },
+            "symbolsChanged": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    
+    "SessionIdleEvent": {
+      "allOf": [{ "$ref": "#/definitions/EventBase" }],
+      "properties": {
+        "eventType": { "const": "session.idle" },
+        "payload": {
+          "type": "object",
+          "required": ["sessionId"],
+          "properties": {
+            "sessionId": { "type": "string" },
+            "duration": { "type": "integer", "description": "Session duration in seconds" },
+            "messageCount": { "type": "integer" },
+            "tasksCompleted": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    
+    "SessionCompactedEvent": {
+      "allOf": [{ "$ref": "#/definitions/EventBase" }],
+      "properties": {
+        "eventType": { "const": "session.compacted" },
+        "payload": {
+          "type": "object",
+          "required": ["sessionId"],
+          "properties": {
+            "sessionId": { "type": "string" },
+            "compactionReason": { "type": "string" },
+            "memoriesConsolidated": { "type": "integer" },
+            "snapshotUpdated": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    
+    "GitCommitEvent": {
+      "allOf": [{ "$ref": "#/definitions/EventBase" }],
+      "properties": {
+        "eventType": { "const": "git.commit" },
+        "payload": {
+          "type": "object",
+          "required": ["commitHash", "message"],
+          "properties": {
+            "commitHash": { "type": "string" },
+            "message": { "type": "string" },
+            "author": { "type": "string" },
+            "filesChanged": { "type": "array", "items": { "type": "string" } },
+            "branch": { "type": "string" },
+            "isMerge": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    
+    "TestResultEvent": {
+      "allOf": [{ "$ref": "#/definitions/EventBase" }],
+      "properties": {
+        "eventType": { "const": "test.result" },
+        "payload": {
+          "type": "object",
+          "required": ["testSuite", "status"],
+          "properties": {
+            "testSuite": { "type": "string" },
+            "status": { "type": "string", "enum": ["passed", "failed", "skipped", "error"] },
+            "testsTotal": { "type": "integer" },
+            "testsPassed": { "type": "integer" },
+            "testsFailed": { "type": "integer" },
+            "duration": { "type": "number" },
+            "failures": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "testName": { "type": "string" },
+                  "error": { "type": "string" },
+                  "stackTrace": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    
+    "BuildResultEvent": {
+      "allOf": [{ "$ref": "#/definitions/EventBase" }],
+      "properties": {
+        "eventType": { "const": "build.result" },
+        "payload": {
+          "type": "object",
+          "required": ["status"],
+          "properties": {
+            "status": { "type": "string", "enum": ["success", "failure", "cancelled"] },
+            "buildType": { "type": "string", "enum": ["compile", "package", "deploy", "test"] },
+            "duration": { "type": "number" },
+            "errors": { "type": "array", "items": { "type": "string" } },
+            "warnings": { "type": "array", "items": { "type": "string" } },
+            "artifacts": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    
+    "ErrorResponse": {
+      "type": "object",
+      "required": ["code", "message"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "INVALID_EVENT_TYPE",
+            "MALFORMED_PAYLOAD",
+            "MISSING_REQUIRED_FIELD",
+            "SCHEMA_VIOLATION",
+            "INGESTION_FAILED",
+            "INTERNAL_ERROR"
+          ]
+        },
+        "message": { "type": "string" },
+        "details": { "type": "object" },
+        "eventId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      }
+    },
+    
+    "MemoryStateTransition": {
+      "type": "object",
+      "description": "State machine transitions",
+      "properties": {
+        "transitions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "from": { 
+                "type": "string", 
+                "enum": ["new", "active", "superseded", "forgotten", "archived", "reverted"] 
+              },
+              "to": { 
+                "type": "string", 
+                "enum": ["active", "superseded", "forgotten", "archived", "reverted"] 
+              },
+              "trigger": { "type": "string" },
+              "reversible": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    }
+  },
+  
+  "oneOf": [
+    { "$ref": "#/definitions/MessageUpdatedEvent" },
+    { "$ref": "#/definitions/FileEditedEvent" },
+    { "$ref": "#/definitions/SessionIdleEvent" },
+    { "$ref": "#/definitions/SessionCompactedEvent" },
+    { "$ref": "#/definitions/GitCommitEvent" },
+    { "$ref": "#/definitions/TestResultEvent" },
+    { "$ref": "#/definitions/BuildResultEvent" }
+  ],
+  
+  "examples": [
+    {
+      "eventId": "550e8400-e29b-41d4-a716-446655440000",
+      "type": "message.updated",
+      "timestamp": "2026-04-09T10:30:00Z",
+      "sourceType": "opencode",
+      "sourceRef": "session_abc123",
+      "workspace": "my-ai-workspace",
+      "batchId": "batch_001",
+      "payload": {
+        "messageId": "msg_001",
+        "role": "user",
+        "content": "记住这个重要的配置",
+        "importance": "high",
+        "tags": ["preference", "configuration"]
+      }
+    }
+  ]
+}
