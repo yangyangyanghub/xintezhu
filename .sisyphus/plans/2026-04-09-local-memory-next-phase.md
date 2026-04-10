@@ -376,7 +376,7 @@ Expected: PASS or next failure moves to search ranking
 - Modify: `/.local-memory/src/provider/router.ts`
 - Test: `/.local-memory/src/test/retrieval.semantic.test.ts`
 
-- [ ] **Step 1: Extend the failing test**
+- [x] **Step 1: Extend the failing test**
 
 ```ts
 it('degrades hybrid to keyword when provider is unavailable, but uses semantic mode when provider is healthy', async () => {
@@ -385,7 +385,7 @@ it('degrades hybrid to keyword when provider is unavailable, but uses semantic m
 });
 ```
 
-- [ ] **Step 2: Implement cosine similarity over stored embeddings**
+- [x] **Step 2: Implement cosine similarity over stored embeddings**
 
 ```ts
 private cosineSimilarity(a: Float32Array, b: Float32Array): number {
@@ -393,16 +393,16 @@ private cosineSimilarity(a: Float32Array, b: Float32Array): number {
 }
 ```
 
-- [ ] **Step 3: Query all candidate embeddings, score, merge with keyword RRF**
+- [x] **Step 3: Query all candidate embeddings, score, merge with keyword RRF**
 
 Do not invent vector SQL extensions; V1 can compute similarity in process.
 
-- [ ] **Step 4: Run tests**
+- [x] **Step 4: Run tests**
 
 Run: `bun test ./.local-memory/src/test/retrieval.semantic.test.ts ./.local-memory/src/test/integration.test.ts`
 Expected: PASS
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add .local-memory/src/repository/embedding.ts .local-memory/src/repository/index.ts .local-memory/src/classifier/service.ts .local-memory/src/retrieval/service.ts .local-memory/src/provider/router.ts .local-memory/src/test/retrieval.semantic.test.ts

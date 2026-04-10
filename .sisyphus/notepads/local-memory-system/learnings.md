@@ -13,3 +13,8 @@
 - `ClassificationService` can now accept optional `EmbeddingRepository` and `ProviderRouter` dependencies without breaking older two-argument call sites.
 - Embeddings should be generated only after the memory has been promoted to `active`, and only when an embedding provider exists and `isHealthy()` returns true.
 - Embedding generation must stay best-effort: provider/embed/save failures are logged and must not block `markProcessed()` or successful classification.
+
+## Retrieval Semantic Search (2026-04-10)
+- `RetrievalService` semantic mode now depends on `EmbeddingRepository` and should use `embeddingProvider.embed(query)` plus `embeddingRepo.searchSimilar()` instead of hand-rolling vector math in the service.
+- Semantic results must be mapped back to `Memory` entities with `memoryRepo.findById()` and then filtered with the same active-memory default used by keyword search.
+- When semantic provider calls or repository similarity lookups fail, retrieval should degrade locally by returning an empty semantic result set instead of throwing from `semanticSearch()`.

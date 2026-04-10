@@ -20,3 +20,14 @@
 - **Consequences**:
     - Embedding persistence is opt-in until callers pass the new dependencies.
     - The service now treats embedding generation as a non-fatal side effect after active-memory promotion.
+
+## Decision: Inject EmbeddingRepository Into RetrievalService (2026-04-10)
+- **Context**: `semanticSearch()` had provider-based embedding generation but no repository access, so semantic mode always returned an empty array.
+- **Decision**: Make `EmbeddingRepository` a required `RetrievalService` constructor dependency and use repository-backed similarity results as the semantic search source.
+- **Rationale**:
+    - Keeps cosine similarity logic in the repository where embeddings are already stored and queried.
+    - Avoids duplicating vector ranking logic inside retrieval orchestration.
+    - Preserves hybrid RRF merging by returning semantic results in the same `HybridSearchResult` shape as keyword results.
+- **Consequences**:
+    - All `RetrievalService` call sites must now pass an embedding repository.
+    - Semantic retrieval still tolerates provider/repository failures by returning `[]`, but no longer behaves as an unimplemented stub.

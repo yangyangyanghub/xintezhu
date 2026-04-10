@@ -1,4 +1,5 @@
 import type { MemoryRepository } from '../repository/memory.ts';
+import type { EmbeddingRepository } from '../repository/embedding.ts';
 import type { ProviderRouter } from '../provider/router.ts';
 import type { 
   Memory, 
@@ -64,15 +65,18 @@ export interface RetrievalResponse {
 
 export class RetrievalService {
   private memoryRepo: MemoryRepository;
+  private embeddingRepo: EmbeddingRepository;
   private providerRouter: ProviderRouter;
   private config: RetrievalConfig;
 
   constructor(
     memoryRepo: MemoryRepository,
+    embeddingRepo: EmbeddingRepository,
     providerRouter: ProviderRouter,
     config: Partial<RetrievalConfig> = {}
   ) {
     this.memoryRepo = memoryRepo;
+    this.embeddingRepo = embeddingRepo;
     this.providerRouter = providerRouter;
     this.config = { ...DEFAULT_CONFIG, ...config };
   }
@@ -166,14 +170,31 @@ export class RetrievalService {
       return [];
     }
 
-    // Generate query embedding
-    const queryEmbedding = await embeddingProvider.embed(query);
+    try {
+      const limit = options?.limit ?? this.config.maxResults;
+      const queryEmbedding = await embeddingProvider.embed(query);
+      const similarResults = await this.embeddingRepo.searchSimilar(queryEmbedding, limit);
+      const memories = await Promise.all(
+        similarResults.map(async (result) => ({
+          similarity: result.similarity,
+          memory: await this.memoryRepo.findById(result.memoryId),
+        }))
+      );
 
-    // Search for similar memories (in real implementation, would use vector DB or SQLite extension)
-    // For now, return empty as we don't have vector search implemented yet
-    // This would require SQLite with sqlite-vss or similar
-    console.warn('[RetrievalService] Semantic search not fully implemented - requires vector DB');
-    return [];
+      return memories
+        .filter((result): result is { similarity: number; memory: Memory } => result.memory !== null)
+        .filter(({ memory }) => this.matchesFilters(memory, filters))
+        .map(({ similarity, memory }, index) => ({
+          memory,
+          score: similarity,
+          semanticRank: index + 1,
+          rrfScore: 1.0 / (RRF_K + index + 1),
+          boostFactors: this.calculateBoostFactors(memory),
+        }));
+    } catch (error) {
+      console.warn('[RetrievalService] Semantic search failed:', error);
+      return [];
+    }
   }
 
   private async hybridSearch(
@@ -287,6 +308,40 @@ export class RetrievalService {
       freshness: freshnessBoost,
       confidence: confidenceBoost,
     };
+  }
+
+  private matchesFilters(memory: Memory, filters?: SearchFilters): boolean {
+    const statuses = filters?.status ?? ['active' satisfies MemoryStatus];
+    if (!statuses.includes(memory.status)) {
+      return false;
+    }
+
+    if (filters?.layers?.length && !filters.layers.includes(memory.layer)) {
+      return false;
+    }
+
+    if (filters?.types?.length && !filters.types.includes(memory.type)) {
+      return false;
+    }
+
+    if (filters?.workspace && memory.workspace !== filters.workspace) {
+      return false;
+    }
+
+    if (filters?.importance?.length && !filters.importance.includes(memory.importance)) {
+      return false;
+    }
+
+    const createdAt = new Date(memory.createdAt).getTime();
+    if (filters?.createdAfter && createdAt < new Date(filters.createdAfter).getTime()) {
+      return false;
+    }
+
+    if (filters?.createdBefore && createdAt > new Date(filters.createdBefore).getTime()) {
+      return false;
+    }
+
+    return true;
   }
 
   // Public method to check if semantic search is available

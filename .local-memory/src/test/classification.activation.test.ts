@@ -58,7 +58,7 @@ describe('Classification activation flow', () => {
       dispose: async () => {},
     };
     classifier = new ClassificationService(memoryRepo, ingestionRepo, embeddingRepo, providerRouter);
-    retrieval = new RetrievalService(memoryRepo, {
+    retrieval = new RetrievalService(memoryRepo, embeddingRepo, {
       getEmbeddingProvider: () => null,
       getInferenceProvider: () => null,
       getStatus: () => ({ degraded: true, degradedReason: 'keyword only' }),

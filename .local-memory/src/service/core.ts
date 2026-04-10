@@ -2,7 +2,7 @@ import { Database } from 'bun:sqlite';
 import { existsSync, mkdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import type { ServiceHealth, HealthCheck } from '../types/index.ts';
-import { SQLiteIngestionRepository, SQLiteAuditRepository, SQLiteMemoryRepository } from '../repository/index.ts';
+import { SQLiteIngestionRepository, SQLiteAuditRepository, SQLiteMemoryRepository, SQLiteEmbeddingRepository } from '../repository/index.ts';
 import { ClassificationService } from '../classifier/service.ts';
 import { IngestGateway } from '../ingest/gateway.ts';
 import { DefaultProviderRouter } from '../provider/router.ts';
@@ -33,6 +33,7 @@ export class MemoryCoreService {
   private memoryRepo: SQLiteMemoryRepository | null = null;
   private ingestionRepo: SQLiteIngestionRepository | null = null;
   private auditRepo: SQLiteAuditRepository | null = null;
+  private embeddingRepo: SQLiteEmbeddingRepository | null = null;
   
   // Service instances
   private classifier: ClassificationService | null = null;
@@ -76,10 +77,11 @@ export class MemoryCoreService {
     this.memoryRepo = new SQLiteMemoryRepository(this.db);
     this.ingestionRepo = new SQLiteIngestionRepository(this.db);
     this.auditRepo = new SQLiteAuditRepository(this.db);
+    this.embeddingRepo = new SQLiteEmbeddingRepository(this.db);
   }
   
   private async initializeServices(): Promise<void> {
-    if (!this.memoryRepo || !this.ingestionRepo || !this.auditRepo) {
+    if (!this.memoryRepo || !this.ingestionRepo || !this.auditRepo || !this.embeddingRepo) {
       throw new Error('Repositories not initialized');
     }
     
@@ -94,7 +96,7 @@ export class MemoryCoreService {
     await this.providerRouter.initialize({ embedding: { provider: 'none' }, inference: { provider: 'none' } });
     
     // Initialize retrieval service
-    this.retrievalService = new RetrievalService(this.memoryRepo, this.providerRouter);
+    this.retrievalService = new RetrievalService(this.memoryRepo, this.embeddingRepo, this.providerRouter);
     
     // Initialize context assembly
     this.contextAssembly = new ContextAssemblyService(this.memoryRepo, this.retrievalService);
