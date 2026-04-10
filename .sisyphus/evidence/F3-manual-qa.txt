@@ -1,0 +1,76 @@
+F3 Manual QA Evidence
+Date: 2026-04-11
+Target Skill Path: C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\
+Plan: .sisyphus/plans/frontend-design-orchestrator-skill.md
+
+Summary
+- Checked the installed skill directory and all required reference files.
+- Read SKILL.md and reference files directly from the filesystem.
+- Tested both the generic skill helper toolchain and the direct `skill` loader path.
+- Generated a real test-project `DESIGN.md` at `temp/f3-manual-qa-test-project/DESIGN.md` and verified the review-log workflow.
+
+Checks
+1. Skill files accessible at correct path: PASS
+   - Found `SKILL.md`
+   - Found `references/design-md-template.md`
+   - Found `references/design-sources.md`
+   - Found `references/icon-systems.md`
+   - Found `references/review-rules.md`
+
+2. SKILL.md exists and is under 300 lines: PASS
+   - Direct file read succeeded
+   - Total lines: 150
+
+3. References directory exists with all 4 reference files: PASS
+   - `design-md-template.md`
+   - `design-sources.md`
+   - `icon-systems.md`
+   - `review-rules.md`
+
+4. DESIGN.md template has all 9 sections: PASS
+   - Visual Theme
+   - Color Palette
+   - Typography
+   - Components
+   - Layout
+   - Depth
+   - Icon System
+   - Responsive
+   - Review Log
+
+5. Icon systems reference has conflict resolution: PASS
+   - Conflict detection rules documented
+   - Canonical-name normalization documented
+   - Prefix-based namespacing documented
+   - Conflict report format documented
+
+6. Review rules reference has Vercel guidelines: PASS
+   - Source explicitly points to `https://vercel.com/design/guidelines`
+   - Checklist and revision workflow are documented
+
+7. Review workflow documented in SKILL.md: PASS
+   - SKILL.md includes a 5-step review workflow covering checklist, problem list, DESIGN.md updates, review log, and re-review
+
+8. Generic skill helper discovery consistency: FAIL
+   - `get_available_skills(query="frontend-design-orchestrator")` returned no matches
+   - `read_skill_file(..., skill="frontend-design-orchestrator")` failed with "Skill not found"
+   - `use_skill("frontend-design-orchestrator")` failed with "Skill not found"
+   - This indicates inconsistency between helper-tool discovery and the direct skill loader path
+
+9. End-to-end manual skill usage (load skill -> generate DESIGN.md for a test project): PASS
+   - `skill(name="frontend-design-orchestrator", ...)` loaded successfully
+   - Generated `temp/f3-manual-qa-test-project/DESIGN.md`
+   - Generated document includes all 9 sections
+   - Icon conflict handling documented in `Icon System`
+   - Review workflow executed via `Review Log` with problem list, updated sections, and revision notes
+
+Verdict
+APPROVE
+
+Specific Issues
+- The generic helper-tool path is inconsistent: `get_available_skills`, `read_skill_file`, and `use_skill` do not resolve this skill, while the direct `skill` loader does.
+- This is not blocking for end-to-end manual usage through `skill`, but it is still a tooling inconsistency worth fixing.
+
+Recommended Fix
+- Align helper-tool discovery with the direct `skill` loader so `frontend-design-orchestrator` resolves consistently across all skill-related interfaces.
+- Keep `temp/f3-manual-qa-test-project/DESIGN.md` as a regression artifact for future F3 reruns.
