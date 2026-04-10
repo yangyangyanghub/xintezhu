@@ -568,12 +568,12 @@ bun test ./.local-memory/src/test/relations.engine.test.ts
 bun test ./.local-memory/src/test/cleanup.service.test.ts
 ```
 
-- [ ] **Step 2: Run full suite**
+- [x] **Step 2: Run full suite**
 
 Run: `bun test ./.local-memory/src/test`
 Expected: all green
 
-- [ ] **Step 3: Run manual smoke commands**
+- [x] **Step 3: Run manual smoke commands**
 
 ```bash
 bun run .local-memory/src/index.ts init
@@ -582,7 +582,7 @@ curl http://127.0.0.1:37777/health
 curl http://127.0.0.1:37777/api/status
 ```
 
-- [ ] **Step 4: Anti-pattern grep checks**
+- [x] **Step 4: Anti-pattern grep checks**
 
 Run:
 
@@ -593,7 +593,7 @@ Get-ChildItem -Path ".local-memory/src" -Recurse -File | Select-String -Pattern 
 
 Expected: no matches in newly implemented surfaces
 
-- [ ] **Step 5: Final commit (if docs drift fix needed)**
+- [x] **Step 5: Final commit (if docs drift fix needed)**
 
 ```bash
 git add .local-memory/RUNBOOK.md
@@ -604,13 +604,13 @@ git commit -m "docs: 对齐 local-memory 最终运行面"
 
 ## Verification Checklist
 
-- [ ] `/health` 之外新增 API 路由全部有 smoke tests
-- [ ] CLI 新命令全部有 spawn smoke tests
-- [ ] semantic retrieval 在 provider healthy/unhealthy 两种状态都被测试
-- [ ] promotion 记录真实写入 `memory_promotions`
-- [ ] relations 查询与 lineage 有回归测试
-- [ ] projection rebuild / verify / cleanup run 都返回结构化 JSON
-- [ ] RUNBOOK 只包含真实存在且已验证的命令/端点
+- [x] `/health` 之外新增 API 路由全部有 smoke tests
+- [x] CLI 新命令全部有 spawn smoke tests
+- [x] semantic retrieval 在 provider healthy/unhealthy 两种状态都被测试
+- [x] promotion 记录真实写入 `memory_promotions`
+- [x] relations 查询与 lineage 有回归测试
+- [x] projection rebuild / verify / cleanup run 都返回结构化 JSON
+- [x] RUNBOOK 只包含真实存在且已验证的命令/端点
 
 ## Anti-pattern Guards
 
