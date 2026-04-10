@@ -74,3 +74,9 @@ None at session start - all decisions documented in plan.
   - `outputs/assistant-response.md`
 - Baseline prompts should explicitly instruct the model to answer inline and avoid write/edit/bash to reduce workspace pollution.
 - Running with `--dir <baseline-run-dir>` isolates any accidental file writes inside the scenario sandbox instead of the repo root.
+
+## 2026-04-11 Task 9 Conflict Resolution Learnings
+
+- The installed `frontend-design-orchestrator` skill lives under `C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\`, so task evidence in this repo must reference the global skill path explicitly.
+- For icon-system guidance, conflict detection is more reliable when the doc requires a small inventory table (`source`, `raw_name`, `usage_context`, `status`) before making any library choice.
+- Prefix-based namespacing needs both decision rules and a report schema; otherwise the guidance stays conceptual and reviewers cannot verify how a conflict was resolved.
