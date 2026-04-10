@@ -10,3 +10,13 @@
 - **Consequences**: 
     - Manual edits to `.memory/*.md` are volatile and will be overwritten.
     - Users must use system tools (e.g., `remember`, `consolidate`) to mutate durable memory.
+
+## Decision: Keep Classification Embedding Dependencies Optional (2026-04-10)
+- **Context**: `ClassificationService` needs to persist embeddings during classification, but existing production/test call sites still construct it with only memory and ingestion repositories.
+- **Decision**: Add `EmbeddingRepository` and `ProviderRouter` as optional constructor dependencies and gate embedding persistence behind their presence.
+- **Rationale**:
+    - Preserves backward compatibility for existing callers while enabling embedding persistence where the extra dependencies are available.
+    - Keeps the classification pipeline resilient in keyword-only or degraded environments.
+- **Consequences**:
+    - Embedding persistence is opt-in until callers pass the new dependencies.
+    - The service now treats embedding generation as a non-fatal side effect after active-memory promotion.

@@ -358,7 +358,7 @@ export interface EmbeddingRepository {
 }
 ```
 
-- [ ] **Step 3: Persist embedding during classification or post-classification hook**
+- [x] **Step 3: Persist embedding during classification or post-classification hook**
 
 Only generate embeddings when:
 - memory is `active`

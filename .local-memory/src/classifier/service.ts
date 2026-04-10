@@ -7,7 +7,9 @@ import type {
   CreateMemoryInput 
 } from '../types/index.ts';
 import type { MemoryRepository } from '../repository/memory.ts';
+import type { EmbeddingRepository } from '../repository/embedding.ts';
 import type { IngestionRepository } from '../repository/ingestion.ts';
+import type { ProviderRouter } from '../provider/router.ts';
 
 // Rule-based classifier - no model dependency for baseline
 
@@ -21,6 +23,8 @@ interface ClassificationRule {
 export class ClassificationService {
   private memoryRepo: MemoryRepository;
   private ingestionRepo: IngestionRepository;
+  private embeddingRepo?: EmbeddingRepository;
+  private providerRouter?: ProviderRouter;
   private version = '1.0.0-rule-based';
 
   // High importance keywords (Chinese and English)
@@ -206,9 +210,16 @@ export class ClassificationService {
     },
   ];
 
-  constructor(memoryRepo: MemoryRepository, ingestionRepo: IngestionRepository) {
+  constructor(
+    memoryRepo: MemoryRepository,
+    ingestionRepo: IngestionRepository,
+    embeddingRepo?: EmbeddingRepository,
+    providerRouter?: ProviderRouter,
+  ) {
     this.memoryRepo = memoryRepo;
     this.ingestionRepo = ingestionRepo;
+    this.embeddingRepo = embeddingRepo;
+    this.providerRouter = providerRouter;
   }
 
   async classify(event: IngestionEvent): Promise<ClassificationResult> {
@@ -260,10 +271,27 @@ export class ClassificationService {
     const memory = await this.memoryRepo.create(memoryInput);
 
     // Update confidence
+    const memoryStatus = 'active';
     await this.memoryRepo.update(memory.id, {
       confidence: result.confidence,
-      status: 'active',
+      status: memoryStatus,
     });
+
+    if (memoryStatus === 'active' && this.embeddingRepo && this.providerRouter) {
+      try {
+        const provider = this.providerRouter.getEmbeddingProvider();
+        if (provider && await provider.isHealthy()) {
+          const embedding = await provider.embed(memory.content);
+          await this.embeddingRepo.save(memory.id, embedding, {
+            name: provider.name,
+            version: provider.version,
+            dimensions: provider.dimensions,
+          });
+        }
+      } catch (error) {
+        console.warn(`[Classifier] Failed to persist embedding for memory ${memory.id}: ${error}`);
+      }
+    }
 
     // Mark ingestion as processed
     await this.ingestionRepo.markProcessed(event.id, memory.id);
