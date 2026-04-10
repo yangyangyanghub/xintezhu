@@ -1,5 +1,6 @@
 import type { MemoryRepository } from '../repository/memory.ts';
 import type { AuditRepository } from '../repository/audit.ts';
+import type { PromotionRepository } from '../repository/promotion.ts';
 import type { RelationEngine } from '../relations/engine.ts';
 import type { 
   Memory, 
@@ -70,17 +71,20 @@ export interface EvaluationResult {
 export class PromotionEngine {
   private memoryRepo: MemoryRepository;
   private auditRepo: AuditRepository;
+  private promotionRepo: PromotionRepository;
   private relationEngine: RelationEngine;
   private config: PromotionConfig;
 
   constructor(
     memoryRepo: MemoryRepository,
     auditRepo: AuditRepository,
+    promotionRepo: PromotionRepository,
     relationEngine: RelationEngine,
     config: Partial<PromotionConfig> = {}
   ) {
     this.memoryRepo = memoryRepo;
     this.auditRepo = auditRepo;
+    this.promotionRepo = promotionRepo;
     this.relationEngine = relationEngine;
     this.config = { ...DEFAULT_CONFIG, ...config };
   }
@@ -198,8 +202,7 @@ export class PromotionEngine {
     };
 
     // Persist promotion record
-    // In real implementation, would have promotion repository
-    // For now, audit is sufficient
+    await this.promotionRepo.create(promotion);
 
     // Audit
     await this.auditRepo.record(
@@ -212,7 +215,7 @@ export class PromotionEngine {
         toLayer: targetLayer,
         scores: evaluation.scores,
         evidenceCount: evidenceRefs.length,
-        forced,
+        forced: force,
       },
       context,
       previousState

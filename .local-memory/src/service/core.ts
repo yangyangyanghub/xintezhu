@@ -2,12 +2,20 @@ import { Database } from 'bun:sqlite';
 import { existsSync, mkdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import type { ServiceHealth, HealthCheck } from '../types/index.ts';
-import { SQLiteIngestionRepository, SQLiteAuditRepository, SQLiteMemoryRepository, SQLiteEmbeddingRepository } from '../repository/index.ts';
+import {
+  SQLiteIngestionRepository,
+  SQLiteAuditRepository,
+  SQLiteMemoryRepository,
+  SQLiteEmbeddingRepository,
+  SQLitePromotionRepository,
+} from '../repository/index.ts';
 import { ClassificationService } from '../classifier/service.ts';
 import { IngestGateway } from '../ingest/gateway.ts';
 import { DefaultProviderRouter } from '../provider/router.ts';
 import { RetrievalService } from '../retrieval/service.ts';
 import { ContextAssemblyService } from '../context/assembly.ts';
+import { RelationEngine } from '../relations/engine.ts';
+import { PromotionEngine } from '../promotion/engine.ts';
 import type { RouteDeps } from '../http/routes.ts';
 
 export interface MemoryCoreConfig {
@@ -34,6 +42,7 @@ export class MemoryCoreService {
   private ingestionRepo: SQLiteIngestionRepository | null = null;
   private auditRepo: SQLiteAuditRepository | null = null;
   private embeddingRepo: SQLiteEmbeddingRepository | null = null;
+  private promotionRepo: SQLitePromotionRepository | null = null;
   
   // Service instances
   private classifier: ClassificationService | null = null;
@@ -41,6 +50,8 @@ export class MemoryCoreService {
   private providerRouter: DefaultProviderRouter | null = null;
   private retrievalService: RetrievalService | null = null;
   private contextAssembly: ContextAssemblyService | null = null;
+  private relationEngine: RelationEngine | null = null;
+  private promotionEngine: PromotionEngine | null = null;
 
   constructor(config: Partial<MemoryCoreConfig> = {}) {
     this.config = { ...DEFAULT_CONFIG, ...config };
@@ -78,10 +89,11 @@ export class MemoryCoreService {
     this.ingestionRepo = new SQLiteIngestionRepository(this.db);
     this.auditRepo = new SQLiteAuditRepository(this.db);
     this.embeddingRepo = new SQLiteEmbeddingRepository(this.db);
+    this.promotionRepo = new SQLitePromotionRepository(this.db);
   }
   
   private async initializeServices(): Promise<void> {
-    if (!this.memoryRepo || !this.ingestionRepo || !this.auditRepo || !this.embeddingRepo) {
+    if (!this.db || !this.memoryRepo || !this.ingestionRepo || !this.auditRepo || !this.embeddingRepo || !this.promotionRepo) {
       throw new Error('Repositories not initialized');
     }
     
@@ -100,6 +112,15 @@ export class MemoryCoreService {
     
     // Initialize context assembly
     this.contextAssembly = new ContextAssemblyService(this.memoryRepo, this.retrievalService);
+
+    // Initialize relation/promotion engines
+    this.relationEngine = new RelationEngine(this.db, this.memoryRepo, this.auditRepo);
+    this.promotionEngine = new PromotionEngine(
+      this.memoryRepo,
+      this.auditRepo,
+      this.promotionRepo,
+      this.relationEngine
+    );
   }
 
   async health(): Promise<ServiceHealth> {

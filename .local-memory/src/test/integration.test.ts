@@ -21,11 +21,12 @@ import { ContextAssemblyService } from '../context/assembly.ts';
 import { CleanupService } from '../cleanup/service.ts';
 import { OpenCodeAdapter } from '../adapter/opencode.ts';
 import { ClassificationService } from '../classifier/service.ts';
-import { 
+import {
   SQLiteMemoryRepository,
   SQLiteIngestionRepository,
   SQLiteAuditRepository,
   SQLiteEmbeddingRepository,
+  SQLitePromotionRepository,
 } from '../repository/index.ts';
 import type { IngestionEventInput } from '../types/index.ts';
 
@@ -58,6 +59,7 @@ describe('Local Memory System Integration', () => {
     const ingestRepo = new SQLiteIngestionRepository(db);
     const auditRepo = new SQLiteAuditRepository(db);
     const embeddingRepo = new SQLiteEmbeddingRepository(db);
+    const promotionRepo = new SQLitePromotionRepository(db);
 
     // Initialize services
     const classifier = new ClassificationService(memoryRepo, ingestRepo);
@@ -79,7 +81,7 @@ describe('Local Memory System Integration', () => {
     retrieval = new RetrievalService(memoryRepo, embeddingRepo, mockProviderRouter as any);
     projection = new ProjectionEngine(memoryRepo, auditRepo);
     relations = new RelationEngine(db, memoryRepo, auditRepo);
-    promotion = new PromotionEngine(memoryRepo, auditRepo, relations);
+    promotion = new PromotionEngine(memoryRepo, auditRepo, promotionRepo, relations);
     contextAssembly = new ContextAssemblyService(memoryRepo, retrieval);
     cleanup = new CleanupService(db, memoryRepo, auditRepo, projection);
 

@@ -176,10 +176,12 @@ export interface Promotion {
   toLayer: MemoryLayer;
   triggerScores: PromotionScores;
   evidenceRefs: string[];
-  status: 'pending' | 'approved' | 'rejected' | 'rolled_back';
+  status: PromotionStatus;
   promotedAt: string | null;
   rolledBackAt: string | null;
 }
+
+export type PromotionStatus = 'pending' | 'approved' | 'rejected' | 'rolled_back';
 
 export interface PromotionScores {
   stability: number;

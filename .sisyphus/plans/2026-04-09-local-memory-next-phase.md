@@ -421,7 +421,7 @@ git commit -m "feat: 实现 local-memory 真实语义检索"
 - Modify: `/.local-memory/src/promotion/engine.ts`
 - Test: `/.local-memory/src/test/promotion.engine.test.ts`
 
-- [ ] **Step 1: Write failing promotion persistence test**
+- [x] **Step 1: Write failing promotion persistence test**
 
 ```ts
 it('writes approved promotion records to memory_promotions', async () => {
@@ -431,9 +431,9 @@ it('writes approved promotion records to memory_promotions', async () => {
 });
 ```
 
-- [ ] **Step 2: Implement repository and persist from engine**
+- [x] **Step 2: Implement repository and persist from engine**
 
-- [ ] **Step 3: Run test**
+- [x] **Step 3: Run test**
 
 Run: `bun test ./.local-memory/src/test/promotion.engine.test.ts`
 Expected: PASS
