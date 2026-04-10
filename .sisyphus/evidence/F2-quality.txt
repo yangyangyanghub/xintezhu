@@ -1,0 +1,72 @@
+F2 Code Quality Review
+
+Target:
+- C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\SKILL.md
+- C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\references\design-md-template.md
+- C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\references\design-sources.md
+- C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\references\icon-systems.md
+- C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\references\review-rules.md
+
+Review date: 2026-04-11
+
+VERDICT: REJECT
+
+Checklist
+- SKILL.md < 300 lines: PASS (150 lines)
+- Proper YAML frontmatter: PASS (`name` + `description` present at lines 1-4)
+- Clear trigger conditions: FAIL
+- All references follow consistent formatting: FAIL
+- No contradictions or ambiguities: FAIL
+- Clear separation of template vs generated output: FAIL
+- Links work: PASS for external source URLs checked during review
+- No scope creep in content: FAIL
+
+Key findings
+1. SKILL description mixes trigger conditions with workflow/output details.
+   - Evidence: `SKILL.md:3` says "Use when the user needs to generate... create or update DESIGN.md, select icon systems, resolve icon conflicts, or perform design reviews...".
+   - Why this fails: writing-skills best practice says the description should focus on when to use the skill, not summarize process/output behavior.
+
+2. SKILL and review reference disagree on review output format.
+   - Evidence: `SKILL.md:76-79` requires `- [severity] Section Name — issue summary — why it matters — required DESIGN.md update` plus mandatory rewrite into `DESIGN.md` and review-log append.
+   - Evidence: `references/review-rules.md:13` says to record issues as `guideline -> problem -> correction`, and `review-rules.md:117-120` shows a 3-part output example without section name / why-it-matters / revision-status structure.
+   - Impact: agents can produce inconsistent review artifacts depending on which file they follow.
+
+3. Reference formatting is inconsistent across files.
+   - Evidence: `references/design-md-template.md:1-55` is Chinese and template-oriented; the other three references are English prose/reference docs.
+   - Evidence: `references/design-sources.md` (138 lines), `references/icon-systems.md` (462 lines), and `references/review-rules.md` (125 lines) exceed 100 lines but provide no table of contents near the top.
+   - Impact: inconsistent reading experience and weaker progressive disclosure for long reference files.
+
+4. Template vs generated output separation is not consistently protected in supporting references.
+   - Evidence: `references/design-md-template.md:3` clearly says placeholders should be replaced and not copied verbatim.
+   - Counter-evidence: `references/icon-systems.md:433-458` presents a filled `## Icon System` example with concrete package names (`lucide-react`), version text (`^0.x.x`), asset path (`/src/assets/icons/`), and extra library recommendation (`react-world-flags`).
+   - Impact: the template file is clean, but another reference nudges the agent toward generated/runtime-specific content and implementation details instead of design-spec-only guidance.
+
+5. Scope creep appears in references even though the skill claims to produce design specs only.
+   - Evidence: `SKILL.md:21` and `SKILL.md:145-150` exclude implementation code, build config, and asset downloads.
+   - Evidence: `references/icon-systems.md:29-33`, `58-61`, `88-90`, `117-120`, and `410-415` include TSX/HTML/CSS implementation snippets.
+   - Evidence: `references/icon-systems.md:447-457` includes runtime asset path and third-party library suggestions.
+   - Evidence: `references/design-sources.md:114` allows optional `asset downloads`, and `design-sources.md:134` lists `Tailwind UI` as an implementation reference.
+   - Impact: the supporting docs expand the skill from design-orchestrator into implementation/toolchain guidance.
+
+6. `review-rules.md` contains at least one checklist/example mismatch.
+   - Evidence: `references/review-rules.md:84-86` says the issue violates "Confirm destructive actions".
+   - Counter-evidence: no checklist item with that exact label exists in `review-rules.md:15-65`.
+   - Impact: examples cannot be traced back cleanly to checklist items, which weakens audit clarity.
+
+7. `review-rules.md` broadens the scope from DESIGN.md review into generic UI audit language.
+   - Evidence: `references/review-rules.md:3` says it is for `DESIGN.md reviews and UI audits`.
+   - Impact: this blurs whether the skill reviews design specifications only, or also performs full UI/code audits.
+
+8. Link checks completed for cited external sources.
+   - Verified reachable during review: `https://github.com/VoltAgent/awesome-design-md`, `https://ui-skills.com/`, `https://lucide.dev/`, `https://heroicons.com/`, `https://ant.design/components/icon/`, `https://www.iconfont.cn/`, `https://vercel.com/design/guidelines`.
+   - Note: SKILL/reference cross-file pointers are mostly plain inline filenames instead of markdown links, so navigation is readable but not consistently link-structured.
+
+Conclusion
+The package is not ready for quality approval. The main blockers are inconsistent review contracts, scope leakage in references, and weak separation between reusable template guidance and generated/implementation-oriented output examples.
+
+Required fixes before APPROVE
+1. Rewrite `SKILL.md` description to be trigger-only and discovery-oriented.
+2. Make `review-rules.md` output format match `SKILL.md` exactly, or vice versa.
+3. Add contents tables to long reference files and normalize language/formatting conventions.
+4. Remove implementation snippets, runtime asset paths, package imports, and toolchain/library migration guidance from references.
+5. Keep template examples placeholder-based unless the file is explicitly marked as generated-output example.

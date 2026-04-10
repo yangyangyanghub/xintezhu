@@ -105,3 +105,10 @@ None - all decisions made during planning phase.
 **Decision**: Mark F4 as `REJECT`.
 **Rationale**: `SKILL.md` holds the correct boundary, but `references/icon-systems.md` and `references/design-sources.md` still include implementation-oriented material (TSX/HTML/CSS snippets, implementation migration wording, `/src/assets/icons/`, `Tailwind UI` as implementation reference, and `asset downloads` wording).
 **Impact**: The skill cannot be approved for scope fidelity until references are reduced to design-spec-only guidance.
+
+## 2026-04-11 F2 Quality Decision
+
+### 12. Reject Current Quality Review
+**Decision**: Mark F2 as `REJECT`.
+**Rationale**: `SKILL.md` passes basic structure checks, but the package still fails quality review because the review contract is inconsistent across files, long references lack navigation structure, and supporting references leak implementation/runtime guidance.
+**Impact**: Future approval work should treat F2 and F4 as linked blockers; fixing only wording in `SKILL.md` will not be sufficient.

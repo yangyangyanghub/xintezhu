@@ -107,3 +107,9 @@ None at session start - all decisions documented in plan.
 - A top-level `Non-goals` section is not sufficient for approval if supporting references still include implementation snippets or runtime package guidance.
 - For a design-orchestrator skill, TSX/HTML/CSS examples inside references count as scope leakage even when the main `SKILL.md` says "does NOT generate implementation code".
 - Offline compliance should be judged on whether the operational path runs from local reference files; external URLs can remain provenance only, but optional network features like `asset downloads` still weaken scope fidelity.
+
+## 2026-04-11 F2 Code Quality Learnings
+
+- For skill QA, a passing line-count/frontmatter check is not enough; the decisive failures often live in the contract between `SKILL.md` and supporting references.
+- Reference files over ~100 lines become harder to scan without a top-level contents section, especially when they are meant for progressive disclosure.
+- Mixed-language references and implementation-heavy examples create quality drift even when each file looks individually “complete”.
