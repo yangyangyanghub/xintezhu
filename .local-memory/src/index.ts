@@ -7,6 +7,8 @@ interface CliOptions extends Partial<MemoryCoreConfig> {
   mode?: string;
   workspace?: string;
   eventFile?: string;
+  memoryId?: string;
+  force?: boolean;
 }
 
 function parseArgs(argv: string[]): { command: string; options: CliOptions } {
@@ -49,6 +51,13 @@ function parseArgs(argv: string[]): { command: string; options: CliOptions } {
       case '--event-file':
         options.eventFile = value;
         index += 1;
+        break;
+      case '--memory-id':
+        options.memoryId = value;
+        index += 1;
+        break;
+      case '--force':
+        options.force = true;
         break;
       case '--disable-projection':
         options.enableProjection = false;
@@ -195,6 +204,58 @@ async function runIngest(options: CliOptions): Promise<number> {
   }
 }
 
+async function runPromote(options: CliOptions): Promise<number> {
+  if (!options.memoryId) {
+    console.error('Error: --memory-id is required');
+    return 1;
+  }
+
+  const service = new MemoryCoreService(options);
+
+  try {
+    await service.initialize();
+    const result = await service.getPromotionEngine().promote(
+      options.memoryId,
+      { actor: 'cli' },
+      options.force ?? false
+    );
+
+    console.log(JSON.stringify(result, null, 2));
+    return result.promoted ? 0 : 1;
+  } catch (error) {
+    console.error(`Error promoting memory: ${error}`);
+    return 1;
+  } finally {
+    await service.dispose();
+  }
+}
+
+async function runRelations(options: CliOptions): Promise<number> {
+  if (!options.memoryId) {
+    console.error('Error: --memory-id is required');
+    return 1;
+  }
+
+  const service = new MemoryCoreService(options);
+
+  try {
+    await service.initialize();
+    const relationEngine = service.getRelationEngine();
+    const [relations, lineage] = await Promise.all([
+      relationEngine.getRelationsFrom(options.memoryId),
+      relationEngine.getLineage(options.memoryId),
+    ]);
+
+    console.log(JSON.stringify({ relations, lineage }, null, 2));
+    return 0;
+  } catch (error) {
+    console.error(`Error querying relations: ${error}`);
+    return 1;
+  } finally {
+    await service.dispose();
+  }
+}
+
 async function main(): Promise<number> {
   const { command, options } = parseArgs(process.argv.slice(2));
 
@@ -211,6 +272,10 @@ async function main(): Promise<number> {
       return runContext(options);
     case 'ingest':
       return runIngest(options);
+    case 'promote':
+      return runPromote(options);
+    case 'relations':
+      return runRelations(options);
     default:
       console.log(`Usage: bun run src/index.ts <command> [options]
 
@@ -221,6 +286,8 @@ Commands:
   search --query <text>         Search memories
   context --query <text>        Assemble context for query
   ingest --event-file <path>    Ingest event from JSON file
+  promote --memory-id <id>      Promote memory to next layer
+  relations --memory-id <id>    Query memory relations and lineage
 
 Options:
   --runtime-root <path>         Runtime directory (default: .local-memory)
@@ -231,6 +298,8 @@ Options:
   --mode <keyword|semantic|hybrid>  Search mode (default: hybrid)
   --workspace <name>            Workspace name
   --event-file <path>           Path to event JSON file
+  --memory-id <id>              Memory id for promote/relations commands
+  --force                       Force promotion even if not eligible
   --disable-projection          Disable projection feature`);
       return 1;
   }

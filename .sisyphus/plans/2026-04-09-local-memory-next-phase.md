@@ -447,14 +447,14 @@ Expected: PASS
 - Test: `/.local-memory/src/test/relations.engine.test.ts`
 - Test: `/.local-memory/src/test/http.ops.test.ts`
 
-- [ ] **Step 1: Add relation tests**
+- [x] **Step 1: Add relation tests**
 
 Cover:
 - create relation
 - query lineage
 - deactivate relation
 
-- [ ] **Step 2: Add API/CLI for promotion + relations**
+- [x] **Step 2: Add API/CLI for promotion + relations**
 
 Expose:
 - `POST /api/promotions/evaluate`
@@ -463,12 +463,12 @@ Expose:
 - `GET /api/relations/:memoryId`
 - CLI counterparts: `promote`, `relations`
 
-- [ ] **Step 3: Run tests**
+- [x] **Step 3: Run tests**
 
 Run: `bun test ./.local-memory/src/test/promotion.engine.test.ts ./.local-memory/src/test/relations.engine.test.ts ./.local-memory/src/test/http.ops.test.ts`
 Expected: PASS
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add .local-memory/src/repository/promotion.ts .local-memory/src/repository/index.ts .local-memory/src/promotion/engine.ts .local-memory/src/relations/engine.ts .local-memory/src/http/handlers/ops.ts .local-memory/src/index.ts .local-memory/src/test/promotion.engine.test.ts .local-memory/src/test/relations.engine.test.ts .local-memory/src/test/http.ops.test.ts

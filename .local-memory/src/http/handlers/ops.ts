@@ -5,6 +5,14 @@ export interface OpsHttpDeps extends RouteDeps {
   service: MemoryCoreService;
 }
 
+type RouteRequest = Request & {
+  params?: Record<string, string>;
+};
+
+function getRouteParam(req: Request, key: string): string | undefined {
+  return (req as RouteRequest).params?.[key];
+}
+
 export async function handleStatus(req: Request, deps: OpsHttpDeps) {
   try {
     const health = await deps.service.health();
@@ -98,6 +106,108 @@ export async function handleRollbackBatch(req: Request, deps: OpsHttpDeps) {
   } catch (error) {
     return Response.json(
       { error: 'Rollback failed', message: String(error) },
+      { status: 500 }
+    );
+  }
+}
+
+export async function handlePromotionEvaluate(req: Request, deps: OpsHttpDeps) {
+  try {
+    const { memoryId } = await req.json();
+
+    if (!memoryId) {
+      return Response.json(
+        { error: 'memoryId is required' },
+        { status: 400 }
+      );
+    }
+
+    const result = await deps.service.getPromotionEngine().evaluate(memoryId);
+    return Response.json(result);
+  } catch (error) {
+    return Response.json(
+      { error: 'Promotion evaluation failed', message: String(error) },
+      { status: 500 }
+    );
+  }
+}
+
+export async function handlePromotionPromote(req: Request, deps: OpsHttpDeps) {
+  try {
+    const { memoryId, force = false } = await req.json();
+
+    if (!memoryId) {
+      return Response.json(
+        { error: 'memoryId is required' },
+        { status: 400 }
+      );
+    }
+
+    const result = await deps.service.getPromotionEngine().promote(memoryId, { actor: 'api' }, force);
+    return Response.json(result);
+  } catch (error) {
+    return Response.json(
+      { error: 'Promotion failed', message: String(error) },
+      { status: 500 }
+    );
+  }
+}
+
+export async function handleRelationCreate(req: Request, deps: OpsHttpDeps) {
+  try {
+    const input = await req.json();
+    const result = await deps.service.getRelationEngine().createRelation(input, { actor: 'api' });
+    return Response.json(result);
+  } catch (error) {
+    return Response.json(
+      { error: 'Relation creation failed', message: String(error) },
+      { status: 500 }
+    );
+  }
+}
+
+export async function handleRelationGet(req: Request, deps: OpsHttpDeps) {
+  try {
+    const memoryId = getRouteParam(req, 'memoryId');
+
+    if (!memoryId) {
+      return Response.json(
+        { error: 'memoryId is required' },
+        { status: 400 }
+      );
+    }
+
+    const relationEngine = deps.service.getRelationEngine();
+    const [relations, lineage] = await Promise.all([
+      relationEngine.getRelationsFrom(memoryId),
+      relationEngine.getLineage(memoryId),
+    ]);
+
+    return Response.json({ relations, lineage });
+  } catch (error) {
+    return Response.json(
+      { error: 'Relation query failed', message: String(error) },
+      { status: 500 }
+    );
+  }
+}
+
+export async function handleRelationDeactivate(req: Request, deps: OpsHttpDeps) {
+  try {
+    const relationId = getRouteParam(req, 'id');
+
+    if (!relationId) {
+      return Response.json(
+        { error: 'id is required' },
+        { status: 400 }
+      );
+    }
+
+    await deps.service.getRelationEngine().deactivateRelation(relationId, { actor: 'api' });
+    return Response.json({ success: true, id: relationId });
+  } catch (error) {
+    return Response.json(
+      { error: 'Relation deactivation failed', message: String(error) },
       { status: 500 }
     );
   }

@@ -10,6 +10,11 @@ import {
   handleProjectionVerify, 
   handleCleanupRun,
   handleRollbackBatch,
+  handlePromotionEvaluate,
+  handlePromotionPromote,
+  handleRelationCreate,
+  handleRelationGet,
+  handleRelationDeactivate,
   type OpsHttpDeps 
 } from './handlers/ops.ts';
 
@@ -56,6 +61,21 @@ export function buildRoutes(deps: RouteDeps) {
     },
     '/api/rollback/batch': {
       POST: (req: Request) => handleRollbackBatch(req, opsDeps),
+    },
+    '/api/promotions/evaluate': {
+      POST: (req: Request) => handlePromotionEvaluate(req, opsDeps),
+    },
+    '/api/promotions/promote': {
+      POST: (req: Request) => handlePromotionPromote(req, opsDeps),
+    },
+    '/api/relations': {
+      POST: (req: Request) => handleRelationCreate(req, opsDeps),
+    },
+    '/api/relations/:memoryId': {
+      GET: (req: Request) => handleRelationGet(req, opsDeps),
+    },
+    '/api/relations/:id': {
+      DELETE: (req: Request) => handleRelationDeactivate(req, opsDeps),
     },
   };
 }

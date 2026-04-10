@@ -166,6 +166,22 @@ export class MemoryCoreService {
     return this.config;
   }
 
+  getRelationEngine(): RelationEngine {
+    if (!this.relationEngine) {
+      throw new Error('Relation engine not initialized. Call initialize() first.');
+    }
+
+    return this.relationEngine;
+  }
+
+  getPromotionEngine(): PromotionEngine {
+    if (!this.promotionEngine) {
+      throw new Error('Promotion engine not initialized. Call initialize() first.');
+    }
+
+    return this.promotionEngine;
+  }
+
   async dispose(): Promise<void> {
     if (this.providerRouter) {
       await this.providerRouter.dispose();
