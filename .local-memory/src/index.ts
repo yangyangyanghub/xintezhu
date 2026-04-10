@@ -1,5 +1,7 @@
 import { MemoryCoreService, type MemoryCoreConfig } from './service/core.ts';
 import { createServer } from './http/server.ts';
+import { mkdir, readFile, unlink, writeFile } from 'node:fs/promises';
+import { basename, join, resolve } from 'node:path';
 
 interface CliOptions extends Partial<MemoryCoreConfig> {
   port?: number;
@@ -10,6 +12,98 @@ interface CliOptions extends Partial<MemoryCoreConfig> {
   memoryId?: string;
   force?: boolean;
   actor?: string;
+  daemon?: boolean;
+}
+
+export function getPidFilePath(runtimeRoot: string): string {
+  return join(resolve(runtimeRoot), '.pid');
+}
+
+export async function writePidFile(runtimeRoot: string, pid: number): Promise<void> {
+  await mkdir(resolve(runtimeRoot), { recursive: true });
+  await writeFile(getPidFilePath(runtimeRoot), `${pid}\n`, 'utf8');
+}
+
+export async function removePidFile(runtimeRoot: string): Promise<void> {
+  await unlink(getPidFilePath(runtimeRoot)).catch((error: unknown) => {
+    const code = error instanceof Error && 'code' in error ? String(error.code) : '';
+    if (code !== 'ENOENT') {
+      throw error;
+    }
+  });
+}
+
+async function readPidFile(runtimeRoot: string): Promise<number | null> {
+  try {
+    const content = await readFile(getPidFilePath(runtimeRoot), 'utf8');
+    const pid = Number.parseInt(content.trim(), 10);
+    return Number.isInteger(pid) && pid > 0 ? pid : null;
+  } catch (error) {
+    const code = error instanceof Error && 'code' in error ? String(error.code) : '';
+    if (code === 'ENOENT') {
+      return null;
+    }
+    throw error;
+  }
+}
+
+function isProcessRunning(pid: number): boolean {
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function resolveStartOptions(options: CliOptions): CliOptions {
+  if (options.runtimeRoot || options.databasePath || options.projectionRoot) {
+    return options;
+  }
+
+  if (basename(process.cwd()) !== '.local-memory') {
+    return options;
+  }
+
+  return {
+    ...options,
+    runtimeRoot: '.',
+    databasePath: './memory.db',
+    projectionRoot: '../.memory',
+  };
+}
+
+async function spawnDaemon(options: CliOptions): Promise<number> {
+  const resolvedOptions = resolveStartOptions({ ...options, daemon: false });
+  const args = ['bun', 'run', 'src/index.ts', 'start'];
+  if (resolvedOptions.port !== undefined) {
+    args.push('--port', String(resolvedOptions.port));
+  }
+  if (resolvedOptions.runtimeRoot) {
+    args.push('--runtime-root', resolvedOptions.runtimeRoot);
+  }
+  if (resolvedOptions.databasePath) {
+    args.push('--database-path', resolvedOptions.databasePath);
+  }
+  if (resolvedOptions.projectionRoot) {
+    args.push('--projection-root', resolvedOptions.projectionRoot);
+  }
+  if (resolvedOptions.enableProjection === false) {
+    args.push('--disable-projection');
+  }
+
+  const child = Bun.spawn({
+    cmd: args,
+    cwd: resolve(import.meta.dir, '..'),
+    detached: true,
+    stdin: 'ignore',
+    stdout: 'ignore',
+    stderr: 'ignore',
+  });
+  child.unref?.();
+
+  console.log(`[MemoryCore] Daemon started (pid: ${child.pid ?? 'unknown'})`);
+  return 0;
 }
 
 function parseArgs(argv: string[]): { command: string; options: CliOptions } {
@@ -75,6 +169,9 @@ function parseArgs(argv: string[]): { command: string; options: CliOptions } {
         options.actor = value;
         index += 1;
         break;
+      case '--daemon':
+        options.daemon = true;
+        break;
       case '--disable-projection':
         options.enableProjection = false;
         break;
@@ -100,15 +197,29 @@ async function runInit(options: CliOptions): Promise<number> {
 }
 
 async function runStart(options: CliOptions): Promise<number> {
-  const port = options.port ?? 37777;
-  const service = new MemoryCoreService(options);
+  if (options.daemon) {
+    return spawnDaemon(options);
+  }
+
+  const resolvedOptions = resolveStartOptions(options);
+  const port = resolvedOptions.port ?? 37777;
+  const runtimeRoot = resolvedOptions.runtimeRoot ?? '.local-memory';
+  const existingPid = await readPidFile(runtimeRoot);
+  if (existingPid && existingPid !== process.pid && isProcessRunning(existingPid)) {
+    console.error(`[MemoryCore] Service already running with pid ${existingPid}`);
+    return 1;
+  }
+
+  const service = new MemoryCoreService(resolvedOptions);
   await service.initialize();
 
   const server = createServer({ port, deps: service.getRouteDeps() });
+  await writePidFile(runtimeRoot, process.pid);
 
   const shutdown = async () => {
     server.stop(true);
     await service.dispose();
+    await removePidFile(runtimeRoot);
     process.exit(0);
   };
 
@@ -379,7 +490,9 @@ Options:
   }
 }
 
-const exitCode = await main();
-if (exitCode !== 0) {
-  process.exit(exitCode);
+if (import.meta.main) {
+  const exitCode = await main();
+  if (exitCode !== 0) {
+    process.exit(exitCode);
+  }
 }
