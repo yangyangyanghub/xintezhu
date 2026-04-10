@@ -1,0 +1,11 @@
+baseline-analysis.md QA check
+
+- scenario_sections=6
+- quote_like_matches=57
+- markdown_lsp=unavailable (no LSP server configured for .md in current environment)
+- rationalization_table_present=yes (`## 理性化借口映射表` at line 184; table header at line 186)
+
+Commands/evidence basis:
+- PowerShell count on baseline-analysis.md for `## N.` scenario headings
+- PowerShell regex count for quote-like verbatim citations
+- Grep check for `理性化借口映射表` and `| 借口 | 现实 | 影响 |`

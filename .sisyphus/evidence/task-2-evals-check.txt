@@ -1,0 +1,71 @@
+scenario_count=6
+[
+  {
+    "id": 1,
+    "has_prompt": true,
+    "has_expected_output": true,
+    "has_assertions": true
+  },
+  {
+    "id": 2,
+    "has_prompt": true,
+    "has_expected_output": true,
+    "has_assertions": true
+  },
+  {
+    "id": 3,
+    "has_prompt": true,
+    "has_expected_output": true,
+    "has_assertions": true
+  },
+  {
+    "id": 4,
+    "has_prompt": true,
+    "has_expected_output": true,
+    "has_assertions": true
+  },
+  {
+    "id": 5,
+    "has_prompt": true,
+    "has_expected_output": true,
+    "has_assertions": true
+  },
+  {
+    "id": 6,
+    "has_prompt": true,
+    "has_expected_output": true,
+    "has_assertions": true
+  }
+]
+[
+  {
+    "name": "negative-implementation-request",
+    "has_timing": true,
+    "has_outputs_dir": true
+  },
+  {
+    "name": "negative-unrelated-backend-api-fix",
+    "has_timing": true,
+    "has_outputs_dir": true
+  },
+  {
+    "name": "new-project-minimal-design-doc",
+    "has_timing": true,
+    "has_outputs_dir": true
+  },
+  {
+    "name": "new-project-with-reference-sketch",
+    "has_timing": true,
+    "has_outputs_dir": true
+  },
+  {
+    "name": "resolve-icon-system-conflict",
+    "has_timing": true,
+    "has_outputs_dir": true
+  },
+  {
+    "name": "review-existing-design-md",
+    "has_timing": true,
+    "has_outputs_dir": true
+  }
+]
