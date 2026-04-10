@@ -75,6 +75,15 @@ None at session start - all decisions documented in plan.
 - Baseline prompts should explicitly instruct the model to answer inline and avoid write/edit/bash to reduce workspace pollution.
 - Running with `--dir <baseline-run-dir>` isolates any accidental file writes inside the scenario sandbox instead of the repo root.
 
+## 2026-04-11 Task 8 Review Rules Learnings
+
+### Review Reference Boundaries
+- Vercel Web Interface Guidelines cover much more than accessibility; the most useful review reference should stay checklist-driven across interaction, responsive layout, content/forms, motion/performance, and visual craft.
+- For this skill, review rules should stay non-exhaustive and action-oriented so Task 10 can turn them into a concise review workflow instead of a generic audit framework.
+
+### Verification Constraint
+- The required review reference lives in the global skill directory (`C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\references\`), so repository evidence can verify it, but git in `E:\code\my-ai-workspace` cannot version that file directly.
+
 ## 2026-04-11 Task 9 Conflict Resolution Learnings
 
 - The installed `frontend-design-orchestrator` skill lives under `C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\`, so task evidence in this repo must reference the global skill path explicitly.

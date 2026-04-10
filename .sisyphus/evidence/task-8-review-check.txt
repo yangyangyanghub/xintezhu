@@ -1,0 +1,25 @@
+Task 8 review rules QA evidence
+
+- Target file: C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\references\review-rules.md
+- Expected checks:
+  - severity terms: critical / major / minor
+  - key review areas: accessibility / responsive / performance
+  - process terms: workflow / revision
+
+Verification output:
+
+```text
+exists=True
+critical=True
+major=True
+minor=True
+accessibility=True
+responsive=True
+performance=True
+workflow=True
+revision=True
+```
+
+Notes:
+- `review-rules.md` exists at the required global skill path.
+- The document includes checklist coverage, severity definitions, example violations/corrections, and a revision workflow.

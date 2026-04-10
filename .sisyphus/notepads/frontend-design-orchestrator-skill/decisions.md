@@ -69,3 +69,20 @@ None - all decisions made during planning phase.
 **Decision**: Use `opencode run --pure --format json` as the no-skill execution path for baseline capture.
 **Rationale**: It yields real no-skill model behavior plus event timestamps and token totals without loading the skill under development.
 **Impact**: Task 2 produces both qualitative outputs and measurable timing/token evidence for later delta comparison.
+
+## 2026-04-11 Task 8 Decisions
+
+### 8. Review Rules Scope Compression
+**Decision**: Compress Vercel Web Interface Guidelines into a practical review checklist with five sections: interaction/accessibility, responsive layout, content/forms, motion/performance, and visual craft.
+**Rationale**: The task asks for actionable review rules, not a full accessibility standard or a line-by-line copy of the source material.
+**Impact**: `review-rules.md` stays compact enough for skill usage while still covering the key Vercel review surfaces.
+
+### 9. Severity Model
+**Decision**: Define `critical`, `major`, and `minor` by release risk and user impact, then attach concrete violation/correction examples.
+**Rationale**: The skill needs review output that can be triaged immediately instead of vague “good/bad” notes.
+**Impact**: Future review output can map directly to a prioritized fix queue.
+
+### 10. Verification Strategy for Global Skill Files
+**Decision**: Verify the global reference file from the workspace repo using evidence files rather than trying to force git tracking for a file outside the repository root.
+**Rationale**: The target skill path is not itself a git repository, but the plan still requires auditable QA evidence.
+**Impact**: Task completion can be proven with evidence even when the deliverable lives outside version control.
