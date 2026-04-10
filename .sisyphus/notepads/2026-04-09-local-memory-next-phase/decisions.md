@@ -15,3 +15,8 @@
 - `MemoryCoreService` 继续承担 projection/cleanup 的依赖注入入口职责，新增 `getProjectionEngine()` / `getCleanupService()`，保持 HTTP handler 和 CLI 都只依赖 service 暴露面。
 - CLI 命令风格从纯顶层命令扩展为“顶层 + 动作”字符串匹配（如 `projection rebuild`），只覆盖当前 Task 10 所需的三个运维命令，不额外引入命令解析库。
 - RUNBOOK 直接把 projection/cleanup/status 写成已验证的运维入口，并明确全量测试与 Bun 构建的正确验证命令，避免后续因 cwd 或 build target 误判实现状态。
+
+## 2026-04-10 Task 15
+
+- Task 15 测试直接使用真实 `SQLiteMemoryRepository + RetrievalService` 组合，而不是把 `ContextAssemblyService` 全部 mock 掉；这样预算、active 状态、keyword 降级和上下文拼装能在同一套数据上一起验证。
+- 端到端断言只固定对外 contract（四类分类、`budgetsUsed`、active-only），不把内部 token 估算或 assemblyTime 这种易波动字段写死，避免测试过度耦合实现细节。

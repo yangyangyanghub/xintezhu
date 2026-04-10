@@ -129,7 +129,7 @@
 ### 日间任务
 - 调研内容沉淀到 `myk/调研笔记/`
 - 技术学习沉淀到 `myk/技术沉淀/`
-- **用户发送工作内容时，立即追加到 `daily-report/.today.md`**
+- **用户发送工作内容时`gz/`，立即追加到 `daily-report/.today.md`**
 - 记录格式：`- HH:MM 内容描述`
 - **自动识别待办事项**，存入 `daily-report/.tdlist.md`
 

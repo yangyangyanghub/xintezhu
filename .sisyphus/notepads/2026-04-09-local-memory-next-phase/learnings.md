@@ -16,3 +16,9 @@
 - `ops.ts` 的 projection/cleanup handler 可以直接复用 promotion handler 的模式：读取 JSON body、补默认 `actor`、调用 service getter、原样返回 engine/service 结果。
 - Bun CLI 要支持 `projection rebuild` / `projection verify` / `cleanup run` 这类二级命令时，最小改法是把连续的非 `--` 参数拼成命令字符串；不需要提前引入完整命令框架。
 - `.local-memory` 的全量测试如果在子目录里跑，`event-contract.test.ts` 会因为相对路径指向 `.local-memory/.local-memory/contracts/...` 失败；验证完整套件时要从工作区根目录显式传入 `./.local-memory/src/test/*.test.ts` 文件路径。
+
+## 2026-04-10 Task 15
+
+- `ContextAssemblyService` 的四类上下文不是互斥通道：同一条 memory 只要满足规则，就可能同时出现在 `taskRelevant` 和 `recentEpisodic` / `projectKnowledge`，所以测试数据必须按 layer、importance、workspace 有意识隔离，不能默认“只命中一个分类”。
+- `taskRelevant` 复用 `RetrievalService.search(..., 'hybrid')`，在测试里给一个 keyword-only 的 `ProviderRouter` 就能稳定走降级路径，既贴近真实行为，也避免 semantic provider 把排序噪音带进断言。
+- `.local-memory` 的全量验证命令应从仓库根目录执行 `bun test ./.local-memory/src/test`，这样能避开相对路径依赖导致的 cwd 问题。
