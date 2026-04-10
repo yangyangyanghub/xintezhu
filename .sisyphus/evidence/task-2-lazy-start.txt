@@ -1,0 +1,26 @@
+[plugin lazy-start tests]
+bun test v1.3.10 (30e609e0)
+
+ 6 pass
+ 0 fail
+ 16 expect() calls
+Ran 6 tests across 2 files. [584.00ms]
+
+[plugin build]
+> opencode-memory-system@1.1.0 build
+> tsc
+
+[local-memory readiness + pid tests]
+bun test v1.3.10 (30e609e0)
+
+src\test\http.server.test.ts:
+[MemoryCore] Applied migration V1
+[MemoryCore] Database at version 0
+[ProviderRouter] Initialized with embedding: null
+[MemoryCore] Service initialized
+[ProviderRouter] Degraded: No embedding provider configured, keyword-only mode
+
+ 4 pass
+ 0 fail
+ 14 expect() calls
+Ran 4 tests across 2 files. [320.00ms]

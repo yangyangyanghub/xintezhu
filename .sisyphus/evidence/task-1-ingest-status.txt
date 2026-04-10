@@ -1,0 +1,23 @@
+﻿bun test v1.3.10 (30e609e0)
+[MemoryCore] Applied migration V1
+bun.exe : 
+所在位置 C:\Users\HP\AppData\Roaming\npm\bun.ps1:14 字符: 3
++   & "$basedir/node_modules/bun/bin/bun.exe"   $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+.local-memory\src\test\http.ingest-search.test.ts:
+[MemoryCore] Database at version 0
+[ProviderRouter] Initialized with embedding: null
+[ProviderRouter] Degraded: No embedding provider configured, keyword-only mode
+[MemoryCore] Service initialized
+[Classifier] Matched rule 'default-message' for event af119716-cc2c-4cd8-95e9-fa02eacee0dd
+[Classifier] Created memory e5c9354b-a03b-4b0f-97d8-df5a8ac952a3 from event af119716-cc2c-4cd8-95e9-fa02eacee0dd
+[Classifier] Matched rule 'default-message' for event b2fc53c5-e55b-4dcb-9efa-379c5ab3a545
+[Classifier] Created memory 7276a746-4c91-44fc-a169-78f6cb29ffce from event b2fc53c5-e55b-4dcb-9efa-379c5ab3a545
+
+ 4 pass
+ 0 fail
+ 9 expect() calls
+Ran 4 tests across 1 file. [98.00ms]

@@ -1,0 +1,19 @@
+﻿bun test v1.3.10 (30e609e0)
+[MemoryCore] Applied migration V1
+bun.exe : 
+所在位置 C:\Users\HP\AppData\Roaming\npm\bun.ps1:14 字符: 3
++   & "$basedir/node_modules/bun/bin/bun.exe"   $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+.local-memory\src\test\http.server.test.ts:
+[MemoryCore] Database at version 0
+[ProviderRouter] Degraded: No embedding provider configured, keyword-only mode
+[ProviderRouter] Initialized with embedding: null
+[MemoryCore] Service initialized
+
+ 5 pass
+ 0 fail
+ 26 expect() calls
+Ran 5 tests across 2 files. [78.00ms]

@@ -1,0 +1,16 @@
+- 2026-04-10 Task 1：`ingestion_events.id` 是内部 ingestion row id，业务状态查询和去重必须统一走 `event_id`，否则 `/api/ingest/status?eventId=` 会把调用方传入的业务键误判成内部主键。
+- 2026-04-10 Task 1：auto-service 语义里 `/health` 只能表示 HTTP 进程存活，真正能不能接收事件要走独立 `/ready`，并由 `IngestGateway.isReady()` 触达 ingest 依赖而不是返回静态 ok。
+- 2026-04-10 Task 1：`session.created` 需要在类型、JSON Schema、adapter forwarding 和测试里同时升格为一等事件，否则 runtime 与 contract 会继续分叉。
+- 2026-04-10 Task 2：hook 侧用 `bun run src/index.ts start --daemon` 拉起服务时，外层 CLI 进程很可能先以 0 退出，launcher 不能把它误判成失败，必须继续轮询 `/ready` 直到超时或真正可用。
+- 2026-04-10 Task 2：当工作目录就是 `.local-memory` 时，`start` 命令的默认 `runtimeRoot/databasePath/projectionRoot` 需要按当前目录特判，否则默认值会变成 `.local-memory/.local-memory/*` 这类套娃路径，PID 和数据库都会落错位置。
+- 2026-04-10 Task 3：hook 侧桥接到 `/api/ingest` 时，事件 payload 要跟 `.local-memory/src/adapter/opencode.ts` 的字段语义保持一致（如 `messageId/sessionId/filePath`），但不要在插件里重新做 importance/classification 推断，插件只负责薄转发。
+- 2026-04-10 Task 3：`eventId` 适合用 `eventType + sourceRef + 规范化 payload 哈希` 生成，这样同一 hook 重投时稳定可去重，又不会把不同内容的同一 sourceRef 强行折叠成一个事件。
+- 2026-04-10 Task 3：插件包直接 type-import `.local-memory/src/types/index.ts` 会被当前 `tsconfig rootDir` 打成 TS6059，因此更稳的做法是本地镜像 ingest 输入类型，再用 declaration 级契约校验和 core 保持同步。
+- 2026-04-10 Task 4：outbox 如果要求“直接用 `eventId` 做文件名”，那 `eventId` 本身就必须是文件系统安全格式；像 `:` 这类字符在 Windows 上会直接把可靠性方案打穿，所以事件键要优先选短横线 + 哈希这类跨平台安全形式。
+- 2026-04-10 Task 4：replay 做幂等恢复时，顺序应该按持久化时间戳排序，但每次真正投递前仍要再查一次 `eventId` 状态；这样既保留 FIFO 语义，又能在服务恢复过程中跳过已成功摄入的重复项。
+- 2026-04-10 Final Verification F3：按计划指定命令执行 contract、adapter、plugin、integration 四组 Bun 测试，共 `48 pass / 0 fail`；未出现超时，输出中只有正常初始化/分类日志，没有错误栈或 console error，覆盖了 readiness、HTTP bridge、outbox/replay 与端到端 ingest 新路径。
+- 2026-04-10 Final Verification F1：Plan compliance 审核显示 Task 1-4 的代码与测试证据基本齐全，但 Task 5 仍未闭环：`RUNBOOK.md` 还在用手动启动 + `/health` 旧语义描述系统，且仓库内缺少把“冷启动 → hook 上报 → 故障写 outbox → 服务恢复 replay”串成单个 smoke 场景的端到端测试。
+- 2026-04-10 Final Verification F2：代码质量审查结论为 **REJECT**。主要原因不是功能跑不通，而是质量守门没站稳：`.opencode/plugin/memory-system/launcher.ts`、`lock.ts`、`bridge.ts` 仍有空 `catch` 静默吞错；`.opencode/plugin/memory-system/index.ts` 仍包含显式 `any`（`Record<string, any>`、`$: any`）；`.local-memory/src/http/handlers/ingest.ts` 与 `.local-memory/src/index.ts` 的失败路径缺少对应测试，导致错误处理虽然存在但证据不足。
+- 2026-04-10 Final Fixes：Final Wave 的 F1/F2 里，真正缺的不是主链路实现，而是“实现证据”和“排障可见性”——补上一对 smoke 用例（冷启动自动拉起、服务恢复 replay）后，auto-service/outbox 设计才算有端到端防回归保护。
+- 2026-04-10 Final Fixes：对 launcher / lock / bridge 这类可靠性组件，空 `catch` 会把故障原因吃掉；哪怕仍然返回 `false` 走降级，也要至少保留 `console.debug` 级别的错误上下文，不然 runbook 和现场排障都会变成猜谜游戏。
+- 2026-04-10 Final Fixes：这个仓库根目录没有统一 `package.json`，验证 build 时必须按实际包位置执行（本次为 `.opencode/plugin/memory-system`），否则“`npm run build` 失败”只是在验证错误路径，不是在验证代码。

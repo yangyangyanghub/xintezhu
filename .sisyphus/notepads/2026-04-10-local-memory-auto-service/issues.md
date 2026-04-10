@@ -1,0 +1,2 @@
+- 2026-04-10 Final Verification F1：`RUNBOOK.md:57-94,166-218` 与当前实现不一致——文档仍把手动 `start` 和 `/health` 作为主路径/主状态面，还声称 ingest/search/context 未暴露；这不符合 lazy-start resident service + `/ready` + `/api/ingest` 的计划要求。
+- 2026-04-10 Final Verification F1：现有测试以组件级 launcher/bridge/outbox/replay 为主（`.opencode/plugin/memory-system/launcher.test.ts`, `test/bridge.test.ts`, `test/replay.test.ts`），`.local-memory/src/test/integration.test.ts:1-9` 也未声明冷启动/恢复 smoke 目标，因此 Task 5 要求的 E2E cold-start / recovery smoke 仍缺证据。

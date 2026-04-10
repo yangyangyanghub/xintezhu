@@ -1,0 +1,13 @@
+Verification: contract completeness check
+Target: .sisyphus/drafts/frontend-design-contracts.md
+
+Matched required contract elements:
+- line 7: installation_path:
+- line 14: invocation:
+- line 36: artifacts:
+- line 54: evaluation_command:
+- line 63: pass_threshold:
+
+Notes:
+- All 5 required contract elements are present with non-empty values.
+- Markdown LSP diagnostics are unavailable in the current environment because no LSP server is configured for `.md` files.

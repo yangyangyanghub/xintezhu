@@ -127,7 +127,7 @@ Create a production-ready frontend design orchestrator skill that reliably gener
 > Implementation + Test = ONE task. Never separate.
 > EVERY task MUST have: Agent Profile + Parallelization + QA Scenarios.
 
-- [ ] 1. Define Core Contracts
+- [x] 1. Define Core Contracts
 
   **What to do**: 
   - Define installation path: `~/.config/opencode/skill/frontend-design-orchestrator/`

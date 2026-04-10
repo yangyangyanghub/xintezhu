@@ -1,0 +1,23 @@
+2026-04-10 Final Fixes Verification
+
+1) bun test ./.local-memory/src/test/integration.test.ts
+- Result: PASS
+- Summary: 11 pass, 0 fail
+- Notes: Includes new cold-start auto-launch smoke and outbox recovery replay smoke.
+
+2) bun test ./.opencode/plugin/memory-system/launcher.test.ts ./.opencode/plugin/memory-system/lock.test.ts ./.opencode/plugin/memory-system/test/*.test.ts
+- Result: PASS
+- Summary: 6 pass, 0 fail
+- Notes: Debug logs now print expected readiness/process failures instead of silently swallowing them.
+
+3) npm run build (workspace root)
+- Result: NOT APPLICABLE AT REPO ROOT
+- Summary: Failed with ENOENT because E:\code\my-ai-workspace has no package.json.
+
+4) npm run build (actual package: .opencode/plugin/memory-system)
+- Result: PASS
+- Summary: tsc completed successfully.
+
+Additional verification notes
+- RUNBOOK updated to document lazy-start resident service, `/ready` readiness semantics, `/api/ingest`, `/api/search`, `/api/context`, and outbox/replay troubleshooting.
+- Empty catch blocks replaced with debug logging in launcher, lock, and bridge recovery paths.

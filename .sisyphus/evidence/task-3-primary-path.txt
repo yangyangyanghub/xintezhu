@@ -1,0 +1,12 @@
+﻿bun test v1.3.10 (30e609e0)
+bun.exe : 
+所在位置 C:\Users\HP\AppData\Roaming\npm\bun.ps1:14 字符: 3
++   & "$basedir/node_modules/bun/bin/bun.exe"   $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+ 10 pass
+ 0 fail
+ 69 expect() calls
+Ran 10 tests across 2 files. [585.00ms]
