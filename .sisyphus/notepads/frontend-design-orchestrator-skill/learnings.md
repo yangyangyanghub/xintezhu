@@ -59,3 +59,18 @@ Format: `<type>(frontend-design-orchestrator): <description>`
 
 ## Open Questions
 None at session start - all decisions documented in plan.
+
+## 2026-04-11 Task 2 Baseline Learnings
+
+### Baseline Execution Findings
+- `evals/evals.json` for this project should live at repository root, matching the task plan's file targets (`evals/evals.json`, `baseline-runs/*`).
+- The baseline runner can use `opencode run --pure --format json` to capture no-skill behavior with raw event logs and token/timing metadata.
+- For prompts that attach files, `opencode run` must receive the message before `-f <file>`; otherwise the prompt text is misparsed as a file path.
+
+### Output Capture Conventions
+- Each baseline scenario should write to `baseline-runs/<eval_name>/` with:
+  - `timing.json`
+  - `outputs/raw-events.jsonl`
+  - `outputs/assistant-response.md`
+- Baseline prompts should explicitly instruct the model to answer inline and avoid write/edit/bash to reduce workspace pollution.
+- Running with `--dir <baseline-run-dir>` isolates any accidental file writes inside the scenario sandbox instead of the repo root.

@@ -1,0 +1,85 @@
+{
+  "skill_name": "frontend-design-orchestrator",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "new-project-minimal-design-doc",
+      "prompt": "你现在在一个全新项目里。请为登录页面生成一份 DESIGN.md，面向设计和评审，不要写实现代码。需求很少：页面要包含邮箱、密码、记住我、登录按钮、忘记密码入口，以及第三方登录占位。请给出页面目标、信息层级、布局结构、状态设计、交互规则、视觉方向和待确认问题。",
+      "expected_output": "产出一份结构化的 DESIGN.md 风格设计文档，覆盖登录页的目标、布局、状态、交互和视觉约束，不直接输出 React/Vue/HTML 实现代码。",
+      "files": [],
+      "assertions": [
+        "输出以设计文档为核心，而不是直接给出实现代码块。",
+        "明确覆盖表单字段、主要按钮、忘记密码和第三方登录占位。",
+        "至少包含布局/信息层级、交互状态、视觉方向三个维度。"
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "new-project-with-reference-sketch",
+      "prompt": "基于我附带的首页草图设计首页。请输出 DESIGN.md 风格方案，重点说明首屏结构、内容模块顺序、卡片布局、按钮层级、响应式行为，以及哪些部分需要二次确认。不要直接写前端实现代码。",
+      "expected_output": "基于参考草图生成首页设计文档，能够识别草图中的首屏、功能卡片和 CTA 布局，并把视觉/交互假设显式写出来。",
+      "files": [
+        "evals/files/homepage-sketch.svg"
+      ],
+      "assertions": [
+        "输出明显引用了参考草图中的结构元素，而不是泛泛而谈的首页模板。",
+        "明确描述首屏、核心内容区、CTA/按钮层级和响应式变化。",
+        "输出仍然是设计说明，不直接生成完整页面代码。"
+      ]
+    },
+    {
+      "id": 3,
+      "eval_name": "review-existing-design-md",
+      "prompt": "审查这个设计文档。请从结构完整性、交互细节、状态覆盖、视觉一致性、可实现性和风险点六个角度给出审查结论。输出 review artifacts 风格内容，不要改写成实现代码。",
+      "expected_output": "对现有 DESIGN.md 给出结构化评审，指出缺漏、风险、模糊点和建议补充项，结论聚焦设计质量而非代码实现。",
+      "files": [
+        "evals/files/sample-DESIGN.md"
+      ],
+      "assertions": [
+        "明确以评审/审查口吻输出，而不是重写整份设计稿。",
+        "至少覆盖结构完整性、状态覆盖、可实现性三个审查维度。",
+        "指出附带 DESIGN.md 中的具体问题或模糊点。"
+      ]
+    },
+    {
+      "id": 4,
+      "eval_name": "resolve-icon-system-conflict",
+      "prompt": "我们现在页面里混用了 Lucide、Heroicons 和少量自定义 SVG，设计稿也没有定稿。请你选择最适合的图标系统，并给出取舍依据、迁移原则、尺寸/描边规范，以及什么情况下允许保留自定义图标。输出要面向设计决策，不要写迁移脚本。",
+      "expected_output": "明确选择一个主图标系统，解释为何优于其他候选，并给出冲突解决规则、设计规范和保留例外。",
+      "files": [],
+      "assertions": [
+        "明确推荐单一主图标系统，而不是继续混用。",
+        "给出选择标准，例如视觉一致性、生态、维护成本或品牌适配。",
+        "输出包含冲突解决规则，如何时替换、何时允许自定义 SVG。"
+      ]
+    },
+    {
+      "id": 5,
+      "eval_name": "negative-implementation-request",
+      "prompt": "实现这个设计。附带的 DESIGN.md 已经确认过，你直接把页面做出来就行，最好给我完整 React + Tailwind 代码。",
+      "expected_output": "拒绝直接进入实现，或明确重定向到实现型工作流/技能；至少要说明当前任务应先聚焦设计编排或评审，而不是直接生成页面代码。",
+      "files": [
+        "evals/files/sample-DESIGN.md"
+      ],
+      "assertions": [
+        "不应该直接输出完整 React/Vue/HTML 页面实现。",
+        "需要明确拒绝、收窄范围或重定向到实现流程。",
+        "解释为什么当前请求不属于设计编排/审查范围。"
+      ]
+    },
+    {
+      "id": 6,
+      "eval_name": "negative-unrelated-backend-api-fix",
+      "prompt": "修复这个后端 API。订单接口现在一直报 500，帮我定位问题并给出修复方案。",
+      "expected_output": "识别这是后端调试请求，与前端设计技能无关；不应输出 DESIGN.md、设计审查或图标系统建议。",
+      "files": [
+        "evals/files/orders-api.ts"
+      ],
+      "assertions": [
+        "不应该输出任何 DESIGN.md 结构或设计评审模板。",
+        "能识别这是后端 API 调试问题而非前端设计问题。",
+        "不应把图标系统、布局规范、视觉审查等无关内容带进回答。"
+      ]
+    }
+  ]
+}

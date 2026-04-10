@@ -57,3 +57,15 @@
 
 ## Pending Decisions
 None - all decisions made during planning phase.
+
+## 2026-04-11 Task 2 Decisions
+
+### 6. Baseline Artifact Layout
+**Decision**: Store baseline artifacts at repo-root `baseline-runs/<eval_name>/` rather than inventing a deeper workspace layout for Task 2.
+**Rationale**: The plan acceptance criteria and commit target explicitly reference `baseline-runs/*`, so matching that path keeps Task 2 atomic and reviewable.
+**Impact**: Later benchmark aggregation can adapt from this RED baseline layout into the fuller skill-creator workspace if needed.
+
+### 7. Baseline Transport
+**Decision**: Use `opencode run --pure --format json` as the no-skill execution path for baseline capture.
+**Rationale**: It yields real no-skill model behavior plus event timestamps and token totals without loading the skill under development.
+**Impact**: Task 2 produces both qualitative outputs and measurable timing/token evidence for later delta comparison.
