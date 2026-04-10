@@ -27,19 +27,6 @@
           ],
           "description": "Event type classification"
         },
-        "sourceType": {
-          "type": "string",
-          "enum": ["opencode", "git", "manual", "system"],
-          "description": "Source system that generated the event"
-        },
-        "sourceRef": {
-          "type": "string",
-          "description": "Reference to source (e.g., sessionId, filePath)"
-        },
-        "workspace": {
-          "type": "string",
-          "description": "Workspace/project scope"
-        },
         "batchId": {
           "type": "string",
           "description": "Batch identifier for rollback operations"

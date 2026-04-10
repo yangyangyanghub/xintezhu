@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'bun:test';
+import { join } from 'node:path';
 import type { AuditRepository } from '../repository/audit.ts';
 import type { IngestionRepository } from '../repository/ingestion.ts';
 import type { ClassificationService } from '../classifier/service.ts';
@@ -32,7 +33,8 @@ function createGateway(): IngestGateway {
 
 describe('V1 event contract', () => {
   it('documents the runtime envelope with eventType instead of legacy type/timestamp fields', async () => {
-    const schemaText = await Bun.file('.local-memory/contracts/v1-event-schema.json').text();
+    const schemaPath = join(import.meta.dir, '../../contracts/v1-event-schema.json');
+    const schemaText = await Bun.file(schemaPath).text();
     const schema = JSON.parse(schemaText) as {
       definitions: {
         EventBase: {
