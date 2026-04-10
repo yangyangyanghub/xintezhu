@@ -18,3 +18,7 @@
 - `RetrievalService` semantic mode now depends on `EmbeddingRepository` and should use `embeddingProvider.embed(query)` plus `embeddingRepo.searchSimilar()` instead of hand-rolling vector math in the service.
 - Semantic results must be mapped back to `Memory` entities with `memoryRepo.findById()` and then filtered with the same active-memory default used by keyword search.
 - When semantic provider calls or repository similarity lookups fail, retrieval should degrade locally by returning an empty semantic result set instead of throwing from `semanticSearch()`.
+
+## Projection/Cleanup Result Contracts (2026-04-10)
+- `ProjectionEngine.rebuild()` contract is now covered by tests and must return `success`, `summary`, `errors`, and `duration`, with `summary` exposing `core`, `semantic`, and `total` counts.
+- `CleanupService.runFullCleanup()` contract is now covered by tests and must return top-level aggregate fields (`timestamp`, `results`, `totalProcessed`, `totalArchived`, `totalDeleted`, `duration`) plus per-task `CleanupResult` entries with `task`, `processed`, `archived`, `deleted`, and `errors`.

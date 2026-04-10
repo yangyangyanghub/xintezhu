@@ -60,4 +60,35 @@ describe('ProjectionEngine paths', () => {
     expect(existsSync(expectedDir)).toBe(true);
     expect(existsSync(wrongDir)).toBe(false);
   });
+
+  it('returns structured rebuild report from projection engine', async () => {
+    const engine = new ProjectionEngine(memoryRepo, auditRepo, { projectionRoot });
+
+    const coreMemory = await memoryRepo.create({
+      layer: 'core',
+      type: 'preference',
+      content: '测试重建返回结构',
+      importance: 'high',
+    });
+    await memoryRepo.update(coreMemory.id, { status: 'active' });
+
+    const semanticMemory = await memoryRepo.create({
+      layer: 'semantic',
+      type: 'project',
+      content: '测试语义投影重建结果',
+      importance: 'medium',
+    });
+    await memoryRepo.update(semanticMemory.id, { status: 'active' });
+
+    const result = await engine.rebuild({ actor: 'test' });
+
+    expect(result.success).toBe(true);
+    expect(result.summary).toBeDefined();
+    expect(result.summary.core).toBeGreaterThanOrEqual(0);
+    expect(result.summary.semantic).toBeGreaterThanOrEqual(0);
+    expect(result.summary.total).toBeGreaterThanOrEqual(0);
+    expect(result.errors).toBeInstanceOf(Array);
+    expect(result.errors).toHaveLength(0);
+    expect(result.duration).toBeGreaterThanOrEqual(0);
+  });
 });

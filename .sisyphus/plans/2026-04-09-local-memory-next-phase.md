@@ -487,7 +487,7 @@ git commit -m "feat: 打通 local-memory promotion 与 relation 管理面"
 - Test: `/.local-memory/src/test/cleanup.service.test.ts`
 - Test: `/.local-memory/src/test/projection.engine.test.ts`
 
-- [ ] **Step 1: Write failing ops result tests**
+- [x] **Step 1: Write failing ops result tests**
 
 ```ts
 it('returns structured rebuild report from projection engine', async () => {
@@ -501,12 +501,12 @@ it('returns structured cleanup report', async () => {
 });
 ```
 
-- [ ] **Step 2: Normalize return payloads**
+- [x] **Step 2: Normalize return payloads**
 
 Projection should return counts and errors.
 Cleanup should keep current report shape but ensure API-safe serialization.
 
-- [ ] **Step 3: Run tests**
+- [x] **Step 3: Run tests**
 
 Run: `bun test ./.local-memory/src/test/cleanup.service.test.ts ./.local-memory/src/test/projection.engine.test.ts`
 Expected: PASS
