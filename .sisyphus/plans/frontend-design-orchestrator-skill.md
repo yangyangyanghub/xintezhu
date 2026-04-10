@@ -169,7 +169,7 @@ Create a production-ready frontend design orchestrator skill that reliably gener
   
   **Commit**: YES | Message: `docs(frontend-design-orchestrator): define core contracts` | Files: [.sisyphus/drafts/frontend-design-contracts.md]
 
-- [ ] 2. Create No-Skill Baseline Scenarios
+- [x] 2. Create No-Skill Baseline Scenarios
 
   **What to do**:
   - Create 6 eval scenarios without any skill loaded
@@ -212,7 +212,7 @@ Create a production-ready frontend design orchestrator skill that reliably gener
   
   **Commit**: YES | Message: `test(frontend-design-orchestrator): add RED baseline scenarios` | Files: [evals/evals.json, baseline-runs/*]
 
-- [ ] 3. Document Baseline Failures
+- [x] 3. Document Baseline Failures
 
   **What to do**:
   - Analyze each baseline run output
@@ -254,7 +254,7 @@ Create a production-ready frontend design orchestrator skill that reliably gener
   
   **Commit**: YES | Message: `docs(frontend-design-orchestrator): document baseline failures and rationalizations` | Files: [baseline-analysis.md]
 
-- [ ] 4. Create SKILL.md with Minimal Metadata
+- [x] 4. Create SKILL.md with Minimal Metadata
 
   **What to do**:
   - Create `~/.config/opencode/skill/frontend-design-orchestrator/SKILL.md`
@@ -307,90 +307,9 @@ Create a production-ready frontend design orchestrator skill that reliably gener
   
   **Commit**: YES | Message: `feat(frontend-design-orchestrator): add minimal skill metadata` | Files: [~/.config/opencode/skill/frontend-design-orchestrator/SKILL.md]
 
-- [ ] 5. Create DESIGN.md Template
-
-  **What to do**:
-  - Create `references/design-md-template.md`
-  - Include all 9 standard sections with placeholders
-  - Sections: Visual Theme, Color Palette, Typography, Components, Layout, Depth, Icon System, Responsive, Review Log
-  
-  **Must NOT do**:
-  - Do not fill in with specific values (it's a template)
-  - Do not skip any of the 9 sections
-  
-  **Recommended Agent Profile**:
-  - Category: `quick` - Reason: Creating template document
-  - Skills: [] - No special skills needed
-  - Omitted: [] - None relevant
-  
-  **Parallelization**: Can Parallel: YES | Wave 2 | Blocks: 8,10 | Blocked By: 1
-  
-  **References**:
-  - Pattern: `https://github.com/VoltAgent/awesome-design-md/tree/main/design-md` - Sample DESIGN.md files
-  - Format: `https://stitch.withgoogle.com/docs/design-md/format/` - Official DESIGN.md format
-  
-  **Acceptance Criteria** (agent-executable only):
-  - [ ] File exists at `~/.config/opencode/skill/frontend-design-orchestrator/references/design-md-template.md`
-  - [ ] Contains all 9 section headers
-  - [ ] Each section has placeholder text or structure
-  
-  **QA Scenarios** (MANDATORY):
-  ```
-  Scenario: Template completeness check
-    Tool: Bash
-    Steps:
-      1. Read ~/.config/opencode/skill/frontend-design-orchestrator/references/design-md-template.md
-      2. Grep for each section: "Visual Theme", "Color Palette", "Typography", "Components", "Layout", "Depth", "Icon System", "Responsive", "Review Log"
-    Expected: All 9 sections present
-    Evidence: .sisyphus/evidence/task-5-template-check.txt
-  ```
-  
-  **Commit**: YES | Message: `feat(frontend-design-orchestrator): add DESIGN.md template` | Files: [references/design-md-template.md]
-
-- [ ] 6. Create Design Sources Reference
-
-  **What to do**:
-  - Create `references/design-sources.md`
-  - Document how to use awesome-design-md samples
-  - Document ui-skills.com capability boundaries
-  - Include sample style snippets (minimalism, glassmorphism, brutalism)
-  
-  **Must NOT do**:
-  - Do not copy entire DESIGN.md files from awesome-design-md (link instead)
-  - Do not create exhaustive style catalog
-  
-  **Recommended Agent Profile**:
-  - Category: `quick` - Reason: Creating reference documentation
-  - Skills: [] - No special skills needed
-  - Omitted: [] - None relevant
-  
-  **Parallelization**: Can Parallel: YES | Wave 2 | Blocks: none | Blocked By: 1
-  
-  **References**:
-  - Source: `https://github.com/VoltAgent/awesome-design-md` - DESIGN.md collection
-  - Source: `https://ui-skills.com/` - Skills aggregation
-  
-  **Acceptance Criteria** (agent-executable only):
-  - [ ] File exists at `~/.config/opencode/skill/frontend-design-orchestrator/references/design-sources.md`
-  - [ ] Includes guidance for awesome-design-md usage
-  - [ ] Includes ui-skills.com boundaries
-  - [ ] Has at least 3 style snippet examples
-  
-  **QA Scenarios** (MANDATORY):
-  ```
-  Scenario: Design sources completeness
-    Tool: Bash
-    Steps:
-      1. Read ~/.config/opencode/skill/frontend-design-orchestrator/references/design-sources.md
-      2. Grep for "awesome-design-md", "ui-skills.com"
-      3. Grep for style names: "minimalism", "glassmorphism", "brutalism"
-    Expected: All sources documented, at least 3 styles present
-    Evidence: .sisyphus/evidence/task-6-sources-check.txt
-  ```
-  
-  **Commit**: YES | Message: `feat(frontend-design-orchestrator): add design sources reference` | Files: [references/design-sources.md]
-
-- [ ] 7. Create Icon Systems Reference
+- [x] 5. Create DESIGN.md Template
+- [x] 6. Create Design Sources Reference
+- [x] 7. Create Icon Systems Reference
 
   **What to do**:
   - Create `references/icon-systems.md`
@@ -435,93 +354,9 @@ Create a production-ready frontend design orchestrator skill that reliably gener
   
   **Commit**: YES | Message: `feat(frontend-design-orchestrator): add icon systems reference` | Files: [references/icon-systems.md]
 
-- [ ] 8. Create Review Rules Reference
-
-  **What to do**:
-  - Create `references/review-rules.md`
-  - Extract Vercel Web Design Guidelines checklist
-  - Define severity levels (critical, major, minor)
-  - Define revision workflow (how to apply fixes)
-  - Include example violations and corrections
-  
-  **Must NOT do**:
-  - Do not create exhaustive accessibility audit checklist
-  - Do not expand beyond Vercel guidelines scope
-  
-  **Recommended Agent Profile**:
-  - Category: `quick` - Reason: Creating reference documentation
-  - Skills: [] - No special skills needed
-  - Omitted: [] - None relevant
-  
-  **Parallelization**: Can Parallel: YES | Wave 3 | Blocks: 10 | Blocked By: 4-7
-  
-  **References**:
-  - Source: Vercel Web Design Guidelines (use webfetch to extract key points)
-  - Pattern: `C:\Users\HP\.config\opencode\skill\web-design-guidelines\SKILL.md` - Review-oriented skill
-  
-  **Acceptance Criteria** (agent-executable only):
-  - [ ] File exists at `~/.config/opencode/skill/frontend-design-orchestrator/references/review-rules.md`
-  - [ ] Includes checklist items from Vercel guidelines
-  - [ ] Defines severity levels with examples
-  - [ ] Defines revision workflow steps
-  
-  **QA Scenarios** (MANDATORY):
-  ```
-  Scenario: Review rules completeness
-    Tool: Bash
-    Steps:
-      1. Read ~/.config/opencode/skill/frontend-design-orchestrator/references/review-rules.md
-      2. Grep for "critical", "major", "minor"
-      3. Grep for "accessibility", "performance", "responsive"
-      4. Grep for "workflow", "revision"
-    Expected: Severity levels defined, key review areas covered, workflow present
-    Evidence: .sisyphus/evidence/task-8-review-check.txt
-  ```
-  
-  **Commit**: YES | Message: `feat(frontend-design-orchestrator): add review rules reference` | Files: [references/review-rules.md]
-
-- [ ] 9. Implement Icon Conflict Resolution Logic
-
-  **What to do**:
-  - Add icon conflict detection rules to SKILL.md or references/icon-systems.md
-  - Define how to detect conflicts (same name, different source)
-  - Define resolution strategy (prefix-based namespacing)
-  - Define output format for conflict report
-  
-  **Must NOT do**:
-  - Do not implement actual icon downloading
-  - Do not create complex AST-based detection
-  
-  **Recommended Agent Profile**:
-  - Category: `quick` - Reason: Adding logic to existing documentation
-  - Skills: [] - No special skills needed
-  - Omitted: [] - None relevant
-  
-  **Parallelization**: Can Parallel: YES | Wave 3 | Blocks: none | Blocked By: 7
-  
-  **References**:
-  - Pattern: `C:\Users\HP\.config\opencode\skill\baoyu-infographic\SKILL.md` - How to structure multi-source logic
-  - Source: `https://github.com/better-auth/better-icons` - Icon naming conventions
-  
-  **Acceptance Criteria** (agent-executable only):
-  - [ ] Icon conflict detection rules documented
-  - [ ] Resolution strategy documented with examples
-  - [ ] Conflict report format defined
-  
-  **QA Scenarios** (MANDATORY):
-  ```
-  Scenario: Icon conflict logic check
-    Tool: Bash
-    Steps:
-      1. Read ~/.config/opencode/skill/frontend-design-orchestrator/references/icon-systems.md
-      2. Grep for "conflict", "resolution", "namespace", "prefix"
-    Expected: Conflict detection and resolution logic documented
-    Evidence: .sisyphus/evidence/task-9-conflict-check.txt
-  ```
-  
-  **Commit**: YES | Message: `feat(frontend-design-orchestrator): add icon conflict resolution` | Files: [references/icon-systems.md]
-
-- [ ] 10. Implement Vercel Review Workflow
+- [x] 8. Create Review Rules Reference
+- [x] 9. Implement Icon Conflict Resolution Logic
+- [x] 10. Implement Vercel Review Workflow
 
   **What to do**:
   - Add review workflow to SKILL.md Quick Start section
@@ -566,7 +401,7 @@ Create a production-ready frontend design orchestrator skill that reliably gener
   
   **Commit**: YES | Message: `feat(frontend-design-orchestrator): add Vercel review workflow` | Files: [SKILL.md, references/design-md-template.md]
 
-- [ ] 11. Create Complete Eval Test Suite
+- [x] 11. Create Complete Eval Test Suite
 
   **What to do**:
   - Update `evals/evals.json` with assertions for all 6 scenarios
@@ -703,7 +538,7 @@ Create a production-ready frontend design orchestrator skill that reliably gener
   
   **Commit**: YES | Message: `test(frontend-design-orchestrator): generate benchmark and viewer` | Files: [benchmark.json, benchmark.md]
 
-- [ ] 14. Iterate Based on Feedback
+- [x] 14. Iterate Based on Feedback
 
   **What to do**:
   - Read feedback.json from viewer

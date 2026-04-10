@@ -3,7 +3,23 @@
   "started_at": "2026-04-10T17:19:45.390Z",
   "session_ids": [
     "ses_28797d78dffewaZuU6lurPIYAO",
-    "ses_28791e3e2ffeIrTx6bCRU2UHVQ"
+    "ses_28791e3e2ffeIrTx6bCRU2UHVQ",
+    "ses_2878c37d3ffeBTbqMNAOkNuXIK",
+    "ses_287771f34ffekFYx1NEQJSM8eV",
+    "ses_28778e45dffedMc0TlIEsSSdYx",
+    "ses_2876c3931ffeEQY5UE2DSx21R2",
+    "ses_287685b9fffeCmNd8Uc17G3u8S",
+    "ses_287685ba0ffewZKZR3YGM6Y4vG",
+    "ses_287685bfcffejG1GPMiVPM7DcD",
+    "ses_2875f6e80ffeKYeQnd5597i8hz",
+    "ses_287611804ffepkgJIenPr5tH7i",
+    "ses_287611806ffesbEAC321HmzVE8",
+    "ses_287611808ffe4IEpVGR1D0SD7S",
+    "ses_2875b4e08ffeo8rv7RJgyf982e",
+    "ses_28757d9d3ffe3pfDD4i41ii5WJ",
+    "ses_287559726ffeL7sx4niixy7UkL",
+    "ses_28750c98fffe44Zw0BQaJcFrHj",
+    "ses_28731ba94ffeKmSy76MUbO4OFJ"
   ],
   "plan_name": "frontend-design-orchestrator-skill",
   "agent": "atlas",
@@ -16,6 +32,69 @@
       "agent": "Sisyphus-Junior",
       "category": "quick",
       "updated_at": "2026-04-10T17:31:05.967Z"
+    },
+    "todo:2": {
+      "task_key": "todo:2",
+      "task_label": "2",
+      "task_title": "Create No-Skill Baseline Scenarios",
+      "session_id": "ses_2878c37d3ffeBTbqMNAOkNuXIK",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-04-10T17:52:18.819Z"
+    },
+    "todo:3": {
+      "task_key": "todo:3",
+      "task_label": "3",
+      "task_title": "Document Baseline Failures",
+      "session_id": "ses_28778e45dffedMc0TlIEsSSdYx",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-04-10T18:00:28.645Z"
+    },
+    "todo:4": {
+      "task_key": "todo:4",
+      "task_label": "4",
+      "task_title": "Create SKILL.md with Minimal Metadata",
+      "session_id": "ses_2876c3931ffeEQY5UE2DSx21R2",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-04-10T18:07:59.622Z"
+    },
+    "todo:5": {
+      "task_key": "todo:5",
+      "task_label": "5",
+      "task_title": "Create DESIGN.md Template",
+      "session_id": "ses_287685bfcffejG1GPMiVPM7DcD",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-04-10T18:14:38.206Z"
+    },
+    "todo:8": {
+      "task_key": "todo:8",
+      "task_label": "8",
+      "task_title": "Create Review Rules Reference",
+      "session_id": "ses_287611808ffe4IEpVGR1D0SD7S",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-04-10T18:27:21.834Z"
+    },
+    "todo:11": {
+      "task_key": "todo:11",
+      "task_label": "11",
+      "task_title": "Create Complete Eval Test Suite",
+      "session_id": "ses_28757d9d3ffe3pfDD4i41ii5WJ",
+      "agent": "Sisyphus-Junior",
+      "category": "deep",
+      "updated_at": "2026-04-10T18:30:27.727Z"
+    },
+    "todo:12": {
+      "task_key": "todo:12",
+      "task_label": "12",
+      "task_title": "Run With-Skill Evals and Compare",
+      "session_id": "ses_2873479acffeKPhMlVRCZgCPoW",
+      "agent": "Sisyphus-Junior",
+      "category": "deep",
+      "updated_at": "2026-04-10T19:38:18.536Z"
     }
   }
 }
