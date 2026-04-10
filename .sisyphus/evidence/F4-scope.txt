@@ -1,0 +1,56 @@
+F4 Scope Fidelity Check
+
+VERDICT: REJECT
+
+Target:
+- Skill: C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\SKILL.md
+- References:
+  - C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\references\design-sources.md
+  - C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\references\icon-systems.md
+  - C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\references\review-rules.md
+  - C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\references\design-md-template.md
+
+Checklist Results:
+- [PASS] No implementation code generation in SKILL.md
+- [PASS] Non-goals section exists and explicitly states: "does NOT generate implementation code" and "produces design specifications only"
+- [PASS] Core workflow can run offline because the operational workflow uses local reference files under `references/`
+- [FAIL] References stay fully within scope
+- [FAIL] No scope drift from original request
+
+Evidence:
+1. SKILL.md contains the required non-goals boundary.
+   - `SKILL.md:21` → "This skill does NOT generate implementation code, CSS, React/Vue components, or design tokens. It produces design specifications only."
+
+2. SKILL.md itself keeps the core workflow local/offline.
+   - `SKILL.md:28-31` routes generation through local references.
+   - `SKILL.md:75-79` defines review steps against local `review-rules.md` instead of requiring live web access.
+
+3. Scope drift appears in references through implementation-oriented examples and downstream tooling hints.
+   - `references/icon-systems.md:29-32` includes TSX import code for `lucide-react`.
+   - `references/icon-systems.md:58-61` includes TSX import code for `@heroicons/react`.
+   - `references/icon-systems.md:87-90` includes TSX import code for `@ant-design/icons`.
+   - `references/icon-systems.md:117-120` includes HTML implementation markup for Iconfont.
+   - `references/icon-systems.md:378-380` says "Update imports and component usage".
+   - `references/icon-systems.md:410-415` includes CSS class implementation.
+   - `references/icon-systems.md:441-447` documents runtime package/library choices and `/src/assets/icons/` path.
+
+4. Additional reference drift introduces implementation and asset-adjacent language outside the original request boundary.
+   - `references/design-sources.md:114` says network-dependent features like "asset downloads" are acceptable as optional enhancements.
+   - `references/design-sources.md:134` lists `Tailwind UI` as a "Component library" for "Implementation reference".
+
+Why this is a REJECT:
+- The primary skill contract is correctly scoped, but the reference layer still teaches implementation details and implementation-adjacent workflow.
+- F4 requires the skill to stay within scope end-to-end, not only in the top-level `SKILL.md`.
+- The original request and plan guardrails explicitly forbid implementation code generation, build-config drift, and asset-download expansion for the core skill path.
+
+Required Fixes Before Approval:
+1. Remove TSX/HTML/CSS implementation snippets from `references/icon-systems.md`.
+2. Replace implementation migration steps (imports, component usage, asset paths) with design-spec-only guidance.
+3. Remove or rewrite `asset downloads` language in `references/design-sources.md` so optional enhancements stay non-implementation and non-asset-delivery.
+4. Remove `Tailwind UI` / "Implementation reference" wording or replace it with design-pattern-only phrasing.
+
+Final Assessment:
+- The skill boundary is stated clearly.
+- The core path is offline-capable.
+- The reference package still leaks implementation guidance.
+- Result: REJECT until references are narrowed back to design-spec-only scope.
