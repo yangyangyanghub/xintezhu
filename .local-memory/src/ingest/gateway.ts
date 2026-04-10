@@ -20,6 +20,15 @@ export interface BatchIngestResult {
   results: IngestResult[];
 }
 
+export interface IngestGatewayReadiness {
+  ready: boolean;
+  checks: {
+    database: { status: 'ok' | 'error'; message?: string };
+    classifier: { status: 'ok' | 'error'; message?: string };
+  };
+  timestamp: string;
+}
+
 export class IngestGateway {
   private ingestionRepo: IngestionRepository;
   private auditRepo: AuditRepository;
@@ -125,11 +134,40 @@ export class IngestGateway {
   }
 
   async getEventStatus(eventId: string): Promise<IngestionEvent | null> {
-    return this.ingestionRepo.findById(eventId);
+    return this.ingestionRepo.findByEventId(eventId);
   }
 
   async getBatchEvents(batchId: string): Promise<IngestionEvent[]> {
     return this.ingestionRepo.findByBatch(batchId);
+  }
+
+  async isReady(): Promise<IngestGatewayReadiness> {
+    const checks: IngestGatewayReadiness['checks'] = {
+      database: { status: 'ok' },
+      classifier: { status: 'ok' },
+    };
+
+    try {
+      await this.ingestionRepo.findPending(1);
+    } catch (error) {
+      checks.database = {
+        status: 'error',
+        message: error instanceof Error ? error.message : 'Ingestion repository unavailable',
+      };
+    }
+
+    if (typeof this.classifier.classifyAndStore !== 'function') {
+      checks.classifier = {
+        status: 'error',
+        message: 'Classification service unavailable',
+      };
+    }
+
+    return {
+      ready: checks.database.status === 'ok' && checks.classifier.status === 'ok',
+      checks,
+      timestamp: new Date().toISOString(),
+    };
   }
 
   private validateEvent(input: IngestionEventInput): ErrorDetail | null {
@@ -157,6 +195,7 @@ export class IngestGateway {
     const validTypes: EventType[] = [
       'message.updated',
       'file.edited',
+      'session.created',
       'session.idle',
       'session.compacted',
       'git.commit',
@@ -202,6 +241,14 @@ export class IngestGateway {
         }
         break;
 
+      case 'session.created':
+      case 'session.idle':
+      case 'session.compacted':
+        if (!payload.sessionId) {
+          return { code: 'MALFORMED_PAYLOAD', message: 'payload.sessionId required' };
+        }
+        break;
+
       case 'test.result':
         if (!payload.testSuite) {
           return { code: 'MALFORMED_PAYLOAD', message: 'payload.testSuite required' };
@@ -223,7 +270,7 @@ export class IngestGateway {
 
   private async checkDuplicate(input: IngestionEventInput): Promise<IngestionEvent | null> {
     // Check by eventId first
-    const byEventId = await this.ingestionRepo.findById(input.eventId);
+    const byEventId = await this.ingestionRepo.findByEventId(input.eventId);
     if (byEventId) return byEventId;
 
     // Could also check by payload hash for content duplicates

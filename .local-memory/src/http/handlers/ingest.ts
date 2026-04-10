@@ -29,6 +29,11 @@ export async function handleGetEventStatus(req: Request, deps: HttpDeps) {
   return Response.json(status);
 }
 
+export async function handleReady(_req: Request, deps: HttpDeps) {
+  const readiness = await deps.ingestGateway.isReady();
+  return Response.json(readiness, { status: readiness.ready ? 200 : 503 });
+}
+
 export async function handleGetBatchEvents(req: Request, deps: HttpDeps) {
   const url = new URL(req.url);
   const batchId = url.searchParams.get('batchId');

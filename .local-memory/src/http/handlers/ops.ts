@@ -15,7 +15,10 @@ function getRouteParam(req: Request, key: string): string | undefined {
 
 export async function handleStatus(req: Request, deps: OpsHttpDeps) {
   try {
-    const health = await deps.service.health();
+    const [health, readiness] = await Promise.all([
+      deps.service.health(),
+      deps.ingestGateway.isReady(),
+    ]);
     const db = deps.service.getDatabase();
     
     // Get additional stats from database
@@ -25,6 +28,7 @@ export async function handleStatus(req: Request, deps: OpsHttpDeps) {
     
     return Response.json({
       health,
+      readiness,
       stats: {
         totalMemories: memoryCount.count,
         activeMemories: activeCount.count,

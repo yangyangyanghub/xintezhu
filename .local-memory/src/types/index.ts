@@ -99,6 +99,7 @@ export interface CreateRelationInput {
 export type EventType = 
   | 'message.updated'
   | 'file.edited'
+  | 'session.created'
   | 'session.idle'
   | 'session.compacted'
   | 'git.commit'

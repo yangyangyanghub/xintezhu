@@ -5,6 +5,7 @@ export interface IngestionRepository {
   createEvent(event: IngestionEventInput): Promise<IngestionEvent>;
   findByBatch(batchId: string): Promise<IngestionEvent[]>;
   findById(id: string): Promise<IngestionEvent | null>;
+  findByEventId(eventId: string): Promise<IngestionEvent | null>;
   updateStatus(id: string, status: IngestionStatus, error?: ErrorDetail): Promise<void>;
   markProcessed(id: string, memoryId?: string): Promise<void>;
   findPending(limit?: number): Promise<IngestionEvent[]>;
@@ -59,6 +60,11 @@ export class SQLiteIngestionRepository implements IngestionRepository {
 
   async findById(id: string): Promise<IngestionEvent | null> {
     const row = this.db.query('SELECT * FROM ingestion_events WHERE id = ?').get(id) as Record<string, unknown> | null;
+    return row ? this.mapRowToEvent(row) : null;
+  }
+
+  async findByEventId(eventId: string): Promise<IngestionEvent | null> {
+    const row = this.db.query('SELECT * FROM ingestion_events WHERE event_id = ?').get(eventId) as Record<string, unknown> | null;
     return row ? this.mapRowToEvent(row) : null;
   }
 

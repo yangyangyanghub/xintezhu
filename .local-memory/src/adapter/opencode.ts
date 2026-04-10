@@ -162,7 +162,7 @@ export class OpenCodeAdapter {
     const ingestEvent: IngestionEventInput = {
       eventId: `session_created_${event.properties.info.id}`,
       batchId: `batch_${event.properties.info.id}`,
-      eventType: 'session.idle', // Treat as session start
+      eventType: 'session.created',
       sourceType: 'opencode',
       sourceRef: event.properties.info.id,
       workspace: this.config.workspace,

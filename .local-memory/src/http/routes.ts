@@ -2,7 +2,7 @@ import type { IngestGateway } from '../ingest/gateway.ts';
 import type { RetrievalService } from '../retrieval/service.ts';
 import type { ContextAssemblyService } from '../context/assembly.ts';
 import type { MemoryCoreService } from '../service/core.ts';
-import { handleIngest, handleGetEventStatus, handleGetBatchEvents } from './handlers/ingest.ts';
+import { handleIngest, handleReady, handleGetEventStatus, handleGetBatchEvents } from './handlers/ingest.ts';
 import { handleSearch, handleContext } from './handlers/search.ts';
 import { 
   handleStatus, 
@@ -31,6 +31,9 @@ export function buildRoutes(deps: RouteDeps) {
   return {
     '/health': {
       GET: () => Response.json({ status: 'ok' }),
+    },
+    '/ready': {
+      GET: (req: Request) => handleReady(req, deps),
     },
     '/api/ingest': {
       POST: (req: Request) => handleIngest(req, deps),

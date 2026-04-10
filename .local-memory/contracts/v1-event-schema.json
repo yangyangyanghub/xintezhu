@@ -19,6 +19,7 @@
           "enum": [
             "message.updated",
             "file.edited", 
+            "session.created",
             "session.idle",
             "session.compacted",
             "git.commit",
@@ -102,6 +103,25 @@
             "duration": { "type": "integer", "description": "Session duration in seconds" },
             "messageCount": { "type": "integer" },
             "tasksCompleted": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+
+    "SessionCreatedEvent": {
+      "allOf": [{ "$ref": "#/definitions/EventBase" }],
+      "properties": {
+        "eventType": { "const": "session.created" },
+        "payload": {
+          "type": "object",
+          "required": ["sessionId"],
+          "properties": {
+            "sessionId": { "type": "string" },
+            "timestamp": {
+              "type": "string",
+              "description": "Session creation timestamp"
+            },
+            "workspace": { "type": "string" }
           }
         }
       }
@@ -243,6 +263,7 @@
   "oneOf": [
     { "$ref": "#/definitions/MessageUpdatedEvent" },
     { "$ref": "#/definitions/FileEditedEvent" },
+    { "$ref": "#/definitions/SessionCreatedEvent" },
     { "$ref": "#/definitions/SessionIdleEvent" },
     { "$ref": "#/definitions/SessionCompactedEvent" },
     { "$ref": "#/definitions/GitCommitEvent" },
