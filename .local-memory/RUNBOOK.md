@@ -6,10 +6,18 @@
 
 - `bun run src/index.ts init`：初始化本地运行目录、数据库和 schema
 - `bun run src/index.ts start`：启动本地 HTTP 服务
+- `bun run src/index.ts status`：读取服务状态与统计信息
+- `bun run src/index.ts projection rebuild`：执行完整 projection 重建
+- `bun run src/index.ts projection verify`：校验 projection 完整性
+- `bun run src/index.ts cleanup run`：执行全量 cleanup
 - `GET /health`：读取服务健康状态
+- `GET /api/status`：读取详细状态与统计信息
+- `POST /api/projection/rebuild`：执行完整 projection 重建
+- `GET /api/projection/verify`：校验 projection 完整性
+- `POST /api/cleanup/run`：执行全量 cleanup
 - `bun test ./.local-memory/src/test`：执行本地完整测试套件
 
-以下模块已经在代码内实现并通过单元/集成测试覆盖核心路径，但**暂未暴露为 CLI/HTTP 端点**：
+以下模块已经在代码内实现并通过单元/集成测试覆盖核心路径，并已暴露对应运维入口：
 
 - ingest gateway
 - retrieval service
@@ -17,8 +25,6 @@
 - projection engine
 - cleanup service
 - promotion engine
-
-如果后续要把这些能力暴露为运维命令，应先补对应端点/CLI，再更新本文档。
 
 ---
 
@@ -104,10 +110,42 @@ bun run src/index.ts init \
 
 ### start
 
-启动 HTTP 服务，目前仅暴露 `/health`。
+启动 HTTP 服务，暴露 health 和运维 API。
 
 ```bash
 bun run src/index.ts start --port 37777
+```
+
+### status
+
+读取当前服务状态与统计信息。
+
+```bash
+bun run src/index.ts status
+```
+
+### projection rebuild
+
+执行完整 projection 重建。
+
+```bash
+bun run src/index.ts projection rebuild --actor cli
+```
+
+### projection verify
+
+校验 projection 完整性。
+
+```bash
+bun run src/index.ts projection verify
+```
+
+### cleanup run
+
+执行全量 cleanup。
+
+```bash
+bun run src/index.ts cleanup run --actor cli
 ```
 
 ### 参数说明
@@ -118,6 +156,7 @@ bun run src/index.ts start --port 37777
 | `--database-path` | SQLite 数据库路径 |
 | `--projection-root` | Markdown projection 输出目录 |
 | `--port` | HTTP 服务端口，默认 `37777` |
+| `--actor` | 审计上下文中的执行者标识 |
 | `--disable-projection` | 禁用 projection 可写检查 |
 
 ---
@@ -132,17 +171,51 @@ bun run src/index.ts start --port 37777
 curl http://127.0.0.1:37777/health
 ```
 
-当前版本**未暴露**以下 HTTP API：
+### `GET /api/status`
+
+返回详细健康状态、数据库统计和时间戳。
+
+```bash
+curl http://127.0.0.1:37777/api/status
+```
+
+### `POST /api/projection/rebuild`
+
+执行完整 projection 重建。
+
+```bash
+curl -X POST http://127.0.0.1:37777/api/projection/rebuild \
+  -H "content-type: application/json" \
+  -d '{"actor":"api"}'
+```
+
+### `GET /api/projection/verify`
+
+校验 projection 完整性。
+
+```bash
+curl http://127.0.0.1:37777/api/projection/verify
+```
+
+### `POST /api/cleanup/run`
+
+执行全量 cleanup。
+
+```bash
+curl -X POST http://127.0.0.1:37777/api/cleanup/run \
+  -H "content-type: application/json" \
+  -d '{"actor":"api"}'
+```
+
+当前版本仍未暴露以下 HTTP API：
 
 - `/ingest`
 - `/search`
 - `/context`
-- `/projection/rebuild`
-- `/cleanup/run`
 - `/rollback/*`
 - `/promotion/*`
 
-这些能力当前仅存在于内部 service/gateway 层。
+其中 status / projection / cleanup 已通过 `/api/*` 暴露，其余仍位于内部 service/gateway 层。
 
 ---
 
@@ -163,6 +236,7 @@ bun test ./.local-memory/src/test
 - rollback source-event linkage
 - degraded provider status
 - projection path correctness
+- projection/cleanup CLI & HTTP ops
 - adapter forwarding thinness
 - integration smoke paths
 
@@ -192,6 +266,12 @@ bun test ./.local-memory/src/test
 
 - singleton 文件写入映射目录，如 `.memory/core/preferences.md`
 - per-item 文件不会重复拼接 `.memory/.memory/...`
+
+### Operations API / CLI
+
+- `projection rebuild` 会调用 `ProjectionEngine.rebuild()`
+- `projection verify` 会调用 `ProjectionEngine.verifyIntegrity()`
+- `cleanup run` 会调用 `CleanupService.runFullCleanup()`
 
 ---
 

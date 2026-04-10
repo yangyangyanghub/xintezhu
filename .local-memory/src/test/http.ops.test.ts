@@ -65,6 +65,9 @@ describe('HTTP Operations API', () => {
     expect(response.status).toBe(200);
     const data = await response.json();
     expect(data.success).toBe(true);
+    expect(data.summary).toBeDefined();
+    expect(data.summary.total).toBeDefined();
+    expect(data.errors).toBeArray();
   });
 
   it('verifies projection via /api/projection/verify', async () => {
@@ -85,7 +88,10 @@ describe('HTTP Operations API', () => {
     
     expect(response.status).toBe(200);
     const data = await response.json();
-    expect(data.success).toBe(true);
+    expect(data.results).toBeArray();
+    expect(data.totalProcessed).toBeDefined();
+    expect(data.totalArchived).toBeDefined();
+    expect(data.totalDeleted).toBeDefined();
   });
 
   it('handles rollback via /api/rollback/batch', async () => {

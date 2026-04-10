@@ -520,7 +520,7 @@ Expected: PASS
 - Test: `/.local-memory/src/test/http.ops.test.ts`
 - Test: `/.local-memory/src/test/cli.ops.test.ts`
 
-- [ ] **Step 1: Add failing smoke tests**
+- [x] **Step 1: Add failing smoke tests**
 
 Cover:
 - `POST /api/projection/rebuild`
@@ -529,16 +529,16 @@ Cover:
 - `bun run src/index.ts projection rebuild`
 - `bun run src/index.ts cleanup run`
 
-- [ ] **Step 2: Implement handlers and commands**
+- [x] **Step 2: Implement handlers and commands**
 
-- [ ] **Step 3: Update RUNBOOK with only verified commands**
+- [x] **Step 3: Update RUNBOOK with only verified commands**
 
-- [ ] **Step 4: Run tests**
+- [x] **Step 4: Run tests**
 
 Run: `bun test ./.local-memory/src/test/http.ops.test.ts ./.local-memory/src/test/cli.ops.test.ts`
 Expected: PASS
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add .local-memory/src/projection/engine.ts .local-memory/src/cleanup/service.ts .local-memory/src/http/handlers/ops.ts .local-memory/src/index.ts .local-memory/src/test/cleanup.service.test.ts .local-memory/src/test/http.ops.test.ts .local-memory/src/test/cli.ops.test.ts .local-memory/RUNBOOK.md

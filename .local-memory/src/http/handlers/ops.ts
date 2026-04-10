@@ -42,12 +42,10 @@ export async function handleStatus(req: Request, deps: OpsHttpDeps) {
 
 export async function handleProjectionRebuild(req: Request, deps: OpsHttpDeps) {
   try {
-    // Projection rebuild requires ProjectionEngine which needs to be added to service
-    return Response.json({
-      success: true,
-      message: 'Projection rebuild initiated',
-      note: 'Full implementation requires ProjectionEngine integration',
-    });
+    const body = await req.json();
+    const { actor = 'api' } = body;
+    const result = await deps.service.getProjectionEngine().rebuild({ actor });
+    return Response.json(result);
   } catch (error) {
     return Response.json(
       { error: 'Projection rebuild failed', message: String(error) },
@@ -58,11 +56,8 @@ export async function handleProjectionRebuild(req: Request, deps: OpsHttpDeps) {
 
 export async function handleProjectionVerify(req: Request, deps: OpsHttpDeps) {
   try {
-    return Response.json({
-      valid: true,
-      issues: [],
-      note: 'Full implementation requires ProjectionEngine integration',
-    });
+    const result = await deps.service.getProjectionEngine().verifyIntegrity();
+    return Response.json(result);
   } catch (error) {
     return Response.json(
       { error: 'Projection verify failed', message: String(error) },
@@ -73,11 +68,10 @@ export async function handleProjectionVerify(req: Request, deps: OpsHttpDeps) {
 
 export async function handleCleanupRun(req: Request, deps: OpsHttpDeps) {
   try {
-    return Response.json({
-      success: true,
-      message: 'Cleanup initiated',
-      note: 'Full implementation requires CleanupService integration',
-    });
+    const body = await req.json();
+    const { actor = 'api' } = body;
+    const result = await deps.service.getCleanupService().runFullCleanup({ actor });
+    return Response.json(result);
   } catch (error) {
     return Response.json(
       { error: 'Cleanup failed', message: String(error) },

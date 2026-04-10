@@ -16,6 +16,8 @@ import { RetrievalService } from '../retrieval/service.ts';
 import { ContextAssemblyService } from '../context/assembly.ts';
 import { RelationEngine } from '../relations/engine.ts';
 import { PromotionEngine } from '../promotion/engine.ts';
+import { ProjectionEngine } from '../projection/engine.ts';
+import { CleanupService } from '../cleanup/service.ts';
 import type { RouteDeps } from '../http/routes.ts';
 
 export interface MemoryCoreConfig {
@@ -52,6 +54,8 @@ export class MemoryCoreService {
   private contextAssembly: ContextAssemblyService | null = null;
   private relationEngine: RelationEngine | null = null;
   private promotionEngine: PromotionEngine | null = null;
+  private projectionEngine: ProjectionEngine | null = null;
+  private cleanupService: CleanupService | null = null;
 
   constructor(config: Partial<MemoryCoreConfig> = {}) {
     this.config = { ...DEFAULT_CONFIG, ...config };
@@ -113,13 +117,23 @@ export class MemoryCoreService {
     // Initialize context assembly
     this.contextAssembly = new ContextAssemblyService(this.memoryRepo, this.retrievalService);
 
-    // Initialize relation/promotion engines
+    // Initialize relation/promotion/projection/cleanup engines
     this.relationEngine = new RelationEngine(this.db, this.memoryRepo, this.auditRepo);
     this.promotionEngine = new PromotionEngine(
       this.memoryRepo,
       this.auditRepo,
       this.promotionRepo,
       this.relationEngine
+    );
+    this.projectionEngine = new ProjectionEngine(this.memoryRepo, this.auditRepo, {
+      projectionRoot: this.config.projectionRoot,
+      enableRebuild: this.config.enableProjection,
+    });
+    this.cleanupService = new CleanupService(
+      this.db,
+      this.memoryRepo,
+      this.auditRepo,
+      this.projectionEngine
     );
   }
 
@@ -180,6 +194,22 @@ export class MemoryCoreService {
     }
 
     return this.promotionEngine;
+  }
+
+  getProjectionEngine(): ProjectionEngine {
+    if (!this.projectionEngine) {
+      throw new Error('Projection engine not initialized. Call initialize() first.');
+    }
+
+    return this.projectionEngine;
+  }
+
+  getCleanupService(): CleanupService {
+    if (!this.cleanupService) {
+      throw new Error('Cleanup service not initialized. Call initialize() first.');
+    }
+
+    return this.cleanupService;
   }
 
   async dispose(): Promise<void> {

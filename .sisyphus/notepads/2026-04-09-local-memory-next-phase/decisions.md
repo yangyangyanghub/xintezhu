@@ -9,3 +9,9 @@
 - `MemoryCoreService` 新增 `getPromotionEngine()` / `getRelationEngine()`，继续让 service 作为 HTTP/CLI 的单一装配入口，避免在 handler 或 CLI 里二次拼依赖。
 - promotion/relation 管理面仍放进 `http/handlers/ops.ts`，保持运维/管理接口集中，不额外拆新 handler 文件，避免把这一层切得过碎。
 - CLI 只新增 `promote --memory-id <id> [--force]` 和 `relations --memory-id <id>` 两个顶层命令，不提前扩展成多级子命令，先和 Task 8 的最小交付面保持一致。
+
+## 2026-04-10 Task 10
+
+- `MemoryCoreService` 继续承担 projection/cleanup 的依赖注入入口职责，新增 `getProjectionEngine()` / `getCleanupService()`，保持 HTTP handler 和 CLI 都只依赖 service 暴露面。
+- CLI 命令风格从纯顶层命令扩展为“顶层 + 动作”字符串匹配（如 `projection rebuild`），只覆盖当前 Task 10 所需的三个运维命令，不额外引入命令解析库。
+- RUNBOOK 直接把 projection/cleanup/status 写成已验证的运维入口，并明确全量测试与 Bun 构建的正确验证命令，避免后续因 cwd 或 build target 误判实现状态。

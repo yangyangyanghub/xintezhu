@@ -9,10 +9,22 @@ interface CliOptions extends Partial<MemoryCoreConfig> {
   eventFile?: string;
   memoryId?: string;
   force?: boolean;
+  actor?: string;
 }
 
 function parseArgs(argv: string[]): { command: string; options: CliOptions } {
-  const [command = 'help', ...rest] = argv;
+  const commandParts: string[] = [];
+  let optionStart = argv.findIndex((arg) => arg.startsWith('--'));
+  if (optionStart === -1) {
+    optionStart = argv.length;
+  }
+
+  for (let index = 0; index < optionStart; index += 1) {
+    commandParts.push(argv[index]);
+  }
+
+  const command = commandParts.join(' ') || 'help';
+  const rest = argv.slice(optionStart);
   const options: CliOptions = {};
 
   for (let index = 0; index < rest.length; index += 1) {
@@ -58,6 +70,10 @@ function parseArgs(argv: string[]): { command: string; options: CliOptions } {
         break;
       case '--force':
         options.force = true;
+        break;
+      case '--actor':
+        options.actor = value;
+        index += 1;
         break;
       case '--disable-projection':
         options.enableProjection = false;
@@ -256,6 +272,54 @@ async function runRelations(options: CliOptions): Promise<number> {
   }
 }
 
+async function runProjectionRebuild(options: CliOptions): Promise<number> {
+  const service = new MemoryCoreService(options);
+
+  try {
+    await service.initialize();
+    const result = await service.getProjectionEngine().rebuild({ actor: options.actor ?? 'cli' });
+    console.log(JSON.stringify(result, null, 2));
+    return result.success ? 0 : 1;
+  } catch (error) {
+    console.error(`Error rebuilding projection: ${error}`);
+    return 1;
+  } finally {
+    await service.dispose();
+  }
+}
+
+async function runProjectionVerify(options: CliOptions): Promise<number> {
+  const service = new MemoryCoreService(options);
+
+  try {
+    await service.initialize();
+    const result = await service.getProjectionEngine().verifyIntegrity();
+    console.log(JSON.stringify(result, null, 2));
+    return result.valid ? 0 : 1;
+  } catch (error) {
+    console.error(`Error verifying projection: ${error}`);
+    return 1;
+  } finally {
+    await service.dispose();
+  }
+}
+
+async function runCleanup(options: CliOptions): Promise<number> {
+  const service = new MemoryCoreService(options);
+
+  try {
+    await service.initialize();
+    const result = await service.getCleanupService().runFullCleanup({ actor: options.actor ?? 'cli' });
+    console.log(JSON.stringify(result, null, 2));
+    return 0;
+  } catch (error) {
+    console.error(`Error running cleanup: ${error}`);
+    return 1;
+  } finally {
+    await service.dispose();
+  }
+}
+
 async function main(): Promise<number> {
   const { command, options } = parseArgs(process.argv.slice(2));
 
@@ -276,6 +340,12 @@ async function main(): Promise<number> {
       return runPromote(options);
     case 'relations':
       return runRelations(options);
+    case 'projection rebuild':
+      return runProjectionRebuild(options);
+    case 'projection verify':
+      return runProjectionVerify(options);
+    case 'cleanup run':
+      return runCleanup(options);
     default:
       console.log(`Usage: bun run src/index.ts <command> [options]
 
@@ -288,6 +358,9 @@ Commands:
   ingest --event-file <path>    Ingest event from JSON file
   promote --memory-id <id>      Promote memory to next layer
   relations --memory-id <id>    Query memory relations and lineage
+  projection rebuild            Run full projection rebuild
+  projection verify             Verify projection integrity
+  cleanup run                   Run full cleanup
 
 Options:
   --runtime-root <path>         Runtime directory (default: .local-memory)
@@ -299,6 +372,7 @@ Options:
   --workspace <name>            Workspace name
   --event-file <path>           Path to event JSON file
   --memory-id <id>              Memory id for promote/relations commands
+  --actor <name>                Actor name for audit context
   --force                       Force promotion even if not eligible
   --disable-projection          Disable projection feature`);
       return 1;

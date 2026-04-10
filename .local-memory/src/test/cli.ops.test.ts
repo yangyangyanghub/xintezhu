@@ -65,4 +65,46 @@ describe('CLI Operations', () => {
 
     expect(result.exitCode).toBe(1);
   });
+
+  it('supports projection rebuild command', () => {
+    const result = Bun.spawnSync({
+      cmd: ['bun', 'run', 'src/index.ts', 'projection', 'rebuild'],
+      cwd: localMemoryRoot,
+      stdout: 'pipe',
+      stderr: 'pipe',
+    });
+
+    expect(result.exitCode).toBe(0);
+    const output = result.stdout.toString();
+    expect(output).toContain('summary');
+    expect(output).toContain('success');
+  });
+
+  it('supports projection verify command', () => {
+    const result = Bun.spawnSync({
+      cmd: ['bun', 'run', 'src/index.ts', 'projection', 'verify'],
+      cwd: localMemoryRoot,
+      stdout: 'pipe',
+      stderr: 'pipe',
+    });
+
+    expect(result.exitCode).toBe(0);
+    const output = result.stdout.toString();
+    expect(output).toContain('valid');
+    expect(output).toContain('issues');
+  });
+
+  it('supports cleanup run command', () => {
+    const result = Bun.spawnSync({
+      cmd: ['bun', 'run', 'src/index.ts', 'cleanup', 'run'],
+      cwd: localMemoryRoot,
+      stdout: 'pipe',
+      stderr: 'pipe',
+    });
+
+    expect(result.exitCode).toBe(0);
+    const output = result.stdout.toString();
+    expect(output).toContain('results');
+    expect(output).toContain('totalProcessed');
+  });
 });
