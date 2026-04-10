@@ -69,3 +69,13 @@ None - all decisions made during planning phase.
 **Decision**: Use `opencode run --pure --format json` as the no-skill execution path for baseline capture.
 **Rationale**: It yields real no-skill model behavior plus event timestamps and token totals without loading the skill under development.
 **Impact**: Task 2 produces both qualitative outputs and measurable timing/token evidence for later delta comparison.
+
+### 8. Task 10 Review Log Structure
+**Decision**: Record review traceability in the template with `Checklist Basis`, `Problem List`, and `Updated Sections`.
+**Rationale**: Task 10 requires not only a review checklist path but also a clear mapping from findings to concrete `DESIGN.md` edits.
+**Impact**: Future review runs can show which section changed for each accepted finding without turning the template into a generic audit report.
+
+### 9. Task 10 Source of Truth
+**Decision**: Apply the required documentation changes in the installed skill directory at `~/.config/opencode/skill/frontend-design-orchestrator/`.
+**Rationale**: The repository plan references the installed skill path as the final artifact location, and no repository-local copy of those two target files exists.
+**Impact**: Verification must read the installed skill files directly, while repository evidence records the changes and the git-tracking limitation.

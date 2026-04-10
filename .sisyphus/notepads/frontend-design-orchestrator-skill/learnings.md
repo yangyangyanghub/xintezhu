@@ -74,3 +74,13 @@ None at session start - all decisions documented in plan.
   - `outputs/assistant-response.md`
 - Baseline prompts should explicitly instruct the model to answer inline and avoid write/edit/bash to reduce workspace pollution.
 - Running with `--dir <baseline-run-dir>` isolates any accidental file writes inside the scenario sandbox instead of the repo root.
+
+## 2026-04-11 Task 10 Review Workflow Learnings
+
+### Review Workflow Shape
+- The review path should explicitly teach a five-step loop: run checklist, create one problem-list item per finding, update the named `DESIGN.md` section, record the result in `Review Log`, then re-review changed sections.
+- The problem list format needs to encode both rationale and required document action; otherwise review output drifts into vague audit prose.
+
+### Template Boundary
+- `SKILL.md` should explain the procedure, but the DESIGN template should capture outcomes.
+- In `Review Log`, an `Updated Sections` block is clearer than repeating a multi-step process description.

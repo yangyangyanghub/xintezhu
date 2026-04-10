@@ -1,0 +1,33 @@
+Task 10 workflow verification
+Date: 2026-04-11
+Worktree: C:\Users\HP\.config\superpowers\worktrees\my-ai-workspace\task-10-review-workflow
+
+Target file 1:
+  C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\SKILL.md
+Verified lines:
+  - Quick Start review flow now states how to invoke the Vercel guidelines check.
+  - Quick Start review flow now defines the problem list format:
+    - [severity] Section Name — issue summary — why it matters — required DESIGN.md update
+  - Quick Start review flow now requires updating the named DESIGN.md section for each accepted issue.
+
+Target file 2:
+  C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\references\design-md-template.md
+Verified lines:
+  - Review Log now includes Checklist Basis.
+  - Review Log now includes Problem List template entries.
+  - Review Log now includes Updated Sections entries for DESIGN.md update tracking.
+
+Validation performed:
+  1. Read back SKILL.md Quick Start section after patch.
+  2. Read back design-md-template.md Review Log section after patch.
+  3. Attempted lsp_diagnostics on both Markdown files.
+
+Diagnostics result:
+  - No Markdown LSP server is configured in this environment.
+  - Command returned: "No LSP server configured for extension: .md"
+  - Replacement verification used: direct file readback of the modified sections.
+
+Repository constraint:
+  - The modified target files are outside git repository E:\code\my-ai-workspace.
+  - git ls-files / status cannot track them from this repository.
+  - A repo commit can only include repository-local evidence/notepad files, not the actual target doc edits.
