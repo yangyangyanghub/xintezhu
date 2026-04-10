@@ -50,6 +50,34 @@ describe('Ingest and Search API', () => {
     expect(response.status).toBe(200);
   });
 
+  it('queries ingest status by business eventId instead of internal ingestion id', async () => {
+    const ingestResponse = await fetch(`${baseUrl}/api/ingest`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        eventId: 'evt-status-001',
+        batchId: 'batch-status-001',
+        eventType: 'message.updated',
+        sourceType: 'manual',
+        sourceRef: 'api-test-status',
+        payload: { messageId: 'msg-status-001', role: 'user', content: '状态查询测试' },
+      }),
+    });
+
+    const ingestBody = await ingestResponse.json();
+    expect(ingestResponse.status).toBe(200);
+
+    const statusResponse = await fetch(`${baseUrl}/api/ingest/status?eventId=evt-status-001`);
+    const statusBody = await statusResponse.json();
+
+    expect(statusResponse.status).toBe(200);
+    expect(statusBody.eventId).toBe('evt-status-001');
+    expect(statusBody.id).toBe(ingestBody.ingestionEventId);
+
+    const wrongIdResponse = await fetch(`${baseUrl}/api/ingest/status?eventId=${ingestBody.ingestionEventId}`);
+    expect(await wrongIdResponse.json()).toBeNull();
+  });
+
   it('returns search results from /api/search', async () => {
     const response = await fetch(`${baseUrl}/api/search`, {
       method: 'POST',

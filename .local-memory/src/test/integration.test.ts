@@ -10,6 +10,9 @@
 
 import { describe, it, expect, beforeEach, afterEach } from 'bun:test';
 import { Database } from 'bun:sqlite';
+import { mkdtemp, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { MemoryCoreService } from '../service/core.ts';
 import { IngestGateway } from '../ingest/gateway.ts';
 import { GovernanceService } from '../governance/index.ts';
@@ -29,6 +32,27 @@ import {
   SQLitePromotionRepository,
 } from '../repository/index.ts';
 import type { IngestionEventInput } from '../types/index.ts';
+import { bridgeHookEvent } from '../../../.opencode/plugin/memory-system/bridge.js';
+import { ServiceLauncher } from '../../../.opencode/plugin/memory-system/launcher.js';
+import { OutboxManager } from '../../../.opencode/plugin/memory-system/outbox.js';
+import { ReplayWorker } from '../../../.opencode/plugin/memory-system/replay.js';
+import type {
+  HookEvent,
+  IngestionEventInput as PluginIngestionEventInput,
+} from '../../../.opencode/plugin/memory-system/types.js';
+
+function createHookMessageUpdatedEvent(messageId: string, content: string): HookEvent {
+  return {
+    type: 'message.updated',
+    properties: {
+      info: {
+        id: messageId,
+        role: 'user',
+        content,
+      },
+    },
+  };
+}
 
 describe('Local Memory System Integration', () => {
   let db: Database;
@@ -42,6 +66,7 @@ describe('Local Memory System Integration', () => {
   let contextAssembly: ContextAssemblyService;
   let cleanup: CleanupService;
   let adapter: OpenCodeAdapter;
+  const tempDirs: string[] = [];
 
   beforeEach(async () => {
     // Initialize service and reuse its bootstrapped database
@@ -97,6 +122,13 @@ describe('Local Memory System Integration', () => {
 
   afterEach(async () => {
     await service.dispose();
+
+    while (tempDirs.length > 0) {
+      const tempDir = tempDirs.pop();
+      if (tempDir) {
+        await rm(tempDir, { force: true, recursive: true });
+      }
+    }
   });
 
   describe('End-to-End Memory Lifecycle', () => {
@@ -289,6 +321,125 @@ describe('Local Memory System Integration', () => {
       expect(searchResult.mode).toBe('keyword');
       expect(searchResult.degraded).toBe(true);
       expect(searchResult.degradedReason).toBeDefined();
+    });
+  });
+
+  describe('Resident Service Smoke Paths', () => {
+    it('auto-starts the resident service when a hook arrives during cold start', async () => {
+      const runtimeRoot = await mkdtemp(join(tmpdir(), 'memory-integration-cold-start-'));
+      tempDirs.push(runtimeRoot);
+
+      let serviceReady = false;
+      let spawnCalls = 0;
+      const ingestedEvents: PluginIngestionEventInput[] = [];
+
+      const fetchImpl = async (input: string | URL | Request, init?: RequestInit): Promise<Response> => {
+        const url = String(input);
+
+        if (url.endsWith('/ready')) {
+          if (!serviceReady) {
+            throw new TypeError('connect ECONNREFUSED');
+          }
+
+          return new Response(JSON.stringify({ ready: true }), { status: 200 });
+        }
+
+        if (url.endsWith('/api/ingest')) {
+          ingestedEvents.push(JSON.parse(String(init?.body)) as PluginIngestionEventInput);
+          return new Response(JSON.stringify({ accepted: true }), { status: 200 });
+        }
+
+        return new Response('not found', { status: 404 });
+      };
+
+      const launcher = new ServiceLauncher({
+        fetchImpl,
+        sleepImpl: async () => {},
+        spawnImpl: () => {
+          spawnCalls += 1;
+          serviceReady = true;
+          return {
+            pid: 4321,
+            exited: Promise.resolve(0),
+            unref: () => {},
+          };
+        },
+      });
+
+      const result = await bridgeHookEvent(
+        createHookMessageUpdatedEvent('msg-cold-start-001', '冷启动时应该自动拉起服务并写入事件'),
+        {
+          workspace: 'workspace-cold-start',
+          runtimeRoot,
+          launcher,
+          fetchImpl,
+        }
+      );
+
+      expect(result.success).toBe(true);
+      expect(result.outboxQueued).not.toBe(true);
+      expect(spawnCalls).toBe(1);
+      expect(ingestedEvents).toHaveLength(1);
+      expect(ingestedEvents[0]?.eventType).toBe('message.updated');
+      expect(ingestedEvents[0]?.payload.content).toBe('冷启动时应该自动拉起服务并写入事件');
+    });
+
+    it('queues failed deliveries to outbox and replays them after the service recovers', async () => {
+      const runtimeRoot = await mkdtemp(join(tmpdir(), 'memory-integration-recovery-'));
+      tempDirs.push(runtimeRoot);
+
+      const outbox = new OutboxManager({
+        runtimeRoot,
+        maxEvents: 10,
+        maxSizeBytes: 1024 * 1024,
+        ttlDays: 7,
+      });
+      const hookEvent = createHookMessageUpdatedEvent('msg-recovery-001', '服务恢复后应该重放这条事件');
+      const queuedResult = await bridgeHookEvent(hookEvent, {
+        workspace: 'workspace-recovery',
+        launcher: {
+          ensureReady: async () => ({
+            success: false,
+            ready: false,
+            error: 'service unavailable',
+          }),
+        },
+        outbox,
+        fetchImpl: async () => new Response('service unavailable', { status: 503 }),
+      });
+
+      expect(queuedResult.success).toBe(true);
+      expect(queuedResult.outboxQueued).toBe(true);
+
+      const queuedEventId = queuedResult.ingestionEvent?.eventId;
+      expect(queuedEventId).toBeDefined();
+      expect((await outbox.list()).map((entry) => entry.eventId)).toEqual([queuedEventId!]);
+
+      let serviceReady = false;
+      const deliveredEvents: string[] = [];
+      const replayWorker = new ReplayWorker({
+        outbox,
+        launcher: {
+          isReady: async () => serviceReady,
+        },
+        ingestClient: {
+          getStatus: async (eventId) => ({ found: false, eventId }),
+          deliver: async (event) => {
+            deliveredEvents.push(event.eventId);
+            return { success: true, status: 200 };
+          },
+        },
+        baseDelayMs: 10,
+        maxDelayMs: 100,
+      });
+
+      serviceReady = true;
+      const replayResult = await replayWorker.runOnce();
+
+      expect(replayResult.replayed).toBe(1);
+      expect(replayResult.remaining).toBe(0);
+      expect(deliveredEvents).toEqual([queuedEventId!]);
+      expect(await outbox.list()).toHaveLength(0);
     });
   });
 });

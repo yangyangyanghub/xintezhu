@@ -240,6 +240,7 @@ describe('Task 18: OpenCode Adapter QA Scenarios', () => {
 
       // Assert Memory Core receives normalized event
       expect(capturedEvent).not.toBeNull();
+      expect(capturedEvent?.eventType).toBe('session.created');
       expect(capturedEvent?.payload.sessionId).toBe('sess-new-789');
       
       // Assert returns acceptance response

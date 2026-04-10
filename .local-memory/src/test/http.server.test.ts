@@ -25,11 +25,48 @@ describe('HTTP server', () => {
     await service.dispose();
   });
 
-  it('serves /health and returns 404 for unknown routes', async () => {
+  it('serves /health and /ready, then returns 404 for unknown routes', async () => {
     const health = await fetch(`${baseUrl}/health`);
     expect(health.status).toBe(200);
+    expect(await health.json()).toEqual({ status: 'ok' });
+
+    const ready = await fetch(`${baseUrl}/ready`);
+    expect(ready.status).toBe(200);
+    expect((await ready.json()).ready).toBe(true);
 
     const notFound = await fetch(`${baseUrl}/api/unknown`);
     expect(notFound.status).toBe(404);
+  });
+
+  it('keeps /health alive while /ready reports ingest unavailability', async () => {
+    const degradedServer = createServer({
+      port: 0,
+      deps: {
+        ingestGateway: {
+          isReady: async () => ({
+            ready: false,
+            checks: {
+              database: { status: 'error', message: 'database unavailable' },
+              classifier: { status: 'ok' },
+            },
+            timestamp: new Date().toISOString(),
+          }),
+        } as never,
+        retrieval: {} as never,
+        contextAssembly: {} as never,
+        service: {} as never,
+      },
+    });
+
+    const degradedBaseUrl = `http://127.0.0.1:${degradedServer.port}`;
+    const health = await fetch(`${degradedBaseUrl}/health`);
+    const ready = await fetch(`${degradedBaseUrl}/ready`);
+
+    expect(health.status).toBe(200);
+    expect((await health.json()).status).toBe('ok');
+    expect(ready.status).toBe(503);
+    expect((await ready.json()).ready).toBe(false);
+
+    degradedServer.stop(true);
   });
 });

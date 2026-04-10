@@ -1,36 +1,19 @@
 # Local Memory System - Operations Runbook
 
-## 当前已支持的运行面
+## 运行模型
 
-当前仓库已经实现并验证了以下运行能力：
+本地记忆系统现在默认走 **OpenCode hook → resident local service → `.local-memory` ingest** 的自动链路。
 
-- `bun run src/index.ts init`：初始化本地运行目录、数据库和 schema
-- `bun run src/index.ts start`：启动本地 HTTP 服务
-- `bun run src/index.ts status`：读取服务状态与统计信息
-- `bun run src/index.ts projection rebuild`：执行完整 projection 重建
-- `bun run src/index.ts projection verify`：校验 projection 完整性
-- `bun run src/index.ts cleanup run`：执行全量 cleanup
-- `GET /health`：读取服务健康状态
-- `GET /api/status`：读取详细状态与统计信息
-- `POST /api/projection/rebuild`：执行完整 projection 重建
-- `GET /api/projection/verify`：校验 projection 完整性
-- `POST /api/cleanup/run`：执行全量 cleanup
-- `bun test ./.local-memory/src/test`：执行本地完整测试套件
-
-以下模块已经在代码内实现并通过单元/集成测试覆盖核心路径，并已暴露对应运维入口：
-
-- ingest gateway
-- retrieval service
-- governance / rollback
-- projection engine
-- cleanup service
-- promotion engine
+- 常驻服务是 **懒启动**：正常情况下不需要手工常驻一个终端。
+- 当 `session.created`、`message.updated`、`session.idle`、`session.compacted`、`file.edited` 等 hook 事件到来时，插件会先探测本地服务的 readiness。
+- 如果服务未就绪，插件会自动尝试拉起 `.local-memory` 服务。
+- 如果本次投递仍然失败，事件会先写入本地 outbox，等服务恢复后由 replay worker 自动补投。
 
 ---
 
 ## Quick Start
 
-### 1. 初始化
+### 1. 初始化运行目录
 
 在仓库根目录执行：
 
@@ -38,120 +21,96 @@
 bun run .local-memory/src/index.ts init
 ```
 
-也可以在 `.local-memory/` 目录内执行：
+常用可选参数：
 
 ```bash
-cd .local-memory
-bun run src/index.ts init
-```
-
-可选参数：
-
-```bash
-bun run src/index.ts init \
+bun run .local-memory/src/index.ts init \
   --runtime-root .local-memory \
   --database-path .local-memory/memory.db \
   --projection-root .memory
 ```
 
-### 2. 启动服务
+### 2. 手工启动服务（调试/运维场景）
+
+自动记忆链路通常不需要手工启动服务；只有在联调、排障或本地压测时才需要显式启动：
 
 ```bash
 bun run .local-memory/src/index.ts start --port 37777
 ```
 
-或在 `.local-memory/` 目录内：
+如果要验证守护进程启动路径，可通过插件侧 launcher 调用的同款命令观察：
 
 ```bash
-cd .local-memory
-bun run src/index.ts start --port 37777
+bun run .local-memory/src/index.ts start --daemon --port 37777
 ```
 
-### 3. 检查健康状态
+### 3. 检查 liveness 与 readiness
 
 ```bash
 curl http://127.0.0.1:37777/health
+curl http://127.0.0.1:37777/ready
 ```
 
-预期返回示例：
-
-```json
-{
-  "status": "ok",
-  "localOnly": true,
-  "runtimeRoot": ".local-memory",
-  "version": "1.0.0",
-  "timestamp": "2026-04-09T00:00:00.000Z",
-  "checks": {
-    "database": {
-      "status": "ok"
-    },
-    "projection": {
-      "status": "ok"
-    }
-  }
-}
-```
+- `/health` 只表示 HTTP 进程还活着（**liveness**）
+- `/ready` 表示服务已经具备 ingest 能力（**readiness**）
+- hook 自动上报、outbox replay、桥接状态判断都必须以 `/ready` 为准，而不是 `/health`
 
 ---
 
 ## CLI Reference
 
-### init
+### `init`
 
-初始化数据库和本地运行目录。
-
-```bash
-bun run src/index.ts init \
-  --runtime-root .local-memory \
-  --database-path .local-memory/memory.db \
-  --projection-root .memory
-```
-
-### start
-
-启动 HTTP 服务，暴露 health 和运维 API。
+初始化数据库、schema 与本地运行目录。
 
 ```bash
-bun run src/index.ts start --port 37777
+bun run .local-memory/src/index.ts init
 ```
 
-### status
+### `start`
 
-读取当前服务状态与统计信息。
+启动本地 HTTP 服务。
 
 ```bash
-bun run src/index.ts status
+bun run .local-memory/src/index.ts start --port 37777
 ```
 
-### projection rebuild
+### `status`
+
+读取服务健康状态、readiness 与统计信息。
+
+```bash
+bun run .local-memory/src/index.ts status
+```
+
+### `projection rebuild`
 
 执行完整 projection 重建。
 
 ```bash
-bun run src/index.ts projection rebuild --actor cli
+bun run .local-memory/src/index.ts projection rebuild --actor cli
 ```
 
-### projection verify
+### `projection verify`
 
 校验 projection 完整性。
 
 ```bash
-bun run src/index.ts projection verify
+bun run .local-memory/src/index.ts projection verify
 ```
 
-### cleanup run
+### `cleanup run`
 
 执行全量 cleanup。
 
 ```bash
-bun run src/index.ts cleanup run --actor cli
+bun run .local-memory/src/index.ts cleanup run --actor cli
 ```
 
-### 参数说明
+### 常用参数
 
 | 参数 | 说明 |
-|---|---|
+| --- | --- |
 | `--runtime-root` | 本地运行根目录 |
 | `--database-path` | SQLite 数据库路径 |
 | `--projection-root` | Markdown projection 输出目录 |
@@ -165,156 +124,232 @@ bun run src/index.ts cleanup run --actor cli
 
 ### `GET /health`
 
-返回当前服务状态。
+只返回存活状态，不校验 ingest 是否可用。
 
 ```bash
 curl http://127.0.0.1:37777/health
 ```
 
+示例响应：
+
+```json
+{
+  "status": "ok"
+}
+```
+
+### `GET /ready`
+
+返回 ingest readiness。只有这里返回 ready，hook 自动上报才会把服务视为可投递。
+
+```bash
+curl http://127.0.0.1:37777/ready
+```
+
+就绪时通常返回 `200`，未就绪返回 `503`。
+
+### `POST /api/ingest`
+
+接收来自 hook bridge 的标准化 `IngestionEventInput`。
+
+```bash
+curl -X POST http://127.0.0.1:37777/api/ingest \
+  -H "content-type: application/json" \
+  -d '{
+    "eventId": "opencode-message.updated-demo",
+    "batchId": "opencode-batch-message.updated-demo",
+    "eventType": "message.updated",
+    "sourceType": "opencode",
+    "sourceRef": "msg-demo-001",
+    "workspace": "demo-workspace",
+    "payload": {
+      "messageId": "msg-demo-001",
+      "role": "user",
+      "content": "请把这条消息写进记忆系统"
+    }
+  }'
+```
+
+配套状态查询接口：
+
+```bash
+curl "http://127.0.0.1:37777/api/ingest/status?eventId=opencode-message.updated-demo"
+curl "http://127.0.0.1:37777/api/ingest/batch?batchId=opencode-batch-message.updated-demo"
+```
+
+### `POST /api/search`
+
+对 memory core 执行检索。
+
+```bash
+curl -X POST http://127.0.0.1:37777/api/search \
+  -H "content-type: application/json" \
+  -d '{
+    "query": "空格缩进",
+    "mode": "hybrid"
+  }'
+```
+
+请求体会透传给 retrieval service：
+
+- `query`：检索关键词
+- `mode`：默认 `hybrid`
+- `filters`：可选过滤条件
+- `options`：可选检索参数
+
+### `POST /api/context`
+
+根据检索结果组装上下文。
+
+```bash
+curl -X POST http://127.0.0.1:37777/api/context \
+  -H "content-type: application/json" \
+  -d '{
+    "query": "帮我回忆一下缩进规范",
+    "workspace": "demo-workspace"
+  }'
+```
+
 ### `GET /api/status`
 
-返回详细健康状态、数据库统计和时间戳。
+返回 health、readiness 与数据库统计的聚合状态。
 
 ```bash
 curl http://127.0.0.1:37777/api/status
 ```
 
-### `POST /api/projection/rebuild`
+当前还保留以下运维接口：
 
-执行完整 projection 重建。
+- `POST /api/projection/rebuild`
+- `GET /api/projection/verify`
+- `POST /api/cleanup/run`
+- `POST /api/rollback/batch`
+- `POST /api/promotions/evaluate`
+- `POST /api/promotions/promote`
+- `POST /api/relations`
+- `GET /api/relations/:memoryId`
+- `DELETE /api/relations/:id`
 
-```bash
-curl -X POST http://127.0.0.1:37777/api/projection/rebuild \
-  -H "content-type: application/json" \
-  -d '{"actor":"api"}'
-```
+---
 
-### `GET /api/projection/verify`
+## 自动投递、Outbox 与 Replay
 
-校验 projection 完整性。
+### 正常路径
 
-```bash
-curl http://127.0.0.1:37777/api/projection/verify
-```
+1. OpenCode hook 触发事件。
+2. 插件桥接层调用 `/ready` 判断服务是否具备 ingest 能力。
+3. 若服务未就绪，`ServiceLauncher` 会尝试自动启动 `.local-memory` 常驻服务。
+4. 服务 ready 后，桥接层将标准化事件 `POST` 到 `/api/ingest`。
 
-### `POST /api/cleanup/run`
+### 服务不可用时
 
-执行全量 cleanup。
+如果以下任一情况发生：
 
-```bash
-curl -X POST http://127.0.0.1:37777/api/cleanup/run \
-  -H "content-type: application/json" \
-  -d '{"actor":"api"}'
-```
+- `/ready` 长时间不可达
+- 自动拉起失败
+- `/api/ingest` 投递失败
 
-当前版本仍未暴露以下 HTTP API：
+插件会把事件落入本地 outbox，而不是阻塞主流程。
 
-- `/ingest`
-- `/search`
-- `/context`
-- `/rollback/*`
-- `/promotion/*`
+### Outbox 行为
 
-其中 status / projection / cleanup 已通过 `/api/*` 暴露，其余仍位于内部 service/gateway 层。
+- 存储位置：`<runtime-root>/.outbox/`
+- 默认容量：`1000` 条事件
+- 默认大小上限：`25 MB`
+- 默认 TTL：`7` 天
+- 淘汰策略：按时间顺序清理过期项；超限时优先移除最旧条目
+
+### Replay 行为
+
+- `ReplayWorker` 会定时尝试重放 pending 事件
+- replay 前先检查 `/ready`
+- replay 时先查 `/api/ingest/status?eventId=...`，如果目标事件已入库，则视为幂等成功并从 outbox 删除
+- 投递失败会增加 `retryCount`，并按指数退避延迟下一次尝试
 
 ---
 
 ## 测试与验证
 
-### 运行完整测试
+### 关键回归测试
 
 ```bash
-bun test ./.local-memory/src/test
+bun test ./.local-memory/src/test/integration.test.ts
+bun test ./.opencode/plugin/memory-system/test/*.test.ts
 ```
 
-当前测试覆盖以下修复面：
+其中 `integration.test.ts` 覆盖了：
 
-- schema/bootstrap
-- CLI init
-- 事件契约
-- classification activation
-- rollback source-event linkage
-- degraded provider status
-- projection path correctness
-- projection/cleanup CLI & HTTP ops
-- adapter forwarding thinness
-- integration smoke paths
+- 冷启动时 hook 自动拉起服务并完成 ingest
+- 服务不可用时写入 outbox，恢复后 replay 成功
+- Local Memory Core 的基础端到端行为
 
 ---
 
-## 已验证的行为
+## Troubleshooting
 
-### Bootstrap
+### 1. hook 触发了，但没有看到记忆入库
 
-- 可在仓库根目录运行
-- 可在 `.local-memory/` 目录内运行
-- schema 会正确初始化
-- projection 目录会在启用时自动准备
-
-### Retrieval / Governance
-
-- classification 后 memory 会进入 `active`
-- keyword retrieval 默认只检索 `active`
-- batch rollback 可通过 `sourceEventId` 找到 memory 并回滚
-
-### Provider degraded mode
-
-- 未配置 embedding provider 时进入 `keyword-only` 降级模式
-- adapter 状态会显式反映 degraded 原因
-
-### Projection
-
-- singleton 文件写入映射目录，如 `.memory/core/preferences.md`
-- per-item 文件不会重复拼接 `.memory/.memory/...`
-
-### Operations API / CLI
-
-- `projection rebuild` 会调用 `ProjectionEngine.rebuild()`
-- `projection verify` 会调用 `ProjectionEngine.verifyIntegrity()`
-- `cleanup run` 会调用 `CleanupService.runFullCleanup()`
-
----
-
-## 故障排查
-
-### 1. init 失败
-
-先确认 Bun 可用：
+先检查服务是否真的 ready，而不是只看进程是否活着：
 
 ```bash
-bun --version
+curl http://127.0.0.1:37777/health
+curl http://127.0.0.1:37777/ready
 ```
 
-再重新执行：
+如果 `/health` 正常但 `/ready` 返回 `503`，说明进程活着但 ingest 依赖还没准备好。
 
-```bash
-bun run .local-memory/src/index.ts init
-```
-
-### 2. health 返回 error
+### 2. 服务没有自动拉起
 
 重点检查：
 
-- `databasePath` 是否可写
-- `projectionRoot` 是否可写
-- 运行目录是否存在权限问题
+- `bun` 是否可执行：`bun --version`
+- `.local-memory/` 是否存在、是否可写
+- `runtimeRoot` 下是否残留异常 `.pid` 或 `.launcher-lock`
 
-### 3. 启动后访问不到 `/health`
-
-确认端口没有冲突：
+可以手工执行：
 
 ```bash
-bun run .local-memory/src/index.ts start --port 37777
+bun run .local-memory/src/index.ts start --daemon --port 37777
 ```
 
-如果 37777 被占用，换一个端口：
+如果仍失败，查看插件侧 `ServiceLauncher` 的 debug 日志。
+
+### 3. 事件进了 outbox 但迟迟没有 replay
+
+重点检查：
+
+- `http://127.0.0.1:37777/ready` 是否恢复正常
+- `<runtime-root>/.outbox/` 下是否仍有 `.json` 文件
+- `/api/ingest/status?eventId=...` 是否已经能查到该事件
+
+如果服务恢复后仍未清空 outbox，优先看 replay worker 是否拿到 `service_unavailable` 或 `delivery_failed`。
+
+### 4. outbox 文件持续增长
+
+这通常说明服务长期不可用，或 ingest 持续返回失败。
+
+排查建议：
+
+- 先修复 `/ready` 与 `/api/ingest`
+- 再检查 outbox 默认限制是否被频繁打满（1000 条 / 25MB / 7 天）
+- 观察是否出现持续重试同一批事件的模式
+
+### 5. `/api/search` 或 `/api/context` 返回 500
+
+重点检查：
+
+- memory core 是否完成初始化
+- 数据库是否可访问
+- 查询参数是否缺失或结构不合法
+
+### 6. `init` 或 `status` 失败
+
+先确认运行环境：
 
 ```bash
-bun run .local-memory/src/index.ts start --port 38888
+bun --version
+bun run .local-memory/src/index.ts init
+bun run .local-memory/src/index.ts status
 ```
 
----
-
-## 说明
-
-本文档只记录**已落地并已验证**的运行方式。凡是代码中尚未暴露的 service 能力，均不在此文档中伪装成可运维命令。
+如果数据库或 projection 路径不可写，`/api/status` 和 CLI `status` 都会出现异常。

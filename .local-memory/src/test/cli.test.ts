@@ -1,8 +1,9 @@
 import { afterEach, describe, expect, it } from 'bun:test';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
+import { getPidFilePath, removePidFile, writePidFile } from '../index.ts';
 
 const localMemoryRoot = resolve(import.meta.dir, '..', '..');
 
@@ -46,5 +47,20 @@ describe('local-memory CLI', () => {
 
     expect(command.exitCode).toBe(0);
     expect(existsSync(databasePath)).toBe(true);
+  });
+
+  it('writes and removes the runtime pid file', async () => {
+    const sandboxRoot = await mkdtemp(join(tmpdir(), 'local-memory-pid-'));
+    tempDirs.push(sandboxRoot);
+
+    const pidFilePath = getPidFilePath(sandboxRoot);
+    await writePidFile(sandboxRoot, 24680);
+
+    expect(existsSync(pidFilePath)).toBe(true);
+    expect(readFileSync(pidFilePath, 'utf8').trim()).toBe('24680');
+
+    await removePidFile(sandboxRoot);
+
+    expect(existsSync(pidFilePath)).toBe(false);
   });
 });
