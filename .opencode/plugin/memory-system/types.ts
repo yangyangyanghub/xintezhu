@@ -107,6 +107,8 @@ export interface MemorySystemConfig {
   autoCleanup: boolean;
   /** 记忆存储根目录 */
   memoryRoot: string;
+  /** 是否启用旧版直写回退 */
+  enableLegacyFallback: boolean;
 }
 
 export const DEFAULT_CONFIG: MemorySystemConfig = {
@@ -114,5 +116,147 @@ export const DEFAULT_CONFIG: MemorySystemConfig = {
   importantRetentionDays: 30,
   maxSnapshotTokens: 2000,
   autoCleanup: true,
-  memoryRoot: '.memory'
+  memoryRoot: '.memory',
+  enableLegacyFallback: false,
 };
+
+// ============ 自动摄入桥接类型 ============
+
+export type EventType =
+  | 'message.updated'
+  | 'file.edited'
+  | 'session.created'
+  | 'session.idle'
+  | 'session.compacted'
+  | 'git.commit'
+  | 'test.result'
+  | 'build.result';
+
+export type SourceType = 'opencode' | 'git' | 'manual' | 'system';
+
+export interface IngestionEventInput {
+  eventId: string;
+  batchId: string;
+  eventType: EventType;
+  sourceType: SourceType;
+  sourceRef: string;
+  workspace?: string;
+  payload: Record<string, unknown>;
+}
+
+export interface OutboxEntry extends IngestionEventInput {
+  timestamp: string;
+  retryCount: number;
+  lastError?: string;
+}
+
+export interface OutboxOptions {
+  runtimeRoot: string;
+  maxEvents?: number;
+  maxSizeBytes?: number;
+  ttlDays?: number;
+}
+
+export interface OutboxStats {
+  pendingEvents: number;
+  totalSizeBytes: number;
+  maxEvents: number;
+  maxSizeBytes: number;
+  ttlDays: number;
+  oldestTimestamp?: string;
+  newestTimestamp?: string;
+  droppedEvents: number;
+  outboxDir: string;
+}
+
+export interface EventStatusResult {
+  found: boolean;
+  eventId: string;
+  status?: string;
+}
+
+export interface IngestDeliveryResponse {
+  success: boolean;
+  status?: number;
+  error?: string;
+}
+
+export interface ReplayResult {
+  replayed: number;
+  skippedDuplicates: number;
+  remaining: number;
+  stoppedReason: 'empty' | 'service_unavailable' | 'delivery_failed' | 'running';
+  lastError?: string;
+}
+
+export interface HookSessionCreatedEvent {
+  type: 'session.created';
+  properties: {
+    info: {
+      id: string;
+      [key: string]: unknown;
+    };
+  };
+}
+
+export interface HookMessageUpdatedEvent {
+  type: 'message.updated';
+  properties: {
+    info: {
+      id: string;
+      role: 'user' | 'assistant' | 'system';
+      content?: string;
+      summary?: {
+        title?: string;
+        body?: string;
+      };
+      tokens?: {
+        input?: number;
+        output?: number;
+      };
+      [key: string]: unknown;
+    };
+  };
+}
+
+export interface HookSessionIdleEvent {
+  type: 'session.idle';
+  properties: {
+    sessionID: string;
+    duration?: number;
+    [key: string]: unknown;
+  };
+}
+
+export interface HookSessionCompactedEvent {
+  type: 'session.compacted';
+  properties: {
+    sessionID: string;
+    [key: string]: unknown;
+  };
+}
+
+export interface HookFileEditedEvent {
+  type: 'file.edited';
+  properties: {
+    filePath: string;
+    changeType: 'created' | 'modified' | 'deleted';
+    [key: string]: unknown;
+  };
+}
+
+export type HookEvent =
+  | HookSessionCreatedEvent
+  | HookMessageUpdatedEvent
+  | HookSessionIdleEvent
+  | HookSessionCompactedEvent
+  | HookFileEditedEvent;
+
+export interface BridgeDeliveryResult {
+  success: boolean;
+  fallbackUsed: boolean;
+  status?: number;
+  error?: string;
+  outboxQueued?: boolean;
+  ingestionEvent?: IngestionEventInput;
+}

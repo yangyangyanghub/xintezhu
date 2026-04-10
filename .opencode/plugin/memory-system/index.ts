@@ -13,18 +13,26 @@
 import { tool, type Hooks, type Plugin, type PluginInput, type ToolContext } from '@opencode-ai/plugin';
 import type { EventSessionCreated, EventSessionIdle, EventMessageUpdated } from '@opencode-ai/sdk';
 import { z } from 'zod';
+import { bridgeHookEvent, createBridgeIngestClient, queryBridgeStatus } from './bridge.js';
 import { loadSnapshot } from './memory/loader.js';
 import { saveWorkingMemory, appendEpisodic, saveSnapshot as saveSnapshotFile } from './memory/writer.js';
 import { consolidateMemory, cleanupExpired, detectImportance } from './memory/consolidator.js';
-import { DEFAULT_CONFIG, type MemorySystemConfig, type WorkingMemory, type ContextEntry } from './types.js';
+import { DEFAULT_CONFIG, type HookEvent, type MemorySystemConfig, type WorkingMemory, type ContextEntry } from './types.js';
 import { searchCodebase, formatSearchResults } from './smart-file-read/search.js';
 import { parseFile, formatFoldedView, unfoldSymbol } from './smart-file-read/parser.js';
+import { ServiceLauncher } from './launcher.js';
+import { OutboxManager } from './outbox.js';
+import { ReplayWorker } from './replay.js';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 // 当前工作记忆状态
 let currentWorkingMemory: WorkingMemory | null = null;
 let config: MemorySystemConfig = DEFAULT_CONFIG;
+let serviceLauncher: ServiceLauncher | null = null;
+let serviceRuntimeRoot = resolve('.local-memory');
+let outboxManager: OutboxManager | null = null;
+let replayWorker: ReplayWorker | null = null;
 
 // claude-mem Worker 配置
 const CLAUDE_MEM_WORKER_URL = 'http://127.0.0.1:37777';
@@ -70,6 +78,19 @@ async function callClaudeMemAPI(
  */
 const memorySystemPlugin: Plugin = async (input: PluginInput) => {
   const { project, directory, $ } = input;
+  serviceRuntimeRoot = resolve(directory, '.local-memory');
+  serviceLauncher = new ServiceLauncher();
+  outboxManager = new OutboxManager({
+    runtimeRoot: serviceRuntimeRoot,
+    maxEvents: 1000,
+    maxSizeBytes: 25 * 1024 * 1024,
+    ttlDays: 7,
+  });
+  replayWorker = new ReplayWorker({
+    outbox: outboxManager,
+    launcher: serviceLauncher,
+    ingestClient: createBridgeIngestClient({}),
+  });
   
   // 初始化配置
   config = {
@@ -81,16 +102,39 @@ const memorySystemPlugin: Plugin = async (input: PluginInput) => {
   
   // 初始化记忆目录
   await initMemoryDirectories($);
+  await replayWorker.start();
   
   const hooks: Hooks = {
     // 会话创建时加载记忆
     event: async ({ event }) => {
-      if (event.type === 'session.created') {
-        await handleSessionCreated(event);
-      } else if (event.type === 'session.idle') {
-        await handleSessionIdle(event);
-      } else if (event.type === 'message.updated') {
-        await handleMessageUpdated(event);
+      if (!serviceLauncher) {
+        console.warn(`[MemorySystem] 服务启动器不可用，跳过事件桥接: ${event.type}`);
+        return;
+      }
+
+      if (!outboxManager) {
+        console.warn(`[MemorySystem] Outbox 不可用，跳过事件桥接: ${event.type}`);
+        return;
+      }
+
+      const result = await bridgeHookEvent(event as HookEvent, {
+        workspace: directory,
+        launcher: serviceLauncher,
+        runtimeRoot: serviceRuntimeRoot,
+        outbox: outboxManager,
+        enableLegacyFallback: config.enableLegacyFallback,
+        legacyFallback: async (legacyEvent) => {
+          await handleLegacyHookEvent(legacyEvent);
+        },
+      });
+
+      if (!result.success) {
+        console.warn(`[MemorySystem] 事件桥接失败 (${event.type}): ${result.error ?? 'unknown error'}`);
+      } else if (result.outboxQueued) {
+        const bridgeStatus = await queryBridgeStatus({ outbox: outboxManager });
+        console.warn(`[MemorySystem] 事件已写入 outbox (${event.type})，pending=${bridgeStatus.outbox?.pendingEvents ?? 0}`);
+      } else if (result.fallbackUsed) {
+        console.warn(`[MemorySystem] 已使用旧版回退路径处理事件: ${event.type}`);
       }
     },
     
@@ -321,6 +365,16 @@ async function initMemoryDirectories($: any) {
   
   for (const dir of dirs) {
     await $`mkdir -p ${dir}`.quiet();
+  }
+}
+
+async function handleLegacyHookEvent(event: HookEvent): Promise<void> {
+  if (event.type === 'session.created') {
+    await handleSessionCreated(event as EventSessionCreated);
+  } else if (event.type === 'session.idle') {
+    await handleSessionIdle(event as EventSessionIdle);
+  } else if (event.type === 'message.updated') {
+    await handleMessageUpdated(event as EventMessageUpdated);
   }
 }
 
