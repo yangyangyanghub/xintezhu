@@ -107,10 +107,10 @@ def generate_markdown_report(analysis: Dict, scores: Dict, date_str: str) -> str
     # 构建完整的部门列表（包含未提交日报的部门）
     all_depts = {}
     
-    # 先添加completion_stats中的所有部门（确保包含未提交的部门）
+    # 先添加completion_stats中的所有部门（确保包含未提交的部门，院部除外）
     if completion_stats:
         for dept, stats in completion_stats.items():
-            if dept == "总览":
+            if dept == "总览" or dept == "院部":
                 continue
             all_depts[dept] = {
                 "dept_total": stats.get("should_submit", 0),
@@ -136,7 +136,8 @@ def generate_markdown_report(analysis: Dict, scores: Dict, date_str: str) -> str
                 "ai_usage_rate": stats.get("ai_usage_rate", "-"),
                 "lazy_report_rate": stats.get("lazy_report_rate", "-"),
                 "plan_rate": stats.get("plan_rate", "-"),
-                "review_rate": stats.get("review_rate", "-")
+                "review_rate": stats.get("review_rate", "-"),
+                "approval_rate": stats.get("approval_rate", "-")
             }
     
     if all_depts:
@@ -148,8 +149,8 @@ def generate_markdown_report(analysis: Dict, scores: Dict, date_str: str) -> str
             "",
             "### 汇总表",
             "",
-            "| 部门 | 已提交/总人数 | 提交率 | 平均分 | AI使用率 | 流水账率 | 计划率 | 复盘率 |",
-            "|------|---------------|--------|--------|----------|----------|--------|--------|"
+            "| 部门 | 已提交/总人数 | 提交率 | 平均分 | AI使用率 | 流水账率 | 计划率 | 复盘率 | 审批率 |",
+            "|------|---------------|--------|--------|----------|----------|--------|--------|--------|"
         ])
         
         # 按提交率排序
@@ -164,11 +165,13 @@ def generate_markdown_report(analysis: Dict, scores: Dict, date_str: str) -> str
             lazy_rate = stats.get("lazy_report_rate", "-")
             plan_rate = stats.get("plan_rate", "-")
             review_rate = stats.get("review_rate", "-")
+            approval_rate = stats.get("approval_rate", "-")
             
             # 评级
             submit_emoji = "✅" if submission_rate >= 90 else "⚠️" if submission_rate >= 70 else "❌"
             score_emoji = "🌟" if avg != "-" and avg >= 4 else "👍" if avg != "-" and avg >= 3 else "👌" if avg != "-" and avg >= 2.5 else "⚠️" if avg != "-" else "-"
             lazy_emoji = "❌" if lazy_rate != "-" and lazy_rate >= 50 else "⚠️" if lazy_rate != "-" and lazy_rate >= 30 else "✅" if lazy_rate != "-" else "-"
+            approval_emoji = "✅" if approval_rate != "-" and approval_rate >= 80 else "⚠️" if approval_rate != "-" and approval_rate >= 50 else "❌" if approval_rate != "-" else "-"
             
             # 处理 "-" 的情况
             avg_str = f"{score_emoji} {avg}" if avg != "-" else "-"
@@ -176,10 +179,11 @@ def generate_markdown_report(analysis: Dict, scores: Dict, date_str: str) -> str
             lazy_str = f"{lazy_emoji} {lazy_rate}%" if lazy_rate != "-" else "-"
             plan_str = f"{plan_rate}%" if plan_rate != "-" else "-"
             review_str = f"{review_rate}%" if review_rate != "-" else "-"
+            approval_str = f"{approval_emoji} {approval_rate}%" if approval_rate != "-" else "-"
             
             lines.append(
                 f"| {dept} | {submitted}/{total_dept} | {submit_emoji} {submission_rate}% | {avg_str} | "
-                f"{ai_str} | {lazy_str} | {plan_str} | {review_str} |"
+                f"{ai_str} | {lazy_str} | {plan_str} | {review_str} | {approval_str} |"
             )
         
         # 各部门详情

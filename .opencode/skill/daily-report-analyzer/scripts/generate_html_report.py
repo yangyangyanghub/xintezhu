@@ -133,10 +133,19 @@ def _generate_dept_table(analysis: Dict) -> str:
     """生成部门排名表格"""
     dept_stats = analysis.get("dept_stats", {})
     
-    # 按平均分排序，但0提交的部门排最后 - 兼容不同key名称
+    # 按提交率降序排序，0提交的部门排最后
+    def get_submit_rate(item):
+        stats = item[1]
+        submitted = stats.get('count', 0)
+        should_submit = stats.get('should_submit_count') or stats.get('dept_total') or submitted
+        if should_submit == 0:
+            return -1  # 无数据的排最后
+        rate = submitted / should_submit * 100
+        return rate
+    
     sorted_depts = sorted(
         dept_stats.items(), 
-        key=lambda x: (-float('inf') if x[1].get('count', 0) == 0 else x[1].get("avg_score", 0), x[1].get('count', 0)),
+        key=get_submit_rate,
         reverse=True
     )
     
@@ -149,6 +158,7 @@ def _generate_dept_table(analysis: Dict) -> str:
         avg_score = round(stats.get("avg_score", 0), 1)
         ai_rate = round(stats.get("ai_usage_rate", 0), 1)
         lazy_rate = round(stats.get("lazy_report_rate", 0), 1)
+        approval_rate = round(stats.get("approval_rate", 0), 1)
         
         # 判断是否为0提交部门
         is_zero = submitted == 0
@@ -180,6 +190,11 @@ def _generate_dept_table(analysis: Dict) -> str:
         if is_zero:
             lazy_badge = "badge-muted"
         
+        # 审批率标签
+        approval_badge = "badge-success" if approval_rate >= 80 else "badge-warning" if approval_rate >= 50 else "badge-danger"
+        if is_zero:
+            approval_badge = "badge-muted"
+        
         row_class = "zero-submit" if is_zero else ""
         
         rows.append(f'''
@@ -191,6 +206,7 @@ def _generate_dept_table(analysis: Dict) -> str:
                             <td><span class="badge {ai_badge}">{avg_score}</span></td>
                             <td><span class="badge {lazy_badge}">{ai_rate}%</span></td>
                             <td><span class="badge {lazy_badge}">{lazy_rate}%</span></td>
+                            <td><span class="badge {approval_badge}">{approval_rate}%</span></td>
                         </tr>
         ''')
     

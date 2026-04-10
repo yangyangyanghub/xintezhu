@@ -67,12 +67,12 @@ def generate(title, content, layout, style, ratio, output):
     style_def = styles[style]
     prompt = build_prompt(title, content, layout_def, style_def)
 
-    print(f"📊 信息图生成")
-    print(f"   布局: {layout_def['name']} ({layout})")
-    print(f"   风格: {style_def['name']} ({style})")
-    print(f"   比例: {ratio}")
-    print(f"   输出: {output}")
-    print(f"   提示词: {prompt[:100]}...")
+    print(f"[INFO] Generating infographic")
+    print(f"   Layout: {layout_def['name']} ({layout})")
+    print(f"   Style: {style_def['name']} ({style})")
+    print(f"   Ratio: {ratio}")
+    print(f"   Output: {output}")
+    print(f"   Prompt: {prompt[:100]}...")
 
     cmd = [
         sys.executable,

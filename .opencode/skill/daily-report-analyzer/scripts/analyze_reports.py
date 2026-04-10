@@ -379,7 +379,14 @@ class ReportAnalyzer:
         if not create_time:
             return 3
         
-        dt = datetime.fromtimestamp(create_time / 1000)
+        # 支持字符串格式和毫秒时间戳
+        if isinstance(create_time, str):
+            try:
+                dt = datetime.strptime(create_time, "%Y-%m-%d %H:%M:%S")
+            except ValueError:
+                return 3
+        else:
+            dt = datetime.fromtimestamp(create_time / 1000)
         hour = dt.hour
         
         if 9 <= hour < 18:
@@ -550,6 +557,11 @@ class ReportAnalyzer:
         }
         
         for report in reports:
+            # 分析已完成和审批中的日报
+            approval_status = report.get("approval", {}).get("status", "")
+            if approval_status not in ["COMPLETED", "已结束", "RUNNING", "审批中"]:
+                continue
+            
             result = self.analyze_report(report)
             all_results.append(result)
             
@@ -611,31 +623,46 @@ class ReportAnalyzer:
         review_rate = round(total_has_review / max(total_should_submit, 1) * 100, 1)
         
         # 计算部门统计（增强版，使用部门总人数作为分母）
+        # 包含所有部门（含零提交），院部除外
         dept_stats = {}
-        for dept, scores in dept_scores.items():
-            # 获取部门总人数
+        
+        # 获取所有部门列表（优先从dept_member_count，否则用已提交部门）
+        all_depts = set(dept_member_count.keys()) if dept_member_count else set(dept_scores.keys())
+        
+        for dept in all_depts:
+            # 排除"院部"
+            if dept == "院部":
+                continue
+            
+            scores = dept_scores.get(dept, [])
             dept_total = dept_member_count.get(dept, len(scores)) if dept_member_count else len(scores)
             submitted = len(scores)
             not_submitted = dept_total - submitted
             
             # 各项统计（未提交的按负面统计）
-            ai_used = dept_ai_usage[dept]["used"]
-            lazy = dept_lazy_count[dept]["lazy"] + not_submitted  # 未提交按流水账
-            has_plan = dept_plan_count[dept]["has_plan"]
-            has_review = dept_review_count[dept]["has_review"]
+            ai_used = dept_ai_usage.get(dept, {"used": 0, "total": 0})["used"]
+            lazy = dept_lazy_count.get(dept, {"lazy": 0, "total": 0})["lazy"] + not_submitted  # 未提交按流水账
+            has_plan = dept_plan_count.get(dept, {"has_plan": 0, "total": 0})["has_plan"]
+            has_review = dept_review_count.get(dept, {"has_review": 0, "total": 0})["has_review"]
             
             dept_stats[dept] = {
                 "count": submitted,
                 "dept_total": dept_total,
                 "submission_rate": round(submitted / max(dept_total, 1) * 100, 1),
-                "avg_score": round(sum(scores) / len(scores), 2),
-                "max_score": max(scores),
-                "min_score": min(scores),
+                "avg_score": round(sum(scores) / len(scores), 2) if scores else 0,
+                "max_score": max(scores) if scores else 0,
+                "min_score": min(scores) if scores else 0,
                 "ai_usage_rate": round(ai_used / max(dept_total, 1) * 100, 1),
                 "lazy_report_rate": round(lazy / max(dept_total, 1) * 100, 1),
                 "plan_rate": round(has_plan / max(dept_total, 1) * 100, 1),
                 "review_rate": round(has_review / max(dept_total, 1) * 100, 1)
             }
+        
+        # 合并部门审批完成率到dept_stats
+        if approval_stats and approval_stats.get("dept_approval_stats"):
+            for dept, ap_stats in approval_stats["dept_approval_stats"].items():
+                if dept in dept_stats:
+                    dept_stats[dept]["approval_rate"] = ap_stats.get("completion_rate", 0)
         
         return {
             "total_count": len(all_results),
@@ -914,22 +941,22 @@ def main():
         
         # 打印摘要
         print("\n" + "=" * 50)
-        print("📊 日报分析摘要（增强版）")
+        print("[日报分析摘要]")
         print("=" * 50)
-        print(f"📅 日期: {date_str}")
-        print(f"👥 提交人数: {results['total_count']}")
-        print(f"⭐ 平均得分: {results['avg_score']}")
-        print(f"\n📈 核心指标:")
-        print(f"  🤖 AI工具使用率: {results['ai_usage_rate']}%")
-        print(f"  📝 流水账占比: {results['lazy_report_rate']}%")
-        print(f"  📋 明日计划填写率: {results['plan_rate']}%")
-        print(f"  🔄 工作复盘填写率: {results['review_rate']}%")
-        print(f"\n📊 分数分布:")
+        print(f"日期: {date_str}")
+        print(f"提交人数: {results['total_count']}")
+        print(f"平均得分: {results['avg_score']}")
+        print(f"\n[核心指标]:")
+        print(f"  AI工具使用率: {results['ai_usage_rate']}%")
+        print(f"  流水账占比: {results['lazy_report_rate']}%")
+        print(f"  明日计划填写率: {results['plan_rate']}%")
+        print(f"  工作复盘填写率: {results['review_rate']}%")
+        print(f"\n[分数分布]:")
         for level, count in results["score_distribution"].items():
             level_name = {"excellent": "优秀", "good": "良好", "average": "一般", "poor": "较差", "bad": "差"}
             print(f"  - {level_name.get(level, level)}: {count}人")
-        print(f"\n⚠️ 流水账日报: {len(results.get('lazy_reports', []))}条")
-        print(f"\n💎 有价值信息:")
+        print(f"\n[警告] 流水账日报: {len(results.get('lazy_reports', []))}条")
+        print(f"\n[有价值信息]:")
         print(f"  - AI应用案例: {len(results['valuable_info']['ai_applications'])}条")
         print(f"  - 项目产出: {len(results['valuable_info']['project_outputs'])}条")
         print(f"  - 风险预警: {len(results['valuable_info']['risk_warnings'])}条")

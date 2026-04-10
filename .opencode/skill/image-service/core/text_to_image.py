@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 文生图脚本 (Text-to-Image)
-支持 DashScope Qwen Image API
+支持 Gemini、DashScope、智谱 API
 
 Author: 翟星人
 """
@@ -20,11 +20,13 @@ try:
     GEMINI_SDK_AVAILABLE = True
 except ImportError:
     GEMINI_SDK_AVAILABLE = False
+
 VALID_ASPECT_RATIOS = [
     "1:1", "2:3", "3:2", "3:4", "4:3", "4:5", "5:4", "9:16", "16:9", "21:9"
 ]
 
-RATIO_TO_SIZE = {
+# DashScope 尺寸映射
+RATIO_TO_SIZE_DASHSCOPE = {
     "1:1": "1328*1328",
     "2:3": "1104*1472",
     "3:2": "1472*1104",
@@ -37,9 +39,21 @@ RATIO_TO_SIZE = {
     "21:9": "1664*704"
 }
 
+# 智谱 GLM-Image 尺寸映射
+RATIO_TO_SIZE_ZHIPU = {
+    "1:1": "1280x1280",
+    "2:3": "1056x1568",
+    "3:2": "1568x1056",
+    "3:4": "1088x1472",
+    "4:3": "1472x1088",
+    "9:16": "960x1728",
+    "16:9": "1728x960",
+    "21:9": "1728x720"
+}
+
 
 class TextToImageGenerator:
-    """文生图生成器 - 支持 Gemini 和 DashScope API"""
+    """文生图生成器 - 支持 Gemini、DashScope、智谱 API"""
     
     def __init__(self, config: Optional[Dict[str, str]] = None):
         if config is None:
@@ -47,15 +61,17 @@ class TextToImageGenerator:
         
         self.api_key = config.get('api_key') or config.get('IMAGE_API_KEY')
         self.base_url = config.get('base_url') or config.get('IMAGE_API_BASE_URL')
-        self.model = config.get('model') or config.get('IMAGE_MODEL') or 'gemini-3-pro-image-preview'
+        self.model = config.get('model') or config.get('IMAGE_MODEL') or 'glm-image'
         
         # 检测 API 类型
         self.is_gemini = 'generativelanguage.googleapis.com' in (self.base_url or '')
+        self.is_zhipu = 'bigmodel.cn' in (self.base_url or '')
+        self.is_dashscope = 'dashscope.aliyuncs.com' in (self.base_url or '')
         
         if not self.api_key:
             raise ValueError("缺少必要的 API 配置：api_key")
         if not self.is_gemini and not self.base_url:
-            raise ValueError("DashScope API 需要配置 base_url")
+            raise ValueError("非 Gemini API 需要配置 base_url")
     def _load_config(self) -> Dict[str, str]:
         """从配置文件或环境变量加载配置"""
         config = {}
@@ -123,10 +139,12 @@ class TextToImageGenerator:
         prompt_extend: bool = False,
         watermark: bool = False
     ) -> Dict[str, Any]:
-        """生成图片 - 自动选择 Gemini 或 DashScope API"""
+        """生成图片 - 自动选择 Gemini、智谱或 DashScope API"""
         
         if self.is_gemini:
             return self._generate_gemini(prompt, aspect_ratio, output_path)
+        elif self.is_zhipu:
+            return self._generate_zhipu(prompt, aspect_ratio, output_path)
         else:
             return self._generate_dashscope(prompt, size, aspect_ratio, output_path, negative_prompt, prompt_extend, watermark)
 
@@ -175,6 +193,89 @@ class TextToImageGenerator:
         except Exception as e:
             return {"success": False, "error": f"Gemini API 错误: {str(e)}"}
 
+    def _generate_zhipu(
+        self,
+        prompt: str,
+        aspect_ratio: Optional[str] = None,
+        output_path: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """使用智谱 API 生成图片 (OpenAI 兼容格式)"""
+        
+        # 确定尺寸 - 智谱 GLM-Image 推荐尺寸
+        final_size = "1280x1280"
+        if aspect_ratio:
+            final_size = RATIO_TO_SIZE_ZHIPU.get(aspect_ratio, "1280x1280")
+        
+        # 构建请求 - OpenAI 兼容格式
+        payload = {
+            "model": self.model,
+            "prompt": prompt,
+            "size": final_size
+        }
+        
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {self.api_key}"
+        }
+        
+        try:
+            with httpx.Client(timeout=180.0) as client:
+                response = client.post(
+                    self.base_url,
+                    headers=headers,
+                    json=payload
+                )
+                response.raise_for_status()
+                result = response.json()
+                
+                # 解析响应 - OpenAI 格式: {"data": [{"url": "..."}]}
+                if result.get("data") and len(result["data"]) > 0:
+                    image_url = result["data"][0].get("url")
+                    
+                    if image_url and output_path:
+                        if self.download_image(image_url, output_path):
+                            return {
+                                "success": True,
+                                "saved_path": output_path,
+                                "image_url": image_url
+                            }
+                        else:
+                            return {
+                                "success": True,
+                                "image_url": image_url,
+                                "saved_path": None
+                            }
+                    
+                    return {
+                        "success": True,
+                        "image_url": image_url,
+                        "saved_path": None
+                    }
+                
+                return {
+                    "success": False,
+                    "error": "生成失败：未返回图片数据",
+                    "detail": result
+                }
+        
+        except httpx.HTTPStatusError as e:
+            # 尝试获取错误详情
+            try:
+                error_detail = e.response.json()
+            except:
+                error_detail = str(e)
+            return {
+                "success": False,
+                "error": f"HTTP 错误: {e.response.status_code}",
+                "detail": error_detail
+            }
+        except Exception as e:
+            return {
+                "success": False,
+                "error": "生成失败",
+                "detail": str(e)
+            }
+
     def _generate_dashscope(
         self,
         prompt: str,
@@ -190,7 +291,7 @@ class TextToImageGenerator:
         # 确定尺寸
         final_size = "1024*1024"
         if aspect_ratio:
-            final_size = RATIO_TO_SIZE.get(aspect_ratio, "1024*1024")
+            final_size = RATIO_TO_SIZE_DASHSCOPE.get(aspect_ratio, "1024*1024")
         elif size:
             final_size = size.replace('x', '*')
 
@@ -284,7 +385,7 @@ def main():
     import argparse
     import time
     
-    parser = argparse.ArgumentParser(description='文生图工具 - DashScope Qwen Image')
+    parser = argparse.ArgumentParser(description='文生图工具 - 支持 Gemini、智谱、DashScope API')
     parser.add_argument('prompt', help='中文图像描述提示词')
     parser.add_argument('-o', '--output', help='输出文件路径')
     parser.add_argument('-r', '--ratio', help=f'宽高比，可选: {", ".join(VALID_ASPECT_RATIOS)}')

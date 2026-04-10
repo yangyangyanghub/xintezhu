@@ -338,7 +338,7 @@ git commit -m "feat: 扩展 local-memory CLI 命令"
 - Modify: `/.local-memory/src/classifier/service.ts`
 - Test: `/.local-memory/src/test/retrieval.semantic.test.ts`
 
-- [ ] **Step 1: Write failing semantic persistence test**
+- [x] **Step 1: Write failing semantic persistence test**
 
 ```ts
 it('stores embeddings for active memories when provider is healthy', async () => {
@@ -348,7 +348,7 @@ it('stores embeddings for active memories when provider is healthy', async () =>
 });
 ```
 
-- [ ] **Step 2: Implement `EmbeddingRepository`**
+- [x] **Step 2: Implement `EmbeddingRepository`**
 
 ```ts
 export interface EmbeddingRepository {

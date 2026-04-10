@@ -1,0 +1,53 @@
+{
+  "active_plan": "E:\\code\\my-ai-workspace\\.sisyphus\\plans\\2026-04-09-local-memory-next-phase.md",
+  "started_at": "2026-04-09T14:35:26.380Z",
+  "session_ids": [
+    "ses_292425898ffeHAe68lfpIIJ2lX",
+    "ses_292400233ffeOaUUOamBzzA4rY",
+    "ses_2924001bbffeB1KoRx1zHevGlf",
+    "ses_2924001b7ffefSdv0GJbZHLwvZ",
+    "ses_2924001b3ffefmQmi1ZEjsTtCa",
+    "ses_2924001b5ffee8AnAMWenPo97z",
+    "ses_29067a072ffez6Y7gc731JJww4",
+    "ses_28f0298a0ffesXzk2oTXdvkO80",
+    "ses_28f0298aeffeTZMMlFCuh1xxI0",
+    "ses_28f0298b2ffe6uANQl6nXV4ScI",
+    "ses_28f0209f8ffexvqVvy38spv7tp",
+    "ses_28f0298a6ffeKar8SQd0i6QUlh",
+    "ses_28f029eacffelR02HK6z6nBZAf",
+    "ses_28e2480bcffewOVUXf0HsG9rnI",
+    "ses_28e247eddffe82L1g7mJLe3xen",
+    "ses_28e2480a4ffetLN7AUtu3wm5gx",
+    "ses_28e1d88f8ffeEd7jqbAKzwusOY",
+    "ses_28e1d88e3ffeHXnX8T506WZ5XA",
+    "ses_28e1d88d5ffeN2jTAT3QD84jZm",
+    "ses_28e20481cffeoZvJ0ap1SQHaRQ",
+    "ses_28d8f8a19ffe4pA84zOHS7GtoC",
+    "ses_28d8f8b87ffe6Oedg3N6SHSMSz",
+    "ses_28d8f8a11ffegnjD4KdPJIR3cY",
+    "ses_28d89f287ffeDlqKLHuHZPmHUF",
+    "ses_28d4faa8cffeTz6jibJETHuyqV",
+    "ses_28cfeed20ffee1EZBrQnDk98n6",
+    "ses_28cfc2d64ffen45B0r9G9UJWiO",
+    "ses_28cdb796effe3RrDpV2hB1wv5m",
+    "ses_28b2c2490ffedBR0qA2wFYxa9w",
+    "ses_28b2c2480ffevVBRFKJnDy0EUV",
+    "ses_28b2c256dffewYG31EykiQhKb4",
+    "ses_28a4ae75affevtqmOgvtqTqFUK",
+    "ses_28a4a1250ffe96xeXvXzFJG4g4",
+    "ses_28a42afe0ffeAP75c201PEv6PN"
+  ],
+  "plan_name": "2026-04-09-local-memory-next-phase",
+  "agent": "atlas",
+  "task_sessions": {
+    "todo:1": {
+      "task_key": "todo:1",
+      "task_label": "1",
+      "task_title": "Lock V1 contract, event schema, and guardrails",
+      "session_id": "ses_29067a072ffez6Y7gc731JJww4",
+      "agent": "Sisyphus-Junior",
+      "category": "deep",
+      "updated_at": "2026-04-09T00:45:51.384Z"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "weekly-report-w14-2026",
+  "version": "1.0.0",
+  "description": "武洋 2026 年 W14 周报视频",
+  "scripts": {
+    "start": "remotion studio src/index.ts",
+    "build": "remotion render WeeklyBrief out/weekly-brief.mp4 src/index.ts",
+    "build:report": "remotion render WeeklyReport out/weekly-report.mp4 src/index.ts",
+    "build:preview": "remotion render WeeklyBrief out/preview.mp4 src/index.ts --frames=300"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.445",
+    "@remotion/cli": "4.0.445",
+    "@remotion/media": "^4.0.445",
+    "@remotion/media-utils": "4.0.445",
+    "@remotion/player": "4.0.445",
+    "@remotion/renderer": "4.0.445",
+    "@remotion/transitions": "4.0.445",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remotion": "4.0.445",
+    "webpack": "^5.88.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "typescript": "^5.0.0"
+  },
+  "optionalDependencies": {
+    "@rspack/binding-win32-x64-msvc": "^1.7.11"
+  }
+}

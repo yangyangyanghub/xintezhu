@@ -189,5 +189,18 @@
 		<outline text="国家能源局-发展规划司工作进展" title="国家能源局-发展规划司工作进展" type="rss" xmlUrl="https://rsshub.app/gov/nea/sjzz/ghs" />
 		<outline text="中华人民共和国国家发展和改革委员会 - 通知公告" title="中华人民共和国国家发展和改革委员会 - 通知公告" type="rss" xmlUrl="https://rsshub.app/gov/jgjcndrc" />
 		<outline text="大数据专家委员会 - 通知公告" title="大数据专家委员会 - 通知公告" type="rss" xmlUrl="https://rsshub.app/ccf/tfbd/xwdt/tzgg" />
+		<!-- 国际测绘地理信息RSS源 -->
+		<outline text="GeoInformatics" title="GeoInformatics" type="rss" xmlUrl="https://www.geoinformatics.com/feed/" htmlUrl="https://www.geoinformatics.com/" />
+		<outline text="GIS Geography" title="GIS Geography" type="rss" xmlUrl="https://gisgeography.com/feed" htmlUrl="https://gisgeography.com/" />
+		<outline text="GIS Resources" title="GIS Resources" type="rss" xmlUrl="https://gisresources.com/feed" htmlUrl="https://gisresources.com/" />
+		<outline text="GeoNe.ws" title="GeoNe.ws" type="rss" xmlUrl="https://geone.ws/feed" htmlUrl="https://geone.ws/" />
+		<outline text="QGIS Blog" title="QGIS Blog" type="rss" xmlUrl="https://blog.qgis.org/feed" htmlUrl="https://blog.qgis.org/" />
+		<outline text="PostGIS" title="PostGIS" type="rss" xmlUrl="https://postgis.net/feed.xml" htmlUrl="https://postgis.net/" />
+		<outline text="Esri ArcGIS Blog" title="Esri ArcGIS Blog" type="rss" xmlUrl="https://www.esri.com/arcgis-blog/feed/" htmlUrl="https://www.esri.com/arcgis-blog/" />
+		<!-- 遥感RSS源 -->
+		<outline text="MDPI Remote Sensing" title="MDPI Remote Sensing" type="rss" xmlUrl="https://www.mdpi.com/rss/journal/remotesensing" htmlUrl="https://www.mdpi.com/journal/remotesensing" />
+		<outline text="NASA Earth Observatory" title="NASA Earth Observatory" type="rss" xmlUrl="https://earthobservatory.nasa.gov/feeds/image-of-the-day.rss" htmlUrl="https://earthobservatory.nasa.gov/" />
+		<outline text="Copernicus EU" title="Copernicus EU" type="rss" xmlUrl="https://www.copernicus.eu/en/rss.xml" htmlUrl="https://www.copernicus.eu/" />
+		<outline text="Remote Sensing (Würzburg)" title="Remote Sensing (Würzburg)" type="rss" xmlUrl="https://remote-sensing.org/feed" htmlUrl="https://remote-sensing.org/" />
 	</body>
 </opml>

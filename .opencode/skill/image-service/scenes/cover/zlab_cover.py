@@ -61,14 +61,23 @@ MOODS = {
 }
 
 
-def build_prompt(title, subtitle, type_key, palette_key, rendering_key, text_key, mood_key):
+def build_prompt(title, subtitle, type_key, palette_key, rendering_key, text_key, mood_key, ratio):
+    # 根据比例确定横竖版
+    is_vertical = ratio in ("3:4", "4:3", "4:5", "5:4", "9:16")
+    orientation = "竖版" if is_vertical else "横版"
+    
     parts = [
-        f"专业文章封面图，横版16:9构图",
+        f"专业文章封面图，{orientation}{ratio}构图",
         TYPES[type_key]['hint'],
         PALETTES[palette_key]['hint'],
         RENDERINGS[rendering_key]['hint'],
         MOODS[mood_key]['hint'],
     ]
+    
+    # 加入虾元素（如果有"虾"相关关键词）
+    if "虾" in title or "虾" in (subtitle or ""):
+        parts.append("画面中包含卡通风格的虾/龙虾元素，作为视觉主角或装饰，呼应标题主题")
+    
     if text_key != "none":
         parts.append(f"画面中包含中文标题「{title}」，字号大而醒目，放在画面视觉中心或黄金分割位置")
         if subtitle and text_key in ("title-subtitle", "text-rich"):
@@ -83,7 +92,7 @@ def build_prompt(title, subtitle, type_key, palette_key, rendering_key, text_key
 
 
 def generate(title, subtitle, type_key, palette_key, rendering_key, text_key, mood_key, ratio, output):
-    prompt = build_prompt(title, subtitle, type_key, palette_key, rendering_key, text_key, mood_key)
+    prompt = build_prompt(title, subtitle, type_key, palette_key, rendering_key, text_key, mood_key, ratio)
 
     print(f"🖼️ 封面图生成")
     print(f"   类型: {TYPES[type_key]['name']} ({type_key})")

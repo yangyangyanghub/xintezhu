@@ -654,8 +654,8 @@ def main():
     )
     parser.add_argument(
         "--status",
-        default="COMPLETED",
-        help="审批状态: RUNNING/TERMINATED/COMPLETED (默认: COMPLETED)"
+        default="",
+        help="审批状态: RUNNING/TERMINATED/COMPLETED，留空获取全部 (默认: 获取全部状态)"
     )
     parser.add_argument(
         "--fetch-dept-count",
@@ -689,12 +689,17 @@ def main():
         else:
             process_code = client.get_process_code(args.template)
         
-        # 获取日报数据
+        # 获取日报数据（默认获取所有状态）
+        if args.status:
+            statuses = [args.status]
+        else:
+            statuses = ["RUNNING", "COMPLETED", "TERMINATED"]
+        
         reports = client.get_all_reports(
             process_code=process_code,
             start_date=target_date,
             end_date=end_date,
-            statuses=[args.status]
+            statuses=statuses
         )
         
         if not reports:

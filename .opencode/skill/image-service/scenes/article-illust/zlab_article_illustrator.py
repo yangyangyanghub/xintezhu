@@ -166,7 +166,7 @@ def generate_illustrations(md_path, style, ratio, output_dir, type_override=None
         print("文章中未找到适合配图的章节")
         sys.exit(0)
 
-    print(f"✏️ 文章插图生成")
+    print(f"[文章插图生成]")
     print(f"   文章: {md_path}")
     print(f"   风格: {STYLES[style]['name']} ({style})")
     print(f"   比例: {ratio}")
@@ -193,9 +193,9 @@ def generate_illustrations(md_path, style, ratio, output_dir, type_override=None
         cmd = [sys.executable, str(CORE_SCRIPT), prompt, "-r", ratio, "-o", output_path]
         result = subprocess.run(cmd, capture_output=True, text=True)
         if result.returncode != 0:
-            print(f"    ⚠️ 失败: {result.stderr[:200]}")
+            print(f"    [!] 失败: {result.stderr[:200]}")
         else:
-            print(f"    ✅ {output_path}")
+            print(f"    [OK] {output_path}")
 
     print(f"\n全部完成！{len(sections)}张插图已保存到 {output_dir}/")
 
