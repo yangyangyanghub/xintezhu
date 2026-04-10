@@ -89,3 +89,21 @@ None at session start - all decisions documented in plan.
 - The installed `frontend-design-orchestrator` skill lives under `C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\`, so task evidence in this repo must reference the global skill path explicitly.
 - For icon-system guidance, conflict detection is more reliable when the doc requires a small inventory table (`source`, `raw_name`, `usage_context`, `status`) before making any library choice.
 - Prefix-based namespacing needs both decision rules and a report schema; otherwise the guidance stays conceptual and reviewers cannot verify how a conflict was resolved.
+
+## 2026-04-11 F3 Manual QA Learnings
+
+- Direct filesystem verification is not enough for end-to-end skill QA; the skill must also be discoverable through `get_available_skills` and loadable through `use_skill`.
+- This skill's content files currently pass manual structure checks, but the skill registry path is broken because `frontend-design-orchestrator` cannot be resolved by the skill toolchain.
+- For future manual QA tasks, treat "file exists" and "skill can actually be invoked" as separate gates.
+
+## 2026-04-11 F3 Manual QA Follow-up
+
+- The direct `skill` loader can load `frontend-design-orchestrator` even though `get_available_skills` and `use_skill` fail for the same name.
+- For this project, the practical end-to-end path works: a test `DESIGN.md` was generated at `temp/f3-manual-qa-test-project/DESIGN.md` with icon conflict handling and a populated review log.
+- Final QA judgment should distinguish between "workflow works" and "all helper interfaces are consistent"; here the former passes and the latter still has a tooling mismatch.
+
+## 2026-04-11 F4 Scope Fidelity Learnings
+
+- A top-level `Non-goals` section is not sufficient for approval if supporting references still include implementation snippets or runtime package guidance.
+- For a design-orchestrator skill, TSX/HTML/CSS examples inside references count as scope leakage even when the main `SKILL.md` says "does NOT generate implementation code".
+- Offline compliance should be judged on whether the operational path runs from local reference files; external URLs can remain provenance only, but optional network features like `asset downloads` still weaken scope fidelity.

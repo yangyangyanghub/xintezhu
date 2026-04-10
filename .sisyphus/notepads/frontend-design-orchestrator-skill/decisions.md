@@ -86,3 +86,22 @@ None - all decisions made during planning phase.
 **Decision**: Verify the global reference file from the workspace repo using evidence files rather than trying to force git tracking for a file outside the repository root.
 **Rationale**: The target skill path is not itself a git repository, but the plan still requires auditable QA evidence.
 **Impact**: Task completion can be proven with evidence even when the deliverable lives outside version control.
+
+## 2026-04-11 F3 Manual QA Decisions
+
+### 11. F3 Verdict Basis
+**Decision**: Mark F3 as `REJECT` instead of `APPROVE`.
+**Rationale**: The installed files can be read directly, but the actual skill cannot be discovered or loaded through the skill system (`get_available_skills`, `read_skill_file`, `use_skill` all fail).
+**Impact**: The skill content is present, but the end-to-end workflow is not verifiably usable until registry/discovery is fixed.
+
+### 12. Final F3 Verdict Adjustment
+**Decision**: Revise the final F3 verdict to `APPROVE`.
+**Rationale**: A direct `skill("frontend-design-orchestrator")` load succeeded and was sufficient to generate a real test-project `DESIGN.md`, proving the manual workflow works end-to-end despite helper-tool inconsistency.
+**Impact**: F3 passes as manual QA evidence, but follow-up work is still needed to make `get_available_skills` / `read_skill_file` / `use_skill` consistent with the direct skill loader.
+
+## 2026-04-11 F4 Scope Fidelity Decision
+
+### 11. Reject Current Scope Fidelity
+**Decision**: Mark F4 as `REJECT`.
+**Rationale**: `SKILL.md` holds the correct boundary, but `references/icon-systems.md` and `references/design-sources.md` still include implementation-oriented material (TSX/HTML/CSS snippets, implementation migration wording, `/src/assets/icons/`, `Tailwind UI` as implementation reference, and `asset downloads` wording).
+**Impact**: The skill cannot be approved for scope fidelity until references are reduced to design-spec-only guidance.
