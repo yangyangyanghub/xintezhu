@@ -1,0 +1,12 @@
+SKILL.md QA check for Task 4
+
+- file_exists=yes (C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\SKILL.md)
+- line_count=142 (< 300 threshold)
+- yaml_frontmatter=yes (lines 1-4)
+- name_field=yes (line 2: frontend-design-orchestrator)
+- description_field=yes (line 3)
+- description_starts_with_use_when=yes (line 3 starts with "Use when")
+- trigger_conditions_present=yes (mentions: design system, DESIGN.md, front-end design)
+- sections_present: When to Use, Workflow Overview, Reference Files Index, Quick Start, Common Mistakes
+
+Validation: ALL CHECKS PASSED

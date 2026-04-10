@@ -1,0 +1,11 @@
+Trigger description QA check for Task 4
+
+- description: "Use when the user needs to generate a frontend design specification, create or update DESIGN.md, select icon systems, resolve icon conflicts, or perform design reviews against Vercel Web Design Guidelines. Triggers on mentions of "design system", "DESIGN.md", "front-end design", "design specification", "icon system", or "design review"."
+- starts_with_use_when: yes
+- includes_design_system: yes
+- includes_design_md: yes
+- includes_frontend_design: yes ("front-end design")
+- includes_icon_system: yes
+- includes_design_review: yes
+
+Validation: ALL TRIGGER CONDITIONS PRESENT
