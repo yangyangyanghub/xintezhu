@@ -112,3 +112,10 @@ None - all decisions made during planning phase.
 **Decision**: Mark F2 as `REJECT`.
 **Rationale**: `SKILL.md` passes basic structure checks, but the package still fails quality review because the review contract is inconsistent across files, long references lack navigation structure, and supporting references leak implementation/runtime guidance.
 **Impact**: Future approval work should treat F2 and F4 as linked blockers; fixing only wording in `SKILL.md` will not be sufficient.
+
+## 2026-04-11 Fix 2 Scope Cleanup Decision
+
+### 13. Reduce References to Design-Level Guidance Only
+**Decision**: Remove implementation snippets and runtime/setup details from `references/icon-systems.md` and `references/design-sources.md`, while preserving their original section structure and design-decision value.
+**Rationale**: This skill produces `DESIGN.md` only, so supporting references must guide naming, visual selection, and decision criteria rather than code usage or asset wiring.
+**Impact**: Scope fidelity is now enforced not only in `SKILL.md`, but also in the reference materials that the skill consults during design generation.

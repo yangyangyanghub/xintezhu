@@ -80,6 +80,30 @@
         "能识别这是后端 API 调试问题而非前端设计问题。",
         "不应把图标系统、布局规范、视觉审查等无关内容带进回答。"
       ]
+    },
+    {
+      "id": 7,
+      "eval_name": "offline-mode-core-workflow",
+      "prompt": "生成一个仪表盘页面的 DESIGN.md，假设我们无法访问外部网络，只能使用技能内置的参考资料。",
+      "expected_output": "使用技能内置的 design-sources.md、icon-systems.md 和 design-md-template.md 生成完整的 DESIGN.md，不依赖外部网络资源。",
+      "files": [],
+      "assertions": [
+        "生成的 DESIGN.md 包含所有9个标准章节。",
+        "使用了内置参考资料中的图标系统建议。",
+        "没有因为网络不可用时失败或报错。"
+      ]
+    },
+    {
+      "id": 8,
+      "eval_name": "trigger-precision-ambiguous",
+      "prompt": "帮我整理一下这个项目",
+      "expected_output": "识别这是一个模糊的请求，不应直接生成 DESIGN.md 或进入设计审查流程；应该要求澄清用户的具体需求。",
+      "files": [],
+      "assertions": [
+        "不输出 DESIGN.md 结构或设计评审模板。",
+        "不讨论图标系统、颜色方案或布局规范。",
+        "主动询问用户具体需要什么类型的帮助。"
+      ]
     }
   ]
 }

@@ -1,0 +1,23 @@
+Task: fix-2-scope-cleanup
+Date: 2026-04-11
+
+Updated files:
+- C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\references\icon-systems.md
+- C:\Users\HP\.config\opencode\skill\frontend-design-orchestrator\references\design-sources.md
+
+Scope cleanup performed:
+- Removed TSX import snippets from icon source sections
+- Removed HTML and CSS implementation snippets
+- Removed runtime/setup wording and file path reference `/src/assets/icons/`
+- Rewrote migration/setup wording to design-spec language
+- Removed `asset downloads` wording from external resource guidance
+- Reframed Tailwind UI from implementation reference to visual pattern inspiration
+
+Retained design-level guidance:
+- Naming conventions and prefix rules
+- Size scale, color/stroke decision guidance
+- Conflict detection/report structure
+- Design inspiration sources and visual style descriptions
+
+Verification notes:
+- Content search found no matches for import snippets, TSX/HTML/CSS fences, `/src/assets/icons/`, `asset downloads`, or `Implementation reference` in the cleaned reference files.

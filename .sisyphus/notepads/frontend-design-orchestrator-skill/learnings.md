@@ -113,3 +113,9 @@ None at session start - all decisions documented in plan.
 - For skill QA, a passing line-count/frontmatter check is not enough; the decisive failures often live in the contract between `SKILL.md` and supporting references.
 - Reference files over ~100 lines become harder to scan without a top-level contents section, especially when they are meant for progressive disclosure.
 - Mixed-language references and implementation-heavy examples create quality drift even when each file looks individually “complete”.
+
+## 2026-04-11 Fix 2 Scope Cleanup Learnings
+
+- Supporting reference files must obey the same scope boundary as `SKILL.md`; otherwise design-only skills still drift into implementation through examples.
+- Replacing code snippets with short "design note" guidance preserves section value without teaching runtime setup.
+- Even small phrases like `asset downloads`, package names, or source file paths are enough to weaken scope fidelity in a documentation-only skill.
