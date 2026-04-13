@@ -8,9 +8,11 @@ for a set of queries. Outputs results as JSON.
 import argparse
 import json
 import os
+import shutil
 import select
 import subprocess
 import sys
+import tempfile
 import time
 import uuid
 from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -20,19 +22,45 @@ from scripts.utils import parse_skill_md
 
 
 def find_project_root() -> Path:
-    """Find the project root by walking up from cwd looking for .claude/.
+    """Find the project root by walking up from cwd looking for CLI config dirs.
 
-    Mimics how Claude Code discovers its project root, so the command file
-    we create ends up where claude -p will look for it.
+    Prefers the nearest ancestor containing either .claude/ or .opencode/.
     """
     current = Path.cwd()
     for parent in [current, *current.parents]:
-        if (parent / ".claude").is_dir():
+        if (parent / ".claude").is_dir() or (parent / ".opencode").is_dir():
             return parent
     return current
 
 
-def run_single_query(
+def detect_backend() -> str:
+    """Detect which CLI backend is available for trigger evaluation."""
+    if shutil.which("claude"):
+        return "claude"
+    if shutil.which("opencode"):
+        return "opencode"
+    raise RuntimeError("Neither 'claude' nor 'opencode' CLI is available on PATH")
+
+
+def resolve_opencode_executable() -> str:
+    """Resolve the OpenCode CLI executable path for subprocess execution."""
+    opencodeExecutable = shutil.which("opencode")
+    if opencodeExecutable:
+        return opencodeExecutable
+    raise RuntimeError("OpenCode backend selected but 'opencode' CLI is not available on PATH")
+
+
+def tool_input_references_skill(tool_input: dict, skill_name: str) -> bool:
+    """Return whether a tool input references the target skill name."""
+    target_name = skill_name.lower()
+    for field_name in ("name", "skill"):
+        field_value = tool_input.get(field_name)
+        if isinstance(field_value, str) and target_name in field_value.lower():
+            return True
+    return False
+
+
+def run_single_query_claude(
     query: str,
     skill_name: str,
     skill_description: str,
@@ -40,14 +68,7 @@ def run_single_query(
     project_root: str,
     model: str | None = None,
 ) -> bool:
-    """Run a single query and return whether the skill was triggered.
-
-    Creates a command file in .claude/commands/ so it appears in Claude's
-    available_skills list, then runs `claude -p` with the raw query.
-    Uses --include-partial-messages to detect triggering early from
-    stream events (content_block_start) rather than waiting for the
-    full assistant message, which only arrives after tool execution.
-    """
+    """Run a single query through Claude and return whether the skill triggered."""
     unique_id = uuid.uuid4().hex[:8]
     clean_name = f"{skill_name}-skill-{unique_id}"
     project_commands_dir = Path(project_root) / ".claude" / "commands"
@@ -89,6 +110,8 @@ def run_single_query(
             cwd=project_root,
             env=env,
         )
+        if process.stdout is None:
+            return False
 
         triggered = False
         start_time = time.time()
@@ -181,6 +204,103 @@ def run_single_query(
             command_file.unlink()
 
 
+def run_single_query_opencode(
+    query: str,
+    skill_name: str,
+    timeout: int,
+    project_root: str,
+) -> bool:
+    """Run a single query through OpenCode and return whether the skill triggered."""
+    queryFilePath = None
+
+    try:
+        with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".txt", delete=False) as queryFile:
+            queryFile.write(query)
+            queryFilePath = queryFile.name
+
+        escapedQueryFilePath = queryFilePath.replace("'", "''")
+        escapedProjectRoot = project_root.replace("'", "''")
+        psCommand = (
+            f"$query = Get-Content -LiteralPath '{escapedQueryFilePath}' -Encoding UTF8 -Raw; "
+            f"opencode run --format json --dir '{escapedProjectRoot}' $query"
+        )
+
+        process = subprocess.run(
+            ["powershell.exe", "-NoProfile", "-Command", psCommand],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            cwd=project_root,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=timeout,
+            check=False,
+        )
+    except subprocess.TimeoutExpired:
+        return False
+    finally:
+        if queryFilePath:
+            Path(queryFilePath).unlink(missing_ok=True)
+
+    for raw_line in process.stdout.splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+
+        if event.get("type") != "tool_use":
+            continue
+
+        part = event.get("part", {})
+        tool_name = part.get("tool", "")
+        tool_input = part.get("state", {}).get("input", part.get("input", {}))
+
+        if tool_name in ("skill", "use_skill"):
+            if tool_input_references_skill(tool_input, skill_name):
+                return True
+            continue
+
+        continue
+
+    return False
+
+
+def run_single_query(
+    query: str,
+    skill_name: str,
+    skill_description: str,
+    timeout: int,
+    project_root: str,
+    backend: str,
+    model: str | None = None,
+) -> bool:
+    """Run a single query and return whether the skill was triggered.
+
+    Uses Claude when available, otherwise falls back to OpenCode.
+    """
+    if backend == "claude":
+        return run_single_query_claude(
+            query=query,
+            skill_name=skill_name,
+            skill_description=skill_description,
+            timeout=timeout,
+            project_root=project_root,
+            model=model,
+        )
+    if backend == "opencode":
+        return run_single_query_opencode(
+            query=query,
+            skill_name=skill_name,
+            timeout=timeout,
+            project_root=project_root,
+        )
+    raise RuntimeError(f"Unsupported backend: {backend}")
+
+
 def run_eval(
     eval_set: list[dict],
     skill_name: str,
@@ -194,6 +314,7 @@ def run_eval(
 ) -> dict:
     """Run the full eval set and return results."""
     results = []
+    backend = detect_backend()
 
     with ProcessPoolExecutor(max_workers=num_workers) as executor:
         future_to_info = {}
@@ -206,6 +327,7 @@ def run_eval(
                     description,
                     timeout,
                     str(project_root),
+                    backend,
                     model,
                 )
                 future_to_info[future] = (item, run_idx)
@@ -269,7 +391,7 @@ def main():
     parser.add_argument("--verbose", action="store_true", help="Print progress to stderr")
     args = parser.parse_args()
 
-    eval_set = json.loads(Path(args.eval_set).read_text())
+    eval_set = json.loads(Path(args.eval_set).read_text(encoding='utf-8'))
     skill_path = Path(args.skill_path)
 
     if not (skill_path / "SKILL.md").exists():
