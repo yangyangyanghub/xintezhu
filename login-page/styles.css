@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'DM Sans', 'Satoshi', system-ui, sans-serif;
+  }
+  
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .animate-stagger-1 {
+    animation: staggerFade 0.5s ease-out 0.1s both;
+  }
+  
+  .animate-stagger-2 {
+    animation: staggerFade 0.5s ease-out 0.15s both;
+  }
+  
+  .animate-stagger-3 {
+    animation: staggerFade 0.5s ease-out 0.2s both;
+  }
+  
+  .animate-stagger-4 {
+    animation: staggerFade 0.5s ease-out 0.25s both;
+  }
+  
+  .animate-stagger-5 {
+    animation: staggerFade 0.5s ease-out 0.3s both;
+  }
+  
+  .animate-stagger-6 {
+    animation: staggerFade 0.5s ease-out 0.35s both;
+  }
+  
+  .animate-stagger-7 {
+    animation: staggerFade 0.5s ease-out 0.4s both;
+  }
+}
+
+input::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+}
+
+input::-webkit-caps-lock-indicator {
+  display: none !important;
+}
+
+::selection {
+  background-color: rgba(99, 102, 241, 0.2);
+}
