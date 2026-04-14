@@ -40,12 +40,18 @@ description: >
 & "<QGIS路径>\python-qgis-ltr.bat" scripts/inspect_data.py --data <数据目录路径>
 ```
 
-这会输出：
-- 每个 shp 文件的名称、几何类型（点/线/面）、要素数
-- 每个图层的字段列表（用于智能标注）
-- 坐标系统（CRS）信息
+向用户展示探测结果后，**询问确认**：
+```
+📊 数据探查完成，共 4 个图层，坐标系 EPSG:4499。
+请问：
+1. 是否需要调整图层显示顺序？（默认底→顶）
+2. 是否需要排除某个图层？（直接告诉我图层名）
+3. 确认可用？（回复"可以"进入下一步）
+```
 
-向用户展示探测结果，格式：
+### 第二步：图层选择与模板选择
+
+**数据探查结果展示格式**（供参考）：
 ```
 📂 检测到 4 个图层：
   ☑ 水体_p.shp      面(Polygon)   300 要素
@@ -55,8 +61,6 @@ description: >
 
 🌍 坐标系: EPSG:4499 (CGCS2000 / Gauss-Kruger zone 21)
 ```
-
-### 第二步：图层选择与模板选择
 
 向用户展示选项，让用户确认：
 
@@ -197,6 +201,12 @@ description: >
 
 确认开始？[是/否]
 ```
+
+## 脚本目录维护
+
+`scripts/` 目录仅保留核心脚本，定期清理临时文件：
+- ✅ 保留：`map_engine.py`, `inspect_data.py`, `create_od_lines.py`, `read_excel.py`, `relationship_map.py`
+- ❌ 清理：`temp_inspect.py`, `inspect_result.txt`, `quick_inspect.py`, `__pycache__/`（运行残留）
 
 ## 注意事项
 
