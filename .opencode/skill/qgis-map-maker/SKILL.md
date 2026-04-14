@@ -28,10 +28,16 @@ description: >
 
 ### 第一步：数据探查
 
-当用户提供数据目录路径时，先运行数据探查脚本：
+**环境检测**：先确认 QGIS 可用。
+1. 尝试默认路径：`C:\Program Files\QGIS 3.40.9\bin\python-qgis-ltr.bat`
+2. 若不存在，自动搜索：`dir "C:\Program Files\QGIS*" /b` 找到最新版本
+3. 仍未找到时，询问用户："未检测到 QGIS，请提供 python-qgis-ltr.bat 路径"
+4. 记住检测到的路径，后续步骤复用。
+
+当用户提供数据目录路径时，运行数据探查脚本：
 
 ```bash
-& "C:\Program Files\QGIS 3.40.9\bin\python-qgis-ltr.bat" scripts/inspect_data.py --data <数据目录路径>
+& "<QGIS路径>\python-qgis-ltr.bat" scripts/inspect_data.py --data <数据目录路径>
 ```
 
 这会输出：
@@ -56,28 +62,15 @@ description: >
 
 **图层列表**（默认全选，用户可去掉不需要的）
 
-**地图模板**（14 种预制方案，见 `references/templates.md`）：
+**地图模板**（14 种预制方案，详见 `references/templates.md`）：
 ```
-🎨 请选择模板：
-【基础类】
-1. 🌊 水系地图（蓝调）      — 河流湖泊蓝色主题，适合水文图
-2. 🏛️ 政区地图（典雅）     — 米色+棕线政务风格，适合行政区划
-3. 🛣️ 交通路网（灰调）     — 灰色路网+淡彩，适合交通规划
-4. ⚡ 极简黑白              — 黑白线稿风格，适合论文插图
-【自然地理类】
-5. 🌾 土地利用图（绿调）   — 耕地林地绿色主题，适合自然资源
-6. 🪨 地质图（土黄）        — 地层岩性土黄色调，适合地质勘探
-7. 🌿 植被覆盖图（翠绿）   — 森林草原绿色主题，适合生态调查
-【人文经济类】
-8. 👥 人口分布图（粉调）   — 人口密度粉色主题，适合人口统计
-9. 📊 经济分布图（金调）   — GDP产业金色主题，适合经济分析
-【规划工程类】
-10. 📐 空间规划图（紫调）  — 国土规划紫色专用色
-11. 🌍 环境评价图（绿+橙） — 环保绿底+警示橙边
-【特殊用途】
-12. 🔥 热力专题图（红调）  — 橙红分级设色，适合统计专题
-13. ⚔️ 军事地形图（军绿）  — 军橄榄绿，地形军事参考
-14. ⛵ 航海图（海军蓝）    — 天蓝+海军蓝，水深航道
+🎨 请选择模板（输入编号或关键词）：
+【基础类】1.水系  2.政区  3.交通  4.极简黑白
+【自然类】5.土地利用  6.地质  7.植被
+【经济类】8.人口  9.经济
+【规划类】10.空间规划  11.环境评价
+【特殊类】12.热力  13.军事  14.航海
+💡 常见场景：行政区划→2，河流湖泊→1，交通规划→3，论文插图→4
 ```
 
 **输出规格**（可选，默认 A3 横向 300DPI）：
@@ -108,7 +101,7 @@ description: >
 收集完所有参数后，调用核心制图引擎：
 
 ```bash
-& "C:\Program Files\QGIS 3.40.9\bin\python-qgis-ltr.bat" scripts/map_engine.py \
+& "<QGIS路径>\python-qgis-ltr.bat" scripts/map_engine.py \
   --data <数据目录> \
   --layers <逗号分隔的图层名> \
   --template <模板名> \
@@ -124,7 +117,7 @@ description: >
 |------|------|------|
 | `--data` | ✅ | Shapefile 所在目录 |
 | `--layers` | ✅ | 要渲染的图层名，逗号分隔（顺序=从底到顶） |
-| `--template` | ❌ | 模板名，默认 `water`（水系） |
+| `--template` | ❌ | 模板名，默认 `water`（水系）。映射关系：1→water, 2→admin, 3→road, 4→minimal, 5→landuse, 6→geology, 7→vegetation, 8→population, 9→economy, 10→planning, 11→environment, 12→heatmap, 13→military, 14→navigation |
 | `--output` | ❌ | 输出路径，默认 `assets/generated/地图.png` |
 | `--paper-size` | ❌ | 纸张尺寸，可选：`A4` `A3` `A2` `A1` `A0`，默认 `A3` |
 | `--orientation` | ❌ | 纸张方向，可选：`portrait`（纵向） `landscape`（横向），默认 `landscape` |
