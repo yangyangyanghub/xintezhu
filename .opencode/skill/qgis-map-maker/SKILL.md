@@ -127,6 +127,8 @@ description: >
 | `--orientation` | ❌ | 纸张方向，可选：`portrait`（纵向） `landscape`（横向），默认 `landscape` |
 | `--dpi` | ❌ | 分辨率，默认 300 |
 | `--title` | ❌ | 地图标题，默认根据模板自动生成 |
+| `--graticule` | ❌ | 是否添加经纬度格网（默认关闭，加此参数开启） |
+| `--source` | ❌ | 数据来源标注，如 `"自然资源局"`，默认 `"公开地理信息数据"` |
 
 > **注意**：`--paper-size` 和 `--orientation` 组合自动计算 `--width` 和 `--height`，无需手动指定毫米值。
 > 如需自定义尺寸，仍可使用 `--width` 和 `--height`（单位 mm）。
