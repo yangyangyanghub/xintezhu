@@ -71,6 +71,8 @@ assets/*
 # 知识库具体内容（保留目录结构）
 myk/调研笔记/*
 !myk/调研笔记/.gitkeep
+!myk/调研笔记/inbox/
+!myk/调研笔记/文献笔记/
 myk/技术沉淀/*
 !myk/技术沉淀/.gitkeep
 myk/技术文章/*

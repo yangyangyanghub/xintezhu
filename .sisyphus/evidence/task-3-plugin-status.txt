@@ -1,0 +1,29 @@
+# Obsidian 插件状态对比报告
+
+生成时间: 2026-05-04
+
+## 插件状态
+
+| 插件名 | 状态 | 备注 |
+|--------|------|------|
+| dataview | ✅ 已安装 | 已启用 |
+| templater-obsidian | ✅ 已安装 | 已启用 |
+| quickadd | ✅ 已安装 | 已启用 |
+| obsidian-zotero-integration | ❌ 待安装 | 方案要求 |
+| obsidian-citations | ❌ 待安装 | 方案要求 |
+
+## 当前已安装插件清单
+
+- calendar
+- dataview
+- obsidian-tasks-plugin
+- obsidian-kanban
+- obsidian-mind-map
+- opencode-obsidian
+- obsidian-image-auto-upload-plugin
+- quickadd
+- templater-obsidian
+
+## 对比结论
+
+已安装方案要求的 3 个核心插件（dataview、templater-obsidian、quickadd），剩余 2 个学术引用相关插件（obsidian-zotero-integration、obsidian-citations）待安装。
