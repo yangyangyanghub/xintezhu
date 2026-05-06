@@ -375,6 +375,8 @@ async function handleLegacyHookEvent(event: HookEvent): Promise<void> {
     await handleSessionIdle(event as EventSessionIdle);
   } else if (event.type === 'message.updated') {
     await handleMessageUpdated(event as EventMessageUpdated);
+  } else if (event.type === 'session.compacted') {
+    await handleSessionCompacted(event.properties.sessionID);
   }
 }
 
@@ -459,10 +461,21 @@ async function handleSessionIdle(event: EventSessionIdle) {
  * 自动记录对话内容到工作记忆
  */
 async function handleMessageUpdated(event: EventMessageUpdated) {
+  // 关键修复：如果 work  memory 丢失（进程重启后），从文件加载
+  if (!currentWorkingMemory) {
+    currentWorkingMemory = await loadWorkingMemoryFromFile(config.memoryRoot);
+    if (!currentWorkingMemory) {
+      currentWorkingMemory = {
+        sessionId: 'unknown',
+        startTime: new Date().toISOString(),
+        currentTask: null,
+        context: [],
+        lastActivity: new Date().toISOString()
+      };
+    }
+  }
+  
   const message = event.properties.info;
-  
-  if (!currentWorkingMemory) return;
-  
   currentWorkingMemory.lastActivity = new Date().toISOString();
   
   // 提取消息内容
@@ -470,30 +483,33 @@ async function handleMessageUpdated(event: EventMessageUpdated) {
   let content = '';
   
   if (role === 'user') {
-    // 用户消息：从 summary 或原始消息提取
-    content = message.summary?.title || message.summary?.body || '';
-    if (!content) {
-      // 尝试从其他字段获取
-      content = `[用户消息 ${message.id.substring(0, 8)}]`;
-    }
+    content = message.summary?.title || message.summary?.body || `[用户消息 ${message.id.substring(0, 8)}]`;
   } else if (role === 'assistant') {
-    // 助手消息：记录完成情况
     const tokens = message.tokens;
     content = `[助手响应 - 输入${tokens?.input || 0}token, 输出${tokens?.output || 0}token]`;
   }
   
   if (content) {
-    // 检测是否重要内容
     const isImportant = detectImportantContent(content);
     
     const entry: ContextEntry = {
       role,
-      content: content.substring(0, 500), // 限制长度
+      content: content.substring(0, 500),
       time: new Date().toISOString(),
       important: isImportant
     };
     
     currentWorkingMemory.context.push(entry);
+    
+    // 去重：如果相邻条目完全相同，只保留一个
+    const ctx = currentWorkingMemory.context;
+    if (ctx.length >= 3) {
+      const last = ctx[ctx.length - 1].content;
+      const prev = ctx[ctx.length - 3]?.content;
+      if (last === prev) {
+        ctx.splice(-1, 1); // 移除重复
+      }
+    }
     
     // 更新当前任务（如果是用户消息且看起来像任务）
     if (role === 'user' && !currentWorkingMemory.currentTask && looksLikeTask(content)) {
@@ -502,6 +518,51 @@ async function handleMessageUpdated(event: EventMessageUpdated) {
     
     // 实时保存工作记忆
     await saveWorkingMemory(config.memoryRoot, currentWorkingMemory);
+  }
+}
+
+/**
+ * 从文件加载工作记忆（解决进程重启后状态丢失问题）
+ */
+async function loadWorkingMemoryFromFile(memoryRoot: string): Promise<WorkingMemory | null> {
+  try {
+    const { readFile } = await import('node:fs/promises');
+    const { resolve } = await import('node:path');
+    const filePath = resolve(memoryRoot, 'working/current.md');
+    const content = await readFile(filePath, 'utf-8');
+    
+    // 解析 markdown 文件提取关键信息
+    const sessionId = content.match(/\*\*sessionId\*\*: (.+)/)?.[1] || null;
+    const startTime = content.match(/\*\*startTime\*\*: (.+)/)?.[1] || null;
+    const currentTask = content.match(/\*\*currentTask\*\*: (.+)/)?.[1] || null;
+    const lastActivity = content.match(/\*\*lastActivity\*\*: (.+)/)?.[1] || null;
+    
+    // 解析上下文条目
+    const contextLines = content.split('\n').filter(line => line.startsWith('- '));
+    const context: ContextEntry[] = contextLines.map(line => {
+      const match = line.match(/^- .+?\[(.+?)\] (.+)/);
+      if (!match) return null;
+      const role = line.includes('👤') ? 'user' : 'assistant';
+      const isImportant = line.includes('⭐');
+      return {
+        role,
+        content: match[2]?.trim() || '',
+        time: `2026-01-01T${match[1]}:00Z`,
+        important: isImportant
+      };
+    }).filter(Boolean) as ContextEntry[];
+    
+    if (!sessionId || !startTime) return null;
+    
+    return {
+      sessionId: sessionId !== 'unknown' ? sessionId : 'recovered',
+      startTime,
+      currentTask: currentTask === '无' ? null : currentTask,
+      lastActivity: lastActivity || startTime,
+      context
+    };
+  } catch {
+    return null;
   }
 }
 
@@ -526,6 +587,54 @@ function looksLikeTask(content: string): boolean {
     /^生成/, /^写/, /^修改/, /^更新/, /^删除/, /^整理/
   ];
   return taskPatterns.some(p => p.test(content));
+}
+
+/**
+ * 处理会话压缩事件
+ * 触发 consolidate：将重要内容沉淀到核心记忆
+ */
+async function handleSessionCompacted(sessionId: string) {
+  console.log(`[MemorySystem] 会话压缩: ${sessionId}`);
+  
+  // 加载当前工作记忆
+  const working = await loadWorkingMemoryFromFile(config.memoryRoot);
+  if (!working || working.context.length === 0) {
+    console.log('[MemorySystem] 无工作记忆可压缩');
+    return;
+  }
+  
+  // 提取重要条目
+  const importantItems = working.context
+    .filter(e => e.important)
+    .map(e => e.content);
+  
+  if (importantItems.length === 0) {
+    console.log('[MemorySystem] 无重要内容可沉淀');
+    return;
+  }
+  
+  // 自动分类沉淀（简单的关键词匹配）
+  const categories = new Set<string>();
+  for (const item of importantItems) {
+    if (/习惯|以后都|记住|以后这样/.test(item)) {
+      categories.add('habits');
+    } else if (/偏好|喜欢|不喜欢|用 |不用|格式|风格/.test(item)) {
+      categories.add('preferences');
+    } else if (/流程|步骤|规范|规则|必须|禁止/.test(item)) {
+      // 铁律存在 habits.md 中
+      categories.add('habits');
+    }
+  }
+  
+  console.log(`[MemorySystem] 发现 ${importantItems.length} 条重要内容，可沉淀到: ${[...categories].join(', ') || '未分类'}`);
+  
+  // 更新快照（即使不自动沉淀也刷新快照）
+  await saveSnapshotFile(config.memoryRoot);
+  
+  // 清理过期记忆
+  if (config.autoCleanup) {
+    await cleanupExpired(config.memoryRoot, config.episodicRetentionDays);
+  }
 }
 
 export default memorySystemPlugin;

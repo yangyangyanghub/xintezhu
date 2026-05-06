@@ -117,7 +117,7 @@ export const DEFAULT_CONFIG: MemorySystemConfig = {
   maxSnapshotTokens: 2000,
   autoCleanup: true,
   memoryRoot: '.memory',
-  enableLegacyFallback: false,
+  enableLegacyFallback: true,
 };
 
 // ============ 自动摄入桥接类型 ============

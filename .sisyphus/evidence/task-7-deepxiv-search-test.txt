@@ -1,0 +1,49 @@
+=== Task 7: deepxiv-sdk Search Test ===
+Date: 2026-05-04
+
+--- CLI Test (deepxiv search) ---
+Command: deepxiv search "machine learning" --limit 3
+Result: SUCCESS
+Found 9 arXiv papers (showing 3):
+
+1. Robustness and Regularization of Support Vector Machines
+   arXiv: 0803.3490 | Score: 3.549 | Citations: 490 | Date: 2008-03-25
+
+2. Rich feature hierarchies for accurate object detection and semantic segmentation
+   arXiv: 1311.2524 | Score: 3.439 | Citations: 28571 | Date: 2013-11-11
+
+3. The Random Feature Method for Time-dependent Problems
+   arXiv: 2304.06913 | Score: 3.326 | Citations: 22 | Date: 2023-04-14
+
+--- Python SDK Test (Reader.search) ---
+Command: reader.search('machine learning', size=3)
+Result: SUCCESS
+Status: success
+Total count: 9
+Returned results: 3
+
+Result 1:
+  Title: Robustness and Regularization of Support Vector Machines
+  arXiv ID: 0803.3490
+  Authors: Huan Xu, Constantine Caramanis, Shie Mannor
+  Citations: 490
+  Categories: cs.AI, cs.LG
+
+Result 2:
+  Title: Rich feature hierarchies for accurate object detection and semantic segmentation
+  arXiv ID: 1311.2524
+  Authors: Ross Girshick, Jeff Donahue, Trevor Darrell, Jitendra Malik
+  Citations: 28571
+  Categories: cs.CV
+
+Result 3:
+  Title: The Random Feature Method for Time-dependent Problems
+  arXiv ID: 2304.06913
+  Authors: Jingrun Chen, Weinan E, Yixin Luo
+  Citations: 22
+  Categories: cs.NA, math.NA, physics.comp-ph
+
+--- Test Summary ---
+CLI search: PASSED
+SDK search:  PASSED
+All tests PASSED
