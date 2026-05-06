@@ -1,41 +1,27 @@
 {
   "active_plan": "E:\\code\\my-ai-workspace\\.sisyphus\\plans\\ai-research-assistant-build.md",
   "started_at": "2026-05-04T10:35:03.331Z",
+  "completed_at": "2026-05-04T12:30:00.000Z",
   "session_ids": [
     "ses_20d78e97bffewZx3PCVfz4gaz8",
     "ses_20d7009c1ffeE25TT5FKBkaDl6",
     "ses_20d6e5b44ffeTCceL5WKdAT0Cn",
-    "ses_20d6cf6a4ffeSIaFERVRE5xloo"
+    "ses_20d6cf6a4ffeSIaFERVRE5xloo",
+    "ses_20d6a921dffemDl4IunY8T0mW8",
+    "ses_20d544007ffeUN56voQzfHSkOq",
+    "ses_20d4cf8a7ffegP8SQKeS22YL3L",
+    "ses_20d4b6d9fffejJxB11Zc4hJYAy",
+    "ses_20d4588abffeRHdZrmYATyFtI1",
+    "ses_20d43b1d5ffeFrmnevSw6t1DgO",
+    "ses_20d41d879ffeoo5091prY3rkwE",
+    "ses_20d3f2b2fffeKiuNb7xD3VtUqA",
+    "ses_20d3b3e51ffeZpkN7B18xX5nhP",
+    "ses_20d3938ffffeqxNz69a2g68V0w",
+    "ses_20d159ab9ffeBfQyHKMybQPeis",
+    "ses_20d148212ffeXacx56CWMPOaZ3",
+    "ses_20d1327bbffeUh0PSPEbyjzNUZ"
   ],
   "plan_name": "ai-research-assistant-build",
   "agent": "atlas",
-  "task_sessions": {
-    "todo:1": {
-      "task_key": "todo:1",
-      "task_label": "1",
-      "task_title": "创建目录结构",
-      "session_id": "ses_20d7009c1ffeE25TT5FKBkaDl6",
-      "agent": "Sisyphus-Junior",
-      "category": "quick",
-      "updated_at": "2026-05-04T10:37:33.006Z"
-    },
-    "todo:2": {
-      "task_key": "todo:2",
-      "task_label": "2",
-      "task_title": "创建文献笔记模板",
-      "session_id": "ses_20d6e5b44ffeTCceL5WKdAT0Cn",
-      "agent": "Sisyphus-Junior",
-      "category": "quick",
-      "updated_at": "2026-05-04T10:39:18.111Z"
-    },
-    "todo:3": {
-      "task_key": "todo:3",
-      "task_label": "3",
-      "task_title": "验证现有 Obsidian 插件配置",
-      "session_id": "ses_20d6cf6a4ffeSIaFERVRE5xloo",
-      "agent": "Sisyphus-Junior",
-      "category": "quick",
-      "updated_at": "2026-05-04T10:41:22.426Z"
-    }
-  }
+  "status": "completed"
 }

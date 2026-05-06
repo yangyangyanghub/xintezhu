@@ -14,7 +14,7 @@ Use this checklist to validate every slide before deployment. Run through all ap
 - [ ] No scrollbars on rendered slide
 
 ### Typography
-- [ ] Times New Roman font applied to all text
+- [ ] Chinese-first font system applied (Noto Serif SC titles, Noto Sans SC body)
 - [ ] Font sizes follow hierarchy (title > body)
 - [ ] Body text left-aligned (not centered)
 - [ ] No more than 2 font families used
@@ -259,7 +259,7 @@ Use this checklist to validate every slide before deployment. Run through all ap
 These checks are non-negotiable. If any fail, the slide is broken:
 
 1. ✅ **Dimensions**: Exactly 960×540px
-2. ✅ **Font**: Times New Roman for all text
+2. ✅ **Font**: Noto Serif SC (titles) + Noto Sans SC (body)
 3. ✅ **No gradients**: Solid colors only
 4. ✅ **No animations**: Static slides only
 5. ✅ **SVG paths**: M/L/H/V/Z commands only
@@ -307,7 +307,7 @@ For quick reference during slide creation:
 SLIDE VERIFICATION:
 - [ ] .slide-content wrapper
 - [ ] 960×540px dimensions
-- [ ] Times New Roman font
+- [ ] Chinese font system (Noto Serif SC / Noto Sans SC)
 - [ ] No gradients
 - [ ] No animations
 - [ ] Inline CSS only
