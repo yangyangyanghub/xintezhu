@@ -96,21 +96,6 @@ window.addEventListener('resize', scaleSlide);
 - Image captions, chart legends, footnotes → light-weight
 - Reserve bold (`font-weight: 600+`) for titles, headings, and key emphasis only
 
-### ⚠️ Chinese-First Font System
-
-All text must use the Chinese-first font stack:
-
-| Element | `font-family` Declaration |
-|---------|--------------------------|
-| **标题/大字** | `font-family: 'Noto Serif SC', 'Times New Roman', 'SimSun', serif;` |
-| **正文/段落/列表** | `font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;` |
-| **代码/技术内容** | `font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;` |
-
-**Implementation tips:**
-- SVG `<text>` elements must include matching `font-family` attributes
-- Inline text styling should reference this stack, not bare `sans-serif`/`serif`
-- English letters and numbers render naturally through Noto's Latin glyphs
-
 ---
 
 ## Appendix C — Color Palette Rules (REQUIRED)
@@ -244,7 +229,6 @@ Do NOT use CSS background/border for decorative background shapes. These must us
 <svg width="180" height="52" viewBox="0 0 180 52">
   <rect width="180" height="52" rx="26" fill="#fb8500"/>
   <text x="90" y="26" text-anchor="middle" dominant-baseline="central"
-        font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"
         font-size="16" font-weight="700" fill="#ffffff">LABEL</text>
 </svg>
 
@@ -340,9 +324,7 @@ Do NOT use CSS background/border for decorative background shapes. These must us
   <circle cx="50" cy="50" r="40" stroke="#4CAF50" stroke-width="8" fill="none"
           stroke-dasharray="251.3" stroke-dashoffset="75.4" stroke-linecap="round"
           transform="rotate(-90 50 50)"/>
-  <text x="50" y="50" text-anchor="middle" dominant-baseline="central"
-        font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"
-        font-size="20" font-weight="bold" fill="currentColor">70%</text>
+  <text x="50" y="50" text-anchor="middle" dominant-baseline="central" font-size="20" font-weight="bold" fill="currentColor">70%</text>
 </svg>
 
 <!-- Horizontal progress bar -->
@@ -438,7 +420,6 @@ Do NOT use CSS background/border for decorative background shapes. These must us
 <svg width="100" height="32" viewBox="0 0 100 32">
   <rect width="100" height="32" rx="16" fill="#bc6c25"/>
   <text x="50" y="16" text-anchor="middle" dominant-baseline="central"
-        font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"
         font-size="14" font-weight="700" fill="#fefae0" letter-spacing="3">丰收季</text>
 </svg>
 
@@ -469,7 +450,6 @@ All slides **except Cover Page** MUST include a page number badge showing the cu
 <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
   <circle cx="18" cy="18" r="18" fill="#219ebc"/>
   <text x="18" y="18" text-anchor="middle" dominant-baseline="central"
-        font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"
         font-size="14" font-weight="600" fill="#ffffff">3</text>
 </svg>
 
@@ -477,7 +457,6 @@ All slides **except Cover Page** MUST include a page number badge showing the cu
 <svg style="position:absolute; right:32px; bottom:24px;" width="48" height="28" viewBox="0 0 48 28">
   <rect width="48" height="28" rx="14" fill="#219ebc"/>
   <text x="24" y="14" text-anchor="middle" dominant-baseline="central"
-        font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"
         font-size="13" font-weight="600" fill="#ffffff">03</text>
 </svg>
 

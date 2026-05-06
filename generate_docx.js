@@ -227,8 +227,8 @@ function parseMD(lines) {
 // ==================== 主生成 ====================
 
 async function main() {
-  const INPUT  = 'E:/code/my-ai-workspace/myk/调研笔记/规划院数字化转型/规划院数字化转型调研报告.md';
-  const OUTPUT = 'E:/code/my-ai-workspace/exports/综合性规划院数字化转型方向调研报告.docx';
+  const INPUT  = 'E:/code/my-ai-workspace/myk/技术文章/2026-04-12规划院数字化转型三年实施路径.md';
+  const OUTPUT = 'E:/code/my-ai-workspace/exports/邯郸市规划设计院数智化转型三年行动计划（2026-2028）.docx';
 
   const outDir = dirname(OUTPUT);
   if (!existsSync(outDir)) mkdirSync(outDir, {recursive:true});
@@ -237,7 +237,7 @@ async function main() {
   const lines = content.split('\n');
 
   // 提取元数据
-  let author = '规划院数字化转型调研组';
+  let author = '规划院数字化转型工作组';
   let docDate = '2026年04月12日';
   let version = 'V3.0';
   const org = '邯郸市规划设计院';

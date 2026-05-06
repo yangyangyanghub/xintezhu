@@ -274,7 +274,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews):
 
   **Commit**: NO (纯验证,不涉及文件修改)
 
-- [x] 4. 安装 Zotero Integration 插件
+- [ ] 4. 安装 Zotero Integration 插件
 
   **What to do**:
   - 通过 Obsidian 社区插件市场安装 `obsidian-zotero-integration`
@@ -316,7 +316,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews):
   **Commit**: YES
   - Message: `feat(zotero): 安装 Zotero Integration 插件`
 
-- [x] 5. 安装 Citations 插件
+- [ ] 5. 安装 Citations 插件
 
   **What to do**:
   - 通过 Obsidian 社区插件市场安装 `obsidian-citations`
@@ -356,7 +356,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews):
   **Commit**: YES (与 Task 4 合并在同一提交)
   - Message: `feat(zotero): 安装 Citations 插件`
 
-- [x] 6. 配置 Templater 模板路径
+- [ ] 6. 配置 Templater 模板路径
 
   **What to do**:
   - 读取或创建 `.obsidian/plugins/templater-obsidian/data.json`
@@ -400,7 +400,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews):
   **Commit**: YES
   - Message: `feat(templater): 配置模板文件夹路径`
 
-- [x] 7. DeepXiv SDK 安装与验证
+- [ ] 7. DeepXiv SDK 安装与验证
 
   **What to do**:
   - 执行 `pip install deepxiv-sdk[all]` 或 `pip3 install deepxiv-sdk[all]`
@@ -450,7 +450,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews):
 
   **Commit**: NO (pip 安装不修改工作区文件)
 
-- [x] 8. 学术鲁班(academic-search)集成
+- [ ] 8. 学术鲁班(academic-search)集成
 
   **What to do**:
   - 从 GitHub 克隆学术鲁班项目: `git clone https://github.com/ustc-ai4science/academic-search.git` 到 `projects/academic-search/`
@@ -492,7 +492,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews):
 
   **Commit**: NO (外部项目克隆,不 commit)
 
-- [x] 9. geomaster 实战验证
+- [ ] 9. geomaster 实战验证
 
   **What to do**:
   - 验证 `geomaster` skill 已正确安装(全局配置)
@@ -533,7 +533,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews):
 
   **Commit**: NO (纯验证)
 
-- [x] 10. Dataview 文献查询面板
+- [ ] 10. Dataview 文献查询面板
 
   **What to do**:
   - 创建一个 Dataview 查询代码块文件 `myk/调研笔记/文献查询面板.md`
@@ -583,7 +583,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews):
   **Commit**: YES
   - Message: `feat(dataview): 创建文献查询面板`
 
-- [x] 11. QuickAdd 自动化脚本(可选) ~~跳过~~
+- [ ] 11. QuickAdd 自动化脚本(可选)
 
   **What to do**:
   - 创建一个 QuickAdd 宏配置,实现"一键生成文献笔记"流程
@@ -624,7 +624,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews):
   **Commit**: YES (如果修改了配置文件)
   - Message: `feat(quickadd): 添加文献笔记生成宏`
 
-- [x] 12. 端到端工作流验证
+- [ ] 12. 端到端工作流验证
 
   **What to do**:
   - 完整走一遍"文献收集→笔记生成→查询显示"工作流
@@ -674,10 +674,17 @@ Wave FINAL (After ALL tasks — 4 parallel reviews):
 
 > 4 review agents run in PARALLEL. ALL must APPROVE. Present consolidated results to user and get explicit "okay" before completing.
 
-- [x] F1. **Plan Compliance Audit** — `oracle`
-- [x] F2. **Code Quality Review** — `unspecified-high`
-- [x] F3. **Real Manual QA** — `unspecified-high`
-- [x] F4. **Scope Fidelity Check** — `deep`
+- [ ] F1. **Plan Compliance Audit** — `oracle`
+  检查: inbox/和文献笔记/目录存在、Zotero Integration+Citations 已安装、Templater 模板正确、DeepXiv SDK 可运行、Dataview 查询面板语法正确、geomaster 可加载。对比交付物列表。
+
+- [ ] F2. **Code Quality Review** — `unspecified-high`
+  检查: Dataview 查询语法正确性、Templater 语法无错误、JSON 配置文件格式正确、无遗留的调试输出。
+
+- [ ] F3. **Real Manual QA** — `unspecified-high`
+  执行完整工作流: 创建目录→安装插件→配置模板→运行 DeepXiv 测试→验证 Dataview→geomaster 加载。每个步骤截图/记录输出。
+
+- [ ] F4. **Scope Fidelity Check** — `deep`
+  验证: 没有创建方案之外的目录/文件、没有修改 wiki 已有内容、没有安装方案之外的插件、所有变更可追溯。
 
 ---
 

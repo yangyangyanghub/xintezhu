@@ -1,337 +1,440 @@
 ---
 name: html-ppt-gen
-description: "Generate professional HTML presentations with template-driven authoring, 36 CSS themes, presenter mode, and PPTX export. TRIGGERS: PPT, 演示文稿, presentation, HTML slides, 幻灯片, slide deck, 汇报, 报告, keynote, 演讲稿, 分享稿, 逐字稿, tech sharing, 小红书图文."
+description: "Generate professional multi-page HTML presentations (PPT). Creates slide decks with cover, TOC, section dividers, content pages, and summary slides. Supports export to PDF/PPTX. TRIGGERS: PPT, 演示文稿, presentation, HTML slides, 幻灯片, slide deck, 汇报, 报告."
 ---
 
 # HTML Presentation Generator
 
 ## Overview
 
-You are an expert at generating multi-page HTML presentations. Each slide is a standalone HTML file rendered at **960×540px**. You handle the full pipeline: research → design system → choose starting point (36 themes + 15 deck templates + 31 layouts) → plan outline → template-driven slide generation (with image generation + verification) → deployment.
-
-**Core principle**: **Never author from scratch**. Always start from the closest template, then replace content.
+You are an expert at generating complete multi-page HTML presentations. Each slide is a standalone HTML file rendered at 960×540px. You handle the full pipeline: research → color/font selection → outline planning → slide-by-slide generation (with image generation and visual verification) → final deployment. All slides are static HTML suitable for browser viewing and PPTX export.
 
 ## Workflow
 
+Follow these steps in order for every presentation:
+
 ### Step 1 — Research (if needed)
 
-If you lack domain knowledge, search for key facts, data, and context. Validate from multiple sources.
+If you lack domain knowledge about the user's topic, perform deep research first:
+- Search the web for key facts, data, and context
+- Validate information from multiple sources
+- Organize findings to inform slide content
 
-### Step 2 — Choose Your Starting Point
+### Step 2 — Configure Design System
 
-**Before writing any slide, know three things**: content/audience, style/theme, and starting point.
+**2.1 Choose Audience**
 
-**2.1 Pick a Theme (36 CSS themes, one `<link>` switches entire style)**
+Identify target audience to adjust design parameters:
 
-| Tone | Recommended Themes |
-|------|-------------------|
-| Business / investor | `pitch-deck-vc`, `corporate-clean`, `swiss-grid` |
-| Tech sharing / engineering | `tokyo-night`, `dracula`, `catppuccin-mocha`, `terminal-green`, `blueprint` |
-| 小红书图文 | `xiaohongshu-white`, `soft-pastel`, `rainbow-gradient`, `magazine-bold` |
-| Academic / report | `academic-paper`, `editorial-serif`, `minimal-white` |
-| Edgy / cyber / launch | `cyberpunk-neon`, `vaporwave`, `y2k-chrome`, `neo-brutalism` |
-| Education / warm | `soft-pastel`, `catppuccin-latte`, `gruvbox-dark` |
+| Audience | Characteristics | Design Impact |
+|----------|----------------|---------------|
+| **Executives** | Strategic, time-limited | Minimal density, large headlines, 3-5 key points |
+| **Experts/Professionals** | Technical depth needed | Dense layouts, detailed data, technical language |
+| **Beginners/Learners** | Educational focus | Warm mood, larger body text, step-by-step structure |
+| **General** | Broad appeal | Balanced density, accessible language |
 
-Full 36 themes: `minimal-white`, `editorial-serif`, `soft-pastel`, `sharp-mono`, `arctic-cool`, `sunset-warm`, `catppuccin-latte`, `catppuccin-mocha`, `dracula`, `tokyo-night`, `nord`, `solarized-light`, `gruvbox-dark`, `rose-pine`, `neo-brutalism`, `glassmorphism`, `bauhaus`, `swiss-grid`, `terminal-green`, `xiaohongshu-white`, `rainbow-gradient`, `aurora`, `blueprint`, `memphis-pop`, `cyberpunk-neon`, `y2k-chrome`, `retro-tv`, `japanese-minimal`, `vaporwave`, `midcentury`, `corporate-clean`, `academic-paper`, `news-broadcast`, `pitch-deck-vc`, `magazine-bold`, `engineering-whiteprint`
+**2.2 Choose Style Dimensions**
 
-Load `references/themes.md` for complete descriptions via `read_skill_file`.
-
-**2.2 Pick a Full-Deck Template (15 available)**
-
-If the content matches, copy from `templates/full-decks/<name>/`:
-- **Pitch**: `pitch-deck`
-- **Product Launch**: `product-launch`
-- **Tech Sharing**: `tech-sharing`
-- **Weekly Report**: `weekly-report`
-- **小红书 3:4 竖版**: `xhs-post` (9 pages, 3:4 ratio)
-- **Course Module**: `course-module`
-- **演讲者模式**: `presenter-mode-reveal` (built-in 逐字稿 examples)
-- Plus 8 real-world extractions: `xhs-white-editorial`, `graphify-dark-graph`, `knowledge-arch-blueprint`, `hermes-cyber-terminal`, `obsidian-claude-gradient`, `testing-safety-alert`, `xhs-pastel-card`, `dir-key-nav-minimal`
-
-Load `references/full-decks.md` via `read_skill_file` for details.
-
-**2.3 Pick Single-Page Layouts (31 available)**
-
-Load `references/layouts.md` via `read_skill_file` to find the closest layout, then copy and replace content.
-
-**2.4 Configure Design System — 4 Dimensions**
-
-If not using a CSS theme, define visual personality:
+Define visual personality using 4 independent dimensions (read `references/design-styles.md` for details):
 
 | Dimension | Options | Quick Guide |
 |-----------|---------|-------------|
-| **Texture** | clean, grid, organic, paper | clean=corporate, grid=technical, organic=friendly |
+| **Texture** | clean, grid, organic, paper | clean=coporate, grid=technical, organic=friendly |
 | **Mood** | professional, warm, cool, vibrant, dark, neutral | professional=finance, warm=education, cool=tech |
 | **Typography** | geometric, humanist, editorial, technical | geometric=modern, humanist=friendly, editorial=bold |
 | **Density** | minimal, balanced, dense | minimal=executives, balanced=general, dense=technical |
 
-Load `references/design-styles.md` via `read_skill_file` for complete specs.
+**OR use presets**: corporate, technical, creative, education, executive, startup, healthcare, finance, lifestyle
 
-**2.5 Choose Color Palette**
+**Auto-selection based on industry**:
+- Tech/SaaS → technical or corporate preset
+- Finance → finance or corporate preset
+- Healthcare → healthcare preset
+- Education → education preset
+- Creative/Brand → creative or lifestyle preset
 
-Select from **18 Chinese color palettes** in `references/color-palettes.md` (read via `read_skill_file`). Key palettes:
+**2.3 Choose Color Palette**
 
-| # | 名称 | 适用场景 |
-|---|------|----------|
-| 1 | 现代与健康 | 医疗健康、心理咨询、护肤 |
-| 2 | 商务与权威 | 年度汇报、金融分析、政务 |
-| 7 | 活力与科技 | 创业路演、体育赛事 |
-| 9 | 科技与夜景 | 科技发布、高端汽车 |
-| 15 | 纯净科技蓝 | 云计算/AI、洁净能源 |
-| 18 | 铂金白金 | Agent 产品、金融科技 |
+Select from **references/color-palettes.md** based on mood and industry. The font is fixed:
 
-**2.6 Font — Noto Sans SC + Noto Serif SC**
-
-> **MANDATORY DEFAULT FONT**: Chinese body → `Noto Sans SC`, Chinese titles → `Noto Serif SC`. English fallback → `Times New Roman`.
-> ```css
-> font-family: 'Noto Sans SC', 'Noto Serif SC', 'Times New Roman', serif;
-> ```
-> For PPTX export, see [HTML Implementation Rules] section for font compatibility notes.
+> **⚠️ MANDATORY FONT**: All presentations use `Times New Roman` for all text.
+> `font-family: 'Times New Roman', serif;`
 
 ### Step 3 — Plan the Outline
 
-Using the **Slide Page Types** section below, create a complete outline:
+Using the **Slide Page Types** section below, create a complete slide outline:
 1. Classify every slide as exactly one of the 5 page types
 2. For content pages, assign a content subtype
-3. Ensure layout variety across slides
+3. Ensure variety in layouts across slides
 4. Typical structure: Cover → TOC → [Section Divider → Content Pages...] → Summary
 
 ### Step 4 — Generate Slides
 
-Generate up to 5 slides concurrently. For **each slide**:
-1. Save as `slides/slide-01.html`, `slides/slide-02.html`, etc. (zero-padded)
-2. Store images in `slides/imgs/`
-3. Use exact 960×540 `.slide-content` dimensions
-4. Use **Noto Sans SC** (body) + **Noto Serif SC** (titles) as default font
-5. **🎤 If presenter mode requested** (演讲/分享/讲稿/逐字稿): use `presenter-mode-reveal` template, write 150-300 words 逐字稿 in `<aside class="notes">` per slide. See Step 4b.
-6. **Generate images** — cover + content pages MANDATORY (see below)
-7. Verify: `bun scripts/verify_layout.ts --html slides/slide-XX.html --type <type>`
-8. Fix any issues before moving on
+Generate each slide as an individual HTML file. Process up to 5 slides concurrently (not more).
 
-**Image generation**: `bun scripts/generate_image.ts --prompt "..." --output slides/imgs/cover.png --ar 16:9`
-- Cover pages: **MANDATORY** hero image
-- Content pages: **MANDATORY** supporting illustration or chart
-- TOC/Divider/Summary: optional
+For **each slide**, follow the page-type-specific workflow below. Every slide must:
+1. Be saved as `slides/slide-01.html`, `slides/slide-02.html`, etc. (zero-padded two digits)
+2. Store any generated images in `slides/imgs/`
+3. Use the exact 960×540 `.slide-content` dimensions
+4. Use `Times New Roman` font for all text
+5. **Check anti-patterns** — Review `references/anti-patterns.md` for industry-specific and slide-type-specific patterns to avoid
+6. After writing HTML, verify layout using `bun scripts/verify_layout.ts --html slides/slide-XX.html --type <type>` — check for structure correctness, constraint compliance, and type-specific requirements. Fix any issues before moving on.
 
-**Before writing HTML**: Read `references/html-implementation.md` and `references/svg-guidelines.md` via `read_skill_file`.
+**Image generation**: Use `bun scripts/generate_image.ts --prompt "..." --output slides/imgs/cover.png --ar 16:9` for cover and content slides.
 
-**4a. Template-Driven Authoring (NOT from scratch)**
+**Before generating each slide**: Read the corresponding HTML implementation rules in `references/html-implementation.md` and SVG guidelines in `references/svg-guidelines.md`.
 
-Copy the closest `<section class="slide">...</section>` block from `templates/single-page/*.html`, then replace content. Never author slides from zero.
-
-**4b. 🎤 Presenter Mode (演讲者模式)**
-
-Trigger words: **演讲 / 分享 / 讲稿 / 逐字稿 / presenter / 演讲者视图**.
-
-When triggered:
-- Use `presenter-mode-reveal` full-deck template
-- Write **150-300 words** of 逐字稿 per slide in `<aside class="notes">`
-- Rules: ① 口语化（"因此"→"所以"） ② 关键词加粗 ③ 过渡句独立成段
-- Press **S** opens popup with 4 magnetic cards: CURRENT / NEXT / SCRIPT / TIMER
-- Cards are draggable + resizable, positions persist to `localStorage`
-
-**4c. Keyboard Navigation (built-in via `runtime.js`)**
-
-Every deck MUST include `<script src="../assets/runtime.js"></script>`:
-
-| Key | Action |
-|-----|--------|
-| `←` `→` `Space` | Navigate slides |
-| `F` | Fullscreen |
-| `T` | Cycle themes |
-| `A` | Cycle animations |
-| `S` | Open presenter mode (演讲者模式) |
-| `O` | Overview grid |
-| `N` | Quick notes drawer |
-| `#/N` | Deep-link to slide N |
-
-**4d. Animations (optional)**
-
-- **27 CSS animations**: `data-anim="fade-up"` on any element (catalog: `references/animations.md`)
-- **20 Canvas FX**: `data-fx="particle-burst"` for particles/graph/fireworks (catalog: `references/animations.md`)
-- All animations are **opt-in** — static by default
+**Critical anti-patterns to avoid** (see `references/anti-patterns.md` for complete list):
+- ❌ Accent lines under titles — Use whitespace or background color instead
+- ❌ More than 6 bullet points — Split into multiple slides
+- ❌ Emojis as icons — Use SVG (Heroicons/Lucide)
+- ❌ Gradients — Solid colors only
+- ❌ Animations — Static slides only
+- ❌ Centered body text — Left-align paragraphs and lists
+- ❌ Bézier curves/arcs in SVG — Use M/L/H/V/Z only
 
 ### Step 5 — Deploy
 
-Run `bun scripts/deploy_presentation.ts --slides ./slides --output ./dist`.
+Use `bun scripts/deploy_presentation.ts --slides ./slides --output ./dist` to merge all slides and deploy the final presentation.
 
-Before deployment: validate all slides via `references/pre-delivery-checklist.md`.
+**Before deployment**: Run through `references/pre-delivery-checklist.md` to validate all slides meet quality standards.
 
 ---
 
 ## Slide Page Types
 
-Classify **every slide** as exactly one of these 5 types.
+Classify **every slide** as exactly one of these 5 types. This prevents layout drift and keeps the deck consistent.
 
 ### Type 1: Cover Page
 
 **Use for**: Opening slide, tone setting.
 
-**Elements**: Main Title (72–120px bold), Subtitle (28–40px), Supporting text / presenter / date (18–24px), Background image or visual motif.
+**Content elements**:
+- Main Title (72–120px, bold, commanding — the visual anchor)
+- Subtitle (28–40px, clearly secondary)
+- Supporting text / presenter / date (18–24px, subtle)
+- Meta info (14–18px)
+- Background image or strong visual motif
 
-**Layouts**: Asymmetric Left-Right, Center-Aligned
-**Image**: **MANDATORY**
-**No page number badge**.
+**Font size hierarchy**:
+
+| Element | Size | Notes |
+|---------|------|-------|
+| Main Title | 72–120px | Bold, 3–5× base |
+| Subtitle | 28–40px | 1.5–2× base |
+| Supporting Text | 18–24px | Base |
+| Meta Info | 14–18px | 0.7–1× base |
+
+**Layout options**:
+
+1. **Asymmetric Left-Right** — Text on one side, image on the other
+2. **Center-Aligned** — Content centered over background image
+
+**Image generation**: **MANDATORY**. You MUST call `GenerateImage` to create at least one image for the cover. Do NOT proceed to HTML until you have a valid image path.
+
+**Workflow**:
+1. Analyze topic, audience, purpose
+2. Generate image (MANDATORY) — wait for file path
+3. Choose layout
+4. Write HTML (embed actual image path, never a placeholder)
+5. Screenshot + verify
+
+**No page number badge on cover page.**
+
+---
 
 ### Type 2: Table of Contents
 
-**Use for**: Navigation, 3–5 sections.
+**Use for**: Navigation, expectation setting (3–5 sections).
 
-**Elements**: Page title, Section numbers (01, 02…), Section titles, Optional descriptions, **Page number badge (MANDATORY)**.
+**Content elements**:
+- Page title ("Table of Contents" / "Agenda" / "Overview")
+- Section numbers (01, 02… or I, II…)
+- Section titles
+- Optional one-line descriptions
+- **Page number badge (MANDATORY)** — see `references/html-implementation.md` Appendix G
 
-**Layouts**: Numbered Vertical List, Two-Column Grid, Sidebar Navigation, Card-Based
-**Image**: Optional
+**Font size hierarchy**:
+
+| Element | Size |
+|---------|------|
+| Page Title | 36–44px |
+| Section Number | 28–36px |
+| Section Title | 20–28px |
+| Description | 14–16px |
+
+**Layout options**:
+
+1. **Numbered Vertical List** — Clean left-aligned structure
+2. **Two-Column Grid** — 2×N grid with numbers + titles
+3. **Sidebar Navigation** — Colored sidebar with section markers
+4. **Card-Based** — Section cards in a row/grid
+
+**Image generation**: OPTIONAL — most TOC slides work best with clean typography + SVG decorations.
+
+**Workflow**:
+1. Analyze section list and count
+2. Choose layout (3 sections → vertical; 4–6 → grid/compact; 7+ → multi-column)
+3. Plan visual hierarchy
+4. Generate image (optional)
+5. Write HTML with page number badge
+6. Screenshot + verify
+
+---
 
 ### Type 3: Section Divider
 
 **Use for**: Clear transitions between major parts.
 
-**Elements**: Section number (72–120px accent color), Section title (36–48px), Optional intro text, **Page number badge (MANDATORY)**.
+**Content elements**:
+- Section number (72–120px, bold, accent color — the dominant element)
+- Section title (36–48px, bold, primary color)
+- Optional intro text (16–20px, light, muted)
+- SVG accent shapes (bars, lines, geometric blocks)
+- **Page number badge (MANDATORY)** — see `references/html-implementation.md` Appendix G
 
-**Layouts**: Bold Center, Left-Aligned Accent Block, Split Background, Full-Bleed with Overlay
-**Image**: Optional
+**Layout options**:
+
+1. **Bold Center** — Number + title centered
+2. **Left-Aligned with Accent Block** — Colored bar on left
+3. **Split Background** — Two color zones
+4. **Full-Bleed Background with Overlay** — Strong bg color, semi-transparent number
+
+**Design decisions**: Corporate → accent block; Creative → full-bleed; Minimal → bold center. Divider style must be consistent across all dividers in one deck.
+
+**Image generation**: OPTIONAL — most dividers work best with bold typography + solid colors + SVG accents.
+
+**Workflow**:
+1. Analyze section number, title, intro
+2. Choose layout
+3. Generate image (optional)
+4. Write HTML with page number badge
+5. Screenshot + verify
+
+---
 
 ### Type 4: Content Page
 
-**Use for**: Core information slides. Pick ONE subtype:
+**Use for**: The core information slides. Each content page belongs to exactly ONE subtype.
 
-| Subtype | Description |
-|---------|-------------|
-| **4a. Text** | Bullets, quotes — requires icons/SVG, never plain text only |
-| **4b. Mixed Media** | Two-column: image + text |
-| **4c. Data Viz** | SVG chart + 1–3 takeaways + data source |
-| **4d. Comparison** | Side-by-side columns (A vs B) |
-| **4e. Timeline/Process** | Steps with arrows, numbered connectors |
-| **4f. Image Showcase** | Hero image dominant, text supporting |
+**Content subtypes**:
 
-**Elements**: Slide Title (36–44px), Body content (14–16px LEFT-ALIGNED), Visual Element (always required), **Page number badge (MANDATORY)**.
+#### 4a. Text
+- Bullets, quotes, short paragraphs
+- Must include icons or SVG shapes — never plain text only
 
-**Image**: **MANDATORY** for all content pages.
+#### 4b. Mixed Media
+- Two-column: image on one side, text on the other
+
+#### 4c. Data Visualization
+- SVG chart (bar/progress/ring) + 1–3 key takeaways + data source
+
+#### 4d. Comparison
+- Side-by-side columns/cards (A vs B, pros/cons)
+
+#### 4e. Timeline / Process
+- Steps with arrows, numbered connectors
+
+#### 4f. Image Showcase
+- Hero image as primary element, text supporting
+
+**Font size hierarchy**:
+
+| Element | Size | Notes |
+|---------|------|-------|
+| Slide Title | 36–44px | Bold, top of slide |
+| Section Header | 20–24px | Bold, sub-sections |
+| Body Text | 14–16px | Regular weight, LEFT-ALIGNED |
+| Captions / Source | 10–12px | Muted color |
+| Stat Callout | 60–72px | Large bold numbers |
+
+**Content elements (all content pages)**:
+1. Slide Title — always required, top of slide
+2. Body Content — based on subtype
+3. Visual Element — image, chart, icon, or SVG shape — ALWAYS required
+4. Source / Caption — include when showing data
+5. **Page number badge (MANDATORY)** — see `references/html-implementation.md` Appendix G
+
+**Key principles**:
+- Left-align body text — never center paragraphs or bullet lists
+- Title must be 36pt+ for contrast with 14–16pt body
+- 0.5″ minimum margins, 0.3–0.5″ between content blocks
+- Each content slide should use a different layout from the previous one
+
+**Image generation**: **MANDATORY**. Call `GenerateImage` for every content page:
+- Mixed Media / Image Showcase → hero image
+- Text / Data / Comparison / Timeline → supporting illustration or thematic element
+
+**Workflow**:
+1. Analyze content, determine subtype
+2. Generate image (MANDATORY) — wait for file path
+3. Choose layout variant for the subtype
+4. Write HTML with page number badge
+5. Screenshot + verify (layout matches subtype, no overlaps, badge present)
+
+---
 
 ### Type 5: Summary / Closing Page
 
 **Use for**: Wrap-up, action items, thank-you.
 
-**Elements**: Closing title (48–72px), Takeaway points (18–24px), Call to action, Contact info, **Page number badge (MANDATORY)**.
+**Content elements**:
+- Closing title (48–72px, bold)
+- Takeaway points (18–24px, scannable)
+- Call to action / next steps
+- Contact info (14–16px, muted)
+- **Page number badge (MANDATORY)** — see `references/html-implementation.md` Appendix G
 
-**Layouts**: Key Takeaways, CTA/Next Steps, Thank You/Contact, Split Recap
-**Image**: Optional
+**Layout options**:
 
----
+1. **Key Takeaways** — 3–5 points with icons/check marks
+2. **CTA / Next Steps** — Action items + contact info
+3. **Thank You / Contact** — Centered thank-you + contact details
+4. **Split Recap** — Left: takeaways; Right: CTA/contact
 
-## Theme System
+**Image generation**: OPTIONAL — most summary slides work best with clean typography + SVG accents.
 
-**One theme = entire deck look.** Switch via one `<link>` tag. Press `T` to cycle at runtime.
-
-All 36 themes are listed in Step 2.1. Load `references/themes.md` via `read_skill_file` for when-to-use guidance per theme.
-
----
-
-## Presenter Mode (🎤 演讲者模式)
-
-Press **S** opens a new window with 4 draggable/resizable magnetic cards:
-- 🔵 **CURRENT** — iframe preview of current slide
-- 🟣 **NEXT** — iframe preview of next slide
-- 🟠 **SPEAKER SCRIPT** — large-font 逐字稿 (scrollable)
-- 🟢 **TIMER** — elapsed time + slide counter + prev/next/reset
-
-Previews use `<iframe src="?preview=N">` — same CSS/fonts as audience view, pixel-perfect.
-
-**逐字稿 rules**: 150-300 words/slide, 口语化, keywords bold. NEVER put presenter-only text on the slide — use `<aside class="notes">` (hidden from audience, visible in presenter).
-
-All 15 full-deck templates support presenter mode. `presenter-mode-reveal` has built-in examples.
+**Workflow**:
+1. Analyze closing content type
+2. Choose layout
+3. Generate image (optional)
+4. Write HTML with page number badge
+5. Screenshot + verify
 
 ---
 
-## Keyboard Shortcuts
+## Design Style System
 
-| Key | Audience | Presenter Window |
-|-----|----------|-----------------|
-| `←` `→` `Space` | Navigate | Navigate (syncs) |
-| `F` | Fullscreen | — |
-| `T` | Cycle themes | — |
-| `A` | Cycle animations | — |
-| `S` | Open presenter | — |
-| `O` | Overview grid | — |
-| `N` | Notes drawer | — |
-| `R` | — | Reset timer |
-| `Esc` | Close overlays | Close popup |
+Choose ONE design style for the entire presentation. Read `references/design-styles.md` for complete specifications.
+
+| Style | Radius | Spacing | Best For |
+|-------|--------|---------|----------|
+| **Sharp & Compact** | 4–6px | 4–12px | Data-heavy dashboards, IDEs |
+| **Soft & Balanced** | 6–12px | 8–16px | Enterprise SaaS, management panels |
+| **Rounded & Spacious** | 16–24px | 16–32px | Consumer apps, marketing pages |
+| **Pill & Airy** | 32px–full | 20–48px | Landing pages, brand showcases |
+
+**Quick rule**: Corporate/enterprise → Sharp or Soft; Consumer/brand → Rounded or Pill.
 
 ---
 
-## HTML Implementation Rules
+## HTML Implementation & SVG Guidelines
 
-**MUST read** `references/html-implementation.md` and `references/svg-guidelines.md` via `read_skill_file` before writing any HTML.
+**CRITICAL**: Before writing ANY HTML, read these reference files:
 
-**Critical constraints**:
-- ✅ Inline CSS only (except responsive scaling snippet in Appendix A)
+- **`references/html-implementation.md`** — Appendix A-G (responsive scaling, CSS rules, color palette rules, SVG constraints, HTML2PPTX validation, page number badge)
+- **`references/svg-guidelines.md`** — SVG usage patterns, supported elements, common pitfalls
+
+**Key constraints**:
+- ✅ Inline CSS only (except scaling snippet)
 - ✅ Solid colors only (no gradients)
-- ✅ SVG for decorative shapes only
-- ⚠️ SVG paths: **M/L/H/V/Z commands ONLY** — no Bézier curves, no arcs (PPTX converter will skip them)
-- ⚠️ **NO absolute-positioned text over SVG** — text lost in PPTX export
-- ⚠️ Pie charts: use `GenerateImage`, not SVG (SVG pie fails in PPTX)
-- ⚠️ Page number badge: required on ALL slides except cover
-- ⚠️ **Font for PPTX export**: If PPTX export is needed, prefer `Times New Roman` / `Arial` over Noto fonts — Windows PPTX converter may not have CJK fonts installed. Embed note: "如需 PPTX 导出，建议在 HTML 中临时切换为 Times New Roman 以避免中文缺字"
+- ✅ Static slides only (no animations)
+- ✅ SVG for decorative shapes (NOT images)
+- ⚠️ SVG paths MUST use only M/L/H/V/Z commands (no Bézier curves, no arcs)
+- ⚠️ Pie charts MUST use `GenerateImage` (SVG pie charts will fail in PPTX)
+- ⚠️ Page number badge required on all slides except cover
 
 ---
 
-## Anti-Patterns (Top 10)
+## Common Mistakes to Avoid
 
-1. ❌ Accent lines under titles — use whitespace or background color
-2. ❌ More than 6 bullet points — split into multiple slides
-3. ❌ Emojis as icons — use SVG (Heroicons/Lucide)
-4. ❌ Gradients or animations when PPTX export needed — solid + static only
-5. ❌ Centered body text — left-align paragraphs and lists
-6. ❌ Bézier curves/arcs in SVG paths — M/L/H/V/Z only
-7. ❌ Text-only slides — always add images/icons/charts
-8. ❌ Low-contrast elements — ensure strong contrast against background
-9. ❌ Repeating same layout — vary columns, cards, callouts
-10. ❌ Presenter notes visible on slide — use `<aside class="notes">`, not visible `<p>`
+- **Don't repeat the same layout** — vary columns, cards, and callouts across slides
+- **Don't center body text** — left-align paragraphs and lists; center only titles
+- **Don't skimp on size contrast** — titles need 36pt+ to stand out from 14–16pt body
+- **Don't default to blue** — pick colors reflecting the specific topic
+- **Don't mix spacing randomly** — choose 0.3″ or 0.5″ gaps and use consistently
+- **Don't style one slide and leave the rest plain** — commit fully or keep it simple throughout
+- **Don't create text-only slides** — add images, icons, charts, or visual elements
+- **Don't forget text box padding** — when aligning shapes with text edges, set `margin: 0` or offset
+- **Don't use low-contrast elements** — icons AND text need strong contrast against background
+- **NEVER use accent lines under titles** — hallmark of AI-generated slides; use whitespace or background color instead
+- **Don't use gradients** — solid colors only
+- **Don't use animations** — static slides only
+- **Don't overlay text on SVG with absolute positioning** — text will be lost in PPTX
+- **Don't use CSS for decorative shapes** — use SVG for crispness under scaling
+- **Don't forget the page number badge** — required on all slides except cover
+- **Don't use Bézier curves or arcs in SVG paths** — PPTX converter will skip them
+
+---
+
+## File & Output Conventions
+
+| Item | Convention |
+|------|-----------|
+| Slide files | `slides/slide-01.html`, `slides/slide-02.html`, … (zero-padded) |
+| Image files | `slides/imgs/` directory |
+| Slide dimensions | 960×540 px (`.slide-content`) |
+| Font | `Times New Roman` for all text (Chinese and English) |
+| CSS | Inline only (except scaling snippet in `references/html-implementation.md`) |
+| Colors | From chosen palette only; no gradients |
+| Animations | None — static slides only |
+| Page badge | All slides except cover; bottom-right corner |
+| Final deployment | Use `deploy_html_presentation` tool |
 
 ---
 
 ## Tools Reference
 
+**IMPORTANT**: This skill includes automated tool scripts located in `scripts/` directory. Read `scripts/README.md` for detailed usage instructions.
+
+### Quick Reference
+
 | Tool Script | Purpose | Command |
 |-------------|---------|---------|
-| Image Generation | Create slide images | `bun scripts/generate_image.ts --prompt "..." --output path.png` |
-| Screenshot | Capture slide as PNG | `bun scripts/screenshot_html.ts --html slide.html --output out.png` |
-| Layout Verify | Check slide structure | `bun scripts/verify_layout.ts --html slide.html --type cover` |
-| Deploy | Merge slides | `bun scripts/deploy_presentation.ts --slides ./slides --output ./dist` |
+| **Image Generation** | Create images for slides | `bun scripts/generate_image.ts --prompt "..." --output path.png` |
+| **Screenshot** | Capture HTML slide as PNG | `bun scripts/screenshot_html.ts --html slide.html --output screenshot.png` |
+| **Layout Verification** | Verify slide structure | `bun scripts/verify_layout.ts --html slide.html --type cover` |
+| **Deployment** | Merge slides into deployable package | `bun scripts/deploy_presentation.ts --slides ./slides --output ./dist` |
 
-Full usage: read `scripts/README.md` via `read_skill_file`.
+### When to Use Each Tool
+
+| Step | Tool | Usage |
+|------|------|-------|
+| Image generation | `generate_image.ts` | MANDATORY for cover + content pages; optional for TOC/divider/summary |
+| HTML writing | Manual | Create HTML files following page type specifications |
+| Layout verification | `verify_layout.ts` | After writing each slide — verify structure, constraints, requirements |
+| Screenshot (optional) | `screenshot_html.ts` | For visual review or documentation |
+| Final deployment | `deploy_presentation.ts` | Step 5 — merge all slides into deployable presentation |
 
 ### Prerequisites
+
 ```bash
-npm install  # or: bun install
-npx playwright install chromium  # for screenshot tool
+# Install dependencies
+npm install
+# or: bun install
+
+# Install Playwright browsers (for screenshot tool)
+npx playwright install chromium
+```
+
+### Environment Variables
+
+Image generation requires API keys (see `scripts/README.md` for details):
+
+```bash
+export GOOGLE_API_KEY="your-key"        # Default provider
+export OPENAI_API_KEY="your-key"        # Alternative
+export DASHSCOPE_API_KEY="your-key"     # 阿里云
+export REPLICATE_API_TOKEN="your-token" # Alternative
 ```
 
 ---
 
 ## Reference Files
 
-Read these via `read_skill_file` as needed:
+Read these as needed during the workflow:
 
 ### Design & Style
-- `references/design-styles.md` — 4-dimension design system + presets
-- `references/color-palettes.md` — 18 Chinese color palettes + Agent Design System
-- `references/themes.md` — all 36 CSS themes with when-to-use guide **(new)**
+- **`references/design-styles.md`** — Style dimension system (Texture, Mood, Typography, Density) + presets
+- **`references/color-palettes.md`** — Complete color palette library (18 palettes + Agent Design System)
 
 ### Quality Assurance
-- `references/anti-patterns.md` — industry/slide-type anti-patterns
-- `references/pre-delivery-checklist.md` — validation checklist
+- **`references/anti-patterns.md`** — Industry-specific and slide-type anti-patterns (what NOT to do)
+- **`references/pre-delivery-checklist.md`** — Validation checklist for each slide type
 
-### Technical
-- `references/html-implementation.md` — Appendix A-G (scaling, CSS, colors, SVG, PPTX, badges)
-- `references/svg-guidelines.md` — SVG usage patterns and constraints
+### Technical Implementation
+- **`references/html-implementation.md`** — HTML implementation rules (Appendix A-G)
+- **`references/svg-guidelines.md`** — SVG usage patterns and constraints
 
-### Open-Source Templates **(new)**
-- `references/full-decks.md` — 15 full-deck template catalog
-- `references/layouts.md` — 31 single-page layout catalog
-- `references/animations.md` — 27 CSS + 20 Canvas FX animations
-- `references/presenter-mode.md` — 演讲者模式 + 逐字稿 authoring guide
-- `references/authoring-guide.md` — complete workflow walkthrough
-
-### Tools
-- `scripts/README.md` — tool usage guide and troubleshooting
+### Tools & Troubleshooting
+- **`scripts/README.md`** — Tool usage guide and troubleshooting

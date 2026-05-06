@@ -84,24 +84,15 @@ Headline and body text personality.
 
 **Font Recommendations**:
 
-All presentations use a **Chinese-first font system** for optimal bilingual rendering:
+All presentations use **Times New Roman** as the mandatory font per skill requirements. However, you can apply typographic personality through:
 
-| Element | Primary Font | Fallback Stack |
-|---------|-------------|----------------|
-| **标题 / 大字**（h1-h3, hero titles） | `Noto Serif SC` | `'Noto Serif SC', 'Times New Roman', 'SimSun', serif` |
-| **正文 / 段落**（p, li, caption） | `Noto Sans SC` | `'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif` |
-| **英文 / 数字**（自动兼容） | Noto Sans SC 内置 Latin | 英文数字自然显示为无衬线体，如需衬线风格回退到 `'Times New Roman', Georgia` |
-| **代码 / 技术内容** | `'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace` | 等宽字体固定宽度渲染 |
-
-Typography dimension applied through weight, spacing, and hierarchy:
-
-| Typography Style | How to Apply with Chinese Font System |
+| Typography Style | How to Apply with Times New Roman |
 |------------------|-----------------------------------|
-| geometric | Noto Sans SC Bold (700), tight letter-spacing, uppercase/en numbers |
-| humanist | Noto Sans SC Regular (400), comfortable line-height, mixed case |
-| handwritten | Noto Serif SC Italic + decorative accents (use sparingly) |
-| editorial | Noto Serif SC Bold (700-900) large titles, high contrast sizes, dramatic hierarchy |
-| technical | JetBrains Mono / Fira Code for code labels, Noto Sans SC for body |
+| geometric | Bold weights, tight letter-spacing, uppercase titles |
+| humanist | Regular weights, comfortable line-height, mixed case |
+| handwritten | Not applicable (use Times New Roman regular) |
+| editorial | Large bold titles, high contrast sizes, dramatic hierarchy |
+| technical | Monospace-inspired titles (uppercase, bold), clear hierarchy |
 
 **Size Hierarchy**:
 
@@ -290,87 +281,6 @@ Pre-configured dimension combinations for common use cases.
 
 ---
 
-## 36 CSS 主题速查
-
-通过一行代码一键切换完整主题：
-
-```html
-<link rel="stylesheet" href="../assets/themes/THEME_NAME.css">
-```
-
-### 极简 | 高管汇报・学术・数据
-
-| # | 主题名 | 一句话 |
-|---|--------|--------|
-| 1 | `minimal-white` | 纯白画布，极致留白，万无一失 |
-| 2 | `editorial-serif` | 杂志级排版，暖白底+衬线字体 |
-| 3 | `japanese-minimal` | 禅意克制，不对称留白 |
-| 4 | `corporate-clean` | 经典商务蓝白灰，安全百搭 |
-| 5 | `academic-paper` | 论文质感，脚注风格标注 |
-
-### 柔和与粉彩 | 教育・生活・品牌
-
-| # | 主题名 | 一句话 |
-|---|--------|--------|
-| 6 | `soft-pastel` | 低饱和粉彩，亲和圆润 |
-| 7 | `sunset-warm` | 日落蜜桃色，黄金时刻氛围 |
-| 8 | `arctic-cool` | 冰蓝配色，凛冽清爽 |
-| 9 | `y2k-chrome` | 千禧年金属光泽，Z世代风格 |
-| 10 | `vaporwave` | 粉紫赛博复古，霓虹迷幻 |
-
-### 开发者 / 终端 | 技术分享・代码
-
-| # | 主题名 | 一句话 |
-|---|--------|--------|
-| 11 | `catppuccin-latte` | 浅色 Catppuccin，柔和粉彩 |
-| 12 | `catppuccin-mocha` | 深色摩卡，现代开发者首选 |
-| 13 | `dracula` | 经典吸血鬼暗色，紫色点缀 |
-| 14 | `tokyo-night` | 深蓝都市，柔和蓝紫高光 |
-| 15 | `terminal-green` | 复古终端绿，黑客文化 |
-| 16 | `blueprint` | 蓝图蓝靛，工程图纸质感 |
-
-### 暗色与高对比 | 发布会・舞台
-
-| # | 主题名 | 一句话 |
-|---|--------|--------|
-| 17 | `nord` | 北极暗色，冰霜蓝灰 |
-| 18 | `solarized-light` | 暖亮色，文献密集阅读舒适 |
-| 19 | `gruvbox-dark` | 复古暖暗色，Linux 极客款 |
-| 20 | `rose-pine` | 深色玫瑰粉，安静舒缓 |
-| 21 | `cyberpunk-neon` | 霓虹攻击性，赛博朋克 |
-| 22 | `retro-tv` | CRT 琥珀橙，老电视复古 |
-
-### 商务与专业 | 融资・对 B・企业
-
-| # | 主题名 | 一句话 |
-|---|--------|--------|
-| 23 | `sharp-mono` | 纯黑白编辑风，极简力量 |
-| 24 | `pitch-deck-vc` | 深蓝+活力点缀，投资人就绪 |
-| 25 | `news-broadcast` | 新闻直播红白蓝，权威紧急 |
-| 26 | `magazine-bold` | 高对比杂志风，大字报冲击 |
-
-### 艺术设计流派 | 作品集・设计分享
-
-| # | 主题名 | 一句话 |
-|---|--------|--------|
-| 27 | `neo-brutalism` | 粗野主义，大胆撞色边框 |
-| 28 | `glassmorphism` | 毛玻璃模糊，现代 UI 展示 |
-| 29 | `bauhaus` | 包豪斯三原色，几何网格 |
-| 30 | `swiss-grid` | 瑞士网格国际主义，精确排版 |
-| 31 | `memphis-pop` | 孟菲斯孟菲斯图案，80 年代派对 |
-| 32 | `midcentury` | 50年代现代主义，胡桃木+芥末黄 |
-
-### 活力与渐变（纯色替代） | 营销・社交
-
-| # | 主题名 | 一句话 |
-|---|--------|--------|
-| 33 | `rainbow-gradient` | 彩虹色带（纯色模拟渐变） |
-| 34 | `aurora` | 极光绿紫交错，自然科技感 |
-| 35 | `xiaohongshu-white` | 小红书风，软粉+白+暖橙 |
-| 36 | `sharp-mono` | （复用纯黑白，哲学/极简场景） |
-
----
-
 ## Audience-Aware Design
 
 Adjust style dimensions based on target audience.
@@ -409,52 +319,33 @@ Adjust style dimensions based on target audience.
 
 ### Tech & SaaS
 - **Presets**: technical, corporate, startup
-- **CSS Themes**: `catppuccin-mocha`, `dracula`, `tokyo-night`, `blueprint`
 - **Mood**: cool or professional
 - **Texture**: grid or clean
 - **Avoid**: Playful elements, neon colors, handwritten fonts
 
 ### Finance & Banking
 - **Presets**: finance, corporate
-- **CSS Themes**: `corporate-clean`, `pitch-deck-vc`, `sharp-mono`, `editorial-serif`
 - **Mood**: professional
 - **Texture**: clean
 - **Avoid**: AI purple/pink gradients, playful icons, informal language
 
 ### Healthcare & Medical
 - **Presets**: healthcare
-- **CSS Themes**: `soft-pastel`, `arctic-cool`, `minimal-white`
 - **Mood**: warm or cool
 - **Texture**: clean or organic
 - **Avoid**: Dark backgrounds, harsh animations, scary imagery
 
 ### Education & Training
 - **Presets**: education
-- **CSS Themes**: `soft-pastel`, `academic-paper`, `editorial-serif`, `solarized-light`
 - **Mood**: warm
 - **Texture**: organic
 - **Avoid**: Corporate stiffness, dense text blocks, cold colors
 
 ### Creative & Design
 - **Presets**: creative, lifestyle
-- **CSS Themes**: `neo-brutalism`, `bauhaus`, `memphis-pop`, `vaporwave`
 - **Mood**: vibrant or warm
 - **Texture**: clean or organic
 - **Avoid**: Generic templates, boring stock photos, safe layouts
-
-### Legal & Consulting
-- **Presets**: corporate, executive
-- **CSS Themes**: `sharp-mono`, `corporate-clean`, `editorial-serif`, `japanese-minimal`
-- **Mood**: professional or neutral
-- **Texture**: clean
-- **Avoid**: Bright/vibrant colors, playful elements
-
-### Marketing & Advertising
-- **Presets**: creative, startup
-- **CSS Themes**: `magazine-bold`, `sunset-warm`, `xiaohongshu-white`, `rainbow-gradient`
-- **Mood**: vibrant
-- **Texture**: clean
-- **Avoid**: Dull palettes, overly conservative layouts
 
 ---
 
@@ -538,5 +429,5 @@ Before finalizing style choice:
 - [ ] Verified dimensions match industry/audience
 - [ ] Checked anti-patterns for chosen mood/industry
 - [ ] Confirmed color palette aligns with mood
-- [ ] Validated typography hierarchy with Chinese-first font system (Noto Serif SC / Noto Sans SC)
+- [ ] Validated typography hierarchy with Times New Roman
 - [ ] Applied consistent density across all slides
