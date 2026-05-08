@@ -32,6 +32,8 @@
 
 ---
 
+| [[myk/wiki/topics/PTY终端技术]] | PTY终端技术完整技术栈，包括伪终端管理、WebSocket流式传输和xterm.js集成 | opencode-pty调研 | ✅ |
+| [[myk/wiki/concepts/PTY-伪终端]] | PTY伪终端核心概念，包括主从设备、工作原理、技术实现和应用场景 | opencode-pty调研 | ✅ |
 ## Concepts
 
 | 页面 | 摘要 | 关联主题 |
@@ -40,13 +42,14 @@
 | [[myk/wiki/concepts/MCP-协议]] | Model Context Protocol：连接大模型与外部工具/数据源的标准化协议，类似 AI 世界的 USB-C | LLM Gateway |
 | [[myk/wiki/concepts/Agent-as-Teammate]] | 多 Agent 协作顶层范式：Agent 不再只是工具，而是具备角色与自主性的团队同事 | Multica, OpenClaw, AI-一人公司模式 |
 | [[myk/wiki/concepts/差异系数]] | 统计学中的变异系数 CV，用于衡量教育均衡评估中的区域/学校差异水平 | 教育资源评估体系, 教育系统数据资源 |
-| [[myk/wiki/concepts/认知型技能]] | AI Agent 技能生态的上层形态：定义“哪些活值得干、按什么顺序干” | AI-一人公司模式, AI-Skill-生态 |
-| [[myk/wiki/concepts/方法论产品化]] | 知识从“可读”走向“可执行”：书籍/经验/咨询框架被拆成 Skill 模块供 Agent 消费 | AI-一人公司模式, AI-Skill-生态 |
+| [[myk/wiki/concepts/认知型技能]] | AI Agent 技能生态的上层形态：定义"哪些活值得干、按什么顺序干" | AI-一人公司模式, AI-Skill-生态 |
+| [[myk/wiki/concepts/方法论产品化]] | 知识从"可读"走向"可执行"：书籍/经验/咨询框架被拆成 Skill 模块供 Agent 消费 | AI-一人公司模式, AI-Skill-生态 |
 | [[myk/wiki/concepts/空间智能]] | 让系统理解空间对象、空间关系与时空变化，并进一步支持推理、预测和行动 | GIS+AI-交叉生态, 遥感+AI-智能体 |
 | [[myk/wiki/concepts/实景三维]] | 面向真实地理世界的三维表达底座，位于新型基础测绘与业务服务之间 | 测绘与新型基础测绘, 国土空间规划与治理 |
 | [[myk/wiki/concepts/用途管制]] | 国土空间治理中的规则执行机制，把规划意图转成可约束、可审批、可监管的空间规则 | 国土空间规划与治理, 土地政策与审批流程 |
 | [[myk/wiki/concepts/自然语言GIS智能体]] | GeoAgent：将自然语言转换为 GIS 操作序列，是 GeoAI Universal Platform 的核心引擎 | GIS+AI-交叉生态, GeoAI-通用平台 |
 | [[myk/wiki/concepts/分层多智能体架构]] | 通过层级分工（规划/执行/审查）实现复杂任务的自主处理与质量控制 | GeoAgent-空间分析智能体, Agent-as-Teammate |
+| [[myk/wiki/concepts/上下文压缩]] | LLM 会话上下文膨胀的压缩技术路线与记忆系统结合方案，含 OpenClaw/Claude-Mem/ClawXMemory 对比 | AI-记忆系统, claude-mem, OpenClaw |
 
 ---
 

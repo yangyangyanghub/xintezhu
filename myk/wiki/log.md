@@ -227,7 +227,46 @@
 
 ---
 
+## [2026-05-06] ingest | 上下文压缩
+
+- 来源：洋哥闪念（/AHA 触发）
+- 深度调研上下文压缩技术与记忆系统结合方案
+- 新建 **concepts/上下文压缩.md**：
+  - OpenClaw compaction 机制缺陷分析（本质是截断不是压缩）
+  - 主流技术路线：SimpleMem、Latent Context Compilation、Focus、ACON、CompLLM、MemArt
+  - 分级记忆压缩架构（L0→L1→L2→Profile）
+  - 三级渐进式检索方案（search→timeline→get_observations）
+  - 9 篇核心论文引用
+- 更新 index.md：新增 1 个 Concepts 条目
+- wiki 页面总数：**33 页**
+
+---
+
 *日志创建：2026-04-13*
 
-n# #   2 0 2 6 - 0 4 - 2 9   i n g e s t   |   W i n d o w s   �~�z�]wQ�x�bJT 
+n# #   2 0 2 6 - 0 4 - 2 9   i n g e s t   |   W i n d o w s   �~�z�]wQ�x�bJT
  
+ 
+## [2026-05-07] ingest | opencode-pty技术调研
+
+- 深度调研opencode-pty技术实现，基于bun-pty的PTY管理库
+- 研究内容：
+  1. bun-pty技术细节和架构设计
+  2. PTY实现挑战和已知问题
+  3. node-pty与bun-pty对比分析
+  4. WebSocket终端流式传输架构
+  5. xterm.js集成模式
+- 生成文档：
+  - **调研报告**：`myk/调研笔记/opencode-pty/opencode-pty调研报告.md` (11KB)
+  - **Word版本**：`myk/调研笔记/opencode-pty/opencode-pty调研报告.docx` (14KB)
+  - **技术架构图**：`images/architecture.png` (2.0MB)
+  - **对比分析图**：`images/comparison.png` (1.7MB)
+- 新增Wiki页面：
+  - **topics/PTY终端技术.md**：PTY终端技术完整技术栈
+  - **concepts/PTY-伪终端.md**：PTY伪终端核心概念
+- 更新index.md，添加2个新页面条目
+- wiki页面总数：**35页** (topics 23 + concepts 12 + synthesis 6)
+
+---
+
+*日志更新时间：2026-05-07*
