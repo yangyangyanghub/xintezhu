@@ -338,6 +338,11 @@ def main():
         print(f"[ERROR] 导出失败: {result}")
         sys.exit(1)
     
+    # ======================== 5. 保存工程文件 ========================
+    qgs_path = os.path.splitext(args.output)[0] + ".qgs"
+    project.write(qgs_path)
+    print(f"[SUCCESS] QGIS 工程文件: {qgs_path}")
+    
     qgs.exitQgis()
 
 
