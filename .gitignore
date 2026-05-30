@@ -79,3 +79,48 @@ myk/技术文章/*
 !myk/技术文章/.gitkeep
 myk/提示词库/*
 !myk/提示词库/.gitkeep
+
+# ============ 工具运行时文件（自动生成，不进库） ============
+
+# Sisyphus / OMO / Claude 运行时
+.sisyphus/run-continuation/
+.sisyphus/evidence/
+.sisyphus/notepads/
+.omo/
+.claude/
+
+# nanobot / OpenClaw 运行时（根目录）
+HEARTBEAT.md
+SOUL.md
+USER.md
+TOOLS.md
+.today.md
+qc
+query
+report_temp.md
+memory/
+sessions/
+opencode/
+
+# 钉钉报告中间产物
+ding-reports/
+
+# 售前方案/闪念草稿（本地内容）
+myk/售前方案/
+myk/闪念/inbox/
+
+# Wiki 草稿目录（如果不想跟踪）
+# myk/wiki/
+
+# AI 工作草稿
+.omo/drafts/
+
+# ============ slide-deck 课程材料：GIS 数据/大文件不进库 ============
+slide-deck/**/Data1/
+slide-deck/**/Data4/
+slide-deck/**/handan12m/
+slide-deck/**/handan12m.rar
+slide-deck/**/县界/
+slide-deck/**/城市关系强度图/
+slide-deck/**/RE/
+*.rar
