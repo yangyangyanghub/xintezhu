@@ -124,3 +124,9 @@ slide-deck/**/县界/
 slide-deck/**/城市关系强度图/
 slide-deck/**/RE/
 *.rar
+
+# ============ 外部独立 git 仓库（clone 进来作参考，不纳入主仓库追踪） ============
+# academic-search: github.com/ustc-ai4science/academic-search
+projects/academic-search/
+# qgis-source: github.com/qgis/QGIS (上游源码参考)
+qgis-source/
