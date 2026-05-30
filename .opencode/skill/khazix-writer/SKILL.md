@@ -1,7 +1,7 @@
 ---
 name: khazix-writer
 description: |
-  Use when writing, planning, rewriting, polishing, or turning notes into Chinese long-form public articles for 空间智研社. Trigger for Chinese long-form writing, 空间智研社, GIS, GeoAI, WebGIS, remote sensing, geospatial intelligence, spatial data, AI workflows, topic planning, rewriting, polishing, title generation, publishing plans, and public article drafts. Keep the brand line「从地理信息到空间智能」and write with a technical plus industry perspective.
+  Use when writing, planning, rewriting, polishing, title generation, publishing plans, or turning notes into Chinese long-form public articles for 空间智研社. Trigger for 公众号文章、技术文章、调研笔记转稿、按我的风格写、空间智研社风格、GIS 技术科普、AI 工作流文章, plus GIS, GeoAI, WebGIS, remote sensing, geospatial intelligence, spatial intelligence, spatial data, AI workflows, topic planning, rewriting, polishing, title generation, publishing plans, and public article drafts. Keep the brand line「从地理信息到空间智能」and write with a technical plus industry perspective.
 ---
 
 # 空间智研社公众号长文写作
