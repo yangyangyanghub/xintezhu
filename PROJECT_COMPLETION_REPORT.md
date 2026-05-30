@@ -46,12 +46,12 @@
 
 ### 最终验证发现的问题 (F1-F4)
 
-| 审查员 | 原始 verdict | 问题 | 修复状态 |
-|--------|-------------|------|---------|
-| F1. Plan Compliance | REJECT | Task 12,13 未完成；缺少8场景 | ✅ FIX-1: 补充了2个场景 |
-| F2. Code Quality | REJECT | 引用文件有实现细节 | ✅ FIX-2: 清理了 scope drift |
-| F3. Real Manual QA | APPROVE | 无问题 | ✅ 通过 |
-| F4. Scope Fidelity | REJECT | 引用文件有实现层内容 | ✅ FIX-2: 已清理 |
+| 审查员                 | 原始 verdict | 问题                   | 修复状态                     |
+| ------------------- | ---------- | -------------------- | ------------------------ |
+| F1. Plan Compliance | REJECT     | Task 12,13 未完成；缺少8场景 | ✅ FIX-1: 补充了2个场景         |
+| F2. Code Quality    | REJECT     | 引用文件有实现细节            | ✅ FIX-2: 清理了 scope drift |
+| F3. Real Manual QA  | APPROVE    | 无问题                  | ✅ 通过                     |
+| F4. Scope Fidelity  | REJECT     | 引用文件有实现层内容           | ✅ FIX-2: 已清理             |
 
 ### 修复提交
 - **Commit**: `0e44b86` - `fix(frontend-design-orchestrator): add 8 eval scenarios, clean up scope drift in references`
