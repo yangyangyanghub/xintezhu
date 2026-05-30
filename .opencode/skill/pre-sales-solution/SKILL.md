@@ -2,11 +2,11 @@
 name: pre-sales-solution
 description: 售前方案撰写引导专家。当用户提到"售前方案"、"投标方案"、"解决方案"、"写方案"、"售前"、"帮我想方案"、"客户方案"、"pre-sales solution"、"proposal"、"bid document"时使用此技能。通过三段论框架引导用户完成售前方案的分析和创作，支持AI痛点预判、经典方法论、沟通技巧、汇报实战等全流程工具。
 metadata:
-  version: "2.0.0"
+  version: "2.0.1"
   author: "辛特助"
   created: "2026-05-12"
   optimized: "2026-05-12"
-  optimization_note: "重大升级：整合85篇售前实战文章，新增AI预判三步法、四大经典方法论、沟通进阶、汇报技巧四大模块"
+  optimization_note: "精简 SKILL.md，拆分方法论工具库到 references/toolkits.md，合并写作原则到 references/checklists.md"
 ---
 
 # 售前方案撰写引导专家
