@@ -119,3 +119,13 @@ None at session start - all decisions documented in plan.
 - Supporting reference files must obey the same scope boundary as `SKILL.md`; otherwise design-only skills still drift into implementation through examples.
 - Replacing code snippets with short "design note" guidance preserves section value without teaching runtime setup.
 - Even small phrases like `asset downloads`, package names, or source file paths are enough to weaken scope fidelity in a documentation-only skill.
+
+## 2026-04-11 Task 10 Review Workflow Learnings
+
+### Review Workflow Shape
+- The review path should explicitly teach a five-step loop: run checklist, create one problem-list item per finding, update the named `DESIGN.md` section, record the result in `Review Log`, then re-review changed sections.
+- The problem list format needs to encode both rationale and required document action; otherwise review output drifts into vague audit prose.
+
+### Template Boundary
+- `SKILL.md` should explain the procedure, but the DESIGN template should capture outcomes.
+- In `Review Log`, an `Updated Sections` block is clearer than repeating a multi-step process description.

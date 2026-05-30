@@ -119,3 +119,15 @@ None - all decisions made during planning phase.
 **Decision**: Remove implementation snippets and runtime/setup details from `references/icon-systems.md` and `references/design-sources.md`, while preserving their original section structure and design-decision value.
 **Rationale**: This skill produces `DESIGN.md` only, so supporting references must guide naming, visual selection, and decision criteria rather than code usage or asset wiring.
 **Impact**: Scope fidelity is now enforced not only in `SKILL.md`, but also in the reference materials that the skill consults during design generation.
+
+## 2026-04-11 Task 10 Review Workflow Decisions
+
+### 13. Task 10 Review Log Structure
+**Decision**: Record review traceability in the template with `Checklist Basis`, `Problem List`, and `Updated Sections`.
+**Rationale**: Task 10 requires not only a review checklist path but also a clear mapping from findings to concrete `DESIGN.md` edits.
+**Impact**: Future review runs can show which section changed for each accepted finding without turning the template into a generic audit report.
+
+### 14. Task 10 Source of Truth
+**Decision**: Apply the required documentation changes in the installed skill directory at `~/.config/opencode/skill/frontend-design-orchestrator/`.
+**Rationale**: The repository plan references the installed skill path as the final artifact location, and no repository-local copy of those two target files exists.
+**Impact**: Verification must read the installed skill files directly, while repository evidence records the changes and the git-tracking limitation.
