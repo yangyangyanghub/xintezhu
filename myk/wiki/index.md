@@ -29,7 +29,6 @@
 | [[myk/wiki/topics/土地政策与审批流程]] | 立项→竣工全生命周期土地审批，地类认定、农村土地政策与地方实践 | 30+ | ✅ |
 | [[myk/wiki/topics/GeoAI-通用平台]] | GeoAI Universal Platform：多 LLM 兼容的地理空间 AI 平台，TypeScript 实现，工厂模式+适配器模式 | 1 | ✅ |
 | [[myk/wiki/topics/GeoAgent-空间分析智能体]] | GeoAgent：分层多智能体架构实现自主空间分析，规划层+执行层+审查层，成功率 95.24% | 2 | ✅ |
-| [[myk/wiki/topics/Multica-官方文档参考]] | Multica 官方文档整理：分布式架构、自部署、Agent/Skill/Squad 系统、11 款 AI 工具对照、CLI 速查 | 28 | ✅ |
 
 ---
 
