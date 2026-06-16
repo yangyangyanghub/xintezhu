@@ -1,5 +1,5 @@
 # 敏感配置文件 - 包含 API Key
-.opencode/skill/image-service/config/settings.json
+.opencode/skills/image-service/config/settings.json
 
 # 环境变量文件
 .env
