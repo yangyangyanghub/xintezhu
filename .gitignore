@@ -34,6 +34,10 @@ test.txt
 Thumbs.db
 desktop.ini
 
+# 安装程序
+*.exe
+miniconda.exe
+
 # IDE 配置
 .idea/
 .vscode/
