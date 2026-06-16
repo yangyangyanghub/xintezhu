@@ -1,0 +1,159 @@
+{
+  "jobs": 3,
+  "tasks": [
+    {
+      "id": "01-slide-cover",
+      "promptFiles": [
+        "prompts/01-slide-cover.md"
+      ],
+      "image": "01-slide-cover.png",
+      "provider": "dashscope",
+      "model": "qwen-image-2.0-pro",
+      "ar": "16:9",
+      "quality": "2k"
+    },
+    {
+      "id": "02-slide-agenda",
+      "promptFiles": [
+        "prompts/02-slide-agenda.md"
+      ],
+      "image": "02-slide-agenda.png",
+      "provider": "dashscope",
+      "model": "qwen-image-2.0-pro",
+      "ar": "16:9",
+      "quality": "2k"
+    },
+    {
+      "id": "03-slide-background",
+      "promptFiles": [
+        "prompts/03-slide-background.md"
+      ],
+      "image": "03-slide-background.png",
+      "provider": "dashscope",
+      "model": "qwen-image-2.0-pro",
+      "ar": "16:9",
+      "quality": "2k"
+    },
+    {
+      "id": "04-slide-four-pillars",
+      "promptFiles": [
+        "prompts/04-slide-four-pillars.md"
+      ],
+      "image": "04-slide-four-pillars.png",
+      "provider": "dashscope",
+      "model": "qwen-image-2.0-pro",
+      "ar": "16:9",
+      "quality": "2k"
+    },
+    {
+      "id": "05-slide-spatiotemporal-platform",
+      "promptFiles": [
+        "prompts/05-slide-spatiotemporal-platform.md"
+      ],
+      "image": "05-slide-spatiotemporal-platform.png",
+      "provider": "dashscope",
+      "model": "qwen-image-2.0-pro",
+      "ar": "16:9",
+      "quality": "2k"
+    },
+    {
+      "id": "06-slide-overlay-system",
+      "promptFiles": [
+        "prompts/06-slide-overlay-system.md"
+      ],
+      "image": "06-slide-overlay-system.png",
+      "provider": "dashscope",
+      "model": "qwen-image-2.0-pro",
+      "ar": "16:9",
+      "quality": "2k"
+    },
+    {
+      "id": "07-slide-satellite-low-altitude",
+      "promptFiles": [
+        "prompts/07-slide-satellite-low-altitude.md"
+      ],
+      "image": "07-slide-satellite-low-altitude.png",
+      "provider": "dashscope",
+      "model": "qwen-image-2.0-pro",
+      "ar": "16:9",
+      "quality": "2k"
+    },
+    {
+      "id": "08-slide-farmland-protection",
+      "promptFiles": [
+        "prompts/08-slide-farmland-protection.md"
+      ],
+      "image": "08-slide-farmland-protection.png",
+      "provider": "dashscope",
+      "model": "qwen-image-2.0-pro",
+      "ar": "16:9",
+      "quality": "2k"
+    },
+    {
+      "id": "09-slide-illegal-land-use",
+      "promptFiles": [
+        "prompts/09-slide-illegal-land-use.md"
+      ],
+      "image": "09-slide-illegal-land-use.png",
+      "provider": "dashscope",
+      "model": "qwen-image-2.0-pro",
+      "ar": "16:9",
+      "quality": "2k"
+    },
+    {
+      "id": "10-slide-facility-agricultural-land",
+      "promptFiles": [
+        "prompts/10-slide-facility-agricultural-land.md"
+      ],
+      "image": "10-slide-facility-agricultural-land.png",
+      "provider": "dashscope",
+      "model": "qwen-image-2.0-pro",
+      "ar": "16:9",
+      "quality": "2k"
+    },
+    {
+      "id": "11-slide-post-approval-supervision",
+      "promptFiles": [
+        "prompts/11-slide-post-approval-supervision.md"
+      ],
+      "image": "11-slide-post-approval-supervision.png",
+      "provider": "dashscope",
+      "model": "qwen-image-2.0-pro",
+      "ar": "16:9",
+      "quality": "2k"
+    },
+    {
+      "id": "12-slide-illegal-building-demo",
+      "promptFiles": [
+        "prompts/12-slide-illegal-building-demo.md"
+      ],
+      "image": "12-slide-illegal-building-demo.png",
+      "provider": "dashscope",
+      "model": "qwen-image-2.0-pro",
+      "ar": "16:9",
+      "quality": "2k"
+    },
+    {
+      "id": "13-slide-implementation-roadmap",
+      "promptFiles": [
+        "prompts/13-slide-implementation-roadmap.md"
+      ],
+      "image": "13-slide-implementation-roadmap.png",
+      "provider": "dashscope",
+      "model": "qwen-image-2.0-pro",
+      "ar": "16:9",
+      "quality": "2k"
+    },
+    {
+      "id": "14-slide-closing-summary",
+      "promptFiles": [
+        "prompts/14-slide-closing-summary.md"
+      ],
+      "image": "14-slide-closing-summary.png",
+      "provider": "dashscope",
+      "model": "qwen-image-2.0-pro",
+      "ar": "16:9",
+      "quality": "2k"
+    }
+  ]
+}
