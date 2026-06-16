@@ -20,17 +20,17 @@
 
 ## 技能清单
 
-技能存放在 `.opencode/skill/` 目录下。
+技能存放在 `.opencode/skills/` 目录下。
 
 ### 已安装技能
 
-| 技能名称 | 描述 | 触发场景 |
-|---------|------|---------|
+| 技能名称                | 描述                                                                     | 触发场景                                                        |
+| ------------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------- |
 | `obsidian-markdown` | 创建和编辑 Obsidian 风格 Markdown，包括 wikilinks、embeds、callouts、properties 等语法 | 处理 `.md` 文件，用户提到 wikilinks、callouts、frontmatter、tags、embeds |
-| `obsidian-cli` | 使用 Obsidian CLI 与 Obsidian vault 交互，读取、创建、搜索笔记，管理任务和属性，支持插件开发调试 | 与 Obsidian vault 交互，从命令行管理笔记，开发和调试 Obsidian 插件/主题 |
-| `obsidian-bases` | 创建和编辑 Obsidian Bases（`.base` 文件），包含 views、filters、formulas、summaries | 处理 `.base` 文件，创建数据库式笔记视图，用户提到 Bases、表格视图、卡片视图、过滤器、公式 |
-| `json-canvas` | 创建和编辑 JSON Canvas 文件（`.canvas`），包含 nodes、edges、groups、connections | 处理 `.canvas` 文件，创建可视化画布、思维导图、流程图 |
-| `defuddle` | 使用 Defuddle CLI 从网页提取干净的 Markdown 内容，移除导航和杂项以节省 token | 用户提供 URL 需要阅读或分析，在线文档、文章、博客帖子等标准网页 |
+| `obsidian-cli`      | 使用 Obsidian CLI 与 Obsidian vault 交互，读取、创建、搜索笔记，管理任务和属性，支持插件开发调试        | 与 Obsidian vault 交互，从命令行管理笔记，开发和调试 Obsidian 插件/主题           |
+| `obsidian-bases`    | 创建和编辑 Obsidian Bases（`.base` 文件），包含 views、filters、formulas、summaries   | 处理 `.base` 文件，创建数据库式笔记视图，用户提到 Bases、表格视图、卡片视图、过滤器、公式        |
+| `json-canvas`       | 创建和编辑 JSON Canvas 文件（`.canvas`），包含 nodes、edges、groups、connections      | 处理 `.canvas` 文件，创建可视化画布、思维导图、流程图                            |
+| `defuddle`          | 使用 Defuddle CLI 从网页提取干净的 Markdown 内容，移除导航和杂项以节省 token                  | 用户提供 URL 需要阅读或分析，在线文档、文章、博客帖子等标准网页                          |
 
 ### 技能使用说明
 

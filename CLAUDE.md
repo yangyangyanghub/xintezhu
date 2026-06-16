@@ -31,9 +31,10 @@
 ## 每日工作流程
 
 ### 早间任务
-1. 搜索整理 AI 行业新闻 → `dailynews/YYYY-MM-DD.md`
-2. 格式：标题 + 摘要 + 详情 + 来源链接
-3. **配图比例固定为 3:4（竖版），禁止 16:9**
+1. 搜索整理 AI 行业新闻 → `dailynews/YYYY-MM-DD/`
+2. 固定产物：`news.md`、`daily-brief.md`、`images/` 分类配图
+3. 格式：标题 + 摘要 + 详情 + 来源链接
+4. **配图比例固定为 3:4（竖版），禁止 16:9**
 
 ### 日间任务
 - 调研内容 → `myk/调研笔记/`
@@ -71,7 +72,7 @@ myk/wiki/
 
 ## 技能清单（13个）
 
-### 本地项目技能（`.opencode/skill/`）
+### 本地项目技能（`.opencode/skills/`）
 - `obsidian-markdown`：Obsidian Markdown 语法
 - `obsidian-cli`：Obsidian CLI 交互
 - `obsidian-bases`：Bases 数据库视图
@@ -84,7 +85,7 @@ myk/wiki/
 - `gis-frontend`：GIS 前端开发
 - `html-ppt-gen`：HTML PPT 生成
 
-### 用户配置技能（`~/.config/opencode/skill/`）
+### 用户配置技能（`~/.config/opencode/skills/`）
 - `skill-manager`：技能管理器
 - `smart-explore`：结构化代码搜索
 

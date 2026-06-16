@@ -49,18 +49,18 @@
 ### 目录结构
 
 #### 核心工作区
-| 目录                 | 用途         | 命名规范                           |
-| -------------------- | ---------- | ------------------------------ |
-| `dailynews/`         | 每日 AI 新闻整理 | `YYYY-MM-DD.md`                |
-| `daily-report/`      | 工作日报/待办列表  | `YYYY-MM-DD.md` / `.tdlist.md` |
-| `myk/调研笔记/`        | 学习调研内容     | 按主题命名                          |
-| `myk/技术沉淀/`        | 技术知识沉淀     | 按技术领域命名                        |
-| `myk/技术文章/`        | 生成公众号文章    | `YYYY-MM-DD名称.md`              |
-| `myk/提示词库/`        | 提示词收集      | 见提示词库规范                        |
-| `myk/闪念/`            | 碎片灵感记录     | inbox/ 按模板自动创建                 |
-| `myk/wiki/`            | LLM Wiki知识库 | 见Wiki维护规范                       |
-| `myk/设计规范/`        | UI/UX设计文档   | 按项目/系统组织                       |
-| `myk/项目文档/`        | 项目规划与文档    | 按项目命名                          |
+| 目录              | 用途          | 命名规范                           |
+| --------------- | ----------- | ------------------------------ |
+| `dailynews/`    | 每日 AI 新闻整理  | `YYYY-MM-DD.md`                |
+| `daily-report/` | 工作日报/待办列表   | `YYYY-MM-DD.md` / `.tdlist.md` |
+| `myk/调研笔记/`     | 学习调研内容      | 按主题命名                          |
+| `myk/技术沉淀/`     | 技术知识沉淀      | 按技术领域命名                        |
+| `myk/技术文章/`     | 生成公众号文章     | `YYYY-MM-DD名称.md`              |
+| `myk/提示词库/`     | 提示词收集       | 见提示词库规范                        |
+| `myk/闪念/`       | 碎片灵感记录      | inbox/ 按模板自动创建                 |
+| `myk/wiki/`     | LLM Wiki知识库 | 见Wiki维护规范                      |
+| `myk/设计规范/`     | UI/UX设计文档   | 按项目/系统组织                       |
+| `myk/项目文档/`     | 项目规划与文档     | 按项目命名`YYYY-MM-DD项目名称.md`       |
 
 ### 文件格式规范
 - 使用 Markdown 格式
@@ -307,9 +307,9 @@ myk/wiki/
 
 ### 当前已安装技能（13个）
 
-技能存放在 `.opencode/skill/` 目录下，当前已安装 13 个技能：
+技能存放在 `.opencode/skills/` 目录下，当前已安装 13 个技能：
 
-#### 本地项目技能（workspace/.opencode/skill/）
+#### 本地项目技能（workspace/.opencode/skills/）
 | 技能名称 | 描述 | 触发场景 |
 |---------|------|---------|
 | `obsidian-markdown` | 创建和编辑 Obsidian Flavored Markdown，包括 wikilinks、embeds、callouts、properties 等语法 | 处理 .md 文件，用户提到 wikilinks、callouts、frontmatter、tags、embeds |
@@ -324,13 +324,13 @@ myk/wiki/
 | `gis-frontend` | GIS行业前端开发专家，专注于地图集成、地理数据可视化、空间交互功能 | 用户提到"地图集成"、"Leaflet"、"地图组件"、"站点标注"、"轨迹绘制"、"地理信息"、"GIS 前端" |
 | `html-ppt-gen` | 生成分页 HTML 演示文稿（PPT），支持封面、目录、章节分隔页、内容页、总结页，可导出 PDF/PPTX | 用户提到"PPT"、"演示文稿"、"presentation"、"HTML slides"、"幻灯片"、"slide deck"、"汇报" |
 
-#### 用户配置技能（~/.config/opencode/skill/）
+#### 用户配置技能（~/.config/opencode/skills/）
 | 技能名称 | 描述 | 触发场景 |
 |---------|------|---------|
 | `skill-manager` | OpenCode 技能管理器，支持列出、安装、更新、批量更新、卸载技能，管理 Git 凭证 | 用户要求"列出技能"、"安装技能"、"更新技能"、"卸载技能"、"批量更新技能"、"管理 Git 凭证" |
 | `smart-explore` | Token 优化的结构化代码搜索，使用 tree-sitter AST 解析，替代传统文件阅读方式 | 需要高效探索代码库、理解代码结构、查找函数定义时，替代 Read/Grep/Glob |
 
-**使用优先级**：本地项目技能优先于用户配置技能。同名技能以 `.opencode/skill/` 目录下的为准。
+**使用优先级**：本地项目技能优先于用户配置技能。同名技能以 `.opencode/skills/` 目录下的为准。
 
 ---
 
@@ -570,13 +570,13 @@ session.compacted ────────► 触发 consolidate（合并到 cor
 $(date +%Y-%m-%d)
 
 # 创建新技能
-python .opencode/skill/skill-creator/scripts/init_skill.py <name> --path .opencode/skill/
+python .opencode/skills/skill-creator/scripts/init_skill.py <name> --path .opencode/skills/
 
 # 打包技能
-python .opencode/skill/skill-creator/scripts/package_skill.py .opencode/skill/<name>
+python .opencode/skills/skill-creator/scripts/package_skill.py .opencode/skills/<name>
 
 # 查看技能列表
-ls .opencode/skill/
+ls .opencode/skills/
 ```
 
 ---
