@@ -107,14 +107,9 @@ def buildReport(
   workspaceRoot: Path,
 ) -> str:
   baselineMap = buildBaselineMap(baselineData)
-  currentRows = sorted(
-    currentData.get("rows", []),
-    key=lambda item: float(item.get("used_quota_m", 0) or 0),
-    reverse=True,
-  )
 
   ranking = []
-  for row in currentRows:
+  for row in (currentData.get("rows", []) or []):
     name = row.get("name") or "N/A"
     usedQuota = round(float(row.get("used_quota_m", 0) or 0), 2)
     deltaValue = round(usedQuota - baselineMap.get(name, 0), 2)
@@ -123,6 +118,8 @@ def buildReport(
       "used_quota_m": usedQuota,
       "delta_m": deltaValue,
     })
+
+  ranking.sort(key=lambda item: item["delta_m"], reverse=True)
 
   totalUsed = round(float(currentData.get("total_used_m", 0) or 0), 2)
   baselineTotal = 0.0
