@@ -12,7 +12,8 @@
 2. **OpenCode 做执行引擎**，外部 Orchestrator 做任务调度。
 3. **`opencode run --session` 是关键杠杆**，用于无头执行和会话续接。
 4. **Worktree 是必须项**，解决 Agent 改脏主工作区的问题。
-5. **PTY / Dashboard / ACP 都后置**，不要在 MVP 阶段过早引入复杂 UI 和 IDE 协议。
+5. **PTY / ACP 后置**，不要在 MVP 阶段过早引入复杂 IDE 协议。
+6. **OpenChamber 可以作为 UI 工作台和工程体验参考**，Phase 3 优先验证能否复用，不自建 Dashboard。
 
 一句话：
 
@@ -39,6 +40,7 @@
 - [[myk/调研笔记/Multica/Multica调研报告]]
 - [[myk/wiki/concepts/Agent-as-Teammate]]
 - [[myk/wiki/synthesis/多Agent-平台对比-Multica-OpenCode-OpenClaw]]
+- OpenChamber 调研
 
 关键启示：
 
@@ -48,6 +50,7 @@
 | Multica 调研 | 多 Agent 平台的核心不是聊天，而是任务生命周期和可观测性 |
 | Agent-as-Teammate | Agent 应具备角色身份、任务责任、反馈闭环和协作协议 |
 | 多平台对比 | OpenCode 适合作为可定制执行引擎，Multica 更像完整团队协作平台 |
+| OpenChamber 调研 | OpenCode 可视化工作台，提供 Worktree Session / Multi-run / Git Workflow / MCP/Skills 管理 / Scheduled Tasks / Web/Desktop/VS Code UI |
 
 ---
 
@@ -59,7 +62,7 @@
 
 MVP 阶段明确不做：
 
-- 不做复杂 Web Dashboard。
+- 不做复杂 Web Dashboard，Phase 3 优先验证 OpenChamber 是否可作为 UI 工作台。
 - 不做云端 Runtime。
 - 不做 pgvector / 向量 Skill 自动匹配。
 - 不做自动 merge。
@@ -82,7 +85,7 @@ MVP 只做一个本地可用的执行编排器：
 |---|---|
 | 可调度 | 任务可以入队、领取、执行、完成、失败重试 |
 | 可隔离 | 每个任务在独立 Git Worktree 中执行 |
-| 可追踪 | 每个任务有日志、diff、执行状态、产物路径 |
+| 可追踪 | 每个任务有日志、diff、执行状态、产物路径，并记录 `sessionId`、`branchName`、`openChamberUrl` |
 | 可接力 | 后续阶段支持 Agent A 产出 `nextTasks`，触发 Agent B |
 | 可审查 | 所有代码进入主分支前必须人工 Review |
 
@@ -90,31 +93,36 @@ MVP 只做一个本地可用的执行编排器：
 
 ## 3. 总体架构
 
-### 3.1 四层架构
+### 3.1 五层架构
 
 ```text
 ┌──────────────────────────────────────────────┐
-│  1. 协作层                                    │
+│  1. 工作台层                                  │
+│  - OpenChamber UI / Workbench                 │
+│  - Obsidian wiki / .memory                    │
+│  - 如 OpenChamber 不适配，再考虑自建最小 UI    │
+├──────────────────────────────────────────────┤
+│  2. 协作层                                    │
 │  - 人工 Review                                │
-│  - 后续 Dashboard                             │
+│  - Reviewer 审查协议                          │
 │  - 后续 ACP IDE 集成                           │
 ├──────────────────────────────────────────────┤
-│  2. 编排层                                    │
+│  3. 编排层                                    │
 │  - Queue                                      │
 │  - Orchestrator                               │
 │  - 状态机 / 重试 / 超时 / 取消                 │
 ├──────────────────────────────────────────────┤
-│  3. 执行层                                    │
+│  4. 执行层                                    │
 │  - opencode run                               │
 │  - --session 会话续接                         │
 │  - --agent / --model 角色和模型选择            │
 │  - stdout / stderr 捕获                       │
 ├──────────────────────────────────────────────┤
-│  4. 隔离与产物层                               │
+│  5. 隔离与产物层                               │
 │  - Git Worktree                               │
 │  - diff artifact                              │
 │  - log artifact                               │
-│  - task result JSON                           │
+│  - result.json / review.json                  │
 └──────────────────────────────────────────────┘
 ```
 
@@ -126,6 +134,9 @@ MVP 只做一个本地可用的执行编排器：
   ▼
 enqueue job
   │
+  ├─ 写入 agent / model / skills / mcpServers
+  └─ 生成 branchName
+  │
   ▼
 SQLite jobs 表
   │
@@ -133,21 +144,29 @@ SQLite jobs 表
 worker claim job
   │
   ▼
-git worktree add .worktrees/<job-id>
+git worktree add .worktrees/<job-id> -b <branchName>
+  │
+  ├─ worktreePath → jobs.worktreePath
+  └─ branchName   → jobs.branchName
   │
   ▼
 opencode run "prompt" --dir <worktree> --agent <agent> --format json
   │
+  ├─ sessionId       → jobs.sessionId
   ├─ stdout / stderr → logs/<job-id>.log
   ├─ git diff        → artifacts/<job-id>.diff
-  └─ result.json     → artifacts/<job-id>.json
+  ├─ result.json     → artifacts/<job-id>.result.json
+  └─ review.json     → artifacts/<job-id>.review.json（Reviewer 任务产生）
   │
   ▼
-人工 Review
+人工 Review / Reviewer 审查
   │
   ├─ 通过：人工 merge / cherry-pick
-  └─ 拒绝：discard worktree / 重新入队
+  ├─ 拒绝：discard worktree / 重新入队
+  └─ 需修复：Orchestrator 基于 review.json 自动生成修复任务
 ```
+
+OpenChamber 如果能通过 OpenCode server 连接读取 session、worktree 和 diff 信息，则优先作为这条链路的可视化入口；AgentForge 仍保留队列、Worker、结果协议和恢复策略。
 
 ### 3.3 技术栈选型
 
@@ -292,8 +311,12 @@ jobs
 ├── prompt          原始任务指令
 ├── agent           OpenCode agent，如 build / plan / reviewer
 ├── model           provider/model，可为空
+├── skills          本任务启用的 Skills 列表，JSON
+├── mcpServers      本任务可用的 MCP Server 列表，JSON
 ├── sessionId       OpenCode session ID
 ├── worktreePath    当前任务沙箱目录
+├── branchName      当前任务 Git 分支名
+├── openChamberUrl  OpenChamber 工作台链接，可为空
 ├── status          pending / claimed / running / review / done / failed / cancelled
 ├── attempts        已重试次数
 ├── maxAttempts     最大重试次数
@@ -359,6 +382,15 @@ MVP Worker 必须满足：
 {
   "status": "success",
   "summary": "完成 JWT 鉴权中间件实现",
+  "environment": {
+    "agent": "developer",
+    "model": "provider/model",
+    "skills": ["test-driven-development"],
+    "mcpServers": ["context7"],
+    "sessionId": "ses_abc123",
+    "worktreePath": ".worktrees/job-001",
+    "branchName": "agentforge/job-001-jwt-auth"
+  },
   "changedFiles": [
     "src/auth/middleware.ts",
     "src/auth/token.ts"
@@ -413,6 +445,8 @@ Worker 执行结束后，必须对 `result.json` 进行**两阶段验证**：
 
 传入其他值时，Worker 将其视为 `review_required` 并记录警告。
 
+`environment` 用于记录任务执行环境，至少应包含 `agent`、`model`、`sessionId`、`worktreePath`、`branchName`；`skills` 和 `mcpServers` 允许为空数组，但不能省略。它不是业务结果，而是供后续追踪、OpenChamber 展示和问题复盘使用。
+
 **nextTasks 中每个对象必须包含**：
 
 | 字段 | 类型 |
@@ -421,6 +455,45 @@ Worker 执行结束后，必须对 `result.json` 进行**两阶段验证**：
 | `prompt` | `string`（非空） |
 
 缺少任一字段的 `nextTasks` 项会被忽略，并记录一条警告。
+
+### 6.5 review.json 审查协议
+
+Reviewer 任务必须输出 `review.json`，供 Orchestrator 判断是否进入人工合并、自动生成修复任务，或退回重新设计。
+
+```json
+{
+  "status": "fail",
+  "blockingIssues": [
+    {
+      "file": "src/auth/middleware.ts",
+      "severity": "high",
+      "message": "JWT 校验失败时没有区分过期和非法 token，调用方无法执行刷新流程。"
+    }
+  ],
+  "suggestions": [
+    "补充 token 过期分支，并在 result.json 的 risks 中记录 refresh token 存储策略。"
+  ],
+  "riskLevel": "high",
+  "recommendedAction": "fix"
+}
+```
+
+字段约束：
+
+| 字段 | 类型 | 合法值 / 说明 |
+|---|---|---|
+| `status` | `string` | `pass` / `fail` / `review_required` |
+| `blockingIssues` | `object[]` | 阻塞合并的问题列表，`pass` 时允许为空数组 |
+| `suggestions` | `string[]` | 非阻塞建议或修复方向 |
+| `riskLevel` | `string` | `low` / `medium` / `high` |
+| `recommendedAction` | `string` | `approve` / `fix` / `redesign` |
+
+Orchestrator 消费规则：
+
+- `status = pass` 且 `recommendedAction = approve`：任务进入人工最终 Review。
+- `status = fail` 且 `recommendedAction = fix`：自动创建 Developer 修复任务，继承原任务的 `parentId`、`diffPath`、`resultPath`、`reviewPath`。
+- `recommendedAction = redesign`：自动创建 Orchestrator/Architect 重新设计任务，不直接让 Developer 继续改。
+- `status = review_required`：保留 worktree，等待人工判断。
 
 ---
 
@@ -667,24 +740,33 @@ diffPath：传递代码改动
 
 ## 12. Phase 3：可观测性
 
-### 12.1 MVP 后再做 Dashboard
+### 12.1 Phase 3A：OpenChamber 适配验证
 
-Dashboard 技术选型（Phase 3 再定，此处给出推荐路径）：
+Phase 3 不先自建 Dashboard，而是先验证 OpenChamber 能否作为 AgentForge 的 UI 工作台。AgentForge 仍负责任务队列、Worker、结果协议、审查协议、错误恢复和安全边界；OpenChamber 只作为可视化入口和工程体验参考。
 
-| 方案 | 适用场景 | 推荐度 |
+验证清单：
+
+| 编号 | 验证项 | 通过标准 |
 |---|---|---|
-| 纯 HTML + 系统 WebView | 个人极简使用 | 仅临时演示 |
-| Astro + SQLite 直连 | 有一定前端能力，想快速出活 | MVP 推荐 |
-| Next.js + API Route + SQLite | 需要后续扩展、接 Auth | 长期推荐 |
+| O1 | Worktree 识别 | OpenChamber 能发现或打开 AgentForge 创建的 `.worktrees/<job-id>` |
+| O2 | Diff 展示 | 能查看当前任务分支相对主分支的 diff |
+| O3 | Session 列表 | 能展示 OpenCode session 列表，并与 `jobs.sessionId` 对应 |
+| O4 | Multi-run 体验 | 能并行观察多个任务或多个 worktree session 的运行状态 |
+| O5 | Git Workflow | 能辅助完成分支查看、变更确认、提交或交由人工合并 |
+| O6 | 配置管理 | 能查看或管理 agent、MCP、Skills 相关配置 |
+| O7 | 入口形态 | Web / Desktop / VS Code 形态至少一种能满足本地工作台使用 |
 
-Dashboard 最小功能：
+如果 OpenChamber 复用可行，整个 Dashboard 阶段改为：**OpenChamber integration + AgentForge jobs panel plugin**。其中 jobs panel 只需要读取 AgentForge SQLite 和 artifacts，展示 job 状态、`sessionId`、`branchName`、`worktreePath`、`result.json`、`review.json`、日志和 diff 入口。
+
+如果 OpenChamber 不适配，再回退到最小 Dashboard：
 
 - jobs 列表（筛选：状态、Agent 类型、日期范围）
 - 当前状态
 - Agent 名称
-- worktree 路径（点击打开）
+- `sessionId`、`branchName`、`worktreePath`
 - 日志查看（实时 tail 或全量）
 - diff 查看（side-by-side）
+- `result.json` / `review.json` 查看
 - retry / cancel / approve 按钮
 
 ### 12.2 日志路线
@@ -693,7 +775,7 @@ Dashboard 最小功能：
 
 ```text
 Phase 1：stdout / stderr 文件日志
-Phase 3：WebSocket 推送日志
+Phase 3：优先接入 OpenChamber 可视化；必要时补 AgentForge jobs panel
 Phase 4：评估是否接入 OpenCode PTY WebSocket
 ```
 
@@ -734,6 +816,18 @@ ACP 用于 IDE 内介入，不是调度核心。
 
 - `run / session / dir / agent / model / error / timeout` 全部验证。
 
+### Phase 0.5：OpenChamber PoC，0.5-1 天
+
+产物：
+
+- OpenChamber 本地运行记录
+- OpenCode server 连接验证记录
+- worktree / session / diff 可视化验证记录
+
+通过标准：
+
+- 能判断 OpenChamber 是否可作为 AgentForge 工作台入口；不能判断时，不进入 UI 建设，只保留 CLI 路线。
+
 ### Phase 1：最小队列执行器，2-3 天
 
 产物：
@@ -752,6 +846,7 @@ ACP 用于 IDE 内介入，不是调度核心。
 产物：
 
 - `result.json` 协议
+- `review.json` 协议
 - `nextTasks` 自动入队
 - Architect → Developer → Reviewer 链路
 
@@ -759,22 +854,53 @@ ACP 用于 IDE 内介入，不是调度核心。
 
 - Reviewer 能基于 Developer 的 diff 产出审查意见，不通过时能自动生成修复任务。
 
-### Phase 3：可观测性，3-5 天
+### Phase 2.5：能力配置管理，1-2 天
 
 产物：
 
-- 简单 Dashboard
-- 日志实时查看
-- diff 查看
-- retry / cancel / approve 操作
+- jobs 表记录 `agent`、`model`、`skills`、`mcpServers`、`sessionId`、`branchName`
+- result.json 写入 `environment` 元数据
+- status 命令能展示任务使用的 Agent / Model / MCP / Skill
 
-### Phase 4：IDE 协作，后置
+通过标准：
+
+- 任意 job 都能追溯执行环境，便于 OpenChamber 展示和失败复盘。
+
+### Phase 3：OpenChamber 适配验证，3-5 天
 
 产物：
 
-- Zed ACP 集成验证
-- worktree 一键打开
-- IDE 内追加指令
+- OpenChamber 适配验证报告
+- AgentForge jobs panel plugin 方案或最小 Dashboard 回退方案
+- 日志、diff、`result.json`、`review.json` 的统一入口
+
+通过标准：
+
+- 优先复用 OpenChamber 展示 worktree session、multi-run、Git Workflow、agent/MCP/skills 管理；如不可行，则启动最小 Dashboard。
+
+### Phase 4：定时任务与常驻智能体，后置
+
+产物：
+
+- Scheduled jobs 配置
+- 常驻 Worker / Daemon 启动方式
+- 周期性任务执行日志和失败恢复策略
+
+通过标准：
+
+- 能稳定执行定时任务，并把执行结果纳入 jobs 表和 artifacts。
+
+### Phase 5：知识沉淀与长期记忆，后置
+
+产物：
+
+- Obsidian wiki ingest 流程
+- `.memory` 摘要写入规则
+- 已完成任务的经验沉淀模板
+
+通过标准：
+
+- 已完成 job 的关键结论能进入 Obsidian/wiki 或 `.memory`，支持后续 Agent 复用。
 
 ---
 
@@ -782,15 +908,16 @@ ACP 用于 IDE 内介入，不是调度核心。
 
 ### 15.1 近期建议
 
-不要先做 Dashboard，也不要先接 ACP。
+AgentForge 保留任务编排核心，OpenChamber 作为 UI/工作台参考。近期不要把精力放在自建复杂 Dashboard 或 ACP 上，而是按“能力验证 → OpenChamber PoC → 队列执行器”的路线推进。
 
 先做：
 
 1. Phase 0 能力验证。
-2. Phase 1 本地队列执行器。
-3. Worktree + diff + log 三件套。
+2. Phase 0.5 OpenChamber PoC。
+3. Phase 1 本地队列执行器。
+4. Worktree + diff + log + result/review 协议。
 
-这三件跑通后，系统才有工程价值。
+这几件跑通后，系统才有工程价值。路线选择原则是：AgentForge 管任务生命周期，OpenChamber 优先承接可视化工作台；OpenChamber 不适配时，再自建最小 Dashboard。
 
 ### 15.2 中期建议
 
@@ -803,17 +930,17 @@ ACP 用于 IDE 内介入，不是调度核心。
 - `reviewer`
 - `docwriter`
 
-等接力稳定后，再补头像、技能、团队空间、看板。
+等接力稳定后，再补技能配置管理、MCP 配置管理、团队空间和看板。看板优先复用 OpenChamber，不先自建。
 
 ### 15.3 长期建议
 
-最终形态可以逐步靠近 Multica：
+最终形态可以逐步靠近 Agent-as-Teammate 平台：
 
 ```text
-本地 Daemon + Web Dashboard + Agent 身份 + Skill 复用 + LLM Gateway
+AgentForge Orchestrator + OpenChamber Workbench + Worktree Session + Skill/MCP 管理 + Scheduled Jobs + Obsidian/wiki 长期记忆
 ```
 
-但这是后续演进，不是 MVP。
+但这是后续演进，不是 MVP。AgentForge 不被 OpenChamber 替代，二者分工应保持清晰：AgentForge 负责队列、Worker、协议、恢复和安全；OpenChamber 负责可视化工作台和工程体验。
 
 ---
 
@@ -823,3 +950,4 @@ ACP 用于 IDE 内介入，不是调度核心。
 - [[myk/调研笔记/Multica/Multica调研报告]]
 - [[myk/wiki/concepts/Agent-as-Teammate]]
 - [[myk/wiki/synthesis/多Agent-平台对比-Multica-OpenCode-OpenClaw]]
+- OpenChamber 调研
